@@ -1,3 +1,5 @@
+name: Light
 main: net.dzikoysk.light.LightPlugin
-author: dzikoysk
+author: Dzikoysk
 version: 0.0.1
+website: http://www.dzikoysk.net/

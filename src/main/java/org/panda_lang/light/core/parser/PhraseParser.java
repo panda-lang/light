@@ -56,7 +56,6 @@ public class PhraseParser implements Parser {
         PhraseParser phraseParser = new PhraseParser(light);
         ParserLayout parserLayout = new ParserLayout(phraseParser);
         parserLayout.pattern("*;", 5);
-        parserLayout.pattern("\n", 10);
         light.getLightCore().getPanda().getPandaCore().registerParser(parserLayout);
     }
 

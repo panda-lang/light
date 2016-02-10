@@ -1,11 +1,8 @@
 package org.panda_lang.light;
 
 import org.panda_lang.light.core.LightCore;
-import org.panda_lang.light.core.block.CommandBlock;
-import org.panda_lang.light.core.block.EventBlock;
+import org.panda_lang.light.core.block.*;
 import org.panda_lang.light.core.parser.util.PhraseRepresentation;
-import org.panda_lang.light.core.block.CommandsCollector;
-import org.panda_lang.light.core.block.EventsCollector;
 import org.panda_lang.panda.Panda;
 
 public class Light {
@@ -16,6 +13,7 @@ public class Light {
 
     private final EventsCollector eventsCollector;
     private final CommandsCollector commandsCollector;
+    private final FunctionsCollector functionsCollector;
 
     public Light() {
         this.panda = new Panda();
@@ -24,6 +22,7 @@ public class Light {
 
         this.eventsCollector = new EventsCollector();
         this.commandsCollector = new CommandsCollector();
+        this.functionsCollector = new FunctionsCollector();
     }
 
     public void registerPhrase(PhraseRepresentation phrase) {
@@ -40,6 +39,10 @@ public class Light {
 
     public void initializeDefaultElements() {
         this.lightCore.initialize();
+    }
+
+    public FunctionsCollector getFunctionsCollector() {
+        return functionsCollector;
     }
 
     public CommandsCollector getCommandsCollector() {
