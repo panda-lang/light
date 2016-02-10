@@ -1,0 +1,63 @@
+package org.panda_lang.light.core.parser;
+
+import org.panda_lang.light.Light;
+import org.panda_lang.light.core.parser.util.HollowPattern;
+import org.panda_lang.light.core.parser.util.PhraseRepresentation;
+import org.panda_lang.panda.core.Particle;
+import org.panda_lang.panda.core.parser.Atom;
+import org.panda_lang.panda.core.parser.Parser;
+import org.panda_lang.panda.core.parser.ParserLayout;
+import org.panda_lang.panda.core.parser.util.SimplifiedNamedExecutable;
+import org.panda_lang.panda.core.syntax.Essence;
+import org.panda_lang.panda.core.syntax.Executable;
+import org.panda_lang.panda.core.syntax.Factor;
+import org.panda_lang.panda.core.syntax.NamedExecutable;
+
+import java.util.Collection;
+
+public class PhraseParser implements Parser {
+
+    private final Light light;
+
+    public PhraseParser(Light light) {
+        this.light = light;
+    }
+
+    public NamedExecutable parse(Atom atom) {
+        String phraseSource = atom.getSourcesDivider().getLine();
+
+        for (PhraseRepresentation phraseRepresentation : light.getLightCore().getPhraseCenter().getPhrases()) {
+            for (HollowPattern pattern : phraseRepresentation.getPatterns()) {
+                if (pattern.match(phraseSource)) {
+                    final ExpressionParser expressionParser = new ExpressionParser();
+                    final Collection<String> hollows = pattern.getHollows();
+                    final Collection<Factor> expressions = expressionParser.parse(atom, hollows);
+
+                    pattern.getHollows().clear();
+
+                    final Factor[] array = new Factor[expressions.size()];
+                    final Factor[] factors = expressions.toArray(array);
+
+                    final Executable executable = phraseRepresentation.getExecutable();
+                    return new SimplifiedNamedExecutable(new Executable() {
+                        @Override
+                        public Essence run(Particle particle) {
+                            particle.setFactors(factors);
+                            return executable.run(particle);
+                        }
+                    });
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void initialize(Light light) {
+        PhraseParser phraseParser = new PhraseParser(light);
+        ParserLayout parserLayout = new ParserLayout(phraseParser);
+        parserLayout.pattern("*;", 5);
+        parserLayout.pattern("\n", 10);
+        light.getLightCore().getPanda().getPandaCore().registerParser(parserLayout);
+    }
+
+}
