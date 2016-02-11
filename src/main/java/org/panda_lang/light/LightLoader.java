@@ -1,8 +1,14 @@
 package org.panda_lang.light;
 
 import org.panda_lang.light.core.LightCore;
+import org.panda_lang.light.core.block.CommandBlock;
+import org.panda_lang.light.core.block.EventBlock;
+import org.panda_lang.light.core.block.FunctionBlock;
 import org.panda_lang.panda.Panda;
-import org.panda_lang.panda.PandaScript;
+import org.panda_lang.panda.core.parser.Atom;
+import org.panda_lang.panda.core.parser.PandaParser;
+import org.panda_lang.panda.core.parser.util.Injection;
+import org.panda_lang.panda.core.syntax.NamedExecutable;
 import org.panda_lang.panda.util.IOUtils;
 
 import java.io.File;
@@ -40,10 +46,28 @@ public class LightLoader {
         for (String line : lines) {
             grammaticalSourceBuilder.append(line);
         }
-
         String grammaticalSource = grammaticalSourceBuilder.toString();
-        PandaScript pandaScript = panda.getPandaLoader().loadSimpleScript(grammaticalSource);
-        return new LightScript(pandaScript);
+
+        final LightScript lightScript = new LightScript(lightCore.getLight());
+        final PandaParser pandaParser = new PandaParser(panda, lightScript, grammaticalSource);
+
+        pandaParser.addInjection(new Injection() {
+            @Override
+            public void call(Atom atom, NamedExecutable namedExecutable) {
+                if (namedExecutable instanceof EventBlock) {
+                    lightScript.registerEventBlock((EventBlock) namedExecutable);
+                }
+                else if (namedExecutable instanceof FunctionBlock) {
+                    lightScript.registerFunctionBlock((FunctionBlock) namedExecutable);
+                }
+                else if (namedExecutable instanceof CommandBlock) {
+                    lightScript.registerCommandBlock((CommandBlock) namedExecutable);
+                }
+            }
+        });
+
+        pandaParser.parse();
+        return lightScript;
     }
 
 }

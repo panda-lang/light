@@ -1,6 +1,8 @@
 package org.panda_lang.light.core.parser;
 
 import org.panda_lang.light.Light;
+import org.panda_lang.light.LightScript;
+import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.parser.util.HollowPattern;
 import org.panda_lang.light.core.parser.util.PhraseRepresentation;
 import org.panda_lang.panda.core.Particle;
@@ -25,6 +27,7 @@ public class PhraseParser implements Parser {
 
     public NamedExecutable parse(Atom atom) {
         String phraseSource = atom.getSourcesDivider().getLine();
+        phraseSource = phraseSource.substring(0, phraseSource.length() - 1);
 
         for (PhraseRepresentation phraseRepresentation : light.getLightCore().getPhraseCenter().getPhrases()) {
             for (HollowPattern pattern : phraseRepresentation.getPatterns()) {
@@ -38,12 +41,14 @@ public class PhraseParser implements Parser {
                     final Factor[] array = new Factor[expressions.size()];
                     final Factor[] factors = expressions.toArray(array);
 
-                    final Executable executable = phraseRepresentation.getExecutable();
+                    final Phrase phrase = phraseRepresentation.getPhrase();
+                    final Ray ray = new Ray().lightScript((LightScript) atom.getPandaScript()).pattern(pattern);
+
                     return new SimplifiedNamedExecutable(new Executable() {
                         @Override
                         public Essence run(Particle particle) {
-                            particle.setFactors(factors);
-                            return executable.run(particle);
+                            ray.include(particle).factors(factors);
+                            return phrase.run(ray);
                         }
                     });
                 }

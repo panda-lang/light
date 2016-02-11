@@ -23,7 +23,7 @@
         <dependency>
             <groupId>org.panda_lang</groupId>
             <artifactId>panda</artifactId>
-            <version>${panda.version}</version>
+            <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -50,7 +50,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <panda.version>1.0.0-SNAPSHOT</panda.version>
     </properties>
 
     <build>

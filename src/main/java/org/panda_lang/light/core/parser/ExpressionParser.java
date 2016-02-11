@@ -18,9 +18,7 @@ public class ExpressionParser implements Parser {
         // <Light expr here>
 
         FactorParser factorParser = new FactorParser();
-        Factor factor = factorParser.parse(atom, expression);
-
-        return factor;
+        return factorParser.parse(atom, expression);
     }
 
     public Factor parse(Atom atom, String expression) {

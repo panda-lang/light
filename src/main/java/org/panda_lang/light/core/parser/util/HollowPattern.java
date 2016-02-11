@@ -9,10 +9,12 @@ import java.util.List;
 
 public class HollowPattern implements Matcher {
 
+    private final int id;
     private final String pattern;
     private final List<String> hollows;
 
-    public HollowPattern(String pattern) {
+    public HollowPattern(int id, String pattern) {
+        this.id = id;
         this.pattern = pattern;
         this.hollows = new ArrayList<>();
     }
@@ -21,6 +23,8 @@ public class HollowPattern implements Matcher {
     public boolean match(String expression) {
         char[] string = expression.toCharArray();
         int i = 0;
+
+        hollows.clear();
 
         if (string.length == 0) {
             return false;
@@ -64,17 +68,31 @@ public class HollowPattern implements Matcher {
                 break;
             }
         }
+
+        if (string.length > i) {
+            for (int fill = i; fill < string.length; fill++) {
+                hollowBuilder.append(string[fill]);
+            }
+        }
+
+        if (hollowBuilder.length() > 0) {
+            hollows.add(hollowBuilder.toString());
+        }
+
         return !distributor.hasNext();
     }
 
     public Collection<String> receiveHollows() {
         Collection<String> collection = getHollows();
-        hollows.clear();
         return collection;
     }
 
     public Collection<String> getHollows() {
         return hollows;
+    }
+
+    public int getID() {
+        return id;
     }
 
 }
