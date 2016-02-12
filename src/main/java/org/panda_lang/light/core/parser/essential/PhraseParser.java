@@ -1,10 +1,10 @@
-package org.panda_lang.light.core.parser;
+package org.panda_lang.light.core.parser.essential;
 
 import org.panda_lang.light.Light;
 import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.Ray;
+import org.panda_lang.light.core.parser.essential.assistant.PhraseRepresentation;
 import org.panda_lang.light.core.parser.util.HollowPattern;
-import org.panda_lang.light.core.parser.util.PhraseRepresentation;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;
@@ -29,26 +29,22 @@ public class PhraseParser implements Parser {
         String phraseSource = atom.getSourcesDivider().getLine();
         phraseSource = phraseSource.substring(0, phraseSource.length() - 1);
 
-        for (PhraseRepresentation phraseRepresentation : light.getLightCore().getPhraseCenter().getPhrases()) {
-            for (HollowPattern pattern : phraseRepresentation.getPatterns()) {
+        for (final PhraseRepresentation phraseRepresentation : light.getLightCore().getPhraseCenter().getPhrases()) {
+            for (final HollowPattern pattern : phraseRepresentation.getPatterns()) {
                 if (pattern.match(phraseSource)) {
-                    final ExpressionParser expressionParser = new ExpressionParser();
+                    final ExpressionParser expressionParser = new ExpressionParser(light);
                     final Collection<String> hollows = pattern.getHollows();
                     final Collection<Factor> expressions = expressionParser.parse(atom, hollows);
-
-                    pattern.getHollows().clear();
 
                     final Factor[] array = new Factor[expressions.size()];
                     final Factor[] factors = expressions.toArray(array);
 
-                    final Phrase phrase = phraseRepresentation.getPhrase();
                     final Ray ray = new Ray().lightScript((LightScript) atom.getPandaScript()).pattern(pattern);
-
                     return new SimplifiedNamedExecutable(new Executable() {
                         @Override
                         public Essence run(Particle particle) {
                             ray.include(particle).factors(factors);
-                            return phrase.run(ray);
+                            return phraseRepresentation.run(ray);
                         }
                     });
                 }

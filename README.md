@@ -12,29 +12,33 @@ Panda Language: http://panda-lang.org/
   - [x] Event
   - [x] Function
   - [x] Command
-  - [ ] Loop/For
-  - [ ] If-then/Else-then
+  - [x] Loop
   - [ ] While
+  - [ ] If-then/Else-then
 - [x] Phrases
   - [x] Interface
   - [x] Parser
   - [x] API
 - [ ] Expressions
-  - [ ] Interface
-  - [ ] Parser
+  - [x] Interface
+  - [x] Parser
   - [ ] Assistant
   - [ ] API
 - [ ] Types
-  - [ ] Idea
-  - [ ] Interface
+  - [x] Idea
+  - [x] Interface
   - [ ] Parser
   - [ ] Assistant
   - [ ] API
 - [ ] Variable system
 - [ ] Registration system
+  - [x] Phrases
+  - [x] Expressions
   - [ ] Events
   - [ ] Commands
   - [ ] Functions
-  - [ ] Expressions
-- [ ] Others
-  - [ ] Pattern Builder
+- [ ] Libraries
+- [ ] Repositories
+- Other goals
+  - Access to the Panda
+  - Develop API

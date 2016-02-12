@@ -24,7 +24,8 @@ public class CommandBlock extends Block {
     }
 
     public static void initialize(final Light light) {
-        BlockLayout blockLayout = new BlockLayout(CommandBlock.class, false, "command").initializer(new BlockInitializer() {
+        BlockLayout blockLayout = new BlockLayout(CommandBlock.class, "command");
+        blockLayout.initializer(new BlockInitializer() {
             @Override
             public Block initialize(Atom atom) {
                 CommandBlock commandBlock = new CommandBlock(atom);
@@ -32,7 +33,7 @@ public class CommandBlock extends Block {
                 return commandBlock;
             }
         });
-        light.getPanda().getPandaCore().registerBlock(blockLayout);
+        light.registerBlock(blockLayout);
     }
 
 }

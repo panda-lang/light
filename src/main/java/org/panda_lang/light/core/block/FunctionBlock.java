@@ -24,7 +24,8 @@ public class FunctionBlock extends Block {
     }
 
     public static void initialize(final Light light) {
-        BlockLayout blockLayout = new BlockLayout(EventBlock.class, false, "function").initializer(new BlockInitializer() {
+        BlockLayout blockLayout = new BlockLayout(EventBlock.class, "function");
+        blockLayout.initializer(new BlockInitializer() {
             @Override
             public Block initialize(Atom atom) {
                 FunctionBlock functionBlock = new FunctionBlock(atom);
@@ -32,7 +33,7 @@ public class FunctionBlock extends Block {
                 return functionBlock;
             }
         });
-        light.getPanda().getPandaCore().registerBlock(blockLayout);
+        light.registerBlock(blockLayout);
     }
 
 }

@@ -1,5 +1,8 @@
-package org.panda_lang.light.core.parser;
+package org.panda_lang.light.core.parser.essential;
 
+import org.panda_lang.light.Light;
+import org.panda_lang.light.core.parser.essential.assistant.ExpressionRepresentation;
+import org.panda_lang.light.core.parser.util.HollowPattern;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.essential.FactorParser;
@@ -11,11 +14,24 @@ import java.util.Collection;
 
 public class ExpressionParser implements Parser {
 
+    public final Light light;
+
+    public ExpressionParser(Light light) {
+        this.light = light;
+    }
+
     @Override
     public Factor parse(Atom atom) {
         String expression = FieldAssistant.clear(atom.getSourceCode(), 0);
 
         // <Light expr here>
+        for (ExpressionRepresentation expressionRepresentation : light.getLightCore().getExpressionCenter().getExpressions()) {
+            for (HollowPattern pattern : expressionRepresentation.getPatterns()) {
+                if (pattern.match(expression)) {
+                    return null;
+                }
+            }
+        }
 
         FactorParser factorParser = new FactorParser();
         return factorParser.parse(atom, expression);

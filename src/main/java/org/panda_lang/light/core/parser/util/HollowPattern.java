@@ -82,11 +82,6 @@ public class HollowPattern implements Matcher {
         return !distributor.hasNext();
     }
 
-    public Collection<String> receiveHollows() {
-        Collection<String> collection = getHollows();
-        return collection;
-    }
-
     public Collection<String> getHollows() {
         return hollows;
     }

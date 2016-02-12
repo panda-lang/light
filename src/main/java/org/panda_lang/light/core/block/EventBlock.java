@@ -24,7 +24,8 @@ public class EventBlock extends Block {
     }
 
     public static void initialize(final Light light) {
-        BlockLayout blockLayout = new BlockLayout(EventBlock.class, false, "on", "event").initializer(new BlockInitializer() {
+        BlockLayout blockLayout = new BlockLayout(EventBlock.class, "on", "event");
+        blockLayout.initializer(new BlockInitializer() {
             @Override
             public Block initialize(Atom atom) {
                 EventBlock eventBlock = new EventBlock(atom);
@@ -32,7 +33,7 @@ public class EventBlock extends Block {
                 return eventBlock;
             }
         });
-        light.getPanda().getPandaCore().registerBlock(blockLayout);
+        light.registerBlock(blockLayout);
     }
 
 }

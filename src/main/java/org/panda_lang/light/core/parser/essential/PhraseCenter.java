@@ -1,6 +1,6 @@
-package org.panda_lang.light.core.parser;
+package org.panda_lang.light.core.parser.essential;
 
-import org.panda_lang.light.core.parser.util.PhraseRepresentation;
+import org.panda_lang.light.core.parser.essential.assistant.PhraseRepresentation;
 
 import java.util.ArrayList;
 import java.util.Collection;

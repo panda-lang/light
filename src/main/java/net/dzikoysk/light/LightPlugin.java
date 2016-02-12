@@ -2,7 +2,7 @@ package net.dzikoysk.light;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.panda_lang.light.Light;
-import org.panda_lang.light.core.parser.util.PhraseRepresentation;
+import org.panda_lang.light.core.parser.essential.assistant.PhraseRepresentation;
 
 public class LightPlugin extends JavaPlugin {
 
