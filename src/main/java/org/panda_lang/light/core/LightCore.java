@@ -6,6 +6,7 @@ import org.panda_lang.light.core.parser.essential.ExpressionCenter;
 import org.panda_lang.light.core.parser.essential.PhraseCenter;
 import org.panda_lang.light.core.parser.essential.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.essential.assistant.PhraseRepresentation;
+import org.panda_lang.light.lang.Expressions;
 import org.panda_lang.light.lang.Phrases;
 import org.panda_lang.panda.Panda;
 
@@ -30,6 +31,9 @@ public class LightCore {
 
         Phrases phrases = new Phrases(this);
         phrases.registerDefaultPhrases();
+
+        Expressions expressions = new Expressions(this);
+        expressions.registerDefaultExpressions();
     }
 
     public void registerPhrase(PhraseRepresentation phraseRepresentation) {

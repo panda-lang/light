@@ -2,6 +2,7 @@
 
 Light is a English-like programming language built on the core of the Panda Programming Language.
 <br>
+<br>
 Website: http://light.panda-lang.org/
 <br>
 Panda Language: http://panda-lang.org/
@@ -13,17 +14,17 @@ Panda Language: http://panda-lang.org/
   - [x] Function
   - [x] Command
   - [x] Loop
-  - [ ] While
+  - [x] While
   - [ ] If-then/Else-then
 - [x] Phrases
   - [x] Interface
   - [x] Parser
   - [x] API
-- [ ] Expressions
+- [x] Expressions
   - [x] Interface
   - [x] Parser
-  - [ ] Assistant
-  - [ ] API
+  - [x] Assistant
+  - [x] API
 - [ ] Types
   - [x] Idea
   - [x] Interface
@@ -34,6 +35,7 @@ Panda Language: http://panda-lang.org/
 - [ ] Registration system
   - [x] Phrases
   - [x] Expressions
+  - [ ] Types
   - [ ] Events
   - [ ] Commands
   - [ ] Functions

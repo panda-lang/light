@@ -4,7 +4,7 @@ import org.panda_lang.light.Light;
 import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.parser.essential.assistant.PhraseRepresentation;
-import org.panda_lang.light.core.parser.util.HollowPattern;
+import org.panda_lang.light.core.parser.essential.pattern.LightPattern;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;
@@ -26,11 +26,11 @@ public class PhraseParser implements Parser {
     }
 
     public NamedExecutable parse(Atom atom) {
-        String phraseSource = atom.getSourcesDivider().getLine();
+        String phraseSource = atom.getSourcesDivider().getLine().trim();
         phraseSource = phraseSource.substring(0, phraseSource.length() - 1);
 
         for (final PhraseRepresentation phraseRepresentation : light.getLightCore().getPhraseCenter().getPhrases()) {
-            for (final HollowPattern pattern : phraseRepresentation.getPatterns()) {
+            for (final LightPattern pattern : phraseRepresentation.getPatterns()) {
                 if (pattern.match(phraseSource)) {
                     final ExpressionParser expressionParser = new ExpressionParser(light);
                     final Collection<String> hollows = pattern.getHollows();

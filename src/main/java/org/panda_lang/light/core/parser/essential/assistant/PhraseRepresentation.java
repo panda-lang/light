@@ -2,7 +2,7 @@ package org.panda_lang.light.core.parser.essential.assistant;
 
 import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.parser.Phrase;
-import org.panda_lang.light.core.parser.util.HollowPattern;
+import org.panda_lang.light.core.parser.essential.pattern.LightPattern;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.util.documentation.Documentation;
 
@@ -12,7 +12,7 @@ import java.util.Collection;
 public class PhraseRepresentation {
 
     private final Phrase phrase;
-    private final Collection<HollowPattern> patterns;
+    private final Collection<LightPattern> patterns;
     private final Documentation documentation;
 
     public PhraseRepresentation(Phrase phrase) {
@@ -27,12 +27,16 @@ public class PhraseRepresentation {
         return ray.getReturnValue();
     }
 
-    public PhraseRepresentation pattern(String expression) {
-        return pattern(new HollowPattern(patterns.size(), expression));
+    public PhraseRepresentation pattern(String pattern) {
+        LightPattern lightPattern = LightPattern.builder()
+                .compiler()
+                .compile(pattern)
+                .build(patterns.size());
+        return pattern(lightPattern);
     }
 
-    public PhraseRepresentation pattern(HollowPattern hollowPattern) {
-        patterns.add(hollowPattern);
+    public PhraseRepresentation pattern(LightPattern lightPattern) {
+        patterns.add(lightPattern);
         return this;
     }
 
@@ -44,7 +48,7 @@ public class PhraseRepresentation {
         return documentation;
     }
 
-    public Collection<HollowPattern> getPatterns() {
+    public Collection<LightPattern> getPatterns() {
         return patterns;
     }
 

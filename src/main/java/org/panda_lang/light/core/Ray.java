@@ -1,16 +1,18 @@
 package org.panda_lang.light.core;
 
 import org.panda_lang.light.LightScript;
+import org.panda_lang.light.core.parser.essential.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.essential.assistant.PhraseRepresentation;
-import org.panda_lang.light.core.parser.util.HollowPattern;
+import org.panda_lang.light.core.parser.essential.pattern.LightPattern;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.syntax.Essence;
 
 public class Ray extends Particle {
 
     private LightScript lightScript;
-    private HollowPattern pattern;
+    private LightPattern pattern;
     private PhraseRepresentation phraseRepresentation;
+    private ExpressionRepresentation expressionRepresentation;
     private Essence returnValue;
 
     public Ray() {
@@ -34,13 +36,18 @@ public class Ray extends Particle {
         return this;
     }
 
-    public Ray pattern(HollowPattern pattern) {
+    public Ray pattern(LightPattern pattern) {
         this.pattern = pattern;
         return this;
     }
 
     public Ray phraseRepresentation(PhraseRepresentation phraseRepresentation) {
         this.phraseRepresentation = phraseRepresentation;
+        return this;
+    }
+
+    public Ray expressionRepresentation(ExpressionRepresentation expressionRepresentation) {
+        this.expressionRepresentation = expressionRepresentation;
         return this;
     }
 
@@ -53,11 +60,15 @@ public class Ray extends Particle {
         return returnValue;
     }
 
+    public ExpressionRepresentation getExpressionRepresentation() {
+        return expressionRepresentation;
+    }
+
     public PhraseRepresentation getPhraseRepresentation() {
         return phraseRepresentation;
     }
 
-    public HollowPattern getPattern() {
+    public LightPattern getPattern() {
         return pattern;
     }
 
