@@ -1,4 +1,3 @@
-
 on load {
     send "Hello Light" to console
 
@@ -6,7 +5,9 @@ on load {
         invoke "ray"
     }
 
-    send 10 > 5 to console
+    while true {
+        send 5 > 10 to console
+    }
 
 }
 

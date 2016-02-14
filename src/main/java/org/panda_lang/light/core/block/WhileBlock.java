@@ -38,9 +38,9 @@ public class WhileBlock extends Block {
         blockLayout.initializer(new BlockInitializer() {
             @Override
             public Block initialize(Atom atom) {
-                String value = atom.getBlockInfo().getSpecifiers().get(0);
+                String phrase = atom.getBlockInfo().getSpecifiersAsPhrase();
                 FactorParser factorParser = new FactorParser();
-                Factor condition = factorParser.parse(atom, value);
+                Factor condition = factorParser.parse(atom, phrase);
                 return new WhileBlock(condition);
             }
         });

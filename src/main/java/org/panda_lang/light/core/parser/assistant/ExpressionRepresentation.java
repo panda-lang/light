@@ -23,7 +23,7 @@ public class ExpressionRepresentation {
 
     public Essence run(Ray ray) {
         ray.expressionRepresentation(this);
-        return expression.run(ray);
+        return expression.getValue(ray);
     }
 
     public ExpressionRepresentation pattern(String pattern) {

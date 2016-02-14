@@ -4,6 +4,7 @@ import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
 import org.panda_lang.light.core.parser.pattern.LightPattern;
+import org.panda_lang.light.core.util.ModificationType;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.syntax.Essence;
 
@@ -54,6 +55,10 @@ public class Ray extends Particle {
     public Ray returnValue(Essence returnValue) {
         this.returnValue = returnValue;
         return this;
+    }
+
+    public ModificationType getModificationType() {
+        return ModificationType.valueOf(getPattern().getID());
     }
 
     public Essence getReturnValue() {

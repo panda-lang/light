@@ -1,4 +1,4 @@
-package org.panda_lang.light.lang.expression.util;
+package org.panda_lang.light.core.util;
 
 public enum ModificationType {
 
@@ -23,7 +23,7 @@ public enum ModificationType {
                 return modificationType;
             }
         }
-        return null;
+        return SET;
     }
 
 }

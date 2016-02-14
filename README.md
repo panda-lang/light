@@ -9,17 +9,18 @@ Panda Language: http://panda-lang.org/
 <br>
 <br>
 #### API
-- API is not stable yet <span style="color: red">●</span>
+API is not stable yet :red_circle:
 <br>
 <br>
 #####Goals:
-- [ ] Blocks
+- [x] Blocks
   - [x] Event
   - [x] Function
   - [x] Command
   - [x] Loop
   - [x] While
-  - [ ] If-then/Else-then
+  - [x] If-then
+  - [x] Else-then
 - [x] Phrases
   - [x] Idea
   - [x] Interface

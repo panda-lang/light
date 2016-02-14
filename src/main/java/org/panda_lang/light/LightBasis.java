@@ -19,8 +19,10 @@ public class LightBasis {
 
     public void loadBlocks() {
         CommandBlock.initialize(light);
+        ElseThenBlock.initialize(light);
         EventBlock.initialize(light);
         FunctionBlock.initialize(light);
+        IfThenBlock.initialize(light);
         LoopBlock.initialize(light);
         WhileBlock.initialize(light);
     }
