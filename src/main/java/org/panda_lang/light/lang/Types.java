@@ -1,6 +1,9 @@
 package org.panda_lang.light.lang;
 
 import org.panda_lang.light.LightCore;
+import org.panda_lang.light.core.parser.assistant.TypeRepresentation;
+import org.panda_lang.light.lang.type.StringType;
+import org.panda_lang.panda.lang.StringEssence;
 
 public class Types {
 
@@ -11,7 +14,8 @@ public class Types {
     }
 
     public void registerDefaultTypes() {
-
+        TypeRepresentation typeRepresentation = new TypeRepresentation(StringEssence.class, new StringType());
+        lightCore.registerType(typeRepresentation);
     }
 
 }

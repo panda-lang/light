@@ -8,6 +8,10 @@ Website: http://light.panda-lang.org/
 Panda Language: http://panda-lang.org/
 <br>
 <br>
+#### API
+- API is not stable yet <span style="color: red">●</span>
+<br>
+<br>
 #####Goals:
 - [ ] Blocks
   - [x] Event
@@ -17,28 +21,33 @@ Panda Language: http://panda-lang.org/
   - [x] While
   - [ ] If-then/Else-then
 - [x] Phrases
+  - [x] Idea
   - [x] Interface
   - [x] Parser
   - [x] API
 - [x] Expressions
+  - [x] Idea
   - [x] Interface
   - [x] Parser
   - [x] Assistant
+  - [ ] Others
   - [x] API
-- [ ] Types
+- [x] Types
   - [x] Idea
   - [x] Interface
-  - [ ] Parser
-  - [ ] Assistant
-  - [ ] API
+  - [x] API
 - [ ] Variable system
-- [ ] Registration system
+  - [x] Idea
+  - [ ] Interface
+  - [ ] Storage
+  - [ ] Others
+- [x] Registration system
   - [x] Phrases
   - [x] Expressions
   - [x] Types
-  - [ ] Events
-  - [ ] Commands
-  - [ ] Functions
+  - [x] Events
+  - [x] Commands
+  - [x] Functions
 - [ ] Libraries
 - [ ] Repositories
 - Other goals

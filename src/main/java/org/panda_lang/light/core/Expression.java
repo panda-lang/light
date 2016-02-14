@@ -2,8 +2,13 @@ package org.panda_lang.light.core;
 
 import org.panda_lang.panda.core.syntax.Essence;
 
-public interface Expression {
+public class Expression extends Essence {
 
-    Essence run(Ray ray);
+    public void setValue(Ray ray) {
+    }
+
+    public Essence getValue(Ray ray) {
+        return run(ray);
+    }
 
 }

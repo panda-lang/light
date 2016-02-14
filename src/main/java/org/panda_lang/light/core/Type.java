@@ -2,10 +2,10 @@ package org.panda_lang.light.core;
 
 import org.panda_lang.panda.core.syntax.Essence;
 
-public interface Type {
+public interface Type<T extends Essence> {
 
-    void set(Essence essence);
+    String serialize(T essence);
 
-    Essence get();
+    T deserialize(String data);
 
 }
