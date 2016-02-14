@@ -1,6 +1,6 @@
-package org.panda_lang.light.core.parser.essential;
+package org.panda_lang.light.core.parser;
 
-import org.panda_lang.light.core.parser.essential.assistant.ExpressionRepresentation;
+import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 
 import java.util.ArrayList;
 import java.util.Collection;

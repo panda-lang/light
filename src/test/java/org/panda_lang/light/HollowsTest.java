@@ -1,6 +1,6 @@
 package org.panda_lang.light;
 
-import org.panda_lang.light.core.parser.essential.pattern.LightPattern;
+import org.panda_lang.light.core.parser.pattern.LightPattern;
 
 import java.util.Collection;
 

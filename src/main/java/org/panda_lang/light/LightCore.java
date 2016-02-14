@@ -1,11 +1,11 @@
-package org.panda_lang.light.core;
+package org.panda_lang.light;
 
-import org.panda_lang.light.Light;
-import org.panda_lang.light.LightBasis;
-import org.panda_lang.light.core.parser.essential.ExpressionCenter;
-import org.panda_lang.light.core.parser.essential.PhraseCenter;
-import org.panda_lang.light.core.parser.essential.assistant.ExpressionRepresentation;
-import org.panda_lang.light.core.parser.essential.assistant.PhraseRepresentation;
+import org.panda_lang.light.core.parser.ExpressionCenter;
+import org.panda_lang.light.core.parser.PhraseCenter;
+import org.panda_lang.light.core.parser.TypeCenter;
+import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
+import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
+import org.panda_lang.light.core.parser.assistant.TypeRepresentation;
 import org.panda_lang.light.lang.Expressions;
 import org.panda_lang.light.lang.Phrases;
 import org.panda_lang.panda.Panda;
@@ -14,12 +14,15 @@ public class LightCore {
 
     private final Panda panda;
     private final Light light;
+    private final TypeCenter typeCenter;
     private final PhraseCenter phraseCenter;
     private final ExpressionCenter expressionCenter;
 
     public LightCore(Panda panda, Light light) {
         this.panda = panda;
         this.light = light;
+
+        this.typeCenter = new TypeCenter();
         this.phraseCenter = new PhraseCenter();
         this.expressionCenter = new ExpressionCenter();
     }
@@ -36,6 +39,10 @@ public class LightCore {
         expressions.registerDefaultExpressions();
     }
 
+    public void registerType(TypeRepresentation typeRepresentation) {
+        typeCenter.registerType(typeRepresentation);
+    }
+
     public void registerPhrase(PhraseRepresentation phraseRepresentation) {
         phraseCenter.registerPhrase(phraseRepresentation);
     }
@@ -50,6 +57,10 @@ public class LightCore {
 
     public PhraseCenter getPhraseCenter() {
         return phraseCenter;
+    }
+
+    public TypeCenter getTypeCenter() {
+        return typeCenter;
     }
 
     public Light getLight() {

@@ -35,7 +35,7 @@ Panda Language: http://panda-lang.org/
 - [ ] Registration system
   - [x] Phrases
   - [x] Expressions
-  - [ ] Types
+  - [x] Types
   - [ ] Events
   - [ ] Commands
   - [ ] Functions

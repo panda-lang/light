@@ -1,4 +1,4 @@
-package org.panda_lang.light.core.parser.essential.assistant;
+package org.panda_lang.light.core.parser.assistant;
 
 import org.panda_lang.panda.lang.StringEssence;
 

@@ -1,6 +1,5 @@
 package org.panda_lang.light;
 
-import org.panda_lang.light.core.LightCore;
 import org.panda_lang.light.core.block.CommandBlock;
 import org.panda_lang.light.core.block.EventBlock;
 import org.panda_lang.light.core.block.FunctionBlock;

@@ -1,9 +1,9 @@
 package org.panda_lang.light.core;
 
 import org.panda_lang.light.LightScript;
-import org.panda_lang.light.core.parser.essential.assistant.ExpressionRepresentation;
-import org.panda_lang.light.core.parser.essential.assistant.PhraseRepresentation;
-import org.panda_lang.light.core.parser.essential.pattern.LightPattern;
+import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
+import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
+import org.panda_lang.light.core.parser.pattern.LightPattern;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.syntax.Essence;
 

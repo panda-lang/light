@@ -1,10 +1,10 @@
-package org.panda_lang.light.core.parser.essential;
+package org.panda_lang.light.core.parser;
 
 import org.panda_lang.light.Light;
 import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.Ray;
-import org.panda_lang.light.core.parser.essential.assistant.ExpressionRepresentation;
-import org.panda_lang.light.core.parser.essential.pattern.LightPattern;
+import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
+import org.panda_lang.light.core.parser.pattern.LightPattern;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;

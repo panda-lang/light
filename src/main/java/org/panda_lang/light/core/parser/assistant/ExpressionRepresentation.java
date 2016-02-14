@@ -1,8 +1,8 @@
-package org.panda_lang.light.core.parser.essential.assistant;
+package org.panda_lang.light.core.parser.assistant;
 
+import org.panda_lang.light.core.Expression;
 import org.panda_lang.light.core.Ray;
-import org.panda_lang.light.core.parser.Expression;
-import org.panda_lang.light.core.parser.essential.pattern.LightPattern;
+import org.panda_lang.light.core.parser.pattern.LightPattern;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.util.documentation.Documentation;
 

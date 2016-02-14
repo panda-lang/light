@@ -1,4 +1,4 @@
-package org.panda_lang.light.core.parser.essential.pattern;
+package org.panda_lang.light.core.parser.pattern;
 
 import java.util.ArrayList;
 import java.util.List;

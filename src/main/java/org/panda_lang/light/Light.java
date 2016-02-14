@@ -1,11 +1,11 @@
 package org.panda_lang.light;
 
-import org.panda_lang.light.core.LightCore;
 import org.panda_lang.light.core.block.CommandsCollector;
 import org.panda_lang.light.core.block.EventsCollector;
 import org.panda_lang.light.core.block.FunctionsCollector;
-import org.panda_lang.light.core.parser.essential.assistant.ExpressionRepresentation;
-import org.panda_lang.light.core.parser.essential.assistant.PhraseRepresentation;
+import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
+import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
+import org.panda_lang.light.core.parser.assistant.TypeRepresentation;
 import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.core.parser.ParserLayout;
 import org.panda_lang.panda.core.parser.essential.util.BlockLayout;
@@ -36,6 +36,10 @@ public class Light {
 
     public void registerBlock(BlockLayout blockLayout) {
         panda.getPandaCore().registerBlock(blockLayout);
+    }
+
+    public void registerType(TypeRepresentation typeRepresentation) {
+        lightCore.registerType(typeRepresentation);
     }
 
     public void registerPhrase(PhraseRepresentation phraseRepresentation) {
