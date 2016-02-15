@@ -2,7 +2,7 @@ on load {
     send "Hello Light" to console
 
     loop 1 time {
-        invoke "ray"
+        invoke "pandaInfo"
     }
 
     while true {
@@ -11,7 +11,8 @@ on load {
 
 }
 
-function ray {
-    send "Hello Panda" to console; send panda version to console // :3
+function pandaInfo {
+    send "Hello Panda" to console
+    send panda version to console
 }
 

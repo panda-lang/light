@@ -2,6 +2,7 @@ package org.panda_lang.light.core.parser;
 
 import org.panda_lang.light.Light;
 import org.panda_lang.light.LightScript;
+import org.panda_lang.light.core.Phrase;
 import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
 import org.panda_lang.light.core.parser.pattern.LightPattern;
@@ -39,12 +40,17 @@ public class PhraseParser implements Parser {
                     final Factor[] array = new Factor[expressions.size()];
                     final Factor[] factors = expressions.toArray(array);
 
-                    final Ray ray = new Ray().lightScript((LightScript) atom.getPandaScript()).pattern(pattern);
+                    final Phrase phrase = phraseRepresentation.getRepresentation();
+                    final Ray ray = new Ray()
+                            .lightScript((LightScript) atom.getPandaScript())
+                            .pattern(pattern);
+
                     return new SimplifiedNamedExecutable(new Executable() {
                         @Override
                         public Essence run(Particle particle) {
                             ray.include(particle).factors(factors);
-                            return phraseRepresentation.run(ray);
+                            phrase.run(ray);
+                            return ray.getReturnValue();
                         }
                     });
                 }

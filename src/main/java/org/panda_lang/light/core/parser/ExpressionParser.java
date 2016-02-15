@@ -2,6 +2,7 @@ package org.panda_lang.light.core.parser;
 
 import org.panda_lang.light.Light;
 import org.panda_lang.light.LightScript;
+import org.panda_lang.light.core.Expression;
 import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.pattern.LightPattern;
@@ -27,12 +28,11 @@ public class ExpressionParser implements Parser {
 
     @Override
     public Factor parse(Atom atom) {
-        String expression = atom.getSourceCode().trim();
+        String expressionSource = atom.getSourceCode().trim();
 
-        // <Light expr here>
         for (final ExpressionRepresentation expressionRepresentation : light.getLightCore().getExpressionCenter().getExpressions()) {
             for (LightPattern pattern : expressionRepresentation.getPatterns()) {
-                if (pattern.match(expression)) {
+                if (pattern.match(expressionSource)) {
                     final ExpressionParser expressionParser = new ExpressionParser(light);
                     final Collection<String> hollows = pattern.getHollows();
                     final Collection<Factor> expressions = expressionParser.parse(atom, hollows);
@@ -40,12 +40,16 @@ public class ExpressionParser implements Parser {
                     final Factor[] array = new Factor[expressions.size()];
                     final Factor[] factors = expressions.toArray(array);
 
-                    final Ray ray = new Ray().lightScript((LightScript) atom.getPandaScript()).pattern(pattern);
+                    final Expression expression = expressionRepresentation.getRepresentation();
+                    final Ray ray = new Ray()
+                            .lightScript((LightScript) atom.getPandaScript())
+                            .pattern(pattern);
+
                     final Runtime runtime = new Runtime(null, new Executable() {
                         @Override
                         public Essence run(Particle particle) {
-                            ray.include(particle).factors(factors);
-                            return expressionRepresentation.run(ray);
+                            ray.include(particle);
+                            return expression.getValue(ray);
                         }
                     }, factors);
 
@@ -55,7 +59,7 @@ public class ExpressionParser implements Parser {
         }
 
         FactorParser factorParser = new FactorParser();
-        return factorParser.parse(atom, expression);
+        return factorParser.parse(atom, expressionSource);
     }
 
     public Factor parse(Atom atom, String expression) {
