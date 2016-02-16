@@ -57,7 +57,7 @@ public class Representation<T> implements NamedExecutable {
 
     @Override
     public String getName() {
-        return null;
+        return patterns.toString();
     }
 
 }

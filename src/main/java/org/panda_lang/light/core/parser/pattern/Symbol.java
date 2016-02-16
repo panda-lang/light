@@ -7,14 +7,14 @@ import java.util.Collection;
 
 public class Symbol implements Matcher {
 
-    private final int id;
+    private final int index;
     private final SymbolType symbolType;
     private final Collection<String> segmentsBefore;
     private final Collection<String> variants;
     private final Collection<String> segmentsAfter;
 
-    public Symbol(SymbolType symbolType, int id) {
-        this.id = id;
+    public Symbol(SymbolType symbolType, int index) {
+        this.index = index;
         this.symbolType = symbolType;
         this.segmentsBefore = new ArrayList<>(1);
         this.variants = new ArrayList<>(1);
@@ -74,8 +74,22 @@ public class Symbol implements Matcher {
         return symbolType;
     }
 
-    public int getID() {
-        return id;
+    public int getIndex() {
+        return index;
+    }
+
+    @Override
+    public String toString() {
+        switch (getSymbolType()) {
+            case BASIS:
+                return variants.toString();
+            case HOLLOW:
+                return "*";
+            case OPTIONAL:
+                return segmentsBefore + "[ ]" + segmentsAfter;
+            default:
+                return null;
+        }
     }
 
 }

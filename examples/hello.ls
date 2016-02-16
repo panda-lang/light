@@ -1,12 +1,15 @@
 on load {
-    send "Hello Light" to console
+
+    if true {
+        send "Hello Light" to console
+    }
 
     loop 1 time {
-        invoke "pandaInfo"
+        call "pandaInfo"
     }
 
     while true {
-        send 5 > 10 to console
+        send 5 is greater than 10 to console
     }
 
 }

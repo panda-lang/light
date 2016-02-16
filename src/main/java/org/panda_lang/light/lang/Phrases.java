@@ -20,16 +20,16 @@ public class Phrases {
         lightCore.registerPhrase(sendPhrase);
 
         PhraseRepresentation functionPhrase = new PhraseRepresentation(new FunctionPhrase());
-
         functionPhrase.pattern(LightPattern.builder()
-                .basis("invoke").variant("call")
+                .basis("call")
                 .hollow()
                 .basis("with")
                 .hollow()
                 .build(0));
-
-        functionPhrase.pattern("invoke *");
-
+        functionPhrase.pattern(LightPattern.builder()
+                .basis("call")
+                .hollow()
+                .build(1));
         lightCore.registerPhrase(functionPhrase);
     }
 

@@ -8,12 +8,12 @@ import java.util.List;
 
 public class LightPattern implements Matcher {
 
-    private final int id;
+    private final int index;
     private final List<Symbol> symbols;
     private final List<String> hollows;
 
-    protected LightPattern(int id, List<Symbol> symbols) {
-        this.id = id;
+    protected LightPattern(int index, List<Symbol> symbols) {
+        this.index = index;
         this.symbols = symbols;
         this.hollows = new ArrayList<>();
     }
@@ -43,13 +43,13 @@ public class LightPattern implements Matcher {
             }
 
             else if (symbol.isHollow()) {
-                Symbol nextSymbol = symbols.size() > symbol.getID() + 1 ? symbols.get(symbol.getID() + 1) : symbol;
+                Symbol nextSymbol = symbols.size() > symbol.getIndex() + 1 ? symbols.get(symbol.getIndex() + 1) : symbol;
                 StringBuilder hollowBuilder = new StringBuilder();
 
                 for (int i = f; i < fragments.size(); i++) {
                     String nextFragment = fragments.get(i);
 
-                    if (nextSymbol.match(nextFragment)) {
+                    if (!nextSymbol.isHollow() && nextSymbol.match(nextFragment)) {
                         hollows.add(hollowBuilder.toString().trim());
                         break loop;
                     }
@@ -77,12 +77,17 @@ public class LightPattern implements Matcher {
         return symbols;
     }
 
-    public int getID() {
-        return id;
+    public int getIndex() {
+        return index;
     }
 
     public static LightPatternBuilder builder() {
         return new LightPatternBuilder();
+    }
+
+    @Override
+    public String toString() {
+        return symbols.toString();
     }
 
 }

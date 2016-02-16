@@ -55,8 +55,8 @@ public class LightPatternBuilder {
         return new LightPatternCompiler(this);
     }
 
-    public LightPattern build(int id) {
-        return new LightPattern(id, symbols);
+    public LightPattern build(int index) {
+        return new LightPattern(index, symbols);
     }
 
 }

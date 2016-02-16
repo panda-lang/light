@@ -27,11 +27,11 @@ API is not stable yet :red_circle:
   - [x] Parser
   - [x] API
 - [x] Expressions
-  - [x] Idea
+  - [ ] Idea
   - [x] Interface
   - [x] Parser
   - [x] Assistant
-  - [ ] Others
+  - [x] Others
   - [x] API
 - [x] Types
   - [x] Idea

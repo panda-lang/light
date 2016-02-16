@@ -58,7 +58,7 @@ public class Ray extends Particle {
     }
 
     public ModificationType getModificationType() {
-        return ModificationType.valueOf(getPattern().getID());
+        return ModificationType.valueOf(getPattern().getIndex());
     }
 
     public Essence getReturnValue() {

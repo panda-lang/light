@@ -9,7 +9,7 @@ public class FunctionPhrase implements Phrase {
     @Override
     public void run(Ray ray) {
         String functionName = ray.getValueOfFactor(0).toString();
-        if (ray.getPattern().getID() == 0) {
+        if (ray.getPattern().getIndex() == 0) {
             ArrayEssence arrayEssence = ray.getValueOfFactor(1);
 
         }

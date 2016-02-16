@@ -33,9 +33,8 @@ public class ExpressionParser implements Parser {
         for (final ExpressionRepresentation expressionRepresentation : light.getLightCore().getExpressionCenter().getExpressions()) {
             for (LightPattern pattern : expressionRepresentation.getPatterns()) {
                 if (pattern.match(expressionSource)) {
-                    final ExpressionParser expressionParser = new ExpressionParser(light);
-                    final Collection<String> hollows = pattern.getHollows();
-                    final Collection<Factor> expressions = expressionParser.parse(atom, hollows);
+                    final Collection<String> hollows = new ArrayList<>(pattern.getHollows());
+                    final Collection<Factor> expressions = parse(atom, hollows);
 
                     final Factor[] array = new Factor[expressions.size()];
                     final Factor[] factors = expressions.toArray(array);
