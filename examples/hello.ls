@@ -1,5 +1,7 @@
 on load {
 
+    set panda version to "0.0.1"
+
     if true {
         send "Hello Light" to console
     }

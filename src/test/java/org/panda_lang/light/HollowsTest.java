@@ -2,16 +2,13 @@ package org.panda_lang.light;
 
 import org.panda_lang.light.core.parser.pattern.LightPattern;
 
-import java.util.Collection;
-
 public class HollowsTest {
 
-    public static void main(String[] args) {
-        LightPattern lightPattern = LightPattern.builder().compile("invoke *").build(0);
-        lightPattern.match("invoke \"ray\"");
+    private static final String CODE = "invoke \"ray\"";
 
-        Collection<String> hollows = lightPattern.getHollows();
-        System.out.print(hollows);
+    public static void main(String[] args) {
+        LightPattern lightPattern = LightPattern.builder().basis("invoke").hollow().build(0);
+        lightPattern.match(CODE);
     }
 
 }

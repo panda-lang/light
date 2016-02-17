@@ -11,7 +11,7 @@ import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
 import org.panda_lang.panda.lang.BooleanEssence;
 
-public class IfThenBlock extends Block {
+public class IfThenBlock extends LightBlock {
 
     private final Factor factor;
     private ElseThenBlock elseThenBlock;
@@ -42,7 +42,7 @@ public class IfThenBlock extends Block {
             public Block initialize(Atom atom) {
                 String phrase = atom.getBlockInfo().getSpecifiersAsPhrase();
                 ExpressionParser expressionParser = new ExpressionParser(light);
-                Factor factor = expressionParser.parse(atom, phrase);
+                Factor factor = expressionParser.parse(atom, phrase).toFactor();
                 return new IfThenBlock(factor);
             }
         });

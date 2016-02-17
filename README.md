@@ -27,7 +27,7 @@ API is not stable yet :red_circle:
   - [x] Parser
   - [x] API
 - [x] Expressions
-  - [ ] Idea
+  - [x] Idea
   - [x] Interface
   - [x] Parser
   - [x] Assistant
@@ -39,7 +39,7 @@ API is not stable yet :red_circle:
   - [x] API
 - [ ] Variable system
   - [x] Idea
-  - [ ] Interface
+  - [x] Interface
   - [ ] Storage
   - [ ] Others
 - [x] Registration system

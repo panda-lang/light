@@ -4,6 +4,7 @@ import org.panda_lang.light.LightCore;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
 import org.panda_lang.light.core.parser.pattern.LightPattern;
 import org.panda_lang.light.lang.phrase.FunctionPhrase;
+import org.panda_lang.light.lang.phrase.ModificationPhrase;
 import org.panda_lang.light.lang.phrase.PrintPhrase;
 
 public class Phrases {
@@ -31,6 +32,13 @@ public class Phrases {
                 .hollow()
                 .build(1));
         lightCore.registerPhrase(functionPhrase);
+
+        PhraseRepresentation modificationPhrase = new PhraseRepresentation(new ModificationPhrase());
+        modificationPhrase.pattern("add * to *");
+        modificationPhrase.pattern("set * to *");
+        modificationPhrase.pattern("remove * from *");
+        modificationPhrase.pattern("delete *");
+        lightCore.registerPhrase(modificationPhrase);
     }
 
 }

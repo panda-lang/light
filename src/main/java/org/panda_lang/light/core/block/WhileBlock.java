@@ -11,7 +11,7 @@ import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
 import org.panda_lang.panda.lang.BooleanEssence;
 
-public class WhileBlock extends Block {
+public class WhileBlock extends LightBlock {
 
     private final Factor factor;
 

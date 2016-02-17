@@ -11,7 +11,7 @@ import org.panda_lang.panda.core.syntax.Block;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
 
-public class LoopBlock extends Block {
+public class LoopBlock extends LightBlock {
 
     private final Factor factor;
 

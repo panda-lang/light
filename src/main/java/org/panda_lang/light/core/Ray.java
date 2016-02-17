@@ -4,17 +4,22 @@ import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
 import org.panda_lang.light.core.parser.pattern.LightPattern;
+import org.panda_lang.light.core.util.ExpressionRuntime;
 import org.panda_lang.light.core.util.ModificationType;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.syntax.Essence;
+import org.panda_lang.panda.core.syntax.Factor;
+
+import java.util.List;
 
 public class Ray extends Particle {
 
     private LightScript lightScript;
     private LightPattern pattern;
+    private Essence returnValue;
     private PhraseRepresentation phraseRepresentation;
     private ExpressionRepresentation expressionRepresentation;
-    private Essence returnValue;
+    private List<ExpressionRuntime> expressionRuntimes;
 
     public Ray() {
     }
@@ -23,12 +28,17 @@ public class Ray extends Particle {
         super(particle.getPandaScript(), particle.getMemory(), particle.getEssence(), particle.getInstance(), particle.getFactors());
     }
 
+    @Override
+    public Ray factors(Factor... factors) {
+        super.setFactors(factors);
+        return this;
+    }
+
     public Ray include(Particle particle) {
         super.pandaScript(particle.getPandaScript())
                 .memory(particle.getMemory())
                 .essence(particle.getEssence())
-                .instance(particle.getInstance())
-                .factors(particle.getFactors());
+                .instance(particle.getInstance());
         return this;
     }
 
@@ -57,8 +67,17 @@ public class Ray extends Particle {
         return this;
     }
 
+    public Ray expressionRuntimes(List<ExpressionRuntime> expressionRuntimes) {
+        this.expressionRuntimes = expressionRuntimes;
+        return this;
+    }
+
     public ModificationType getModificationType() {
         return ModificationType.valueOf(getPattern().getIndex());
+    }
+
+    public List<ExpressionRuntime> getExpressionRuntimes() {
+        return expressionRuntimes;
     }
 
     public Essence getReturnValue() {

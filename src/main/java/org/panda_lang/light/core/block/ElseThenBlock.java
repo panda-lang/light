@@ -6,7 +6,7 @@ import org.panda_lang.panda.core.parser.essential.util.BlockInitializer;
 import org.panda_lang.panda.core.parser.essential.util.BlockLayout;
 import org.panda_lang.panda.core.syntax.Block;
 
-public class ElseThenBlock extends Block {
+public class ElseThenBlock extends LightBlock {
 
     public static void initialize(final Light light) {
         BlockLayout blockLayout = new BlockLayout(IfThenBlock.class, false, "else");

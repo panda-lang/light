@@ -6,17 +6,16 @@ import org.panda_lang.light.core.Expression;
 import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.pattern.LightPattern;
-import org.panda_lang.panda.core.Particle;
+import org.panda_lang.light.core.util.ExpressionRuntime;
+import org.panda_lang.light.core.util.ExpressionUtils;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.essential.FactorParser;
-import org.panda_lang.panda.core.syntax.Essence;
-import org.panda_lang.panda.core.syntax.Executable;
 import org.panda_lang.panda.core.syntax.Factor;
-import org.panda_lang.panda.core.syntax.Runtime;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class ExpressionParser implements Parser {
 
@@ -27,49 +26,42 @@ public class ExpressionParser implements Parser {
     }
 
     @Override
-    public Factor parse(Atom atom) {
+    public ExpressionRuntime parse(Atom atom) {
         String expressionSource = atom.getSourceCode().trim();
 
         for (final ExpressionRepresentation expressionRepresentation : light.getLightCore().getExpressionCenter().getExpressions()) {
             for (LightPattern pattern : expressionRepresentation.getPatterns()) {
                 if (pattern.match(expressionSource)) {
                     final Collection<String> hollows = new ArrayList<>(pattern.getHollows());
-                    final Collection<Factor> expressions = parse(atom, hollows);
-
-                    final Factor[] array = new Factor[expressions.size()];
-                    final Factor[] factors = expressions.toArray(array);
+                    final List<ExpressionRuntime> expressions = parse(atom, hollows);
+                    final Factor[] factors = ExpressionUtils.toFactors(expressions);
 
                     final Expression expression = expressionRepresentation.getRepresentation();
                     final Ray ray = new Ray()
                             .lightScript((LightScript) atom.getPandaScript())
-                            .pattern(pattern);
+                            .pattern(pattern)
+                            .expressionRuntimes(expressions)
+                            .factors(factors);
 
-                    final Runtime runtime = new Runtime(null, new Executable() {
-                        @Override
-                        public Essence run(Particle particle) {
-                            ray.include(particle);
-                            return expression.getValue(ray);
-                        }
-                    }, factors);
-
-                    return new Factor(runtime);
+                    return new ExpressionRuntime(expression, ray);
                 }
             }
         }
 
         FactorParser factorParser = new FactorParser();
-        return factorParser.parse(atom, expressionSource);
+        Factor factor = factorParser.parse(atom, expressionSource);
+        return new ExpressionRuntime(factor);
     }
 
-    public Factor parse(Atom atom, String expression) {
+    public ExpressionRuntime parse(Atom atom, String expression) {
         atom.setSourceCode(expression);
         return parse(atom);
     }
 
-    public Collection<Factor> parse(Atom atom, Collection<String> expressions) {
-        Collection<Factor> executables = new ArrayList<>(expressions.size());
+    public List<ExpressionRuntime> parse(Atom atom, Collection<String> expressions) {
+        List<ExpressionRuntime> executables = new ArrayList<>(expressions.size());
         for (String expression : expressions) {
-            Factor namedExecutable = parse(atom, expression);
+            ExpressionRuntime namedExecutable = parse(atom, expression);
             executables.add(namedExecutable);
         }
         return executables;
