@@ -1,9 +1,9 @@
 on load {
-
-    set panda version to "0.0.1"
+   send "Hello Light" to console
 
     if true {
-        send "Hello Light" to console
+        set [var] to "Variable Test"
+        send [var] to console
     }
 
     loop 1 time {
@@ -13,11 +13,9 @@ on load {
     while true {
         send 5 is greater than 10 to console
     }
-
 }
 
 function pandaInfo {
     send "Hello Panda" to console
     send panda version to console
 }
-

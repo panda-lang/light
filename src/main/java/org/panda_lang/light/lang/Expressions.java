@@ -14,10 +14,6 @@ public class Expressions {
     }
 
     public void registerDefaultExpressions() {
-        ExpressionRepresentation pandaVersionExpression = new ExpressionRepresentation(new PandaVersionExpression());
-        pandaVersionExpression.pattern("panda version");
-        lightCore.registerExpression(pandaVersionExpression);
-
         ExpressionRepresentation comparisonExpression = new ExpressionRepresentation(new ComparisonExpression());
         comparisonExpression.pattern("* and *");
         comparisonExpression.pattern("* or *");
@@ -28,6 +24,10 @@ public class Expressions {
         comparisonExpression.pattern("* is less than *");
         comparisonExpression.pattern("* is *");
         lightCore.registerExpression(comparisonExpression);
+
+        ExpressionRepresentation pandaVersionExpression = new ExpressionRepresentation(new PandaVersionExpression());
+        pandaVersionExpression.pattern("panda version");
+        lightCore.registerExpression(pandaVersionExpression);
     }
 
 }

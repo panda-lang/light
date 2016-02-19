@@ -48,8 +48,14 @@ public class ExpressionParser implements Parser {
             }
         }
 
-        FactorParser factorParser = new FactorParser();
-        Factor factor = factorParser.parse(atom, expressionSource);
+        TypeParser typeParser = new TypeParser();
+        Factor factor = typeParser.parse(atom, expressionSource);
+
+        if (factor == null) {
+            FactorParser factorParser = new FactorParser();
+            factor = factorParser.parse(atom, expressionSource);
+        }
+
         return new ExpressionRuntime(factor);
     }
 

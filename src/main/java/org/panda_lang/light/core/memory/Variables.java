@@ -1,7 +1,5 @@
 package org.panda_lang.light.core.memory;
 
-import org.panda_lang.light.core.Variable;
-
 import java.util.HashMap;
 import java.util.Map;
 

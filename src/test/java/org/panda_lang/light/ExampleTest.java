@@ -8,7 +8,7 @@ public class ExampleTest {
         Light light = new Light();
         light.initializeDefaultElements();
 
-        File script = new File("examples/hello.ls");
+        File script = new File("examples/full.ls");
         LightScript lightScript = light.getLightLoader().load(script);
 
         lightScript.callEvent("load");

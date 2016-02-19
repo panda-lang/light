@@ -1,4 +1,4 @@
-package org.panda_lang.light.core;
+package org.panda_lang.light.core.memory;
 
 import org.panda_lang.panda.core.syntax.Essence;
 
