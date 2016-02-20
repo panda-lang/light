@@ -5,6 +5,28 @@ import java.util.Map;
 
 public class Variables {
 
-    public static final Map<String, Variable> COMMON_VARIABLES = new HashMap<>();
+    private final Map<String, Variable> commonVariables;
+    private final Storage storage;
+
+    public Variables() {
+        this.commonVariables = new HashMap<>();
+        this.storage = new Storage();
+    }
+
+    public void load() {
+        storage.load();
+    }
+
+    public void save() {
+        storage.save();
+    }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public Map<String, Variable> getCommonVariables() {
+        return commonVariables;
+    }
 
 }

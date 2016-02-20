@@ -1,9 +1,10 @@
 package org.panda_lang.light.core.block;
 
 import org.panda_lang.light.Light;
+import org.panda_lang.light.core.parser.ExpressionParser;
+import org.panda_lang.light.core.util.ExpressionRuntime;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.parser.Atom;
-import org.panda_lang.panda.core.parser.essential.FactorParser;
 import org.panda_lang.panda.core.parser.essential.util.BlockInitializer;
 import org.panda_lang.panda.core.parser.essential.util.BlockLayout;
 import org.panda_lang.panda.core.syntax.Block;
@@ -33,15 +34,15 @@ public class WhileBlock extends LightBlock {
         return null;
     }
 
-    public static void initialize(Light light) {
+    public static void initialize(final Light light) {
         BlockLayout blockLayout = new BlockLayout(WhileBlock.class, "while");
         blockLayout.initializer(new BlockInitializer() {
             @Override
             public Block initialize(Atom atom) {
                 String phrase = atom.getBlockInfo().getSpecifiersAsPhrase();
-                FactorParser factorParser = new FactorParser();
-                Factor condition = factorParser.parse(atom, phrase);
-                return new WhileBlock(condition);
+                ExpressionParser expressionParser = new ExpressionParser(light);
+                ExpressionRuntime condition = expressionParser.parse(atom, phrase);
+                return new WhileBlock(condition.toFactor());
             }
         });
         light.registerBlock(blockLayout);

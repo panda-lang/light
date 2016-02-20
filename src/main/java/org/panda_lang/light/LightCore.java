@@ -1,5 +1,6 @@
 package org.panda_lang.light;
 
+import org.panda_lang.light.core.memory.Variables;
 import org.panda_lang.light.core.parser.ExpressionCenter;
 import org.panda_lang.light.core.parser.PhraseCenter;
 import org.panda_lang.light.core.parser.TypeCenter;
@@ -14,6 +15,7 @@ public class LightCore {
 
     private final Panda panda;
     private final Light light;
+    private final Variables variables;
     private final TypeCenter typeCenter;
     private final PhraseCenter phraseCenter;
     private final ExpressionCenter expressionCenter;
@@ -22,6 +24,7 @@ public class LightCore {
         this.panda = panda;
         this.light = light;
 
+        this.variables = new Variables();
         this.typeCenter = new TypeCenter();
         this.phraseCenter = new PhraseCenter();
         this.expressionCenter = new ExpressionCenter();
@@ -61,6 +64,10 @@ public class LightCore {
 
     public TypeCenter getTypeCenter() {
         return typeCenter;
+    }
+
+    public Variables getVariables() {
+        return variables;
     }
 
     public Light getLight() {

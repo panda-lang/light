@@ -8,6 +8,7 @@ import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.pattern.LightPattern;
 import org.panda_lang.light.core.util.ExpressionRuntime;
 import org.panda_lang.light.core.util.ExpressionUtils;
+import org.panda_lang.light.lang.expression.VariableExpression;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.essential.FactorParser;
@@ -46,6 +47,11 @@ public class ExpressionParser implements Parser {
                     return new ExpressionRuntime(expression, ray);
                 }
             }
+        }
+
+        if (expressionSource.charAt(0) == '[') {
+            final Ray ray = new Ray();
+            return new ExpressionRuntime(new VariableExpression(expressionSource.substring(1, expressionSource.length() - 1)), ray);
         }
 
         TypeParser typeParser = new TypeParser();

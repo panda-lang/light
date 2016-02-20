@@ -10,11 +10,15 @@ import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.core.parser.ParserLayout;
 import org.panda_lang.panda.core.parser.essential.util.BlockLayout;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class Light {
 
     private final Panda panda;
     private final LightCore lightCore;
     private final LightLoader lightLoader;
+    private final Collection<LightScript> scripts;
 
     private final EventsCollector eventsCollector;
     private final CommandsCollector commandsCollector;
@@ -24,10 +28,15 @@ public class Light {
         this.panda = new Panda();
         this.lightCore = new LightCore(panda, this);
         this.lightLoader = new LightLoader(lightCore);
+        this.scripts = new ArrayList<>();
 
         this.eventsCollector = new EventsCollector();
         this.commandsCollector = new CommandsCollector();
         this.functionsCollector = new FunctionsCollector();
+    }
+
+    public void registerScript(LightScript lightScript) {
+        scripts.add(lightScript);
     }
 
     public void registerParser(ParserLayout parserLayout) {
@@ -68,6 +77,10 @@ public class Light {
 
     public LightBasis getLightBasis() {
         return new LightBasis(this);
+    }
+
+    public Collection<LightScript> getScripts() {
+        return scripts;
     }
 
     public LightLoader getLightLoader() {
