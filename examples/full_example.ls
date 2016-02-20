@@ -6,7 +6,7 @@ on load {
     // If-statement
     if true {
         // Set [var] variable to text
-        set <var> to "Variable Test"
+        set [var] to "Variable Test"
         // Display content of [var] variable in console
         send [var] to console
 
