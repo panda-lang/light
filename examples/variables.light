@@ -1,0 +1,12 @@
+follow [stored]
+global [common]
+
+on load {
+    set [stored] to "I'm immortal"
+
+    set [common] to "I'm everywhere"
+
+    set [local] to "Carpe diem"
+}
+
+

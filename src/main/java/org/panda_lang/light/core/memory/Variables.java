@@ -1,32 +1,29 @@
 package org.panda_lang.light.core.memory;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.panda_lang.light.LightCore;
 
 public class Variables {
 
-    private final Map<String, Variable> commonVariables;
-    private final Storage storage;
+    private final LightCore lightCore;
+    private final Followed followed;
+    private final Globalized globalized;
 
-    public Variables() {
-        this.commonVariables = new HashMap<>();
-        this.storage = new Storage();
+    public Variables(LightCore lightCore) {
+        this.lightCore = lightCore;
+        this.followed = new Followed(this);
+        this.globalized = new Globalized();
     }
 
-    public void load() {
-        storage.load();
+    public Globalized getGlobalized() {
+        return globalized;
     }
 
-    public void save() {
-        storage.save();
+    public Followed getFollowed() {
+        return followed;
     }
 
-    public Storage getStorage() {
-        return storage;
-    }
-
-    public Map<String, Variable> getCommonVariables() {
-        return commonVariables;
+    public LightCore getLightCore() {
+        return lightCore;
     }
 
 }

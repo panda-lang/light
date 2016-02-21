@@ -1,18 +1,22 @@
 package org.panda_lang.light.lang.type;
 
 import org.panda_lang.light.core.Type;
+import org.panda_lang.light.core.memory.database.util.DataSerializer;
 import org.panda_lang.panda.lang.StringEssence;
+
+import java.io.IOException;
 
 public class StringType implements Type<StringEssence> {
 
     @Override
-    public String serialize(StringEssence essence) {
-        return essence.toString();
+    public DataSerializer serialize(DataSerializer dataSerializer, StringEssence essence) throws IOException {
+        dataSerializer.writeString(essence.toString());
+        return dataSerializer;
     }
 
     @Override
-    public StringEssence deserialize(String data) {
-        return new StringEssence(data);
+    public StringEssence deserialize(DataSerializer dataSerializer) throws IOException {
+        return new StringEssence(dataSerializer.readString());
     }
 
 }

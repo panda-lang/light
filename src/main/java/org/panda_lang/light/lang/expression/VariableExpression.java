@@ -39,4 +39,8 @@ public class VariableExpression extends Expression {
         return ray.getMemory().get(variableName);
     }
 
+    public String getVariableName() {
+        return variableName;
+    }
+
 }
