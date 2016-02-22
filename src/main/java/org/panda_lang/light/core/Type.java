@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public interface Type<T extends Essence> {
 
-    DataSerializer serialize(DataSerializer dataSerializer, T essence) throws IOException;
+    void serialize(DataSerializer dataSerializer, T essence) throws IOException;
 
     T deserialize(DataSerializer dataSerializer) throws IOException;
 

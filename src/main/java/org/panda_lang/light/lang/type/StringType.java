@@ -9,9 +9,8 @@ import java.io.IOException;
 public class StringType implements Type<StringEssence> {
 
     @Override
-    public DataSerializer serialize(DataSerializer dataSerializer, StringEssence essence) throws IOException {
+    public void serialize(DataSerializer dataSerializer, StringEssence essence) throws IOException {
         dataSerializer.writeString(essence.toString());
-        return dataSerializer;
     }
 
     @Override

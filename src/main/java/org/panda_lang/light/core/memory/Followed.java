@@ -1,7 +1,6 @@
 package org.panda_lang.light.core.memory;
 
 import org.panda_lang.light.LightCore;
-import org.panda_lang.light.core.memory.database.Storage;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -9,6 +9,14 @@ public class DataSerializer {
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
 
+    public DataSerializer(DataInputStream dataInputStream) {
+        this(dataInputStream, null);
+    }
+
+    public DataSerializer(DataOutputStream dataOutputStream) {
+        this(null, dataOutputStream);
+    }
+
     public DataSerializer(DataInputStream dataInputStream, DataOutputStream dataOutputStream) {
         this.dataInputStream = dataInputStream;
         this.dataOutputStream = dataOutputStream;

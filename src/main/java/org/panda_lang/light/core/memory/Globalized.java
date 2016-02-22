@@ -5,14 +5,20 @@ import java.util.Map;
 
 public class Globalized {
 
+    private final Variables variables;
     private final Map<String, Variable> commonVariables;
 
-    public Globalized() {
+    public Globalized(Variables variables) {
+        this.variables = variables;
         this.commonVariables = new HashMap<>();
     }
 
     public Map<String, Variable> getCommonVariables() {
         return commonVariables;
+    }
+
+    public Variables getVariables() {
+        return variables;
     }
 
 }

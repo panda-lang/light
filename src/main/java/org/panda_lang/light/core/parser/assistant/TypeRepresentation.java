@@ -12,6 +12,12 @@ public class TypeRepresentation extends Representation<Type> {
         this.clazz = clazz;
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public Type<Essence> getRepresentation() {
+        return super.getRepresentation();
+    }
+
     public Class<? extends Essence> getClazz() {
         return clazz;
     }
