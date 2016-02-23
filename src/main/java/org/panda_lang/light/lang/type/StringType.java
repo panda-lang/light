@@ -10,12 +10,12 @@ public class StringType implements Type<StringEssence> {
 
     @Override
     public void serialize(DataSerializer dataSerializer, StringEssence essence) throws IOException {
-        dataSerializer.writeString(essence.toString());
+        dataSerializer.writeUTF(essence.toString());
     }
 
     @Override
     public StringEssence deserialize(DataSerializer dataSerializer) throws IOException {
-        return new StringEssence(dataSerializer.readString());
+        return new StringEssence(dataSerializer.readUTF());
     }
 
 }

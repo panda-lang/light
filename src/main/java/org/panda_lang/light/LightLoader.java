@@ -4,6 +4,9 @@ import org.panda_lang.light.core.block.CommandBlock;
 import org.panda_lang.light.core.block.EventBlock;
 import org.panda_lang.light.core.block.FunctionBlock;
 import org.panda_lang.panda.Panda;
+import org.panda_lang.panda.core.Particle;
+import org.panda_lang.panda.core.memory.Global;
+import org.panda_lang.panda.core.memory.Memory;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.PandaParser;
 import org.panda_lang.panda.core.parser.util.Injection;
@@ -62,10 +65,17 @@ public class LightLoader {
                 else if (namedExecutable instanceof CommandBlock) {
                     lightScript.registerCommandBlock((CommandBlock) namedExecutable);
                 }
+                else {
+                    atom.getParent().addExecutable(namedExecutable);
+                }
             }
         });
 
         pandaParser.parse();
+
+        Particle particle = new Particle(lightScript, new Memory(Global.COMMON_MEMORY), null, null);
+        lightScript.getPandaScript().run(particle);
+
         return lightScript;
     }
 

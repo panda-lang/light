@@ -30,6 +30,10 @@ public class DataSerializer {
         return dataInputStream.skipBytes(i);
     }
 
+    public void write(int v) throws IOException {
+        dataOutputStream.write(v);
+    }
+
     public void writeByte(byte v) throws IOException {
         dataOutputStream.writeByte(v);
     }
@@ -72,11 +76,6 @@ public class DataSerializer {
 
     public void writeUTF(String string) throws IOException {
         dataOutputStream.writeUTF(string);
-    }
-
-    public void writeString(String string) throws IOException {
-        writeInt(string.length());
-        writeBytes(string);
     }
 
     public int read() throws IOException {
@@ -133,16 +132,6 @@ public class DataSerializer {
 
     public String readUTF() throws IOException {
         return dataInputStream.readUTF();
-    }
-
-    public String readString() throws IOException {
-        int length = read();
-        char[] chars = new char[length];
-        for (int i = 0; i < length; i++) {
-            char c = (char) read();
-            chars[i] = c;
-        }
-        return new String(chars);
     }
 
     public DataOutputStream getDataOutputStream() {

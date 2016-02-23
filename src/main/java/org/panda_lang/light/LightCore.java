@@ -9,6 +9,7 @@ import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
 import org.panda_lang.light.core.parser.assistant.TypeRepresentation;
 import org.panda_lang.light.lang.Expressions;
 import org.panda_lang.light.lang.Phrases;
+import org.panda_lang.light.lang.Types;
 import org.panda_lang.panda.Panda;
 
 public class LightCore {
@@ -24,16 +25,19 @@ public class LightCore {
         this.panda = panda;
         this.light = light;
 
-        this.variables = new Variables(this);
         this.typeCenter = new TypeCenter();
         this.phraseCenter = new PhraseCenter();
         this.expressionCenter = new ExpressionCenter();
+        this.variables = new Variables(this);
     }
 
     public void initialize() {
         LightBasis lightBasis = light.getLightBasis();
         lightBasis.loadParsers();
         lightBasis.loadBlocks();
+
+        Types types = new Types(this);
+        types.registerDefaultTypes();
 
         Phrases phrases = new Phrases(this);
         phrases.registerDefaultPhrases();

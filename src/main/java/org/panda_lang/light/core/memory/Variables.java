@@ -6,12 +6,10 @@ public class Variables {
 
     private final LightCore lightCore;
     private final Followed followed;
-    private final Globalized globalized;
 
     public Variables(LightCore lightCore) {
         this.lightCore = lightCore;
         this.followed = new Followed(this);
-        this.globalized = new Globalized(this);
     }
 
     public void load() {
@@ -20,10 +18,6 @@ public class Variables {
 
     public void save() {
         followed.getStorage().save();
-    }
-
-    public Globalized getGlobalized() {
-        return globalized;
     }
 
     public Followed getFollowed() {

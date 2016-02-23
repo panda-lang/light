@@ -2,11 +2,20 @@ follow [stored]
 global [common]
 
 on load {
-    set [stored] to "I'm immortal"
+    send [stored] to console
+
+    set [stored} to "I'm immortal"
 
     set [common] to "I'm everywhere"
 
     set [local] to "Carpe diem"
+
+    call "test"
 }
 
+function test {
+    send [stored] to console
+    send [common] to console
+    send [local] to console
+}
 

@@ -1,14 +1,13 @@
 package org.panda_lang.light.core.parser;
 
 import org.panda_lang.light.core.parser.assistant.TypeRepresentation;
-import org.panda_lang.panda.core.syntax.Essence;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class TypeCenter {
 
-    private final Map<Class<? extends Essence>, TypeRepresentation> types;
+    private final Map<Class, TypeRepresentation> types;
 
     public TypeCenter() {
         this.types = new HashMap<>();
@@ -18,7 +17,11 @@ public class TypeCenter {
         types.put(typeRepresentation.getClazz(), typeRepresentation);
     }
 
-    public Map<Class<? extends Essence>, TypeRepresentation> getTypes() {
+    public TypeRepresentation get(Class clazz) {
+        return types.get(clazz);
+    }
+
+    public Map<Class, TypeRepresentation> getTypes() {
         return types;
     }
 
