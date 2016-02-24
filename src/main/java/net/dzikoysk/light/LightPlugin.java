@@ -25,7 +25,6 @@ public class LightPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
         light.getLightCore().getVariables().save();
     }
 
