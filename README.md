@@ -7,7 +7,6 @@ Website: http://light.panda-lang.org/
 <br>
 Panda Language: http://panda-lang.org/
 <br>
-<br>
 #### Example
 ```javascript
 // Event 'on load' called when the script starts
@@ -17,15 +16,15 @@ on load {
 
     // If-statement
     if true {
-        // Set [var] variable to text
-        set [var] to "Variable Test"
-        // Display content of [var] variable in console
-        send [var] to console
+        // Set <var> variable to text
+        set <var> to "Variable Test"
+        // Display content of <var> variable in console
+        send <var> to console
 
-        // Delete [var] variable
-        delete [var]
-        // Display content of [var] variable in console
-        send [var] to console
+        // Delete <var> variable
+        delete <var>
+        // Display content of <var> variable in console
+        send <var> to console
     }
 
     // Loop once
@@ -34,14 +33,14 @@ on load {
         call "pandaInfo"
     }
 
-    // Set [int] variable to 0
-    set [int] to 0
-    // Loop when [int] variable is less than 1
-    while [int] is less than 1 {
+    // Set <int> variable to 0
+    set <int> to 0
+    // Loop when <int> variable is less than 1
+    while <int> is less than 1 {
         // Display expression
         send 5 is greater than 10 to console
-        // Set [int] variable to 1 (This will complete the loop)
-        set [int] to 1
+        // Set <int> variable to 1 (This will complete the loop)
+        set <int> to 1
     }
 }
 
@@ -52,14 +51,7 @@ function pandaInfo {
     // Display Panda's version in console
     send panda version to console
 }
-
 ```
-<br>
-<br>
-#### API
-API is not stable yet :red_circle:
-<br>
-<br>
 #####Goals:
 - [x] Blocks
   - [x] Event

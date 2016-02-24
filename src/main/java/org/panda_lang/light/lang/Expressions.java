@@ -4,6 +4,7 @@ import org.panda_lang.light.LightCore;
 import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 import org.panda_lang.light.lang.expression.ComparisonExpression;
 import org.panda_lang.light.lang.expression.PandaVersionExpression;
+import org.panda_lang.light.lang.expression.SystemExpression;
 
 public class Expressions {
 
@@ -28,6 +29,11 @@ public class Expressions {
         ExpressionRepresentation pandaVersionExpression = new ExpressionRepresentation(new PandaVersionExpression());
         pandaVersionExpression.pattern("panda version");
         lightCore.registerExpression(pandaVersionExpression);
+
+        ExpressionRepresentation systemExpression = new ExpressionRepresentation(new SystemExpression());
+        systemExpression.pattern("current time milliseconds");
+        systemExpression.pattern("nano time");
+        lightCore.registerExpression(systemExpression);
     }
 
 }

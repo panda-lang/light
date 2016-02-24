@@ -49,7 +49,7 @@ public class ExpressionParser implements Parser {
             }
         }
 
-        if (expressionSource.charAt(0) == '[') {
+        if (expressionSource.charAt(0) == '<') {
             final Ray ray = new Ray();
             return new ExpressionRuntime(new VariableExpression(expressionSource.substring(1, expressionSource.length() - 1)), ray);
         }
