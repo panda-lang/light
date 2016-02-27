@@ -3,10 +3,7 @@ package org.panda_lang.light.lang;
 import org.panda_lang.light.LightCore;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
 import org.panda_lang.light.core.parser.pattern.LightPattern;
-import org.panda_lang.light.lang.phrase.DeclarationPhrase;
-import org.panda_lang.light.lang.phrase.FunctionPhrase;
-import org.panda_lang.light.lang.phrase.ModificationPhrase;
-import org.panda_lang.light.lang.phrase.PrintPhrase;
+import org.panda_lang.light.lang.phrase.*;
 
 public class Phrases {
 
@@ -41,6 +38,12 @@ public class Phrases {
         modificationPhrase.pattern("remove * from *");
         modificationPhrase.pattern("delete *");
         lightCore.registerPhrase(modificationPhrase);
+
+        PhraseRepresentation benchmarkPhrase = new PhraseRepresentation(new BenchmarkPhrase());
+        benchmarkPhrase.pattern("initialize benchmark");
+        benchmarkPhrase.pattern("benchmark point");
+        benchmarkPhrase.pattern("stop benchmark");
+        lightCore.registerPhrase(benchmarkPhrase);
 
         PhraseRepresentation sendPhrase = new PhraseRepresentation(new PrintPhrase());
         sendPhrase.pattern("send * to console");

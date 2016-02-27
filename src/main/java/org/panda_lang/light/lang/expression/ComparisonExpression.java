@@ -23,32 +23,32 @@ public class ComparisonExpression extends Expression {
                 BooleanEssence orB = ray.getValueOfFactor(1);
                 flag = orA.getBoolean() || orB.getBoolean();
                 break;
-            case 7:
-                Essence equalsA = ray.getValueOfFactor(0);
-                Essence equalsB = ray.getValueOfFactor(1);
-                flag = equalsA.equals(equalsB);
-                break;
             case 2:
                 Essence notEqualsA = ray.getValueOfFactor(0);
                 Essence notEqualsB = ray.getValueOfFactor(1);
                 flag = !notEqualsA.equals(notEqualsB);
                 break;
-            case 4:
-                Numeric greaterThanA = ray.getValueOfFactor(0);
-                Numeric greaterThanB = ray.getValueOfFactor(1);
-                return NumericUtils.isGreaterThan(greaterThanA, greaterThanB);
             case 3:
                 Numeric greaterThanOrEqualsA = ray.getValueOfFactor(0);
                 Numeric greaterThanOrEqualsB = ray.getValueOfFactor(1);
                 return NumericUtils.isGreaterThanOrEquals(greaterThanOrEqualsA, greaterThanOrEqualsB);
-            case 6:
-                Numeric lessThanA = ray.getValueOfFactor(0);
-                Numeric lessThanB = ray.getValueOfFactor(1);
-                return NumericUtils.isLessThan(lessThanA, lessThanB);
+            case 4:
+                Numeric greaterThanA = ray.getValueOfFactor(0);
+                Numeric greaterThanB = ray.getValueOfFactor(1);
+                return NumericUtils.isGreaterThan(greaterThanA, greaterThanB);
             case 5:
                 Numeric lessThanOrEqualsA = ray.getValueOfFactor(0);
                 Numeric lessThanOrEqualsB = ray.getValueOfFactor(1);
                 return NumericUtils.isLessThanOrEquals(lessThanOrEqualsA, lessThanOrEqualsB);
+            case 6:
+                Numeric lessThanA = ray.getValueOfFactor(0);
+                Numeric lessThanB = ray.getValueOfFactor(1);
+                return NumericUtils.isLessThan(lessThanA, lessThanB);
+            case 7:
+                Essence equalsA = ray.getValueOfFactor(0);
+                Essence equalsB = ray.getValueOfFactor(1);
+                flag = equalsA.equals(equalsB);
+                break;
             default:
                 flag = false;
                 break;

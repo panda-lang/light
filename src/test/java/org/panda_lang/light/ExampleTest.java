@@ -14,7 +14,7 @@ public class ExampleTest {
         variables.getFollowed().getStorage().initializeDatabase(new File("database"));
         variables.load();
 
-        File script = new File("examples/variables.light");
+        File script = new File("examples/full_example.light");
         LightScript lightScript = light.getLightLoader().load(script);
 
         lightScript.callEvent("load");

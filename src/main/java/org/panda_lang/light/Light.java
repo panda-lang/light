@@ -3,6 +3,7 @@ package org.panda_lang.light;
 import org.panda_lang.light.core.block.CommandsCollector;
 import org.panda_lang.light.core.block.EventsCollector;
 import org.panda_lang.light.core.block.FunctionsCollector;
+import org.panda_lang.light.core.memory.Variables;
 import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
 import org.panda_lang.light.core.parser.assistant.TypeRepresentation;
@@ -10,6 +11,7 @@ import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.core.parser.ParserLayout;
 import org.panda_lang.panda.core.parser.essential.util.BlockLayout;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -93,6 +95,22 @@ public class Light {
 
     public Panda getPanda() {
         return panda;
+    }
+
+
+    public static void main(String[] args) {
+        Light light = new Light();
+        light.initializeDefaultElements();
+
+        Variables variables = light.getLightCore().getVariables();
+        variables.getFollowed().getStorage().initializeDatabase(new File("database"));
+        variables.load();
+
+        File script = new File(args[0]);
+        LightScript lightScript = light.getLightLoader().load(script);
+
+        lightScript.callEvent("load");
+        light.getLightCore().getVariables().save();
     }
 
 }

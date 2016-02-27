@@ -25,14 +25,22 @@ public class ExpressionRuntime extends Runtime {
     @Override
     public Essence run(Particle particle) {
         if (expression != null) {
-            ray.include(particle);
-            return expression.getValue(ray);
+            return getExpressionValue(particle);
         }
-        return factor.run(particle);
+        return getFactorValue(particle);
     }
 
     public Factor toFactor() {
         return new Factor(this);
+    }
+
+    public Essence getFactorValue(Particle particle) {
+        return factor.getValue(particle);
+    }
+
+    public Essence getExpressionValue(Particle particle) {
+        ray.include(particle);
+        return expression.getValue(ray);
     }
 
     public Ray getRay() {

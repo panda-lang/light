@@ -30,4 +30,3 @@ function test {
     // Display content of <local> variable (default variable)
     send <local> to console
 }
-
