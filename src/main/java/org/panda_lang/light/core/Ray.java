@@ -3,7 +3,8 @@ package org.panda_lang.light.core;
 import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
-import org.panda_lang.light.core.parser.pattern.LightPattern;
+import org.panda_lang.light.core.util.ExpressionModule;
+import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.light.core.util.ExpressionRuntime;
 import org.panda_lang.light.core.util.ModificationType;
 import org.panda_lang.panda.core.Particle;
@@ -15,17 +16,18 @@ import java.util.List;
 public class Ray extends Particle {
 
     private LightScript lightScript;
-    private LightPattern pattern;
+    private HollowPattern pattern;
     private Essence returnValue;
     private PhraseRepresentation phraseRepresentation;
-    private ExpressionRepresentation expressionRepresentation;
-    private List<ExpressionRuntime> expressionRuntimes;
+    private ExpressionModule expressionModule;
 
     public Ray() {
+        this.expressionModule = new ExpressionModule();
     }
 
     public Ray(Particle particle) {
         super(particle.getPandaScript(), particle.getMemory(), particle.getEssence(), particle.getInstance(), particle.getFactors());
+        this.expressionModule = new ExpressionModule();
     }
 
     @Override
@@ -35,8 +37,7 @@ public class Ray extends Particle {
     }
 
     public Ray include(Particle particle) {
-        super.pandaScript(particle.getPandaScript())
-                .memory(particle.getMemory())
+        super.memory(particle.getMemory())
                 .essence(particle.getEssence())
                 .instance(particle.getInstance());
         return this;
@@ -47,7 +48,7 @@ public class Ray extends Particle {
         return this;
     }
 
-    public Ray pattern(LightPattern pattern) {
+    public Ray pattern(HollowPattern pattern) {
         this.pattern = pattern;
         return this;
     }
@@ -58,7 +59,7 @@ public class Ray extends Particle {
     }
 
     public Ray expressionRepresentation(ExpressionRepresentation expressionRepresentation) {
-        this.expressionRepresentation = expressionRepresentation;
+        expressionModule.setExpressionRepresentation(expressionRepresentation);
         return this;
     }
 
@@ -68,7 +69,7 @@ public class Ray extends Particle {
     }
 
     public Ray expressionRuntimes(List<ExpressionRuntime> expressionRuntimes) {
-        this.expressionRuntimes = expressionRuntimes;
+        expressionModule.setExpressionRuntimes(expressionRuntimes);
         return this;
     }
 
@@ -77,7 +78,7 @@ public class Ray extends Particle {
     }
 
     public List<ExpressionRuntime> getExpressionRuntimes() {
-        return expressionRuntimes;
+        return expressionModule.getExpressionRuntimes();
     }
 
     public Essence getReturnValue() {
@@ -85,14 +86,18 @@ public class Ray extends Particle {
     }
 
     public ExpressionRepresentation getExpressionRepresentation() {
-        return expressionRepresentation;
+        return expressionModule.getExpressionRepresentation();
+    }
+
+    public ExpressionModule getExpressionModule() {
+        return expressionModule;
     }
 
     public PhraseRepresentation getPhraseRepresentation() {
         return phraseRepresentation;
     }
 
-    public LightPattern getPattern() {
+    public HollowPattern getPattern() {
         return pattern;
     }
 

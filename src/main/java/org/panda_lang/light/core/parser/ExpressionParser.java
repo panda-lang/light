@@ -5,13 +5,15 @@ import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.Expression;
 import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
-import org.panda_lang.light.core.parser.pattern.LightPattern;
 import org.panda_lang.light.core.util.ExpressionRuntime;
 import org.panda_lang.light.core.util.ExpressionUtils;
 import org.panda_lang.light.lang.expression.VariableExpression;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;
-import org.panda_lang.panda.core.parser.essential.FactorParser;
+import org.panda_lang.panda.core.parser.essential.EssenceParser;
+import org.panda_lang.panda.core.parser.essential.RuntimeParser;
+import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
+import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
 
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ public class ExpressionParser implements Parser {
         String expressionSource = atom.getSourceCode().trim();
 
         for (final ExpressionRepresentation expressionRepresentation : light.getLightCore().getExpressionCenter().getExpressions()) {
-            for (LightPattern pattern : expressionRepresentation.getPatterns()) {
+            for (HollowPattern pattern : expressionRepresentation.getPatterns()) {
                 if (pattern.match(expressionSource)) {
                     final Collection<String> hollows = new ArrayList<>(pattern.getHollows());
                     final List<ExpressionRuntime> expressions = parse(atom, hollows);
@@ -50,17 +52,31 @@ public class ExpressionParser implements Parser {
         }
 
         if (expressionSource.charAt(0) == '<') {
-            final Ray ray = new Ray();
-            return new ExpressionRuntime(new VariableExpression(expressionSource.substring(1, expressionSource.length() - 1)), ray);
+            Ray ray = new Ray();
+            String variableName = expressionSource.substring(1, expressionSource.length() - 1);
+            VariableExpression variableExpression = new VariableExpression(variableName);
+            return new ExpressionRuntime(variableExpression, ray);
         }
 
         TypeParser typeParser = new TypeParser();
         Factor factor = typeParser.parse(atom, expressionSource);
 
-        if (factor == null) {
-            FactorParser factorParser = new FactorParser();
-            factor = factorParser.parse(atom, expressionSource);
+        if (factor != null) {
+            return new ExpressionRuntime(factor);
         }
+
+        EssenceParser essenceParser = new EssenceParser();
+        Essence essence = essenceParser.parse(atom);
+
+        if (essence != null) {
+            factor = new Factor(essence);
+            return new ExpressionRuntime(factor);
+        }
+
+        RuntimeParser runtimeParser = new RuntimeParser();
+        factor = new RuntimeParser().parse(atom);
+
+        // todo: argument
 
         return new ExpressionRuntime(factor);
     }

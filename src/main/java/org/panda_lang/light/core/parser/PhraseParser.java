@@ -5,7 +5,7 @@ import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.Phrase;
 import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
-import org.panda_lang.light.core.parser.pattern.LightPattern;
+import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.light.core.util.ExpressionRuntime;
 import org.panda_lang.light.core.util.ExpressionUtils;
 import org.panda_lang.panda.core.Particle;
@@ -34,7 +34,7 @@ public class PhraseParser implements Parser {
         phraseSource = phraseSource.substring(0, phraseSource.length() - 1);
 
         for (final PhraseRepresentation phraseRepresentation : light.getLightCore().getPhraseCenter().getPhrases()) {
-            for (final LightPattern pattern : phraseRepresentation.getPatterns()) {
+            for (final HollowPattern pattern : phraseRepresentation.getPatterns()) {
                 if (pattern.match(phraseSource)) {
                     final ExpressionParser expressionParser = new ExpressionParser(light);
                     final Collection<String> hollows = pattern.getHollows();

@@ -1,6 +1,6 @@
 package org.panda_lang.light.core.parser.assistant;
 
-import org.panda_lang.light.core.parser.pattern.LightPattern;
+import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.NamedExecutable;
@@ -12,7 +12,7 @@ import java.util.Collection;
 public class Representation<T> implements NamedExecutable {
 
     private final T representation;
-    private final Collection<LightPattern> patterns;
+    private final Collection<HollowPattern> patterns;
     private final Documentation documentation;
 
     public Representation(T representation) {
@@ -27,15 +27,15 @@ public class Representation<T> implements NamedExecutable {
     }
 
     public Representation<T> pattern(String pattern) {
-        LightPattern lightPattern = LightPattern.builder()
+        HollowPattern hollowPattern = HollowPattern.builder()
                 .compiler()
                 .compile(pattern)
                 .build(patterns.size());
-        return pattern(lightPattern);
+        return pattern(hollowPattern);
     }
 
-    public Representation<T> pattern(LightPattern lightPattern) {
-        patterns.add(lightPattern);
+    public Representation<T> pattern(HollowPattern hollowPattern) {
+        patterns.add(hollowPattern);
         return this;
     }
 
@@ -47,7 +47,7 @@ public class Representation<T> implements NamedExecutable {
         return documentation;
     }
 
-    public Collection<LightPattern> getPatterns() {
+    public Collection<HollowPattern> getPatterns() {
         return patterns;
     }
 

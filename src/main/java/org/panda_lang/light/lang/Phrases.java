@@ -2,7 +2,7 @@ package org.panda_lang.light.lang;
 
 import org.panda_lang.light.LightCore;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
-import org.panda_lang.light.core.parser.pattern.LightPattern;
+import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.light.lang.phrase.*;
 
 public class Phrases {
@@ -20,13 +20,13 @@ public class Phrases {
         lightCore.registerPhrase(declarationPhrase);
 
         PhraseRepresentation functionPhrase = new PhraseRepresentation(new FunctionPhrase());
-        functionPhrase.pattern(LightPattern.builder()
+        functionPhrase.pattern(HollowPattern.builder()
                 .basis("call")
                 .hollow()
                 .basis("with")
                 .hollow()
                 .build(0));
-        functionPhrase.pattern(LightPattern.builder()
+        functionPhrase.pattern(HollowPattern.builder()
                 .basis("call")
                 .hollow()
                 .build(1));
