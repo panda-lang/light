@@ -4,10 +4,10 @@ import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
 import org.panda_lang.light.core.util.ExpressionModule;
-import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.light.core.util.ExpressionRuntime;
 import org.panda_lang.light.core.util.ModificationType;
 import org.panda_lang.panda.core.Particle;
+import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
 
@@ -71,6 +71,14 @@ public class Ray extends Particle {
     public Ray expressionRuntimes(List<ExpressionRuntime> expressionRuntimes) {
         expressionModule.setExpressionRuntimes(expressionRuntimes);
         return this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getExpressionValue(int index) {
+        ExpressionRuntime expressionRuntime = getExpressionRuntimes().get(index);
+        Essence essence = expressionRuntime.run(this);
+        Object object = essence.getJavaValue();
+        return (T) object;
     }
 
     public ModificationType getModificationType() {

@@ -1,8 +1,9 @@
 package org.panda_lang.light;
 
-import org.panda_lang.light.core.block.CommandsCollector;
-import org.panda_lang.light.core.block.EventsCollector;
-import org.panda_lang.light.core.block.FunctionsCollector;
+import org.panda_lang.light.core.Structure;
+import org.panda_lang.light.core.block.collector.CommandsCollector;
+import org.panda_lang.light.core.block.collector.EventsCollector;
+import org.panda_lang.light.core.block.collector.FunctionsCollector;
 import org.panda_lang.light.core.memory.Variables;
 import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
@@ -59,6 +60,10 @@ public class Light {
 
     public void registerExpression(ExpressionRepresentation expressionRepresentation) {
         lightCore.registerExpression(expressionRepresentation);
+    }
+
+    public void registerStructure(Structure structure) {
+        lightCore.registerStructure(structure);
     }
 
     public void initializeDefaultElements() {

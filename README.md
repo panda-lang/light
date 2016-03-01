@@ -61,25 +61,33 @@ function pandaInfo {
   - [x] While
   - [x] If-then
   - [x] Else-then
+  - [x] Runnable
+- [x] Types
+  - [x] Classes
+  - [x] API
 - [x] Phrases
-  - [x] Idea
-  - [x] Interface
+  - [x] Classes
   - [x] Parser
   - [x] API
 - [x] Expressions
-  - [x] Idea
-  - [x] Interface
+  - [x] Classes
   - [x] Parser
   - [x] Assistant
   - [x] Others
   - [x] API
-- [x] Types
-  - [x] Idea
-  - [x] Interface
+- [ ] Arguments
+  - [x] Classes
+  - [ ] Parser
+  - [ ] Assistant
+  - [ ] Others
+  - [ ] API
+- [x] Structures
+  - [x] Classes
   - [x] API
 - [x] Variable system
-  - [x] Idea
-  - [x] Interface
+  - [x] Classes
+  - [x] Global
+  - [x] Followed
   - [x] Storage
   - [x] Others
 - [x] Registration system
@@ -89,6 +97,8 @@ function pandaInfo {
   - [x] Events
   - [x] Commands
   - [x] Functions
+  - [ ] Arguments
+  - [x] Structures
 - [ ] Libraries
 - [ ] Repositories
 <br>
@@ -96,3 +106,13 @@ function pandaInfo {
 - Other goals
   - Access to the Panda
   - Develop API
+<br>
+<br>
+#####Goals::Bukkit:
+- [ ] Basic Types
+- [ ] Basic Phrases
+- [ ] Basic Expressions
+- [ ] Events
+- [ ] Commands
+- [ ] Tasks
+- [ ] Extensions API

@@ -1,7 +1,7 @@
 package org.panda_lang.light.core.parser.assistant;
 
-import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.Particle;
+import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.NamedExecutable;
 import org.panda_lang.panda.util.documentation.Documentation;

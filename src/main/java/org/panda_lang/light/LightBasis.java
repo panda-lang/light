@@ -24,6 +24,7 @@ public class LightBasis {
         FunctionBlock.initialize(light);
         IfThenBlock.initialize(light);
         LoopBlock.initialize(light);
+        RunnableBlock.initialize(light);
         WhileBlock.initialize(light);
     }
 

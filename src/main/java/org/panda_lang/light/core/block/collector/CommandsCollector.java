@@ -1,4 +1,6 @@
-package org.panda_lang.light.core.block;
+package org.panda_lang.light.core.block.collector;
+
+import org.panda_lang.light.core.block.CommandBlock;
 
 import java.util.HashMap;
 import java.util.Map;

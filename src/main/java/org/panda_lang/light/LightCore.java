@@ -1,8 +1,10 @@
 package org.panda_lang.light;
 
+import org.panda_lang.light.core.Structure;
 import org.panda_lang.light.core.memory.Variables;
 import org.panda_lang.light.core.parser.ExpressionCenter;
 import org.panda_lang.light.core.parser.PhraseCenter;
+import org.panda_lang.light.core.parser.StructureCenter;
 import org.panda_lang.light.core.parser.TypeCenter;
 import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
 import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
@@ -20,6 +22,7 @@ public class LightCore {
     private final TypeCenter typeCenter;
     private final PhraseCenter phraseCenter;
     private final ExpressionCenter expressionCenter;
+    private final StructureCenter structureCenter;
 
     public LightCore(Panda panda, Light light) {
         this.panda = panda;
@@ -28,6 +31,8 @@ public class LightCore {
         this.typeCenter = new TypeCenter();
         this.phraseCenter = new PhraseCenter();
         this.expressionCenter = new ExpressionCenter();
+        this.structureCenter = new StructureCenter();
+
         this.variables = new Variables(this);
     }
 
@@ -51,11 +56,20 @@ public class LightCore {
     }
 
     public void registerPhrase(PhraseRepresentation phraseRepresentation) {
-        phraseCenter.registerPhrase(phraseRepresentation);
+        phraseCenter.registerElement(phraseRepresentation);
     }
 
     public void registerExpression(ExpressionRepresentation expressionRepresentation) {
-        expressionCenter.registerExpression(expressionRepresentation);
+        expressionCenter.registerElement(expressionRepresentation);
+    }
+
+    public void registerStructure(Structure structure) {
+        structureCenter.registerElement(structure);
+        structure.initialize(this);
+    }
+
+    public StructureCenter getStructureCenter() {
+        return structureCenter;
     }
 
     public ExpressionCenter getExpressionCenter() {
