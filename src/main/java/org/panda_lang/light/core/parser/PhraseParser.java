@@ -33,7 +33,7 @@ public class PhraseParser implements Parser {
         String phraseSource = atom.getSourcesDivider().getLine().trim();
         phraseSource = phraseSource.substring(0, phraseSource.length() - 1);
 
-        for (final PhraseRepresentation phraseRepresentation : light.getLightCore().getPhraseCenter().getPhrases()) {
+        for (final PhraseRepresentation phraseRepresentation : light.getLightCore().getPhraseCenter().getElements()) {
             for (final HollowPattern pattern : phraseRepresentation.getPatterns()) {
                 if (pattern.match(phraseSource)) {
                     final ExpressionParser expressionParser = new ExpressionParser(light);

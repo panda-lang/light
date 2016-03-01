@@ -19,11 +19,12 @@ public class LightInitializer implements Runnable {
         bukkitBasis.registerDefaultElements();
 
         Variables variables = lightPlugin.getLight().getLightCore().getVariables();
-        File file = new File(lightPlugin.getDataFolder(), "variables.db");
-        variables.getFollowed().getStorage().initializeDatabase(file);
+        File variablesFile = new File(lightPlugin.getDataFolder(), "variables.db");
+        variables.getFollowed().getStorage().initializeDatabase(variablesFile);
         variables.load();
 
-        DefaultLoader defaultLoader = new DefaultLoader();
+        File scriptsDirectory = new File("scripts");
+        DefaultLoader defaultLoader = new DefaultLoader(scriptsDirectory);
         defaultLoader.load();
     }
 

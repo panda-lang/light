@@ -5,9 +5,9 @@ import org.panda_lang.panda.core.syntax.Essence;
 
 public class TypeRepresentation extends Representation<Type> {
 
-    private final Class<? extends Essence> clazz;
+    private final Class<?> clazz;
 
-    public TypeRepresentation(Class<? extends Essence> clazz, Type representation) {
+    public TypeRepresentation(Class<?> clazz, Type representation) {
         super(representation);
         this.clazz = clazz;
     }
@@ -18,7 +18,7 @@ public class TypeRepresentation extends Representation<Type> {
         return super.getRepresentation();
     }
 
-    public Class<? extends Essence> getClazz() {
+    public Class<?> getClazz() {
         return clazz;
     }
 

@@ -22,7 +22,7 @@ public class IfThenBlock extends LightBlock {
 
     @Override
     public Essence run(Particle particle) {
-        if (factor.<BooleanEssence>getValue().isTrue()) {
+        if (factor.<BooleanEssence> getValue(particle).isTrue()) {
             return super.run(particle);
         }
         else if (elseThenBlock != null) {

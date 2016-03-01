@@ -32,7 +32,7 @@ public class ExpressionParser implements Parser {
     public ExpressionRuntime parse(Atom atom) {
         String expressionSource = atom.getSourceCode().trim();
 
-        for (final ExpressionRepresentation expressionRepresentation : light.getLightCore().getExpressionCenter().getExpressions()) {
+        for (final ExpressionRepresentation expressionRepresentation : light.getLightCore().getExpressionCenter().getElements()) {
             for (HollowPattern pattern : expressionRepresentation.getPatterns()) {
                 if (pattern.match(expressionSource)) {
                     final Collection<String> hollows = new ArrayList<>(pattern.getHollows());

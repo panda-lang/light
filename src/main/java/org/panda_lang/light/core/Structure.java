@@ -17,7 +17,7 @@ public abstract class Structure<T> extends Documentation implements Type<T> {
 
     public abstract void initialize(LightCore lightCore);
 
-    public void hookClass(Class clazz) {
+    public void hookClass(Class<?> clazz) {
         typeRepresentation = new TypeRepresentation(clazz, this);
     }
 
