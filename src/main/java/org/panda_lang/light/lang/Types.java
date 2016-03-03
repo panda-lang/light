@@ -1,7 +1,7 @@
 package org.panda_lang.light.lang;
 
 import org.panda_lang.light.LightCore;
-import org.panda_lang.light.core.parser.assistant.TypeRepresentation;
+import org.panda_lang.light.core.element.type.TypeRepresentation;
 import org.panda_lang.light.lang.type.StringType;
 import org.panda_lang.panda.lang.StringEssence;
 

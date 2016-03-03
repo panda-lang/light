@@ -2,11 +2,11 @@ package org.panda_lang.light.core.parser;
 
 import org.panda_lang.light.Light;
 import org.panda_lang.light.LightScript;
-import org.panda_lang.light.core.Expression;
+import org.panda_lang.light.core.element.expression.Expression;
 import org.panda_lang.light.core.Ray;
-import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
-import org.panda_lang.light.core.util.ExpressionRuntime;
-import org.panda_lang.light.core.util.ExpressionUtils;
+import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
+import org.panda_lang.light.core.element.expression.ExpressionRuntime;
+import org.panda_lang.light.core.element.expression.ExpressionUtils;
 import org.panda_lang.light.lang.expression.VariableExpression;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;

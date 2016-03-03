@@ -1,8 +1,8 @@
 package org.panda_lang.light;
 
-import org.panda_lang.light.core.block.CommandBlock;
-import org.panda_lang.light.core.block.EventBlock;
-import org.panda_lang.light.core.block.FunctionBlock;
+import org.panda_lang.light.lang.block.CommandBlock;
+import org.panda_lang.light.lang.block.EventBlock;
+import org.panda_lang.light.lang.block.FunctionBlock;
 import org.panda_lang.panda.PandaScript;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.memory.Memory;

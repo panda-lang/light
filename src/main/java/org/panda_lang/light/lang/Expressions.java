@@ -1,7 +1,7 @@
 package org.panda_lang.light.lang;
 
 import org.panda_lang.light.LightCore;
-import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
+import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.light.lang.expression.ComparisonExpression;
 import org.panda_lang.light.lang.expression.PandaVersionExpression;
 import org.panda_lang.light.lang.expression.SystemExpression;

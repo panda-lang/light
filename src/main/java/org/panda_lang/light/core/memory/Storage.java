@@ -1,11 +1,11 @@
 package org.panda_lang.light.core.memory;
 
-import org.panda_lang.light.core.Type;
+import org.panda_lang.light.core.element.type.Type;
 import org.panda_lang.light.core.memory.database.Database;
 import org.panda_lang.light.core.memory.database.DatabaseRecord;
 import org.panda_lang.light.core.memory.database.util.DataSerializer;
-import org.panda_lang.light.core.parser.TypeCenter;
-import org.panda_lang.light.core.parser.assistant.TypeRepresentation;
+import org.panda_lang.light.core.element.type.TypeCenter;
+import org.panda_lang.light.core.element.type.TypeRepresentation;
 import org.panda_lang.panda.core.memory.Global;
 import org.panda_lang.panda.core.syntax.Essence;
 

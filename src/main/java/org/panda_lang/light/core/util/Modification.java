@@ -1,6 +1,7 @@
 package org.panda_lang.light.core.util;
 
 import org.panda_lang.light.core.Ray;
+import org.panda_lang.light.core.element.expression.ExpressionRuntime;
 
 public class Modification {
 

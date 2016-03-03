@@ -1,13 +1,13 @@
 package org.panda_lang.light;
 
-import org.panda_lang.light.core.Structure;
-import org.panda_lang.light.core.block.collector.CommandsCollector;
-import org.panda_lang.light.core.block.collector.EventsCollector;
-import org.panda_lang.light.core.block.collector.FunctionsCollector;
+import org.panda_lang.light.core.element.Structure;
+import org.panda_lang.light.lang.block.collector.CommandsCollector;
+import org.panda_lang.light.lang.block.collector.EventsCollector;
+import org.panda_lang.light.lang.block.collector.FunctionsCollector;
 import org.panda_lang.light.core.memory.Variables;
-import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
-import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
-import org.panda_lang.light.core.parser.assistant.TypeRepresentation;
+import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
+import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
+import org.panda_lang.light.core.element.type.TypeRepresentation;
 import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.core.parser.ParserLayout;
 import org.panda_lang.panda.core.parser.essential.util.BlockLayout;

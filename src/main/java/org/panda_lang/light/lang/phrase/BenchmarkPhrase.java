@@ -1,6 +1,6 @@
 package org.panda_lang.light.lang.phrase;
 
-import org.panda_lang.light.core.Phrase;
+import org.panda_lang.light.core.element.phrase.Phrase;
 import org.panda_lang.light.core.Ray;
 
 public class BenchmarkPhrase implements Phrase {

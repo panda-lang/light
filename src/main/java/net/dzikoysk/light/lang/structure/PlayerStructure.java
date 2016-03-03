@@ -3,11 +3,11 @@ package net.dzikoysk.light.lang.structure;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.panda_lang.light.LightCore;
-import org.panda_lang.light.core.Expression;
+import org.panda_lang.light.core.element.expression.Expression;
 import org.panda_lang.light.core.Ray;
-import org.panda_lang.light.core.Structure;
+import org.panda_lang.light.core.element.Structure;
 import org.panda_lang.light.core.memory.database.util.DataSerializer;
-import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
+import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.lang.StringEssence;
 

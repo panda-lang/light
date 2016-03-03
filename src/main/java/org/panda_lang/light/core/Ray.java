@@ -1,10 +1,10 @@
 package org.panda_lang.light.core;
 
 import org.panda_lang.light.LightScript;
-import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
-import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
-import org.panda_lang.light.core.util.ExpressionModule;
-import org.panda_lang.light.core.util.ExpressionRuntime;
+import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
+import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
+import org.panda_lang.light.core.element.expression.ExpressionModule;
+import org.panda_lang.light.core.element.expression.ExpressionRuntime;
 import org.panda_lang.light.core.util.ModificationType;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
@@ -45,6 +45,7 @@ public class Ray extends Particle {
 
     public Ray lightScript(LightScript lightScript) {
         this.lightScript = lightScript;
+        super.pandaScript(lightScript);
         return this;
     }
 

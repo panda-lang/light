@@ -1,7 +1,7 @@
 package org.panda_lang.light.lang;
 
 import org.panda_lang.light.LightCore;
-import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
+import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.light.lang.phrase.*;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 

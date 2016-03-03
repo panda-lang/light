@@ -4,9 +4,9 @@ import net.dzikoysk.light.util.metrics.MetricsCollector;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.panda_lang.light.Light;
-import org.panda_lang.light.core.parser.assistant.ExpressionRepresentation;
-import org.panda_lang.light.core.parser.assistant.PhraseRepresentation;
-import org.panda_lang.light.core.parser.assistant.TypeRepresentation;
+import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
+import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
+import org.panda_lang.light.core.element.type.TypeRepresentation;
 
 public class LightPlugin extends JavaPlugin {
 
@@ -14,6 +14,8 @@ public class LightPlugin extends JavaPlugin {
     private final Light light;
 
     public LightPlugin() {
+        lightPlugin = this;
+
         this.light = new Light();
     }
 
