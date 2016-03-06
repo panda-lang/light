@@ -2,8 +2,8 @@ package org.panda_lang.light.core.parser;
 
 import org.panda_lang.light.Light;
 import org.panda_lang.light.LightScript;
-import org.panda_lang.light.core.element.expression.Expression;
 import org.panda_lang.light.core.Ray;
+import org.panda_lang.light.core.element.expression.Expression;
 import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.light.core.element.expression.ExpressionRuntime;
 import org.panda_lang.light.core.element.expression.ExpressionUtils;
@@ -39,7 +39,7 @@ public class ExpressionParser implements Parser {
                     final List<ExpressionRuntime> expressions = parse(atom, hollows);
                     final Factor[] factors = ExpressionUtils.toFactors(expressions);
 
-                    final Expression expression = expressionRepresentation.getRepresentation();
+                    final Expression expression = expressionRepresentation.getExpression();
                     final Ray ray = new Ray()
                             .lightScript((LightScript) atom.getPandaScript())
                             .pattern(pattern)
@@ -50,6 +50,11 @@ public class ExpressionParser implements Parser {
                 }
             }
         }
+
+        /*
+            for argument : arguments:
+
+         */
 
         if (expressionSource.charAt(0) == '<') {
             Ray ray = new Ray();

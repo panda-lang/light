@@ -2,11 +2,11 @@ package org.panda_lang.light.core.parser;
 
 import org.panda_lang.light.Light;
 import org.panda_lang.light.LightScript;
-import org.panda_lang.light.core.element.phrase.Phrase;
 import org.panda_lang.light.core.Ray;
-import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.light.core.element.expression.ExpressionRuntime;
 import org.panda_lang.light.core.element.expression.ExpressionUtils;
+import org.panda_lang.light.core.element.phrase.Phrase;
+import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;

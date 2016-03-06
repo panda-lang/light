@@ -1,10 +1,10 @@
 package org.panda_lang.light.core;
 
 import org.panda_lang.light.LightScript;
-import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
-import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.light.core.element.expression.ExpressionModule;
+import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.light.core.element.expression.ExpressionRuntime;
+import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.light.core.util.ModificationType;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
@@ -13,39 +13,44 @@ import org.panda_lang.panda.core.syntax.Factor;
 
 import java.util.List;
 
-public class Ray extends Particle {
+public class Ray {
 
+    private Particle particle;
     private LightScript lightScript;
     private HollowPattern pattern;
     private Essence returnValue;
     private PhraseRepresentation phraseRepresentation;
     private ExpressionModule expressionModule;
+    private Factor[] factors;
 
     public Ray() {
         this.expressionModule = new ExpressionModule();
     }
 
     public Ray(Particle particle) {
-        super(particle.getPandaScript(), particle.getMemory(), particle.getEssence(), particle.getInstance(), particle.getFactors());
-        this.expressionModule = new ExpressionModule();
+        this();
+        this.particle = particle;
+
+        particle.setCustom(this);
     }
 
-    @Override
-    public Ray factors(Factor... factors) {
-        super.setFactors(factors);
+    public Ray particle(Particle particle) {
+        this.particle = particle;
+        if (factors != null) {
+            particle.setFactors(factors);
+        }
+
+        particle.setCustom(this);
         return this;
     }
 
-    public Ray include(Particle particle) {
-        super.memory(particle.getMemory())
-                .essence(particle.getEssence())
-                .instance(particle.getInstance());
+    public Ray factors(Factor... factors) {
+        this.factors = factors;
         return this;
     }
 
     public Ray lightScript(LightScript lightScript) {
         this.lightScript = lightScript;
-        super.pandaScript(lightScript);
         return this;
     }
 
@@ -77,7 +82,12 @@ public class Ray extends Particle {
     @SuppressWarnings("unchecked")
     public <T> T getExpressionValue(int index) {
         ExpressionRuntime expressionRuntime = getExpressionRuntimes().get(index);
-        Essence essence = expressionRuntime.run(this);
+        if (expressionRuntime == null) {
+            return null;
+        }
+
+        particle.setCustom(this);
+        Essence essence = expressionRuntime.run(particle);
         Object object = essence.getJavaValue();
         return (T) object;
     }
@@ -106,12 +116,20 @@ public class Ray extends Particle {
         return phraseRepresentation;
     }
 
+    public Factor[] getFactors() {
+        return factors;
+    }
+
     public HollowPattern getPattern() {
         return pattern;
     }
 
     public LightScript getLightScript() {
         return lightScript;
+    }
+
+    public Particle getParticle() {
+        return particle;
     }
 
 }

@@ -1,9 +1,9 @@
 package org.panda_lang.light.core.element.expression;
 
-import org.panda_lang.panda.core.parser.Atom;
+import org.panda_lang.light.core.Ray;
 
 public interface IndividualExpression {
 
-    Expression initialize(Atom atom);
+    Expression get(Ray ray);
 
 }

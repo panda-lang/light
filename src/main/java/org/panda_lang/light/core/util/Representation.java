@@ -11,12 +11,10 @@ import java.util.Collection;
 
 public class Representation<T> implements NamedExecutable {
 
-    private final T representation;
     private final Collection<HollowPattern> patterns;
     private final Documentation documentation;
 
-    public Representation(T representation) {
-        this.representation = representation;
+    public Representation() {
         this.patterns = new ArrayList<>(1);
         this.documentation = new Documentation();
     }
@@ -26,7 +24,7 @@ public class Representation<T> implements NamedExecutable {
         return null;
     }
 
-    public Representation<T> pattern(String pattern) {
+    public HollowPattern pattern(String pattern) {
         HollowPattern hollowPattern = HollowPattern.builder()
                 .compiler()
                 .compile(pattern)
@@ -34,9 +32,9 @@ public class Representation<T> implements NamedExecutable {
         return pattern(hollowPattern);
     }
 
-    public Representation<T> pattern(HollowPattern hollowPattern) {
+    public HollowPattern pattern(HollowPattern hollowPattern) {
         patterns.add(hollowPattern);
-        return this;
+        return hollowPattern;
     }
 
     public Documentation documentation() {
@@ -49,10 +47,6 @@ public class Representation<T> implements NamedExecutable {
 
     public Collection<HollowPattern> getPatterns() {
         return patterns;
-    }
-
-    public T getRepresentation() {
-        return representation;
     }
 
     @Override

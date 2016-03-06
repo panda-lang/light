@@ -3,9 +3,10 @@
 	* Core
     	* Expression:
     	    * types:
-    	        - default expression
-    	        - individual expression
-    	        - argument
+    	        - default expression // e.g. panda version
+    	        - expression initializer // e.g. {var}
+    	        - individual expression //
+    	        - argument // event-player
         	- modify
         	- getValue
         * Phrase:
@@ -59,7 +60,7 @@
 general:
 ----------------------------------------------------------------------
 
-// block
+// scope
 on join {
  	// argument (expression)
 	player
@@ -89,7 +90,7 @@ parse("on join"): {
 runtime:
 -----------------------------------------------------------------------
 
-// event
+// scope (event)
 call("on join"): {
 	todo: set arguments to objects
     run {

@@ -1,9 +1,9 @@
 package org.panda_lang.light.lang.phrase;
 
-import org.panda_lang.light.core.element.expression.Expression;
-import org.panda_lang.light.core.element.phrase.Phrase;
 import org.panda_lang.light.core.Ray;
+import org.panda_lang.light.core.element.expression.Expression;
 import org.panda_lang.light.core.element.expression.ExpressionRuntime;
+import org.panda_lang.light.core.element.phrase.Phrase;
 import org.panda_lang.light.core.util.Modification;
 
 public class ModificationPhrase implements Phrase {

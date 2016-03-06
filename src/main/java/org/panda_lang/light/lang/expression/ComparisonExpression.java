@@ -1,7 +1,7 @@
 package org.panda_lang.light.lang.expression;
 
-import org.panda_lang.light.core.element.expression.Expression;
 import org.panda_lang.light.core.Ray;
+import org.panda_lang.light.core.element.expression.Expression;
 import org.panda_lang.panda.core.parser.essential.util.Numeric;
 import org.panda_lang.panda.core.parser.essential.util.NumericUtils;
 import org.panda_lang.panda.core.syntax.Essence;

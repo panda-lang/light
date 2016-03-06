@@ -1,9 +1,9 @@
 package org.panda_lang.light.core.element;
 
 import org.panda_lang.light.LightCore;
-import org.panda_lang.light.core.element.type.Type;
 import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
+import org.panda_lang.light.core.element.type.Type;
 import org.panda_lang.light.core.element.type.TypeRepresentation;
 import org.panda_lang.panda.util.documentation.Documentation;
 

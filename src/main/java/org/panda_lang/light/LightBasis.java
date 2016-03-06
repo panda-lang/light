@@ -1,7 +1,7 @@
 package org.panda_lang.light;
 
-import org.panda_lang.light.lang.block.*;
 import org.panda_lang.light.core.parser.PhraseParser;
+import org.panda_lang.light.lang.block.*;
 import org.panda_lang.panda.core.parser.essential.BlockParser;
 
 public class LightBasis {
