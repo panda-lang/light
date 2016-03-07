@@ -1,8 +1,8 @@
 package org.panda_lang.light;
 
-import org.panda_lang.light.lang.block.CommandBlock;
-import org.panda_lang.light.lang.block.EventBlock;
-import org.panda_lang.light.lang.block.FunctionBlock;
+import org.panda_lang.light.lang.scope.CommandScope;
+import org.panda_lang.light.lang.scope.EventScope;
+import org.panda_lang.light.lang.scope.FunctionScope;
 import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.memory.Global;
@@ -56,14 +56,14 @@ public class LightLoader {
         pandaParser.addInjection(new Injection() {
             @Override
             public void call(Atom atom, NamedExecutable namedExecutable) {
-                if (namedExecutable instanceof EventBlock) {
-                    lightScript.registerEventBlock((EventBlock) namedExecutable);
+                if (namedExecutable instanceof EventScope) {
+                    lightScript.registerEventBlock((EventScope) namedExecutable);
                 }
-                else if (namedExecutable instanceof FunctionBlock) {
-                    lightScript.registerFunctionBlock((FunctionBlock) namedExecutable);
+                else if (namedExecutable instanceof FunctionScope) {
+                    lightScript.registerFunctionBlock((FunctionScope) namedExecutable);
                 }
-                else if (namedExecutable instanceof CommandBlock) {
-                    lightScript.registerCommandBlock((CommandBlock) namedExecutable);
+                else if (namedExecutable instanceof CommandScope) {
+                    lightScript.registerCommandBlock((CommandScope) namedExecutable);
                 }
                 else {
                     atom.getParent().addExecutable(namedExecutable);

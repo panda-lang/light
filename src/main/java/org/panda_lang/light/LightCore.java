@@ -6,11 +6,13 @@ import org.panda_lang.light.core.element.expression.ExpressionCenter;
 import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.light.core.element.phrase.PhraseCenter;
 import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
+import org.panda_lang.light.core.element.scope.ScopeRepresentation;
 import org.panda_lang.light.core.element.type.TypeCenter;
 import org.panda_lang.light.core.element.type.TypeRepresentation;
 import org.panda_lang.light.core.memory.Variables;
 import org.panda_lang.light.lang.Expressions;
 import org.panda_lang.light.lang.Phrases;
+import org.panda_lang.light.lang.Scopes;
 import org.panda_lang.light.lang.Types;
 import org.panda_lang.panda.Panda;
 
@@ -39,7 +41,9 @@ public class LightCore {
     public void initialize() {
         LightBasis lightBasis = light.getLightBasis();
         lightBasis.loadParsers();
-        lightBasis.loadBlocks();
+
+        Scopes scopes = new Scopes(this);
+        scopes.registerDefaultElements();
 
         Types types = new Types(this);
         types.registerDefaultTypes();
@@ -49,6 +53,10 @@ public class LightCore {
 
         Expressions expressions = new Expressions(this);
         expressions.registerDefaultExpressions();
+    }
+
+    public void registerScope(ScopeRepresentation scopeRepresentation) {
+        panda.getPandaCore().registerBlock(scopeRepresentation.getBlockLayout());
     }
 
     public void registerType(TypeRepresentation typeRepresentation) {

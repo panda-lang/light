@@ -3,14 +3,11 @@ package org.panda_lang.light;
 import org.panda_lang.light.core.element.Structure;
 import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
+import org.panda_lang.light.core.element.scope.ScopeRepresentation;
 import org.panda_lang.light.core.element.type.TypeRepresentation;
 import org.panda_lang.light.core.memory.Variables;
-import org.panda_lang.light.lang.block.collector.CommandsCollector;
-import org.panda_lang.light.lang.block.collector.EventsCollector;
-import org.panda_lang.light.lang.block.collector.FunctionsCollector;
 import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.core.parser.ParserLayout;
-import org.panda_lang.panda.core.parser.essential.util.BlockLayout;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,19 +20,11 @@ public class Light {
     private final LightLoader lightLoader;
     private final Collection<LightScript> scripts;
 
-    private final EventsCollector eventsCollector;
-    private final CommandsCollector commandsCollector;
-    private final FunctionsCollector functionsCollector;
-
     public Light() {
         this.panda = new Panda();
         this.lightCore = new LightCore(panda, this);
         this.lightLoader = new LightLoader(lightCore);
         this.scripts = new ArrayList<>();
-
-        this.eventsCollector = new EventsCollector();
-        this.commandsCollector = new CommandsCollector();
-        this.functionsCollector = new FunctionsCollector();
     }
 
     public void registerScript(LightScript lightScript) {
@@ -46,8 +35,8 @@ public class Light {
         panda.getPandaCore().registerParser(parserLayout);
     }
 
-    public void registerBlock(BlockLayout blockLayout) {
-        panda.getPandaCore().registerBlock(blockLayout);
+    public void registerScope(ScopeRepresentation scopeRepresentation) {
+        lightCore.registerScope(scopeRepresentation);
     }
 
     public void registerType(TypeRepresentation typeRepresentation) {
@@ -68,18 +57,6 @@ public class Light {
 
     public void initializeDefaultElements() {
         this.lightCore.initialize();
-    }
-
-    public FunctionsCollector getFunctionsCollector() {
-        return functionsCollector;
-    }
-
-    public CommandsCollector getCommandsCollector() {
-        return commandsCollector;
-    }
-
-    public EventsCollector getEventsCollector() {
-        return eventsCollector;
     }
 
     public LightBasis getLightBasis() {

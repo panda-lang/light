@@ -1,6 +1,7 @@
-package org.panda_lang.light.lang.block;
+package org.panda_lang.light.lang.scope;
 
 import org.panda_lang.light.Light;
+import org.panda_lang.light.core.element.scope.Scope;
 import org.panda_lang.light.core.parser.ExpressionParser;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.parser.Atom;
@@ -11,12 +12,12 @@ import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
 import org.panda_lang.panda.lang.BooleanEssence;
 
-public class IfThenBlock extends LightBlock {
+public class IfThenScope extends Scope {
 
     private final Factor factor;
-    private ElseThenBlock elseThenBlock;
+    private ElseThenScope elseThenScope;
 
-    public IfThenBlock(Factor factor) {
+    public IfThenScope(Factor factor) {
         this.factor = factor;
     }
 
@@ -25,28 +26,27 @@ public class IfThenBlock extends LightBlock {
         if (factor.<BooleanEssence>getValue(particle).isTrue()) {
             return super.run(particle);
         }
-        else if (elseThenBlock != null) {
-            elseThenBlock.run(particle);
+        else if (elseThenScope != null) {
+            elseThenScope.run(particle);
         }
         return null;
     }
 
-    public void setElseThenBlock(ElseThenBlock elseThenBlock) {
-        this.elseThenBlock = elseThenBlock;
+    public void setElseThenScope(ElseThenScope elseThenScope) {
+        this.elseThenScope = elseThenScope;
     }
 
     public static void initialize(final Light light) {
-        BlockLayout blockLayout = new BlockLayout(IfThenBlock.class, "if");
+        BlockLayout blockLayout = new BlockLayout(IfThenScope.class, "if");
         blockLayout.initializer(new BlockInitializer() {
             @Override
             public Block initialize(Atom atom) {
                 String phrase = atom.getBlockInfo().getSpecifiersAsPhrase();
                 ExpressionParser expressionParser = new ExpressionParser(light);
                 Factor factor = expressionParser.parse(atom, phrase).toFactor();
-                return new IfThenBlock(factor);
+                return new IfThenScope(factor);
             }
         });
-        light.registerBlock(blockLayout);
     }
 
 }

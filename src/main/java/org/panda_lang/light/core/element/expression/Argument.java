@@ -2,7 +2,6 @@ package org.panda_lang.light.core.element.expression;
 
 import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.element.type.Type;
-import org.panda_lang.panda.core.syntax.Essence;
 
 public class Argument extends Expression {
 
@@ -15,8 +14,8 @@ public class Argument extends Expression {
     }
 
     @Override
-    public Essence getValue(Ray ray) {
-        return super.getValue(ray);
+    public Object getValue(Ray ray) {
+        return getObject();
     }
 
     public Object getObject() {

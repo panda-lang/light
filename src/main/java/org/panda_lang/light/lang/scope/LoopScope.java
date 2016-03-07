@@ -1,29 +1,33 @@
-package org.panda_lang.light.lang.block;
+package org.panda_lang.light.lang.scope;
 
 import org.panda_lang.light.Light;
 import org.panda_lang.light.core.element.expression.ExpressionRuntime;
+import org.panda_lang.light.core.element.scope.Scope;
 import org.panda_lang.light.core.parser.ExpressionParser;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.essential.util.BlockInitializer;
 import org.panda_lang.panda.core.parser.essential.util.BlockLayout;
+import org.panda_lang.panda.core.parser.essential.util.Numeric;
 import org.panda_lang.panda.core.syntax.Block;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
-import org.panda_lang.panda.lang.BooleanEssence;
 
-public class WhileBlock extends LightBlock {
+public class LoopScope extends Scope {
 
     private final Factor factor;
 
-    public WhileBlock(Factor factor) {
+    public LoopScope(Factor factor) {
         this.factor = factor;
-        this.setName("while::" + atomicInteger.incrementAndGet());
+        this.setName("loop::" + atomicInteger.incrementAndGet());
     }
 
     @Override
     public Essence run(Particle particle) {
-        while (factor.<BooleanEssence>getValue(particle).isTrue()) {
+        Numeric numeric = factor.getValue(particle);
+        int times = numeric.getInt();
+
+        for (int i = 0; i < times; i++) {
             Essence essence = super.run(particle);
 
             if (essence != null) {
@@ -35,17 +39,16 @@ public class WhileBlock extends LightBlock {
     }
 
     public static void initialize(final Light light) {
-        BlockLayout blockLayout = new BlockLayout(WhileBlock.class, "while");
+        BlockLayout blockLayout = new BlockLayout(LoopScope.class, "loop");
         blockLayout.initializer(new BlockInitializer() {
             @Override
             public Block initialize(Atom atom) {
-                String phrase = atom.getBlockInfo().getSpecifiersAsPhrase();
+                String times = atom.getBlockInfo().getSpecifiers().get(0);
                 ExpressionParser expressionParser = new ExpressionParser(light);
-                ExpressionRuntime condition = expressionParser.parse(atom, phrase);
-                return new WhileBlock(condition.toFactor());
+                ExpressionRuntime number = expressionParser.parse(atom, times);
+                return new LoopScope(number.toFactor());
             }
         });
-        light.registerBlock(blockLayout);
     }
 
 }

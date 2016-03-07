@@ -17,7 +17,7 @@ public class VariableExpression extends Expression {
     @Override
     public void modify(Modification modification) {
         Ray ray = modification.getRay();
-        Memory memory = ray.getMemory();
+        Memory memory = ray.getParticle().getMemory();
         Essence value = modification.getValue() != null ? modification.getValue().run(ray) : null;
 
         switch (modification.getType()) {

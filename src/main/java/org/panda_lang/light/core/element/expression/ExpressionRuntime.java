@@ -38,7 +38,7 @@ public class ExpressionRuntime extends Runtime {
     }
 
     public Essence getExpressionValue(Particle particle) {
-        ray.include(particle);
+        ray.particle(particle);
         return expression.getValue(ray);
     }
 
