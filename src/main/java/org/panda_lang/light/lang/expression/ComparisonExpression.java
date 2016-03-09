@@ -14,39 +14,39 @@ public class ComparisonExpression extends Expression {
         boolean flag;
         switch (ray.getPattern().getIndex()) {
             case 0:
-                BooleanEssence andA = ray.getValueOfFactor(0);
-                BooleanEssence andB = ray.getValueOfFactor(1);
+                BooleanEssence andA = ray.getDefaultExpressionValue(0);
+                BooleanEssence andB = ray.getDefaultExpressionValue(1);
                 flag = andA.getBoolean() && andB.getBoolean();
                 break;
             case 1:
-                BooleanEssence orA = ray.getValueOfFactor(0);
-                BooleanEssence orB = ray.getValueOfFactor(1);
+                BooleanEssence orA = ray.getDefaultExpressionValue(0);
+                BooleanEssence orB = ray.getDefaultExpressionValue(1);
                 flag = orA.getBoolean() || orB.getBoolean();
                 break;
             case 2:
-                Essence notEqualsA = ray.getValueOfFactor(0);
-                Essence notEqualsB = ray.getValueOfFactor(1);
+                Essence notEqualsA = ray.getDefaultExpressionValue(0);
+                Essence notEqualsB = ray.getDefaultExpressionValue(1);
                 flag = !notEqualsA.equals(notEqualsB);
                 break;
             case 3:
-                Numeric greaterThanOrEqualsA = ray.getValueOfFactor(0);
-                Numeric greaterThanOrEqualsB = ray.getValueOfFactor(1);
+                Numeric greaterThanOrEqualsA = ray.getDefaultExpressionValue(0);
+                Numeric greaterThanOrEqualsB = ray.getDefaultExpressionValue(1);
                 return NumericUtils.isGreaterThanOrEquals(greaterThanOrEqualsA, greaterThanOrEqualsB);
             case 4:
-                Numeric greaterThanA = ray.getValueOfFactor(0);
-                Numeric greaterThanB = ray.getValueOfFactor(1);
+                Numeric greaterThanA = ray.getDefaultExpressionValue(0);
+                Numeric greaterThanB = ray.getDefaultExpressionValue(1);
                 return NumericUtils.isGreaterThan(greaterThanA, greaterThanB);
             case 5:
-                Numeric lessThanOrEqualsA = ray.getValueOfFactor(0);
-                Numeric lessThanOrEqualsB = ray.getValueOfFactor(1);
+                Numeric lessThanOrEqualsA = ray.getDefaultExpressionValue(0);
+                Numeric lessThanOrEqualsB = ray.getDefaultExpressionValue(1);
                 return NumericUtils.isLessThanOrEquals(lessThanOrEqualsA, lessThanOrEqualsB);
             case 6:
-                Numeric lessThanA = ray.getValueOfFactor(0);
-                Numeric lessThanB = ray.getValueOfFactor(1);
+                Numeric lessThanA = ray.getDefaultExpressionValue(0);
+                Numeric lessThanB = ray.getDefaultExpressionValue(1);
                 return NumericUtils.isLessThan(lessThanA, lessThanB);
             case 7:
-                Essence equalsA = ray.getValueOfFactor(0);
-                Essence equalsB = ray.getValueOfFactor(1);
+                Essence equalsA = ray.getDefaultExpressionValue(0);
+                Essence equalsB = ray.getDefaultExpressionValue(1);
                 flag = equalsA.equals(equalsB);
                 break;
             default:

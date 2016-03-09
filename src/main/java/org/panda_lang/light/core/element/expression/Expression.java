@@ -6,6 +6,7 @@ import org.panda_lang.light.core.util.Modification;
 public class Expression {
 
     public void modify(Modification modification) {
+
     }
 
     public Object getValue(Ray ray) {

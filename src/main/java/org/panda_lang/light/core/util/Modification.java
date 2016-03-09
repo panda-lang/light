@@ -10,9 +10,16 @@ public class Modification {
     private final ExpressionRuntime instance;
     private final ExpressionRuntime value;
 
-    public Modification(Ray ray, ModificationType modificationType, ExpressionRuntime instance, ExpressionRuntime value) {
+    public Modification(Ray ray, ExpressionRuntime instance, ExpressionRuntime value) {
         this.ray = ray;
         this.type = ray.getModificationType();
+        this.instance = instance;
+        this.value = value;
+    }
+
+    public Modification(Ray ray, ModificationType modificationType, ExpressionRuntime instance, ExpressionRuntime value) {
+        this.ray = ray;
+        this.type = modificationType;
         this.instance = instance;
         this.value = value;
     }

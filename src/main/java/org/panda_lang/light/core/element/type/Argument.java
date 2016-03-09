@@ -1,7 +1,7 @@
-package org.panda_lang.light.core.element.expression;
+package org.panda_lang.light.core.element.type;
 
 import org.panda_lang.light.core.Ray;
-import org.panda_lang.light.core.element.type.Type;
+import org.panda_lang.light.core.element.expression.Expression;
 
 public class Argument extends Expression {
 

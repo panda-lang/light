@@ -28,11 +28,11 @@ public class LightLoader {
     }
 
     public LightScript load(String source) {
-        Panda panda = lightCore.getPanda();
+        final Panda panda = lightCore.getPanda();
+        final String[] lines = source.split(System.lineSeparator());
 
-        String[] lines = source.split(System.lineSeparator());
         for (int i = 0; i < lines.length; i++) {
-            String line = lines[i];
+            final String line = lines[i];
 
             if (line.isEmpty()) {
                 continue;
@@ -44,12 +44,12 @@ public class LightLoader {
             lines[i] = line + ';' + System.lineSeparator();
         }
 
-        StringBuilder grammaticalSourceBuilder = new StringBuilder();
+        final StringBuilder grammaticalSourceBuilder = new StringBuilder();
         for (String line : lines) {
             grammaticalSourceBuilder.append(line);
         }
-        String grammaticalSource = grammaticalSourceBuilder.toString();
 
+        final String grammaticalSource = grammaticalSourceBuilder.toString();
         final LightScript lightScript = new LightScript(lightCore.getLight());
         final PandaParser pandaParser = new PandaParser(panda, lightScript, grammaticalSource);
 
@@ -74,7 +74,7 @@ public class LightLoader {
         pandaParser.parse();
 
         Particle particle = new Particle(lightScript, new Memory(Global.COMMON_MEMORY), null, null);
-        lightScript.getPandaScript().run(particle);
+        lightScript.run(particle);
 
         return lightScript;
     }

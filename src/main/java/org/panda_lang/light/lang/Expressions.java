@@ -5,6 +5,7 @@ import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.light.lang.expression.ComparisonExpression;
 import org.panda_lang.light.lang.expression.PandaVersionExpression;
 import org.panda_lang.light.lang.expression.SystemExpression;
+import org.panda_lang.light.lang.expression.initializer.VariableExpressionInitializer;
 
 public class Expressions {
 
@@ -15,6 +16,9 @@ public class Expressions {
     }
 
     public void registerDefaultExpressions() {
+        ExpressionRepresentation variableExpression = new ExpressionRepresentation(new VariableExpressionInitializer());
+        lightCore.registerExpression(variableExpression);
+
         ExpressionRepresentation comparisonExpression = new ExpressionRepresentation(new ComparisonExpression());
         comparisonExpression.pattern("* and *");
         comparisonExpression.pattern("* or *");

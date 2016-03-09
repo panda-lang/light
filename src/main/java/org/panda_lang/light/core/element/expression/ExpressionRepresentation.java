@@ -31,6 +31,19 @@ public class ExpressionRepresentation extends Representation<Expression> {
         return new ObjectEssence(value);
     }
 
+    public ExpressionType getExpressionType() {
+        if (expression != null) {
+            return ExpressionType.DEFAULT;
+        }
+        else if (expressionInitializer != null) {
+            return ExpressionType.INITIALIZABLE;
+        }
+        else if (individualExpression != null) {
+            return ExpressionType.INDIVIDUAL;
+        }
+        return null;
+    }
+
     public IndividualExpression getIndividualExpression() {
         return individualExpression;
     }

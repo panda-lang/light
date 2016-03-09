@@ -5,6 +5,7 @@ import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
 import org.panda_lang.panda.core.syntax.Runtime;
+import org.panda_lang.panda.lang.ObjectEssence;
 
 public class ExpressionRuntime extends Runtime {
 
@@ -23,23 +24,32 @@ public class ExpressionRuntime extends Runtime {
 
     @Override
     public Essence run(Particle particle) {
-        if (expression != null) {
-            return getExpressionValue(particle);
+        if (ray == null) {
+            ray = new Ray();
         }
-        return getFactorValue(particle);
+
+        ray.particle(particle);
+        return run(ray);
+    }
+
+    public Essence run(Ray ray) {
+        if (expression != null) {
+            return getExpressionValue(ray);
+        }
+        return getFactorValue(ray);
     }
 
     public Factor toFactor() {
         return new Factor(this);
     }
 
-    public Essence getFactorValue(Particle particle) {
-        return factor.getValue(particle);
+    public Essence getFactorValue(Ray ray) {
+        return factor.getValue(ray.getParticle());
     }
 
-    public Essence getExpressionValue(Particle particle) {
-        ray.particle(particle);
-        return expression.getValue(ray);
+    public Essence getExpressionValue(Ray ray) {
+        Object object = expression.getValue(ray);
+        return new ObjectEssence(object);
     }
 
     public Ray getRay() {

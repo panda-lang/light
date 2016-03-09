@@ -1,6 +1,7 @@
 package org.panda_lang.light.lang.scope;
 
 import org.panda_lang.light.Light;
+import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.element.expression.ExpressionRuntime;
 import org.panda_lang.light.core.element.scope.Scope;
 import org.panda_lang.light.core.parser.ExpressionParser;
@@ -23,7 +24,7 @@ public class RunnableScope extends Scope {
                 String phrase = atom.getBlockInfo().getSpecifiersAsPhrase();
                 ExpressionParser expressionParser = new ExpressionParser(light);
                 ExpressionRuntime condition = expressionParser.parse(atom, phrase);
-                String name = condition.run(null).toString();
+                String name = condition.run(new Ray()).toString();
                 return new RunnableScope(name);
             }
         });

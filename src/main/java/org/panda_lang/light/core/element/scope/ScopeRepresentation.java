@@ -2,7 +2,7 @@ package org.panda_lang.light.core.element.scope;
 
 import org.panda_lang.light.Light;
 import org.panda_lang.light.core.Flash;
-import org.panda_lang.light.core.element.expression.ArgumentRepresentation;
+import org.panda_lang.light.core.element.type.ArgumentRepresentation;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.essential.util.BlockInitializer;
 import org.panda_lang.panda.core.parser.essential.util.BlockLayout;

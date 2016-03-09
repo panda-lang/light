@@ -36,7 +36,7 @@ public class VariableExpression extends Expression {
 
     @Override
     public Essence getValue(Ray ray) {
-        return ray.getMemory().get(variableName);
+        return ray.getParticle().getMemory().get(variableName);
     }
 
     public String getVariableName() {

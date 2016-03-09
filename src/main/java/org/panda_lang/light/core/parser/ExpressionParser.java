@@ -3,11 +3,7 @@ package org.panda_lang.light.core.parser;
 import org.panda_lang.light.Light;
 import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.Ray;
-import org.panda_lang.light.core.element.expression.Expression;
-import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
-import org.panda_lang.light.core.element.expression.ExpressionRuntime;
-import org.panda_lang.light.core.element.expression.ExpressionUtils;
-import org.panda_lang.light.lang.expression.VariableExpression;
+import org.panda_lang.light.core.element.expression.*;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.essential.EssenceParser;
@@ -31,8 +27,9 @@ public class ExpressionParser implements Parser {
     @Override
     public ExpressionRuntime parse(Atom atom) {
         String expressionSource = atom.getSourceCode().trim();
+        ExpressionCenter expressionCenter = light.getLightCore().getExpressionCenter();
 
-        for (final ExpressionRepresentation expressionRepresentation : light.getLightCore().getExpressionCenter().getElements()) {
+        for (final ExpressionRepresentation expressionRepresentation : expressionCenter.getElements()) {
             for (HollowPattern pattern : expressionRepresentation.getPatterns()) {
                 if (pattern.match(expressionSource)) {
                     final Collection<String> hollows = new ArrayList<>(pattern.getHollows());
@@ -51,16 +48,11 @@ public class ExpressionParser implements Parser {
             }
         }
 
-        /*
-            for argument : arguments:
-
-         */
-
-        if (expressionSource.charAt(0) == '<') {
-            Ray ray = new Ray();
-            String variableName = expressionSource.substring(1, expressionSource.length() - 1);
-            VariableExpression variableExpression = new VariableExpression(variableName);
-            return new ExpressionRuntime(variableExpression, ray);
+        for (ExpressionRepresentation expressionRepresentation : expressionCenter.getInitializables()) {
+            ExpressionInitializer initializer = expressionRepresentation.getExpressionInitializer();
+            if (initializer.match(expressionSource)) {
+                return initializer.initialize(atom);
+            }
         }
 
         TypeParser typeParser = new TypeParser();
@@ -79,7 +71,7 @@ public class ExpressionParser implements Parser {
         }
 
         RuntimeParser runtimeParser = new RuntimeParser();
-        factor = new RuntimeParser().parse(atom);
+        factor = runtimeParser.parse(atom);
 
         // todo: argument
 

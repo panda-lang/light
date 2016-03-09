@@ -41,7 +41,7 @@ public class Storage {
                 TypeRepresentation typeRepresentation = typeCenter.get(typeClass);
 
                 if (typeRepresentation != null) {
-                    Type<Essence> type = typeRepresentation.getRepresentation();
+                    Type<Essence> type = typeRepresentation.getType();
                     Essence essence = type.deserialize(dataSerializer);
                     Global.COMMON_MEMORY.put(databaseRecord.getRecordName(), essence);
                 }
@@ -55,7 +55,7 @@ public class Storage {
         TypeRepresentation typeRepresentation = typeCenter.get(value.getClass());
 
         if (typeRepresentation != null) {
-            Type<Essence> type = typeRepresentation.getRepresentation();
+            Type<Essence> type = typeRepresentation.getType();
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
             DataSerializer dataSerializer = new DataSerializer(dataOutputStream);

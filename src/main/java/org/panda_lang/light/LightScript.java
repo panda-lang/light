@@ -1,5 +1,6 @@
 package org.panda_lang.light;
 
+import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.lang.scope.CommandScope;
 import org.panda_lang.light.lang.scope.EventScope;
 import org.panda_lang.light.lang.scope.FunctionScope;
@@ -30,29 +31,13 @@ public class LightScript extends PandaScript {
         this.functionBlockMap = new HashMap<>();
     }
 
-    public void registerEventBlock(EventScope eventScope) {
-        Collection<EventScope> eventScopes = eventBlockMap.get(eventScope.getEventName());
-        if (eventScopes == null) {
-            eventScopes = new ArrayList<>(1);
-        }
-        eventScopes.add(eventScope);
-        eventBlockMap.put(eventScope.getEventName(), eventScopes);
-    }
-
-    public void registerCommandBlock(CommandScope commandScope) {
-        commandBlockMap.put(commandScope.getCommandName(), commandScope);
-    }
-
-    public void registerFunctionBlock(FunctionScope functionScope) {
-        functionBlockMap.put(functionScope.getFunctionName(), functionScope);
-    }
-
     public void callEvent(String eventName, Factor... factors) {
         Collection<EventScope> eventScopes = eventBlockMap.get(eventName);
         if (eventScopes != null) {
             Particle particle = new Particle()
                     .pandaScript(this)
-                    .factors(factors);
+                    .factors(factors)
+                    .custom(new Ray());
 
             for (EventScope eventScope : eventScopes) {
                 particle.memory(new Memory());
@@ -70,9 +55,27 @@ public class LightScript extends PandaScript {
         Particle particle = new Particle()
                 .pandaScript(this)
                 .memory(new Memory())
-                .factors(factors);
+                .factors(factors)
+                .custom(new Ray());
 
         return functionScope.run(particle);
+    }
+
+    public void registerEventBlock(EventScope eventScope) {
+        Collection<EventScope> eventScopes = eventBlockMap.get(eventScope.getEventName());
+        if (eventScopes == null) {
+            eventScopes = new ArrayList<>(1);
+        }
+        eventScopes.add(eventScope);
+        eventBlockMap.put(eventScope.getEventName(), eventScopes);
+    }
+
+    public void registerCommandBlock(CommandScope commandScope) {
+        commandBlockMap.put(commandScope.getCommandName(), commandScope);
+    }
+
+    public void registerFunctionBlock(FunctionScope functionScope) {
+        functionBlockMap.put(functionScope.getFunctionName(), functionScope);
     }
 
     public Map<String, CommandScope> getCommandBlockMap() {

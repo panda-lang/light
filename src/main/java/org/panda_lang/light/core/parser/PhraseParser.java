@@ -41,7 +41,7 @@ public class PhraseParser implements Parser {
                     final List<ExpressionRuntime> expressions = expressionParser.parse(atom, hollows);
                     final Factor[] factors = ExpressionUtils.toFactors(expressions);
 
-                    final Phrase phrase = phraseRepresentation.getRepresentation();
+                    final Phrase phrase = phraseRepresentation.getPhrase();
                     final Ray ray = new Ray()
                             .lightScript((LightScript) atom.getPandaScript())
                             .pattern(pattern)
@@ -51,9 +51,9 @@ public class PhraseParser implements Parser {
                     return new SimplifiedNamedExecutable(new Executable() {
                         @Override
                         public Essence run(Particle particle) {
-                            ray.include(particle);
+                            ray.particle(particle);
                             phrase.run(ray);
-                            return ray.getReturnValue();
+                            return null;
                         }
                     });
                 }

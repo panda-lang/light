@@ -45,7 +45,6 @@ public class Scopes {
         });
 
         ElseThenScope.initialize(light);
-        FunctionScope.initialize(light);
         IfThenScope.initialize(light);
         LoopScope.initialize(light);
         RunnableScope.initialize(light);

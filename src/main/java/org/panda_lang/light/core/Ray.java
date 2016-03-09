@@ -2,10 +2,9 @@ package org.panda_lang.light.core;
 
 import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.element.expression.ExpressionModule;
-import org.panda_lang.light.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.light.core.element.expression.ExpressionRuntime;
-import org.panda_lang.light.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.light.core.util.ModificationType;
+import org.panda_lang.light.core.util.RepresentationInfo;
 import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.syntax.Essence;
@@ -17,21 +16,19 @@ public class Ray {
 
     private Particle particle;
     private LightScript lightScript;
-    private HollowPattern pattern;
-    private Essence returnValue;
-    private PhraseRepresentation phraseRepresentation;
     private ExpressionModule expressionModule;
+    private RepresentationInfo representationInfo;
+    private HollowPattern pattern;
     private Factor[] factors;
 
     public Ray() {
         this.expressionModule = new ExpressionModule();
+        this.representationInfo = new RepresentationInfo();
     }
 
     public Ray(Particle particle) {
         this();
-        this.particle = particle;
-
-        particle.setCustom(this);
+        this.particle(particle);
     }
 
     public Ray particle(Particle particle) {
@@ -59,35 +56,25 @@ public class Ray {
         return this;
     }
 
-    public Ray phraseRepresentation(PhraseRepresentation phraseRepresentation) {
-        this.phraseRepresentation = phraseRepresentation;
-        return this;
-    }
-
-    public Ray expressionRepresentation(ExpressionRepresentation expressionRepresentation) {
-        expressionModule.setExpressionRepresentation(expressionRepresentation);
-        return this;
-    }
-
-    public Ray returnValue(Essence returnValue) {
-        this.returnValue = returnValue;
-        return this;
-    }
-
     public Ray expressionRuntimes(List<ExpressionRuntime> expressionRuntimes) {
         expressionModule.setExpressionRuntimes(expressionRuntimes);
         return this;
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T getExpressionValue(int index) {
+    public <T> T getDefaultExpressionValue(int index) {
         ExpressionRuntime expressionRuntime = getExpressionRuntimes().get(index);
         if (expressionRuntime == null) {
             return null;
         }
 
         particle.setCustom(this);
-        Essence essence = expressionRuntime.run(particle);
+        return (T) expressionRuntime.run(particle);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getExpressionValue(int index) {
+        Essence essence = getDefaultExpressionValue(index);
         Object object = essence.getJavaValue();
         return (T) object;
     }
@@ -100,20 +87,12 @@ public class Ray {
         return expressionModule.getExpressionRuntimes();
     }
 
-    public Essence getReturnValue() {
-        return returnValue;
-    }
-
-    public ExpressionRepresentation getExpressionRepresentation() {
-        return expressionModule.getExpressionRepresentation();
+    public RepresentationInfo getRepresentationInfo() {
+        return representationInfo;
     }
 
     public ExpressionModule getExpressionModule() {
         return expressionModule;
-    }
-
-    public PhraseRepresentation getPhraseRepresentation() {
-        return phraseRepresentation;
     }
 
     public Factor[] getFactors() {
