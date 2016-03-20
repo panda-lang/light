@@ -1,12 +1,10 @@
 package org.panda_lang.light;
 
+import org.panda_lang.light.core.parser.util.LightCodeUtils;
 import org.panda_lang.light.lang.scope.CommandScope;
 import org.panda_lang.light.lang.scope.EventScope;
 import org.panda_lang.light.lang.scope.FunctionScope;
 import org.panda_lang.panda.Panda;
-import org.panda_lang.panda.core.Particle;
-import org.panda_lang.panda.core.memory.Global;
-import org.panda_lang.panda.core.memory.Memory;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.PandaParser;
 import org.panda_lang.panda.core.parser.util.Injection;
@@ -24,33 +22,30 @@ public class LightLoader {
     }
 
     public LightScript load(File file) {
+        if (!file.exists()) {
+            System.out.println("[LightLoader::load] File '" + file + "' doesn't exist");
+            return null;
+        }
+
+        final String content = IOUtils.getContentOfFile(file);
+        if (content == null) {
+            System.out.println("[LightLoader::load] Source is null");
+            return null;
+        }
+
         return load(IOUtils.getContentOfFile(file));
     }
 
     public LightScript load(String source) {
+        if (source == null) {
+            System.out.println("[LightLoader::load] Source is null");
+            return null;
+        }
+
         final Panda panda = lightCore.getPanda();
-        final String[] lines = source.split(System.lineSeparator());
-
-        for (int i = 0; i < lines.length; i++) {
-            final String line = lines[i];
-
-            if (line.isEmpty()) {
-                continue;
-            }
-            else if (line.endsWith(";") || line.endsWith("{") || line.endsWith("}")) {
-                continue;
-            }
-
-            lines[i] = line + ';' + System.lineSeparator();
-        }
-
-        final StringBuilder grammaticalSourceBuilder = new StringBuilder();
-        for (String line : lines) {
-            grammaticalSourceBuilder.append(line);
-        }
-
-        final String grammaticalSource = grammaticalSourceBuilder.toString();
         final LightScript lightScript = new LightScript(lightCore.getLight());
+
+        final String grammaticalSource = LightCodeUtils.convert(source);
         final PandaParser pandaParser = new PandaParser(panda, lightScript, grammaticalSource);
 
         pandaParser.addInjection(new Injection() {
@@ -72,10 +67,6 @@ public class LightLoader {
         });
 
         pandaParser.parse();
-
-        Particle particle = new Particle(lightScript, new Memory(Global.COMMON_MEMORY), null, null);
-        lightScript.run(particle);
-
         return lightScript;
     }
 

@@ -1,15 +1,8 @@
 package org.panda_lang.light.lang.scope;
 
-import org.panda_lang.light.Light;
-import org.panda_lang.light.core.element.expression.ExpressionRuntime;
 import org.panda_lang.light.core.element.scope.Scope;
-import org.panda_lang.light.core.parser.ExpressionParser;
 import org.panda_lang.panda.core.Particle;
-import org.panda_lang.panda.core.parser.Atom;
-import org.panda_lang.panda.core.parser.essential.util.BlockInitializer;
-import org.panda_lang.panda.core.parser.essential.util.BlockLayout;
 import org.panda_lang.panda.core.parser.essential.util.Numeric;
-import org.panda_lang.panda.core.syntax.Block;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
 
@@ -24,31 +17,14 @@ public class LoopScope extends Scope {
 
     @Override
     public Essence run(Particle particle) {
-        Numeric numeric = factor.getValue(particle);
-        int times = numeric.getInt();
+        final Numeric numeric = factor.getValue(particle);
+        final int count = numeric.getInt();
 
-        for (int i = 0; i < times; i++) {
-            Essence essence = super.run(particle);
-
-            if (essence != null) {
-                return essence;
-            }
+        for (int i = 0; i < count; i++) {
+            super.run(particle);
         }
 
         return null;
-    }
-
-    public static void initialize(final Light light) {
-        BlockLayout blockLayout = new BlockLayout(LoopScope.class, "loop");
-        blockLayout.initializer(new BlockInitializer() {
-            @Override
-            public Block initialize(Atom atom) {
-                String times = atom.getBlockInfo().getSpecifiers().get(0);
-                ExpressionParser expressionParser = new ExpressionParser(light);
-                ExpressionRuntime number = expressionParser.parse(atom, times);
-                return new LoopScope(number.toFactor());
-            }
-        });
     }
 
 }

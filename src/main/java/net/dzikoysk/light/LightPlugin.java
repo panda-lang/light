@@ -19,6 +19,10 @@ public class LightPlugin extends JavaPlugin {
         this.light = new Light();
     }
 
+    public static LightPlugin getInstance() {
+        return lightPlugin;
+    }
+
     @Override
     public void onEnable() {
         light.initializeDefaultElements();
@@ -49,10 +53,6 @@ public class LightPlugin extends JavaPlugin {
 
     public Light getLight() {
         return light;
-    }
-
-    public static LightPlugin getInstance() {
-        return lightPlugin;
     }
 
 }

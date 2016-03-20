@@ -66,6 +66,7 @@ public class LightScript extends PandaScript {
         if (eventScopes == null) {
             eventScopes = new ArrayList<>(1);
         }
+
         eventScopes.add(eventScope);
         eventBlockMap.put(eventScope.getEventName(), eventScopes);
     }

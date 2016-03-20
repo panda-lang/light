@@ -1,15 +1,13 @@
-package org.panda_lang.light.core.element.type;
+package org.panda_lang.light.core.element.argument;
 
 import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.element.expression.Expression;
 
 public class Argument extends Expression {
 
-    private final Type type;
     private final Object object;
 
-    public Argument(Type type, Object object) {
-        this.type = type;
+    public Argument(Object object) {
         this.object = object;
     }
 
@@ -20,10 +18,6 @@ public class Argument extends Expression {
 
     public Object getObject() {
         return object;
-    }
-
-    public Type getType() {
-        return type;
     }
 
 }

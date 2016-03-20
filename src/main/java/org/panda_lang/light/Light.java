@@ -27,6 +27,21 @@ public class Light {
         this.scripts = new ArrayList<>();
     }
 
+    public static void main(String[] args) {
+        Light light = new Light();
+        light.initializeDefaultElements();
+
+        Variables variables = light.getLightCore().getVariables();
+        variables.getFollowed().getStorage().initializeDatabase(new File("database"));
+        variables.load();
+
+        File script = new File(args[0]);
+        LightScript lightScript = light.getLightLoader().load(script);
+
+        lightScript.callEvent("load");
+        light.getLightCore().getVariables().save();
+    }
+
     public void registerScript(LightScript lightScript) {
         scripts.add(lightScript);
     }
@@ -77,22 +92,6 @@ public class Light {
 
     public Panda getPanda() {
         return panda;
-    }
-
-
-    public static void main(String[] args) {
-        Light light = new Light();
-        light.initializeDefaultElements();
-
-        Variables variables = light.getLightCore().getVariables();
-        variables.getFollowed().getStorage().initializeDatabase(new File("database"));
-        variables.load();
-
-        File script = new File(args[0]);
-        LightScript lightScript = light.getLightLoader().load(script);
-
-        lightScript.callEvent("load");
-        light.getLightCore().getVariables().save();
     }
 
 }

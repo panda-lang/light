@@ -62,6 +62,99 @@ public class Metrics {
         debug = configuration.getBoolean("debug", false);
     }
 
+    public static byte[] gzip(String input) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        GZIPOutputStream gzos = null;
+
+        try {
+            gzos = new GZIPOutputStream(baos);
+            gzos.write(input.getBytes("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (gzos != null) {
+                try {
+                    gzos.close();
+                } catch (IOException ignore) {
+                }
+            }
+        }
+
+        return baos.toByteArray();
+    }
+
+    private static void appendJSONPair(StringBuilder json, String key, String value) throws UnsupportedEncodingException {
+        boolean isValueNumeric = false;
+
+        try {
+            if (value.equals("0") || !value.endsWith("0")) {
+                double d = Double.parseDouble(value);
+                isValueNumeric = true;
+            }
+        } catch (NumberFormatException e) {
+            isValueNumeric = false;
+        }
+
+        if (json.charAt(json.length() - 1) != '{') {
+            json.append(',');
+        }
+
+        json.append(escapeJSON(key));
+        json.append(':');
+
+        if (isValueNumeric) {
+            json.append(value);
+        }
+        else {
+            json.append(escapeJSON(value));
+        }
+    }
+
+    private static String escapeJSON(String text) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append('"');
+        for (int index = 0; index < text.length(); index++) {
+            char chr = text.charAt(index);
+
+            switch (chr) {
+                case '"':
+                case '\\':
+                    builder.append('\\');
+                    builder.append(chr);
+                    break;
+                case '\b':
+                    builder.append("\\b");
+                    break;
+                case '\t':
+                    builder.append("\\t");
+                    break;
+                case '\n':
+                    builder.append("\\n");
+                    break;
+                case '\r':
+                    builder.append("\\r");
+                    break;
+                default:
+                    if (chr < ' ') {
+                        String t = "000" + Integer.toHexString(chr);
+                        builder.append("\\u").append(t.substring(t.length() - 4));
+                    }
+                    else {
+                        builder.append(chr);
+                    }
+                    break;
+            }
+        }
+        builder.append('"');
+
+        return builder.toString();
+    }
+
+    private static String urlEncode(final String text) throws UnsupportedEncodingException {
+        return URLEncoder.encode(text, "UTF-8");
+    }
+
     public Graph createGraph(final String name) {
         if (name == null) {
             throw new IllegalArgumentException("Graph name cannot be null");
@@ -358,27 +451,6 @@ public class Metrics {
         }
     }
 
-    public static byte[] gzip(String input) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        GZIPOutputStream gzos = null;
-
-        try {
-            gzos = new GZIPOutputStream(baos);
-            gzos.write(input.getBytes("UTF-8"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (gzos != null) {
-                try {
-                    gzos.close();
-                } catch (IOException ignore) {
-                }
-            }
-        }
-
-        return baos.toByteArray();
-    }
-
     private boolean isMineshafterPresent() {
         try {
             Class.forName("mineshafter.MineServer");
@@ -386,78 +458,6 @@ public class Metrics {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    private static void appendJSONPair(StringBuilder json, String key, String value) throws UnsupportedEncodingException {
-        boolean isValueNumeric = false;
-
-        try {
-            if (value.equals("0") || !value.endsWith("0")) {
-                double d = Double.parseDouble(value);
-                isValueNumeric = true;
-            }
-        } catch (NumberFormatException e) {
-            isValueNumeric = false;
-        }
-
-        if (json.charAt(json.length() - 1) != '{') {
-            json.append(',');
-        }
-
-        json.append(escapeJSON(key));
-        json.append(':');
-
-        if (isValueNumeric) {
-            json.append(value);
-        }
-        else {
-            json.append(escapeJSON(value));
-        }
-    }
-
-    private static String escapeJSON(String text) {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append('"');
-        for (int index = 0; index < text.length(); index++) {
-            char chr = text.charAt(index);
-
-            switch (chr) {
-                case '"':
-                case '\\':
-                    builder.append('\\');
-                    builder.append(chr);
-                    break;
-                case '\b':
-                    builder.append("\\b");
-                    break;
-                case '\t':
-                    builder.append("\\t");
-                    break;
-                case '\n':
-                    builder.append("\\n");
-                    break;
-                case '\r':
-                    builder.append("\\r");
-                    break;
-                default:
-                    if (chr < ' ') {
-                        String t = "000" + Integer.toHexString(chr);
-                        builder.append("\\u").append(t.substring(t.length() - 4));
-                    }
-                    else {
-                        builder.append(chr);
-                    }
-                    break;
-            }
-        }
-        builder.append('"');
-
-        return builder.toString();
-    }
-
-    private static String urlEncode(final String text) throws UnsupportedEncodingException {
-        return URLEncoder.encode(text, "UTF-8");
     }
 
     public static class Graph {

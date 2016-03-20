@@ -10,10 +10,7 @@ import org.panda_lang.light.core.element.scope.ScopeRepresentation;
 import org.panda_lang.light.core.element.type.TypeCenter;
 import org.panda_lang.light.core.element.type.TypeRepresentation;
 import org.panda_lang.light.core.memory.Variables;
-import org.panda_lang.light.lang.Expressions;
-import org.panda_lang.light.lang.Phrases;
-import org.panda_lang.light.lang.Scopes;
-import org.panda_lang.light.lang.Types;
+import org.panda_lang.light.lang.*;
 import org.panda_lang.panda.Panda;
 
 public class LightCore {
@@ -45,14 +42,17 @@ public class LightCore {
         Scopes scopes = new Scopes(this);
         scopes.registerDefaultElements();
 
+        Arguments arguments = new Arguments(this);
+        arguments.registerDefaultElements();
+
         Types types = new Types(this);
         types.registerDefaultTypes();
 
-        Phrases phrases = new Phrases(this);
-        phrases.registerDefaultPhrases();
-
         Expressions expressions = new Expressions(this);
         expressions.registerDefaultExpressions();
+
+        Phrases phrases = new Phrases(this);
+        phrases.registerDefaultPhrases();
     }
 
     public void registerScope(ScopeRepresentation scopeRepresentation) {

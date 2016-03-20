@@ -1,0 +1,3 @@
+on load {
+    send arg-test to console
+}

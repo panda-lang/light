@@ -2,7 +2,7 @@ package org.panda_lang.light.core.element.scope;
 
 import org.panda_lang.light.Light;
 import org.panda_lang.light.core.Flash;
-import org.panda_lang.light.core.element.type.ArgumentRepresentation;
+import org.panda_lang.light.core.element.argument.ArgumentRepresentation;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.essential.util.BlockInitializer;
 import org.panda_lang.panda.core.parser.essential.util.BlockLayout;
@@ -34,7 +34,9 @@ public class ScopeRepresentation {
             @Override
             public Block initialize(Atom atom) {
                 Flash flash = new Flash(light, atom);
-                return scopeInitializer.initialize(flash);
+                Scope scope = scopeInitializer.initialize(flash);
+
+                return scope;
             }
         });
         return this;

@@ -29,17 +29,25 @@ public class PhraseParser implements Parser {
         this.light = light;
     }
 
+    public static void initialize(Light light) {
+        PhraseParser phraseParser = new PhraseParser(light);
+        ParserLayout parserLayout = new ParserLayout(phraseParser);
+        parserLayout.pattern("*;", 5);
+        light.registerParser(parserLayout);
+    }
+
     public NamedExecutable parse(Atom atom) {
         String phraseSource = atom.getSourcesDivider().getLine().trim();
         phraseSource = phraseSource.substring(0, phraseSource.length() - 1);
 
-        for (final PhraseRepresentation phraseRepresentation : light.getLightCore().getPhraseCenter().getElements()) {
-            for (final HollowPattern pattern : phraseRepresentation.getPatterns()) {
+        for (PhraseRepresentation phraseRepresentation : light.getLightCore().getPhraseCenter().getElements()) {
+            for (HollowPattern pattern : phraseRepresentation.getPatterns()) {
                 if (pattern.match(phraseSource)) {
-                    final ExpressionParser expressionParser = new ExpressionParser(light);
-                    final Collection<String> hollows = pattern.getHollows();
-                    final List<ExpressionRuntime> expressions = expressionParser.parse(atom, hollows);
-                    final Factor[] factors = ExpressionUtils.toFactors(expressions);
+
+                    ExpressionParser expressionParser = new ExpressionParser(light);
+                    Collection<String> hollows = pattern.getHollows();
+                    List<ExpressionRuntime> expressions = expressionParser.parse(atom, hollows);
+                    Factor[] factors = ExpressionUtils.toFactors(expressions);
 
                     final Phrase phrase = phraseRepresentation.getPhrase();
                     final Ray ray = new Ray()
@@ -60,13 +68,6 @@ public class PhraseParser implements Parser {
             }
         }
         return null;
-    }
-
-    public static void initialize(Light light) {
-        PhraseParser phraseParser = new PhraseParser(light);
-        ParserLayout parserLayout = new ParserLayout(phraseParser);
-        parserLayout.pattern("*;", 5);
-        light.getLightCore().getPanda().getPandaCore().registerParser(parserLayout);
     }
 
 }

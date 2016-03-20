@@ -11,12 +11,12 @@ public class Variable {
         this.variableName = variableName;
     }
 
-    public void setValue(Essence value) {
-        this.value = value;
-    }
-
     public Essence getValue() {
         return value;
+    }
+
+    public void setValue(Essence value) {
+        this.value = value;
     }
 
     public String getVariableName() {

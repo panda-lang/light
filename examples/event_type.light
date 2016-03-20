@@ -1,5 +1,0 @@
-
-on load {
-    set <var> to event-text
-    send <var> to console
-}

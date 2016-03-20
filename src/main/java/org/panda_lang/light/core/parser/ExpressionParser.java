@@ -5,6 +5,7 @@ import org.panda_lang.light.LightScript;
 import org.panda_lang.light.core.Ray;
 import org.panda_lang.light.core.element.expression.*;
 import org.panda_lang.panda.core.parser.Atom;
+import org.panda_lang.panda.core.parser.PandaException;
 import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.essential.EssenceParser;
 import org.panda_lang.panda.core.parser.essential.RuntimeParser;
@@ -26,10 +27,10 @@ public class ExpressionParser implements Parser {
 
     @Override
     public ExpressionRuntime parse(Atom atom) {
-        String expressionSource = atom.getSourceCode().trim();
-        ExpressionCenter expressionCenter = light.getLightCore().getExpressionCenter();
+        final String expressionSource = atom.getSourceCode().trim();
+        final ExpressionCenter expressionCenter = light.getLightCore().getExpressionCenter();
 
-        for (final ExpressionRepresentation expressionRepresentation : expressionCenter.getElements()) {
+        for (ExpressionRepresentation expressionRepresentation : expressionCenter.getElements()) {
             for (HollowPattern pattern : expressionRepresentation.getPatterns()) {
                 if (pattern.match(expressionSource)) {
                     final Collection<String> hollows = new ArrayList<>(pattern.getHollows());
@@ -55,25 +56,28 @@ public class ExpressionParser implements Parser {
             }
         }
 
-        TypeParser typeParser = new TypeParser();
-        Factor factor = typeParser.parse(atom, expressionSource);
+        ArgumentParser argumentParser = new ArgumentParser();
+        ExpressionRuntime argument = argumentParser.parse(atom);
 
-        if (factor != null) {
-            return new ExpressionRuntime(factor);
+        if (argument != null) {
+            return argument;
         }
 
         EssenceParser essenceParser = new EssenceParser();
         Essence essence = essenceParser.parse(atom);
 
         if (essence != null) {
-            factor = new Factor(essence);
+            Factor factor = new Factor(essence);
             return new ExpressionRuntime(factor);
         }
 
         RuntimeParser runtimeParser = new RuntimeParser();
-        factor = runtimeParser.parse(atom);
+        Factor factor = runtimeParser.parse(atom);
 
-        // todo: argument
+        if (factor == null) {
+            PandaException pandaException = new PandaException("Unknown expression '" + expressionSource + "'", atom.getSourcesDivider());
+            return atom.getPandaParser().throwException(pandaException);
+        }
 
         return new ExpressionRuntime(factor);
     }

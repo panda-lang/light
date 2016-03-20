@@ -1,0 +1,27 @@
+// Event 'on load' called when the script starts
+on load {
+
+    // Something
+    send "Hello" to console
+
+    // Panda
+    ---
+        // Create new thread called "Thread-Test"
+        Thread testThread = new Thread("Thread-Test");
+        // Thread block associated with 'testThread', executed when the thread starts
+        thread (testThread) {
+            // Print the name of the thread
+            System.print(testThread.getName());
+        }
+        // Start the thread
+        testThread.start();
+
+        // Get the current thread
+        Thread currentThread = Thread.currentThread();
+        // Display the name of the current thread
+        System.print(currentThread.getName());
+    ---
+
+    // Something
+    send "Goodbye" to console
+}

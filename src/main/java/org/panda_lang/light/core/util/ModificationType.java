@@ -13,10 +13,6 @@ public enum ModificationType {
         this.id = id;
     }
 
-    public int getID() {
-        return id;
-    }
-
     public static ModificationType valueOf(int id) {
         for (ModificationType modificationType : values()) {
             if (modificationType.getID() == id) {
@@ -24,6 +20,10 @@ public enum ModificationType {
             }
         }
         return SET;
+    }
+
+    public int getID() {
+        return id;
     }
 
 }
