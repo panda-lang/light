@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.panda_lang</groupId>
-    <artifactId>light</artifactId>
+    <artifactId>moonlight</artifactId>
     <version>0.0.1</version>
 
     <name>Light</name>
     <description>Light is a English-like programming language built on the core of the Panda Programming Language.
     </description>
-    <url>http://light.panda-lang.org/</url>
+    <url>http://moonlight.panda-lang.org/</url>
 
     <licenses>
         <license>
@@ -97,7 +97,7 @@
                             <Implementation-Version>1.0.0-SNAPSHOT</Implementation-Version>
                         </manifestEntries>
                         <manifest>
-                            <mainClass>org.panda_lang.light.Light</mainClass>
+                            <mainClass>org.panda_lang.moonlight.Moonlight</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

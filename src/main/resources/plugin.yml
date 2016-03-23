@@ -1,5 +1,5 @@
-name: Light
-main: net.dzikoysk.light.LightPlugin
+name: Moonlight
+main: net.dzikoysk.rayightPlugin
 author: Dzikoysk
 version: 0.0.1
 website: http://www.dzikoysk.net/
