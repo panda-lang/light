@@ -1,6 +1,5 @@
 package org.panda_lang.moonlight.lang;
 
-import org.panda_lang.moonlight.Moonlight;
 import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.Flash;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRuntime;
@@ -12,11 +11,11 @@ import org.panda_lang.panda.core.syntax.Block;
 
 public class Scopes {
 
-    private final Moonlight moonlight;
+    private final MoonlightCore moonlight;
     private final MoonlightCore moonlightCore;
 
     public Scopes(MoonlightCore moonlightCore) {
-        this.moonlight = moonlightCore.getMoonlight();
+        this.moonlight = moonlightCore;
         this.moonlightCore = moonlightCore;
     }
 

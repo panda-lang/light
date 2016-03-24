@@ -1,6 +1,6 @@
 package org.panda_lang.moonlight.core.parser;
 
-import org.panda_lang.moonlight.Moonlight;
+import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.PandaScript;
 import org.panda_lang.panda.core.Particle;
@@ -13,20 +13,20 @@ import org.panda_lang.panda.core.syntax.block.PandaBlock;
 public class NativeParser implements Parser {
 
     private final Panda panda;
-    private final Moonlight moonlight;
+    private final MoonlightCore moonlightCore;
 
-    public NativeParser(Moonlight moonlight) {
+    public NativeParser(MoonlightCore moonlightCore) {
         this.panda = new Panda();
-        this.moonlight = moonlight;
+        this.moonlightCore = moonlightCore;
 
         this.panda.initializeDefaultElements();
     }
 
-    public static void initialize(Moonlight moonlight) {
-        NativeParser nativeParser = new NativeParser(moonlight);
+    public static void initialize(MoonlightCore moonlightCore) {
+        NativeParser nativeParser = new NativeParser(moonlightCore);
         ParserLayout parserLayout = new ParserLayout(nativeParser);
         parserLayout.pattern("---;", 0, 0, PatternExtractor.FULL);
-        moonlight.registerParser(parserLayout);
+        moonlightCore.registerParser(parserLayout);
     }
 
     @Override

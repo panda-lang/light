@@ -5,7 +5,6 @@ import org.panda_lang.panda.core.Particle;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
 import org.panda_lang.panda.core.syntax.Runtime;
-import org.panda_lang.panda.lang.ObjectEssence;
 
 public class ExpressionRuntime extends Runtime {
 
@@ -49,7 +48,10 @@ public class ExpressionRuntime extends Runtime {
 
     public Essence getExpressionValue(Ray ray) {
         Object object = expression.getValue(ray);
-        return new ObjectEssence(object);
+        if (object instanceof Essence) {
+            return (Essence) object;
+        }
+        return new ExpressionEssence(object);
     }
 
     public Ray getRay() {

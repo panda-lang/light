@@ -1,6 +1,6 @@
 package org.panda_lang.moonlight.core.parser;
 
-import org.panda_lang.moonlight.Moonlight;
+import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.MoonlightScript;
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.expression.*;
@@ -19,16 +19,16 @@ import java.util.List;
 
 public class ExpressionParser implements Parser {
 
-    public final Moonlight moonlight;
+    public final MoonlightCore moonlightCore;
 
-    public ExpressionParser(Moonlight moonlight) {
-        this.moonlight = moonlight;
+    public ExpressionParser(MoonlightCore moonlightCore) {
+        this.moonlightCore = moonlightCore;
     }
 
     @Override
     public ExpressionRuntime parse(Atom atom) {
         final String expressionSource = atom.getSourceCode().trim();
-        final ExpressionCenter expressionCenter = moonlight.getMoonlightCore().getExpressionCenter();
+        final ExpressionCenter expressionCenter = moonlightCore.getExpressionCenter();
 
         for (ExpressionRepresentation expressionRepresentation : expressionCenter.getElements()) {
             for (HollowPattern pattern : expressionRepresentation.getPatterns()) {
@@ -95,6 +95,5 @@ public class ExpressionParser implements Parser {
         }
         return executables;
     }
-
 
 }

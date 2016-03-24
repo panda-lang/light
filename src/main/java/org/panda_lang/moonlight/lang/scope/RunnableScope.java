@@ -1,6 +1,6 @@
 package org.panda_lang.moonlight.lang.scope;
 
-import org.panda_lang.moonlight.Moonlight;
+import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRuntime;
 import org.panda_lang.moonlight.core.element.scope.Scope;
@@ -16,7 +16,7 @@ public class RunnableScope extends Scope {
         super.setName(name);
     }
 
-    public static void initialize(final Moonlight moonlight) {
+    public static void initialize(final MoonlightCore moonlight) {
         BlockLayout blockLayout = new BlockLayout(RunnableScope.class, "runnable");
         blockLayout.initializer(new BlockInitializer() {
             @Override

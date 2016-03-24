@@ -1,4 +1,4 @@
-package net.dzikoysk.luminosity.util.metrics;
+package net.dzikoysk.moonlight.util.metrics;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;

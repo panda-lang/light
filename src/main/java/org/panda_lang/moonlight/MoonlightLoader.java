@@ -43,7 +43,7 @@ public class MoonlightLoader {
         }
 
         final Panda panda = moonlightCore.getPanda();
-        final MoonlightScript moonlightScript = new MoonlightScript(moonlightCore.getMoonlight());
+        final MoonlightScript moonlightScript = new MoonlightScript(moonlightCore);
 
         final String grammaticalSource = LightCodeUtils.convert(source);
         final PandaParser pandaParser = new PandaParser(panda, moonlightScript, grammaticalSource);

@@ -1,4 +1,4 @@
-package net.dzikoysk.luminosity.lang;
+package net.dzikoysk.moonlight.lang;
 
 import org.panda_lang.moonlight.MoonlightCore;
 

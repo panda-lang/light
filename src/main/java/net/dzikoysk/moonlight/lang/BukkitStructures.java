@@ -1,6 +1,6 @@
-package net.dzikoysk.luminosity.lang;
+package net.dzikoysk.moonlight.lang;
 
-import net.dzikoysk.luminosity.lang.structure.PlayerStructure;
+import net.dzikoysk.moonlight.lang.structure.PlayerStructure;
 import org.panda_lang.moonlight.MoonlightCore;
 
 public class BukkitStructures {

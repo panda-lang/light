@@ -1,31 +1,34 @@
-package net.dzikoysk.luminosity;
+package net.dzikoysk.moonlight;
 
-import net.dzikoysk.luminosity.util.metrics.MetricsCollector;
+import net.dzikoysk.moonlight.util.metrics.MetricsCollector;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.panda_lang.moonlight.Moonlight;
+import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.moonlight.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.moonlight.core.element.type.TypeRepresentation;
 
-public class Luminosity extends JavaPlugin {
+public class Moonlight extends JavaPlugin {
 
-    private static Luminosity luminosity;
-    private final Moonlight moonlight;
+    private static Moonlight moonlight;
+    private final MoonlightCore moonlightCore;
 
-    public Luminosity() {
-        luminosity = this;
+    public Moonlight() {
+        moonlight = this;
+        moonlightCore = new MoonlightCore();
+    }
 
-        this.moonlight = new Moonlight();
+    public static Moonlight getInstance() {
+        return moonlight;
     }
 
     @Override
     public void onEnable() {
-        moonlight.initializeDefaultElements();
-        moonlight.getMoonlightCore().getVariables().load();
+        moonlightCore.initializeDefaultElements();
+        moonlightCore.getVariables().load();
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new LuminosityInitializer(this));
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new MoonlightInitializer(this));
 
         MetricsCollector metricsCollector = new MetricsCollector(this);
         metricsCollector.start();
@@ -33,7 +36,7 @@ public class Luminosity extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        moonlight.getMoonlightCore().getVariables().save();
+        moonlightCore.getVariables().save();
     }
 
     public void registerType(TypeRepresentation typeRepresentation) {
@@ -52,12 +55,8 @@ public class Luminosity extends JavaPlugin {
 
     }
 
-    public Moonlight getMoonlight() {
-        return moonlight;
-    }
-
-    public static Luminosity getInstance() {
-        return luminosity;
+    public MoonlightCore getMoonlight() {
+        return moonlightCore;
     }
 
 }

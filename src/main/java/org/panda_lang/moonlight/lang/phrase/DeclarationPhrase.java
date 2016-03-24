@@ -12,7 +12,7 @@ public class DeclarationPhrase implements Phrase {
 
     @Override
     public void run(Ray ray) {
-        MoonlightCore moonlightCore = ray.getMoonlightScript().getMoonlight().getMoonlightCore();
+        MoonlightCore moonlightCore = ray.getMoonlightScript().getMoonlight();
         ExpressionRuntime expressionRuntime = ray.getExpressionRuntimes().get(0);
         Expression expression = expressionRuntime.getExpression();
 

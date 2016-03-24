@@ -1,4 +1,4 @@
-package net.dzikoysk.luminosity.core.event;
+package net.dzikoysk.moonlight.core.event;
 
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -9,12 +9,12 @@ import org.panda_lang.moonlight.lang.scope.EventScope;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class LuminosityListener implements Listener {
+public class BukkitListener implements Listener {
 
     private final MoonlightScript moonlightScript;
     private final Collection<EventScope> eventScopeCollection;
 
-    public LuminosityListener(MoonlightScript moonlightScript) {
+    public BukkitListener(MoonlightScript moonlightScript) {
         this.moonlightScript = moonlightScript;
         this.eventScopeCollection = new ArrayList<>();
     }

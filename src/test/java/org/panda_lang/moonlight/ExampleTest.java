@@ -7,18 +7,18 @@ import java.io.File;
 public class ExampleTest {
 
     public static void main(String[] args) {
-        Moonlight moonlight = new Moonlight();
+        MoonlightCore moonlight = new MoonlightCore();
         moonlight.initializeDefaultElements();
 
-        Variables variables = moonlight.getMoonlightCore().getVariables();
+        Variables variables = moonlight.getVariables();
         variables.getFollowed().getStorage().initializeDatabase(new File("database"));
         variables.load();
 
-        File script = new File("examples/full_example.luminosity");
+        File script = new File("examples/full_example.light");
         MoonlightScript moonlightScript = moonlight.getMoonlightLoader().load(script);
 
-        moonlightScript.callEvent("load");
-        moonlight.getMoonlightCore().getVariables().save();
+        moonlightScript.callEvent("load", null);
+        moonlight.getVariables().save();
     }
 
 }

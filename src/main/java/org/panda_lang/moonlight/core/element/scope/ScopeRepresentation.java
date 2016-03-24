@@ -1,6 +1,6 @@
 package org.panda_lang.moonlight.core.element.scope;
 
-import org.panda_lang.moonlight.Moonlight;
+import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.Flash;
 import org.panda_lang.moonlight.core.element.argument.ArgumentRepresentation;
 import org.panda_lang.panda.core.parser.Atom;
@@ -13,17 +13,17 @@ import java.util.Collection;
 
 public class ScopeRepresentation {
 
-    private final Moonlight moonlight;
+    private final MoonlightCore moonlight;
     private final BlockLayout blockLayout;
     private final Collection<ArgumentRepresentation> arguments;
 
-    public ScopeRepresentation(String scope, Class<? extends Block> clazz, Moonlight moonlight) {
+    public ScopeRepresentation(String scope, Class<? extends Block> clazz, MoonlightCore moonlight) {
         this.blockLayout = new BlockLayout(clazz, scope);
         this.arguments = new ArrayList<>();
         this.moonlight = moonlight;
     }
 
-    public ScopeRepresentation(Moonlight moonlight, Class<? extends Block> clazz, String... scopes) {
+    public ScopeRepresentation(MoonlightCore moonlight, Class<? extends Block> clazz, String... scopes) {
         this.blockLayout = new BlockLayout(clazz, scopes);
         this.arguments = new ArrayList<>();
         this.moonlight = moonlight;
@@ -55,7 +55,7 @@ public class ScopeRepresentation {
         return blockLayout;
     }
 
-    public Moonlight getMoonlight() {
+    public MoonlightCore getMoonlight() {
         return moonlight;
     }
 

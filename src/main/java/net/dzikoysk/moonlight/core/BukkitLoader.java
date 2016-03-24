@@ -1,12 +1,12 @@
-package net.dzikoysk.luminosity;
+package net.dzikoysk.moonlight.core;
 
 import java.io.File;
 
-public class LuminosityLoader {
+public class BukkitLoader {
 
     private final File directory;
 
-    public LuminosityLoader(File directory) {
+    public BukkitLoader(File directory) {
         this.directory = directory;
     }
 

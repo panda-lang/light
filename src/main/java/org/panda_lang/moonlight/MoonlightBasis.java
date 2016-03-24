@@ -6,21 +6,21 @@ import org.panda_lang.panda.core.parser.essential.BlockParser;
 
 public class MoonlightBasis {
 
-    private final Moonlight moonlight;
+    private final MoonlightCore moonlightCore;
 
-    public MoonlightBasis(Moonlight moonlight) {
-        this.moonlight = moonlight;
+    public MoonlightBasis(MoonlightCore moonlightCore) {
+        this.moonlightCore = moonlightCore;
     }
 
     public void loadParsers() {
-        NativeParser.initialize(moonlight);
-        PhraseParser.initialize(moonlight);
+        NativeParser.initialize(moonlightCore);
+        PhraseParser.initialize(moonlightCore);
 
-        BlockParser.initialize(moonlight.getPanda());
+        BlockParser.initialize(moonlightCore.getPanda());
     }
 
-    public Moonlight getMoonlight() {
-        return moonlight;
+    public MoonlightCore getMoonlightCore() {
+        return moonlightCore;
     }
 
 }

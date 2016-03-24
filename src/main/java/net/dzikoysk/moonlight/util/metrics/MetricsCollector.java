@@ -1,20 +1,20 @@
-package net.dzikoysk.luminosity.util.metrics;
+package net.dzikoysk.moonlight.util.metrics;
 
-import net.dzikoysk.luminosity.Luminosity;
+import net.dzikoysk.moonlight.Moonlight;
 import org.bukkit.Bukkit;
 
 public class MetricsCollector implements Runnable {
 
-    private final Luminosity luminosity;
+    private final Moonlight moonlight;
     private final Metrics metrics;
 
-    public MetricsCollector(Luminosity luminosity) {
-        this.luminosity = luminosity;
-        this.metrics = new Metrics(luminosity);
+    public MetricsCollector(Moonlight moonlight) {
+        this.moonlight = moonlight;
+        this.metrics = new Metrics(moonlight);
     }
 
     public void start() {
-        Bukkit.getScheduler().runTaskLaterAsynchronously(luminosity, this, 20L);
+        Bukkit.getScheduler().runTaskLaterAsynchronously(moonlight, this, 20L);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class MetricsCollector implements Runnable {
         global.addPlotter(new Metrics.Plotter("Scripts") {
             @Override
             public int getValue() {
-                return luminosity.getMoonlight().getScripts().size();
+                return moonlight.getMoonlight().getScripts().size();
             }
         });
         metrics.start();

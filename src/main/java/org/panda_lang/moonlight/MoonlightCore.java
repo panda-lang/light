@@ -12,20 +12,27 @@ import org.panda_lang.moonlight.core.element.type.TypeRepresentation;
 import org.panda_lang.moonlight.core.memory.Variables;
 import org.panda_lang.moonlight.lang.*;
 import org.panda_lang.panda.Panda;
+import org.panda_lang.panda.core.parser.ParserLayout;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class MoonlightCore {
 
     private final Panda panda;
-    private final Moonlight moonlight;
+    private final MoonlightLoader moonlightLoader;
+    private final Collection<MoonlightScript> scripts;
+
     private final Variables variables;
     private final TypeCenter typeCenter;
     private final PhraseCenter phraseCenter;
     private final ExpressionCenter expressionCenter;
     private final StructureCenter structureCenter;
 
-    public MoonlightCore(Panda panda, Moonlight moonlight) {
-        this.panda = panda;
-        this.moonlight = moonlight;
+    public MoonlightCore() {
+        this.panda = new Panda();
+        this.moonlightLoader = new MoonlightLoader(this);
+        this.scripts = new ArrayList<>();
 
         this.typeCenter = new TypeCenter();
         this.phraseCenter = new PhraseCenter();
@@ -35,8 +42,8 @@ public class MoonlightCore {
         this.variables = new Variables(this);
     }
 
-    public void initialize() {
-        MoonlightBasis moonlightBasis = moonlight.getLightBasis();
+    protected void initialize() {
+        MoonlightBasis moonlightBasis = getMoonlightBasis();
         moonlightBasis.loadParsers();
 
         Scopes scopes = new Scopes(this);
@@ -53,6 +60,14 @@ public class MoonlightCore {
 
         Phrases phrases = new Phrases(this);
         phrases.registerDefaultPhrases();
+    }
+
+    public void registerScript(MoonlightScript moonlightScript) {
+        scripts.add(moonlightScript);
+    }
+
+    public void registerParser(ParserLayout parserLayout) {
+        panda.getPandaCore().registerParser(parserLayout);
     }
 
     public void registerScope(ScopeRepresentation scopeRepresentation) {
@@ -76,6 +91,10 @@ public class MoonlightCore {
         structure.initialize(this);
     }
 
+    public void initializeDefaultElements() {
+        initialize();
+    }
+
     public StructureCenter getStructureCenter() {
         return structureCenter;
     }
@@ -96,8 +115,16 @@ public class MoonlightCore {
         return variables;
     }
 
-    public Moonlight getMoonlight() {
-        return moonlight;
+    public MoonlightBasis getMoonlightBasis() {
+        return new MoonlightBasis(this);
+    }
+
+    public Collection<MoonlightScript> getScripts() {
+        return scripts;
+    }
+
+    public MoonlightLoader getMoonlightLoader() {
+        return moonlightLoader;
     }
 
     public Panda getPanda() {

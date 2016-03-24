@@ -1,6 +1,6 @@
 package org.panda_lang.moonlight.core.parser;
 
-import org.panda_lang.moonlight.Moonlight;
+import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.MoonlightScript;
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRuntime;
@@ -23,28 +23,28 @@ import java.util.List;
 
 public class PhraseParser implements Parser {
 
-    private final Moonlight moonlight;
+    private final MoonlightCore moonlightCore;
 
-    public PhraseParser(Moonlight moonlight) {
-        this.moonlight = moonlight;
+    public PhraseParser(MoonlightCore moonlightCore) {
+        this.moonlightCore = moonlightCore;
     }
 
-    public static void initialize(Moonlight moonlight) {
-        PhraseParser phraseParser = new PhraseParser(moonlight);
+    public static void initialize(MoonlightCore moonlightCore) {
+        PhraseParser phraseParser = new PhraseParser(moonlightCore);
         ParserLayout parserLayout = new ParserLayout(phraseParser);
         parserLayout.pattern("*;", 5);
-        moonlight.registerParser(parserLayout);
+        moonlightCore.registerParser(parserLayout);
     }
 
     public NamedExecutable parse(Atom atom) {
         String phraseSource = atom.getSourcesDivider().getLine().trim();
         phraseSource = phraseSource.substring(0, phraseSource.length() - 1);
 
-        for (PhraseRepresentation phraseRepresentation : moonlight.getMoonlightCore().getPhraseCenter().getElements()) {
+        for (PhraseRepresentation phraseRepresentation : moonlightCore.getPhraseCenter().getElements()) {
             for (HollowPattern pattern : phraseRepresentation.getPatterns()) {
                 if (pattern.match(phraseSource)) {
 
-                    ExpressionParser expressionParser = new ExpressionParser(moonlight);
+                    ExpressionParser expressionParser = new ExpressionParser(moonlightCore);
                     Collection<String> hollows = pattern.getHollows();
                     List<ExpressionRuntime> expressions = expressionParser.parse(atom, hollows);
                     Factor[] factors = ExpressionUtils.toFactors(expressions);

@@ -1,4 +1,4 @@
-package net.dzikoysk.luminosity.lang.structure;
+package net.dzikoysk.moonlight.lang.structure;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

@@ -17,12 +17,12 @@ import java.util.Map;
 
 public class MoonlightScript extends PandaScript {
 
-    private final Moonlight moonlight;
+    private final MoonlightCore moonlight;
     private final Map<String, Collection<EventScope>> eventBlockMap;
     private final Map<String, CommandScope> commandBlockMap;
     private final Map<String, FunctionScope> functionBlockMap;
 
-    public MoonlightScript(Moonlight moonlight) {
+    public MoonlightScript(MoonlightCore moonlight) {
         super(moonlight.getPanda());
 
         this.moonlight = moonlight;
@@ -97,7 +97,7 @@ public class MoonlightScript extends PandaScript {
         return this;
     }
 
-    public Moonlight getMoonlight() {
+    public MoonlightCore getMoonlight() {
         return moonlight;
     }
 
