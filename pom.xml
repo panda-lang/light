@@ -6,8 +6,8 @@
     <artifactId>moonlight</artifactId>
     <version>0.0.1</version>
 
-    <name>Light</name>
-    <description>Light is a English-like programming language built on the core of the Panda Programming Language.
+    <name>Moonlight</name>
+    <description>Moonlight is a English-like programming language built on the core of the Panda Programming Language.
     </description>
     <url>http://moonlight.panda-lang.org/</url>
 
@@ -92,7 +92,7 @@
                     <archive>
                         <manifestEntries>
                             <Built-By>Dzikoysk</Built-By>
-                            <Implementation-Vendor>Light-Programming-Language</Implementation-Vendor>
+                            <Implementation-Vendor>Moonlight-Programming-Language</Implementation-Vendor>
                             <Implementation-Title>${project.name}</Implementation-Title>
                             <Implementation-Version>1.0.0-SNAPSHOT</Implementation-Version>
                         </manifestEntries>

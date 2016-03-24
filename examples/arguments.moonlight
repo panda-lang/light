@@ -1,0 +1,9 @@
+on load {
+
+    send arg-object to console;
+
+    loop 100 {
+        send loop-index to console;
+    }
+
+}

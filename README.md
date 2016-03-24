@@ -1,6 +1,6 @@
-#Light
+#Moonlight
 
-Light is a English-like programming language built on the core of the Panda Programming Language.
+Moonlight is a English-like programming language built on the core of the Panda Programming Language.
 <br>
 <br>
 Website: https://moonlight.panda-lang.org/
@@ -11,8 +11,8 @@ Panda Language: https://panda-lang.org/
 ```javascript
 // Event 'on load' called when the script starts
 on load {
-    // Display 'Hello Light' in console
-    send "Hello Light" to console
+    // Display 'Hello Moonlight' in console
+    send "Hello Moonlight" to console
 
     // If-statement
     if true {
