@@ -1,7 +1,9 @@
 package org.panda_lang.moonlight.lang.scope;
 
 import org.panda_lang.moonlight.core.element.scope.Scope;
-import org.panda_lang.panda.core.Particle;
+import org.panda_lang.panda.core.Alice;
+import org.panda_lang.panda.core.memory.Cache;
+import org.panda_lang.panda.core.memory.Memory;
 import org.panda_lang.panda.core.parser.essential.util.Numeric;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
@@ -16,12 +18,15 @@ public class LoopScope extends Scope {
     }
 
     @Override
-    public Essence run(Particle particle) {
-        final Numeric numeric = factor.getValue(particle);
+    public Essence run(Alice alice) {
+        final Memory memory = alice.getMemory();
+        final Cache cache = memory.getCache();
+        final Numeric numeric = factor.getValue(alice);
         final int count = numeric.getInt();
 
         for (int i = 0; i < count; i++) {
-            super.run(particle);
+            cache.slotA = i;
+            super.run(alice);
         }
 
         return null;

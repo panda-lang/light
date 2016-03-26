@@ -1,7 +1,7 @@
 package org.panda_lang.moonlight;
 
+import net.dzikoysk.moonlight.lang.scope.CommandScope;
 import org.panda_lang.moonlight.core.parser.util.LightCodeUtils;
-import org.panda_lang.moonlight.lang.scope.CommandScope;
 import org.panda_lang.moonlight.lang.scope.EventScope;
 import org.panda_lang.moonlight.lang.scope.FunctionScope;
 import org.panda_lang.panda.Panda;

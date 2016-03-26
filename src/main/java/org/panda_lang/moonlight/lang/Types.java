@@ -3,9 +3,10 @@ package org.panda_lang.moonlight.lang;
 import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.element.type.TypeRepresentation;
 import org.panda_lang.moonlight.lang.type.StringType;
+import org.panda_lang.moonlight.util.MoonlightElements;
 import org.panda_lang.panda.lang.StringEssence;
 
-public class Types {
+public class Types implements MoonlightElements {
 
     private final MoonlightCore moonlightCore;
 
@@ -13,7 +14,8 @@ public class Types {
         this.moonlightCore = moonlightCore;
     }
 
-    public void registerDefaultTypes() {
+    @Override
+    public void registerDefaultElements() {
         TypeRepresentation typeRepresentation = new TypeRepresentation(StringEssence.class, new StringType());
         moonlightCore.registerType(typeRepresentation);
     }

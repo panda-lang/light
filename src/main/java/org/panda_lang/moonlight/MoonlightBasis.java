@@ -13,10 +13,9 @@ public class MoonlightBasis {
     }
 
     public void loadParsers() {
+        BlockParser.initialize(moonlightCore.getPanda());
         NativeParser.initialize(moonlightCore);
         PhraseParser.initialize(moonlightCore);
-
-        BlockParser.initialize(moonlightCore.getPanda());
     }
 
     public MoonlightCore getMoonlightCore() {

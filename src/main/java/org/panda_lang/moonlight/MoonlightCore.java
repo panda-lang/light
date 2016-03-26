@@ -6,6 +6,7 @@ import org.panda_lang.moonlight.core.element.expression.ExpressionCenter;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.moonlight.core.element.phrase.PhraseCenter;
 import org.panda_lang.moonlight.core.element.phrase.PhraseRepresentation;
+import org.panda_lang.moonlight.core.element.scope.ScopeCenter;
 import org.panda_lang.moonlight.core.element.scope.ScopeRepresentation;
 import org.panda_lang.moonlight.core.element.type.TypeCenter;
 import org.panda_lang.moonlight.core.element.type.TypeRepresentation;
@@ -22,8 +23,10 @@ public class MoonlightCore {
     private final Panda panda;
     private final MoonlightLoader moonlightLoader;
     private final Collection<MoonlightScript> scripts;
-
     private final Variables variables;
+
+    private final ScopeCenter scopeCenter;
+
     private final TypeCenter typeCenter;
     private final PhraseCenter phraseCenter;
     private final ExpressionCenter expressionCenter;
@@ -33,6 +36,8 @@ public class MoonlightCore {
         this.panda = new Panda();
         this.moonlightLoader = new MoonlightLoader(this);
         this.scripts = new ArrayList<>();
+
+        this.scopeCenter = new ScopeCenter(this);
 
         this.typeCenter = new TypeCenter();
         this.phraseCenter = new PhraseCenter();
@@ -53,13 +58,13 @@ public class MoonlightCore {
         arguments.registerDefaultElements();
 
         Types types = new Types(this);
-        types.registerDefaultTypes();
+        types.registerDefaultElements();
 
         Expressions expressions = new Expressions(this);
-        expressions.registerDefaultExpressions();
+        expressions.registerDefaultElements();
 
         Phrases phrases = new Phrases(this);
-        phrases.registerDefaultPhrases();
+        phrases.registerDefaultElements();
     }
 
     public void registerScript(MoonlightScript moonlightScript) {
@@ -71,7 +76,7 @@ public class MoonlightCore {
     }
 
     public void registerScope(ScopeRepresentation scopeRepresentation) {
-        panda.getPandaCore().registerBlock(scopeRepresentation.getBlockLayout());
+        scopeCenter.registerElement(scopeRepresentation);
     }
 
     public void registerType(TypeRepresentation typeRepresentation) {
@@ -105,6 +110,10 @@ public class MoonlightCore {
 
     public PhraseCenter getPhraseCenter() {
         return phraseCenter;
+    }
+
+    public ScopeCenter getScopeCenter() {
+        return scopeCenter;
     }
 
     public TypeCenter getTypeCenter() {

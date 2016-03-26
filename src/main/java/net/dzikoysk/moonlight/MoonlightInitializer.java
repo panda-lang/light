@@ -16,10 +16,10 @@ public class MoonlightInitializer implements Runnable {
 
     @Override
     public void run() {
-        BukkitBasis bukkitBasis = new BukkitBasis(moonlight.getMoonlight());
-        bukkitBasis.registerDefaultElements();
+        BukkitBasis bukkitBasis = new BukkitBasis(moonlight);
+        bukkitBasis.registerBukkitElements();
 
-        Variables variables = moonlight.getMoonlight().getVariables();
+        Variables variables = moonlight.getMoonlightCore().getVariables();
         File variablesFile = new File(moonlight.getDataFolder(), "variables.db");
         variables.getFollowed().getStorage().initializeDatabase(variablesFile);
         variables.load();

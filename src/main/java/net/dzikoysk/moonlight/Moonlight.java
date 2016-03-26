@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.moonlight.core.element.phrase.PhraseRepresentation;
+import org.panda_lang.moonlight.core.element.scope.ScopeUnit;
 import org.panda_lang.moonlight.core.element.type.TypeRepresentation;
 
 public class Moonlight extends JavaPlugin {
@@ -51,11 +52,12 @@ public class Moonlight extends JavaPlugin {
         moonlight.registerExpression(expressionRepresentation);
     }
 
-    public void registerEvent(Class<? extends Event> eventClass, String eventName) {
-
+    public ScopeUnit registerEvent(Class<? extends Event> eventClass, String eventName) {
+        ScopeUnit scopeUnit = new ScopeUnit();
+        return scopeUnit;
     }
 
-    public MoonlightCore getMoonlight() {
+    public MoonlightCore getMoonlightCore() {
         return moonlightCore;
     }
 

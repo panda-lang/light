@@ -7,7 +7,7 @@ import org.panda_lang.moonlight.core.element.expression.ExpressionRuntime;
 import org.panda_lang.moonlight.core.element.expression.ExpressionUtils;
 import org.panda_lang.moonlight.core.element.phrase.Phrase;
 import org.panda_lang.moonlight.core.element.phrase.PhraseRepresentation;
-import org.panda_lang.panda.core.Particle;
+import org.panda_lang.panda.core.Alice;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.ParserLayout;
@@ -58,8 +58,8 @@ public class PhraseParser implements Parser {
 
                     return new SimplifiedNamedExecutable(new Executable() {
                         @Override
-                        public Essence run(Particle particle) {
-                            ray.particle(particle);
+                        public Essence run(Alice alice) {
+                            ray.particle(alice);
                             phrase.run(ray);
                             return null;
                         }

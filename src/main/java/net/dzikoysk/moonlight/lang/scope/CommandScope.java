@@ -1,4 +1,4 @@
-package org.panda_lang.moonlight.lang.scope;
+package net.dzikoysk.moonlight.lang.scope;
 
 import org.panda_lang.moonlight.core.element.scope.Scope;
 

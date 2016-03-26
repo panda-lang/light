@@ -11,7 +11,7 @@ public class ComparisonExpression extends Expression {
 
     @Override
     public Essence getValue(Ray ray) {
-        boolean flag;
+        final boolean flag;
         switch (ray.getPattern().getIndex()) {
             case 0:
                 BooleanEssence andA = ray.getDefaultExpressionValue(0);

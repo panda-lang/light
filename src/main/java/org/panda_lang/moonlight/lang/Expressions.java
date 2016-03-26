@@ -6,8 +6,9 @@ import org.panda_lang.moonlight.lang.expression.ComparisonExpression;
 import org.panda_lang.moonlight.lang.expression.PandaVersionExpression;
 import org.panda_lang.moonlight.lang.expression.SystemExpression;
 import org.panda_lang.moonlight.lang.expression.initializer.VariableExpressionInitializer;
+import org.panda_lang.moonlight.util.MoonlightElements;
 
-public class Expressions {
+public class Expressions implements MoonlightElements {
 
     private final MoonlightCore moonlightCore;
 
@@ -15,7 +16,8 @@ public class Expressions {
         this.moonlightCore = moonlightCore;
     }
 
-    public void registerDefaultExpressions() {
+    @Override
+    public void registerDefaultElements() {
         ExpressionRepresentation variableExpression = new ExpressionRepresentation(new VariableExpressionInitializer());
         moonlightCore.registerExpression(variableExpression);
 

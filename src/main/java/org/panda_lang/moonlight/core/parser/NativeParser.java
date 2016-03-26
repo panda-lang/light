@@ -3,7 +3,7 @@ package org.panda_lang.moonlight.core.parser;
 import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.PandaScript;
-import org.panda_lang.panda.core.Particle;
+import org.panda_lang.panda.core.Alice;
 import org.panda_lang.panda.core.parser.*;
 import org.panda_lang.panda.core.parser.util.match.parser.PatternExtractor;
 import org.panda_lang.panda.core.syntax.*;
@@ -55,8 +55,8 @@ public class NativeParser implements Parser {
 
         return new Runtime(null, new Executable() {
             @Override
-            public Essence run(Particle particle) {
-                return block.run(particle);
+            public Essence run(Alice alice) {
+                return block.run(alice);
             }
         }, null);
     }

@@ -23,7 +23,7 @@ public class MetricsCollector implements Runnable {
         global.addPlotter(new Metrics.Plotter("Scripts") {
             @Override
             public int getValue() {
-                return moonlight.getMoonlight().getScripts().size();
+                return moonlight.getMoonlightCore().getScripts().size();
             }
         });
         metrics.start();

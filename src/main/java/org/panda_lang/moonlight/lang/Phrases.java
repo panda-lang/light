@@ -3,9 +3,10 @@ package org.panda_lang.moonlight.lang;
 import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.moonlight.lang.phrase.*;
+import org.panda_lang.moonlight.util.MoonlightElements;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 
-public class Phrases {
+public class Phrases implements MoonlightElements {
 
     private final MoonlightCore moonlightCore;
 
@@ -13,7 +14,8 @@ public class Phrases {
         this.moonlightCore = moonlightCore;
     }
 
-    public void registerDefaultPhrases() {
+    @Override
+    public void registerDefaultElements() {
         PhraseRepresentation declarationPhrase = new PhraseRepresentation(new DeclarationPhrase());
         declarationPhrase.pattern("follow *");
         declarationPhrase.pattern("global *");

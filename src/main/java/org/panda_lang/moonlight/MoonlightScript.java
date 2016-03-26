@@ -1,11 +1,11 @@
 package org.panda_lang.moonlight;
 
+import net.dzikoysk.moonlight.lang.scope.CommandScope;
 import org.panda_lang.moonlight.core.Ray;
-import org.panda_lang.moonlight.lang.scope.CommandScope;
 import org.panda_lang.moonlight.lang.scope.EventScope;
 import org.panda_lang.moonlight.lang.scope.FunctionScope;
 import org.panda_lang.panda.PandaScript;
-import org.panda_lang.panda.core.Particle;
+import org.panda_lang.panda.core.Alice;
 import org.panda_lang.panda.core.memory.Memory;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
@@ -41,11 +41,12 @@ public class MoonlightScript extends PandaScript {
     }
 
     public void callEvent(EventScope eventScope, Object object) {
-        Particle particle = new Particle()
+        Ray ray = new Ray().scopeObject(object);
+        Alice alice = new Alice()
                 .pandaScript(this)
                 .memory(new Memory())
                 .custom(new Ray());
-        eventScope.run(particle, object);
+        eventScope.run(alice);
     }
 
     public Essence callFunction(String functionName, Factor... factors) {
@@ -54,13 +55,13 @@ public class MoonlightScript extends PandaScript {
             return null;
         }
 
-        Particle particle = new Particle()
+        Alice alice = new Alice()
                 .pandaScript(this)
                 .memory(new Memory())
                 .factors(factors)
                 .custom(new Ray());
 
-        return functionScope.run(particle);
+        return functionScope.run(alice);
     }
 
     public void registerEventBlock(EventScope eventScope) {

@@ -3,9 +3,10 @@ package org.panda_lang.moonlight.core;
 import org.panda_lang.moonlight.MoonlightScript;
 import org.panda_lang.moonlight.core.element.expression.ExpressionModule;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRuntime;
+import org.panda_lang.moonlight.core.element.scope.Scope;
 import org.panda_lang.moonlight.core.util.ModificationType;
 import org.panda_lang.moonlight.core.util.RepresentationInfo;
-import org.panda_lang.panda.core.Particle;
+import org.panda_lang.panda.core.Alice;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
@@ -14,11 +15,13 @@ import java.util.List;
 
 public class Ray {
 
-    private Particle particle;
+    private Alice alice;
     private MoonlightScript moonlightScript;
     private ExpressionModule expressionModule;
     private RepresentationInfo representationInfo;
     private HollowPattern pattern;
+    private Scope argumentScope;
+    private Object scopeObject;
     private Factor[] factors;
 
     public Ray() {
@@ -26,19 +29,9 @@ public class Ray {
         this.representationInfo = new RepresentationInfo();
     }
 
-    public Ray(Particle particle) {
+    public Ray(Alice alice) {
         this();
-        this.particle(particle);
-    }
-
-    public Ray particle(Particle particle) {
-        this.particle = particle;
-        if (factors != null) {
-            particle.setFactors(factors);
-        }
-
-        particle.setCustom(this);
-        return this;
+        this.particle(alice);
     }
 
     public Ray factors(Factor... factors) {
@@ -61,6 +54,26 @@ public class Ray {
         return this;
     }
 
+    public Ray scopeObject(Object scopeObject) {
+        this.scopeObject = scopeObject;
+        return this;
+    }
+
+    public Ray argumentScope(Scope argumentScope) {
+        this.argumentScope = argumentScope;
+        return this;
+    }
+
+    public Ray particle(Alice alice) {
+        this.alice = alice;
+        if (factors != null) {
+            alice.setFactors(factors);
+        }
+
+        alice.setCustom(this);
+        return this;
+    }
+
     @SuppressWarnings("unchecked")
     public <T> T getDefaultExpressionValue(int index) {
         ExpressionRuntime expressionRuntime = getExpressionRuntimes().get(index);
@@ -68,15 +81,23 @@ public class Ray {
             return null;
         }
 
-        particle.setCustom(this);
-        return (T) expressionRuntime.run(particle);
+        alice.setCustom(this);
+        return (T) expressionRuntime.run(alice);
     }
 
     @SuppressWarnings("unchecked")
     public <T> T getExpressionValue(int index) {
         Essence essence = getDefaultExpressionValue(index);
-        Object object = essence.getJavaValue();
+        Object object = essence != null ? essence.getJavaValue() : null;
         return (T) object;
+    }
+
+    public Scope getArgumentScope() {
+        return argumentScope;
+    }
+
+    public Object getScopeObject() {
+        return scopeObject;
     }
 
     public ModificationType getModificationType() {
@@ -107,8 +128,8 @@ public class Ray {
         return moonlightScript;
     }
 
-    public Particle getParticle() {
-        return particle;
+    public Alice getAlice() {
+        return alice;
     }
 
 }

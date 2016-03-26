@@ -7,20 +7,20 @@ import org.panda_lang.moonlight.core.element.scope.Scope;
 import org.panda_lang.moonlight.core.element.scope.ScopeInitializer;
 import org.panda_lang.moonlight.core.element.scope.ScopeRepresentation;
 import org.panda_lang.moonlight.lang.scope.*;
+import org.panda_lang.moonlight.util.MoonlightElements;
 import org.panda_lang.panda.core.syntax.Block;
 
-public class Scopes {
+public class Scopes implements MoonlightElements {
 
-    private final MoonlightCore moonlight;
     private final MoonlightCore moonlightCore;
 
     public Scopes(MoonlightCore moonlightCore) {
-        this.moonlight = moonlightCore;
         this.moonlightCore = moonlightCore;
     }
 
+    @Override
     public void registerDefaultElements() {
-        ScopeRepresentation ifThenScope = new ScopeRepresentation("if", IfThenScope.class, moonlight);
+        ScopeRepresentation ifThenScope = new ScopeRepresentation("if", IfThenScope.class, moonlightCore);
         ifThenScope.initializer(new ScopeInitializer() {
             @Override
             public Scope initialize(Flash flash) {
@@ -29,9 +29,9 @@ public class Scopes {
                 return new IfThenScope(condition.toFactor());
             }
         });
-        moonlight.registerScope(ifThenScope);
+        moonlightCore.registerScope(ifThenScope);
 
-        ScopeRepresentation elseThenScope = new ScopeRepresentation("else", ElseThenScope.class, moonlight);
+        ScopeRepresentation elseThenScope = new ScopeRepresentation("else", ElseThenScope.class, moonlightCore);
         elseThenScope.initializer(new ScopeInitializer() {
             @Override
             public Scope initialize(Flash flash) {
@@ -44,9 +44,9 @@ public class Scopes {
             }
         });
         elseThenScope.getBlockLayout().conventional(false);
-        moonlight.registerScope(elseThenScope);
+        moonlightCore.registerScope(elseThenScope);
 
-        ScopeRepresentation loopScope = new ScopeRepresentation("loop", LoopScope.class, moonlight);
+        ScopeRepresentation loopScope = new ScopeRepresentation("loop", LoopScope.class, moonlightCore);
         loopScope.initializer(new ScopeInitializer() {
             @Override
             public Scope initialize(Flash flash) {
@@ -55,9 +55,9 @@ public class Scopes {
                 return new LoopScope(count.toFactor());
             }
         });
-        moonlight.registerScope(loopScope);
+        moonlightCore.registerScope(loopScope);
 
-        ScopeRepresentation whileScope = new ScopeRepresentation("while", WhileScope.class, moonlight);
+        ScopeRepresentation whileScope = new ScopeRepresentation("while", WhileScope.class, moonlightCore);
         whileScope.initializer(new ScopeInitializer() {
             @Override
             public Scope initialize(Flash flash) {
@@ -66,9 +66,9 @@ public class Scopes {
                 return new WhileScope(condition.toFactor());
             }
         });
-        moonlight.registerScope(whileScope);
+        moonlightCore.registerScope(whileScope);
 
-        ScopeRepresentation functionScope = new ScopeRepresentation("function", FunctionScope.class, moonlight);
+        ScopeRepresentation functionScope = new ScopeRepresentation("function", FunctionScope.class, moonlightCore);
         functionScope.initializer(new ScopeInitializer() {
             @Override
             public Scope initialize(Flash flash) {
@@ -76,19 +76,9 @@ public class Scopes {
                 return new FunctionScope(functionName);
             }
         });
-        moonlight.registerScope(functionScope);
+        moonlightCore.registerScope(functionScope);
 
-        ScopeRepresentation commandScope = new ScopeRepresentation("command", CommandScope.class, moonlight);
-        commandScope.initializer(new ScopeInitializer() {
-            @Override
-            public Scope initialize(Flash flash) {
-                String commandName = flash.getSpecifiers().get(0);
-                return new CommandScope(commandName);
-            }
-        });
-        moonlight.registerScope(commandScope);
-
-        ScopeRepresentation eventScope = new ScopeRepresentation(moonlight, EventScope.class, "on", "event");
+        ScopeRepresentation eventScope = new ScopeRepresentation(moonlightCore, EventScope.class, "on", "util");
         eventScope.initializer(new ScopeInitializer() {
             @Override
             public Scope initialize(Flash flash) {
@@ -96,11 +86,7 @@ public class Scopes {
                 return new EventScope(eventName);
             }
         });
-        moonlight.registerScope(eventScope);
-    }
-
-    public MoonlightCore getMoonlightCore() {
-        return moonlightCore;
+        moonlightCore.registerScope(eventScope);
     }
 
 }

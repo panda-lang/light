@@ -75,12 +75,12 @@ function pandaInfo {
   - [x] Assistant
   - [x] Others
   - [x] API
-- [ ] Arguments
+- [x] Arguments
   - [x] Classes
-  - [ ] Parser
-  - [ ] Assistant
-  - [ ] Others
-  - [ ] API
+  - [x] Parser
+  - [x] Assistant
+  - [x] Others
+  - [x] API
 - [x] Structures
   - [x] Classes
   - [x] API
@@ -97,7 +97,7 @@ function pandaInfo {
   - [x] Events
   - [x] Commands
   - [x] Functions
-  - [ ] Arguments
+  - [x] Arguments
   - [x] Structures
 - [ ] Libraries
 - [ ] Repositories

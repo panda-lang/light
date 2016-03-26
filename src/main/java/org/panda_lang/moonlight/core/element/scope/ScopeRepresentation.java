@@ -2,6 +2,7 @@ package org.panda_lang.moonlight.core.element.scope;
 
 import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.Flash;
+import org.panda_lang.moonlight.core.element.argument.ArgumentInitializer;
 import org.panda_lang.moonlight.core.element.argument.ArgumentRepresentation;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.essential.util.BlockInitializer;
@@ -30,16 +31,24 @@ public class ScopeRepresentation {
     }
 
     public ScopeRepresentation initializer(final ScopeInitializer scopeInitializer) {
+        final ScopeRepresentation scopeRepresentation = this;
         blockLayout.initializer(new BlockInitializer() {
             @Override
             public Block initialize(Atom atom) {
                 Flash flash = new Flash(moonlight, atom);
                 Scope scope = scopeInitializer.initialize(flash);
-
+                scope.initializeScopeRepresentation(scopeRepresentation);
                 return scope;
             }
         });
         return this;
+    }
+
+    public ScopeRepresentation registerArgument(String pattern, ArgumentInitializer argumentInitializer) {
+        ArgumentRepresentation argumentRepresentation = new ArgumentRepresentation();
+        argumentRepresentation.pattern(pattern);
+        argumentRepresentation.initializer(argumentInitializer);
+        return registerArgument(argumentRepresentation);
     }
 
     public ScopeRepresentation registerArgument(ArgumentRepresentation argumentRepresentation) {

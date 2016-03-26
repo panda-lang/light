@@ -1,7 +1,7 @@
 package org.panda_lang.moonlight.lang.scope;
 
 import org.panda_lang.moonlight.core.element.scope.Scope;
-import org.panda_lang.panda.core.Particle;
+import org.panda_lang.panda.core.Alice;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
 import org.panda_lang.panda.lang.BooleanEssence;
@@ -16,12 +16,12 @@ public class IfThenScope extends Scope {
     }
 
     @Override
-    public Essence run(Particle particle) {
-        if (factor.<BooleanEssence> getValue(particle).isTrue()) {
-            return super.run(particle);
+    public Essence run(Alice alice) {
+        if (factor.<BooleanEssence> getValue(alice).isTrue()) {
+            return super.run(alice);
         }
         else if (elseThenScope != null) {
-            elseThenScope.run(particle);
+            elseThenScope.run(alice);
         }
         return null;
     }

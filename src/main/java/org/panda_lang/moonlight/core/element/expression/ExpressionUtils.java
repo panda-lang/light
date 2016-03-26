@@ -10,6 +10,9 @@ public class ExpressionUtils {
     public static Factor[] toFactors(Collection<ExpressionRuntime> expressionRuntimes) {
         Collection<Factor> factorCollection = new ArrayList<>(expressionRuntimes.size());
         for (ExpressionRuntime expressionRuntime : expressionRuntimes) {
+            if (expressionRuntime == null) {
+                continue;
+            }
             factorCollection.add(expressionRuntime.toFactor());
         }
 

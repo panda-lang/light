@@ -1,7 +1,7 @@
 package org.panda_lang.moonlight.core.element.expression;
 
 import org.panda_lang.moonlight.core.Ray;
-import org.panda_lang.panda.core.Particle;
+import org.panda_lang.panda.core.Alice;
 import org.panda_lang.panda.core.syntax.Essence;
 import org.panda_lang.panda.core.syntax.Factor;
 import org.panda_lang.panda.core.syntax.Runtime;
@@ -22,12 +22,12 @@ public class ExpressionRuntime extends Runtime {
     }
 
     @Override
-    public Essence run(Particle particle) {
+    public Essence run(Alice alice) {
         if (ray == null) {
             ray = new Ray();
         }
 
-        ray.particle(particle);
+        ray.particle(alice);
         return run(ray);
     }
 
@@ -43,7 +43,7 @@ public class ExpressionRuntime extends Runtime {
     }
 
     public Essence getFactorValue(Ray ray) {
-        return factor.getValue(ray.getParticle());
+        return factor.getValue(ray.getAlice());
     }
 
     public Essence getExpressionValue(Ray ray) {

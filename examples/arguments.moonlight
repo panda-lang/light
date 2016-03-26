@@ -1,9 +1,18 @@
+// Event 'on load' called when the script starts
 on load {
 
-    send arg-object to console;
+    // Initialize benchmark
+    initialize benchmark
 
-    loop 100 {
-        send loop-index to console;
+    // Loop 1000 times
+    loop 10000 times {
+        // Display current index of the loop
+        send loop-index to console
+
+        // Point
+        benchmark point
     }
 
+    // Stop benchmark and display result in console
+    stop benchmark
 }
