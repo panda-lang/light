@@ -8,11 +8,14 @@ public class FunctionPhrase implements Phrase {
 
     @Override
     public void run(Ray ray) {
+        final String functionName = ray.getHollows().get(0);
+
         if (ray.getPattern().getIndex() == 0) {
             ArrayEssence arrayEssence = ray.getExpressionValue(0);
-
+            // todo
         }
-        ray.getMoonlightScript().callFunction(ray.getHollows().get(0), ray.getFactors());
+
+        ray.getMoonlightScript().callFunction(functionName, ray.getFactors());
     }
 
 }

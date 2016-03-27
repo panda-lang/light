@@ -30,7 +30,7 @@ on load {
     // Loop once
     loop 1 time {
         // Call function named 'pandaInfo'
-        call "pandaInfo"
+        call pandaInfo
     }
 
     // Set <int> variable to 0
