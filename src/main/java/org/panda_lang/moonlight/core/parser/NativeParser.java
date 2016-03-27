@@ -4,11 +4,14 @@ import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.PandaScript;
 import org.panda_lang.panda.core.Alice;
+import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.statement.Executable;
+import org.panda_lang.panda.core.statement.util.NamedExecutable;
 import org.panda_lang.panda.core.parser.*;
 import org.panda_lang.panda.core.parser.util.match.parser.PatternExtractor;
-import org.panda_lang.panda.core.syntax.*;
-import org.panda_lang.panda.core.syntax.Runtime;
-import org.panda_lang.panda.core.syntax.block.PandaBlock;
+import org.panda_lang.panda.core.statement.*;
+import org.panda_lang.panda.core.statement.Runtime;
+import org.panda_lang.panda.core.statement.block.PandaBlock;
 
 public class NativeParser implements Parser {
 

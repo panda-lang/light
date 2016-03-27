@@ -8,7 +8,7 @@ import org.panda_lang.moonlight.core.element.Structure;
 import org.panda_lang.moonlight.core.element.expression.Expression;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.moonlight.core.memory.database.util.DataSerializer;
-import org.panda_lang.panda.core.syntax.Essence;
+import org.panda_lang.panda.core.Essence;
 import org.panda_lang.panda.lang.StringEssence;
 
 import java.io.IOException;

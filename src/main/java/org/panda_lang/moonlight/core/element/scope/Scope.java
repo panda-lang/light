@@ -3,8 +3,8 @@ package org.panda_lang.moonlight.core.element.scope;
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.argument.ArgumentRepresentation;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.syntax.Block;
-import org.panda_lang.panda.core.syntax.Essence;
+import org.panda_lang.panda.core.statement.Block;
+import org.panda_lang.panda.core.Essence;
 
 public class Scope extends Block {
 

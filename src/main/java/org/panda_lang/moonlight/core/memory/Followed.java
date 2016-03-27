@@ -3,7 +3,7 @@ package org.panda_lang.moonlight.core.memory;
 import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.panda.core.memory.Global;
 import org.panda_lang.panda.core.memory.MemoryFollower;
-import org.panda_lang.panda.core.syntax.Essence;
+import org.panda_lang.panda.core.Essence;
 
 import java.io.IOException;
 

@@ -1,6 +1,6 @@
 package org.panda_lang.moonlight.core.element.expression;
 
-import org.panda_lang.panda.core.syntax.Factor;
+import org.panda_lang.panda.core.statement.Factor;
 
 import java.util.ArrayList;
 import java.util.Collection;

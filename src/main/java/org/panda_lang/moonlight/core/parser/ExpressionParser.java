@@ -10,8 +10,8 @@ import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.essential.EssenceParser;
 import org.panda_lang.panda.core.parser.essential.RuntimeParser;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
-import org.panda_lang.panda.core.syntax.Essence;
-import org.panda_lang.panda.core.syntax.Factor;
+import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.statement.Factor;
 
 import java.util.ArrayList;
 import java.util.Collection;

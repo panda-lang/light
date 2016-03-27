@@ -4,7 +4,7 @@ import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.expression.Expression;
 import org.panda_lang.moonlight.core.util.Modification;
 import org.panda_lang.panda.core.memory.Memory;
-import org.panda_lang.panda.core.syntax.Essence;
+import org.panda_lang.panda.core.Essence;
 
 public class VariableExpression extends Expression {
 

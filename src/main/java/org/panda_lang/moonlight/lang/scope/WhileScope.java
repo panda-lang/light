@@ -2,8 +2,8 @@ package org.panda_lang.moonlight.lang.scope;
 
 import org.panda_lang.moonlight.core.element.scope.Scope;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.syntax.Essence;
-import org.panda_lang.panda.core.syntax.Factor;
+import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.statement.Factor;
 import org.panda_lang.panda.lang.BooleanEssence;
 
 public class WhileScope extends Scope {

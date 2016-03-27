@@ -4,9 +4,9 @@ import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRuntime;
 import org.panda_lang.moonlight.core.element.phrase.Phrase;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.syntax.Block;
-import org.panda_lang.panda.core.syntax.Factor;
-import org.panda_lang.panda.core.syntax.Return;
+import org.panda_lang.panda.core.statement.Block;
+import org.panda_lang.panda.core.statement.Factor;
+import org.panda_lang.panda.core.statement.Return;
 
 public class ReturnPhrase implements Phrase {
 

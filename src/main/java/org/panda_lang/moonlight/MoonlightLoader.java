@@ -8,7 +8,7 @@ import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.PandaParser;
 import org.panda_lang.panda.core.parser.util.Injection;
-import org.panda_lang.panda.core.syntax.NamedExecutable;
+import org.panda_lang.panda.core.statement.util.NamedExecutable;
 import org.panda_lang.panda.util.IOUtils;
 
 import java.io.File;

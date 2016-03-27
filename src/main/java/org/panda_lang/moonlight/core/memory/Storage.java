@@ -7,7 +7,7 @@ import org.panda_lang.moonlight.core.memory.database.Database;
 import org.panda_lang.moonlight.core.memory.database.DatabaseRecord;
 import org.panda_lang.moonlight.core.memory.database.util.DataSerializer;
 import org.panda_lang.panda.core.memory.Global;
-import org.panda_lang.panda.core.syntax.Essence;
+import org.panda_lang.panda.core.Essence;
 
 import java.io.*;
 

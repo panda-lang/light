@@ -2,9 +2,9 @@ package org.panda_lang.moonlight.core.element.expression;
 
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.syntax.Essence;
-import org.panda_lang.panda.core.syntax.Factor;
-import org.panda_lang.panda.core.syntax.Runtime;
+import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.statement.Factor;
+import org.panda_lang.panda.core.statement.Runtime;
 
 public class ExpressionRuntime extends Runtime {
 

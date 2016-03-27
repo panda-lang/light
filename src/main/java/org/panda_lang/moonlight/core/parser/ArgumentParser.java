@@ -10,7 +10,7 @@ import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.PandaException;
 import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
-import org.panda_lang.panda.core.syntax.Block;
+import org.panda_lang.panda.core.statement.Block;
 
 public class ArgumentParser implements Parser {
 

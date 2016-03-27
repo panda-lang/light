@@ -9,7 +9,7 @@ import org.panda_lang.moonlight.core.element.scope.ScopeRepresentation;
 import org.panda_lang.moonlight.lang.scope.*;
 import org.panda_lang.moonlight.lang.scope.event.EventUnit;
 import org.panda_lang.moonlight.util.MoonlightElements;
-import org.panda_lang.panda.core.syntax.Block;
+import org.panda_lang.panda.core.statement.Block;
 
 public class Scopes implements MoonlightElements {
 

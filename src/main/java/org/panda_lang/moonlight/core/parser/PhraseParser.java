@@ -8,15 +8,13 @@ import org.panda_lang.moonlight.core.element.expression.ExpressionUtils;
 import org.panda_lang.moonlight.core.element.phrase.Phrase;
 import org.panda_lang.moonlight.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.panda.core.Alice;
+import org.panda_lang.panda.core.Essence;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.ParserLayout;
-import org.panda_lang.panda.core.parser.util.SimplifiedNamedExecutable;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
-import org.panda_lang.panda.core.syntax.Essence;
-import org.panda_lang.panda.core.syntax.Executable;
-import org.panda_lang.panda.core.syntax.Factor;
-import org.panda_lang.panda.core.syntax.NamedExecutable;
+import org.panda_lang.panda.core.statement.Executable;
+import org.panda_lang.panda.core.statement.Factor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +34,7 @@ public class PhraseParser implements Parser {
         moonlightCore.registerParser(parserLayout);
     }
 
-    public NamedExecutable parse(Atom atom) {
+    public Executable parse(Atom atom) {
         String phraseSource = atom.getSourcesDivider().getLine().trim();
         phraseSource = phraseSource.substring(0, phraseSource.length() - 1);
 
@@ -63,14 +61,14 @@ public class PhraseParser implements Parser {
                         expressions.add(expressionRuntime);
                     }
 
-                    return new SimplifiedNamedExecutable(new Executable() {
+                    return new Executable() {
                         @Override
                         public Essence run(Alice alice) {
                             ray.particle(alice);
                             phrase.run(ray);
                             return null;
                         }
-                    });
+                    };
                 }
             }
         }
