@@ -4,7 +4,6 @@ import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.moonlight.lang.phrase.*;
 import org.panda_lang.moonlight.util.MoonlightElements;
-import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 
 public class Phrases implements MoonlightElements {
 
@@ -22,17 +21,14 @@ public class Phrases implements MoonlightElements {
         moonlightCore.registerPhrase(declarationPhrase);
 
         PhraseRepresentation functionPhrase = new PhraseRepresentation(new FunctionPhrase());
-        functionPhrase.pattern(HollowPattern.builder()
-                .basis("call")
-                .hollow()
-                .basis("with")
-                .hollow()
-                .build(0));
-        functionPhrase.pattern(HollowPattern.builder()
-                .basis("call")
-                .hollow()
-                .build(1));
+        functionPhrase.pattern("call * with *");
+        functionPhrase.pattern("call *");
+        functionPhrase.disableTranslation(1);
         moonlightCore.registerPhrase(functionPhrase);
+
+        PhraseRepresentation returnPhrase = new PhraseRepresentation(new ReturnPhrase());
+        returnPhrase.pattern("return *");
+        moonlightCore.registerPhrase(returnPhrase);
 
         PhraseRepresentation modificationPhrase = new PhraseRepresentation(new ModificationPhrase());
         modificationPhrase.pattern("add * to *");

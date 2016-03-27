@@ -20,26 +20,22 @@ public class Ray {
     private ExpressionModule expressionModule;
     private RepresentationInfo representationInfo;
     private HollowPattern pattern;
+    private List<String> hollows;
     private Scope argumentScope;
     private Object scopeObject;
     private Factor[] factors;
-
-    public Ray() {
-        this.expressionModule = new ExpressionModule();
-        this.representationInfo = new RepresentationInfo();
-    }
 
     public Ray(Alice alice) {
         this();
         this.particle(alice);
     }
 
-    public Ray factors(Factor... factors) {
-        this.factors = factors;
-        return this;
+    public Ray() {
+        this.expressionModule = new ExpressionModule();
+        this.representationInfo = new RepresentationInfo();
     }
 
-    public Ray lightScript(MoonlightScript moonlightScript) {
+    public Ray script(MoonlightScript moonlightScript) {
         this.moonlightScript = moonlightScript;
         return this;
     }
@@ -53,6 +49,10 @@ public class Ray {
         expressionModule.setExpressionRuntimes(expressionRuntimes);
         return this;
     }
+    public Ray hollows(List<String> hollows) {
+        this.hollows = hollows;
+        return this;
+    }
 
     public Ray scopeObject(Object scopeObject) {
         this.scopeObject = scopeObject;
@@ -61,6 +61,14 @@ public class Ray {
 
     public Ray argumentScope(Scope argumentScope) {
         this.argumentScope = argumentScope;
+        return this;
+    }
+
+    public Ray factors(Factor... factors) {
+        this.factors = factors;
+        if (alice != null) {
+            alice.factors(factors);
+        }
         return this;
     }
 
@@ -90,6 +98,10 @@ public class Ray {
         Essence essence = getDefaultExpressionValue(index);
         Object object = essence != null ? essence.getJavaValue() : null;
         return (T) object;
+    }
+
+    public List<String> getHollows() {
+        return hollows;
     }
 
     public Scope getArgumentScope() {

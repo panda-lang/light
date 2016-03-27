@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.argument.ArgumentInitializer;
-import org.panda_lang.moonlight.core.element.scope.ScopeUnit;
+import org.panda_lang.moonlight.lang.scope.event.EventUnit;
 
 public class BukkitEvents implements BukkitElements {
 
@@ -20,8 +20,8 @@ public class BukkitEvents implements BukkitElements {
 
     @Override
     public void registerBukkitElements() {
-        ScopeUnit joinScopeUnit = moonlight.registerEvent(PlayerJoinEvent.class, "join");
-        joinScopeUnit.registerArgument("player", new ArgumentInitializer<PlayerJoinEvent>() {
+        EventUnit joinEventUnit = moonlight.registerEvent(PlayerJoinEvent.class, "join");
+        joinEventUnit.registerArgument("player", new ArgumentInitializer<PlayerJoinEvent>() {
             @Override
             public Object get(Ray ray, PlayerJoinEvent event) {
                 return event.getPlayer();

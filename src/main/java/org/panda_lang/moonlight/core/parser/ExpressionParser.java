@@ -39,7 +39,7 @@ public class ExpressionParser implements Parser {
 
                     final Expression expression = expressionRepresentation.getExpression();
                     final Ray ray = new Ray()
-                            .lightScript((MoonlightScript) atom.getPandaScript())
+                            .script((MoonlightScript) atom.getPandaScript())
                             .pattern(pattern)
                             .expressionRuntimes(expressions)
                             .factors(factors);
@@ -83,6 +83,9 @@ public class ExpressionParser implements Parser {
     }
 
     public ExpressionRuntime parse(Atom atom, String expression) {
+        if (expression == null || expression.isEmpty()) {
+            return null;
+        }
         atom.setSourceCode(expression);
         return parse(atom);
     }
@@ -90,6 +93,9 @@ public class ExpressionParser implements Parser {
     public List<ExpressionRuntime> parse(Atom atom, Collection<String> expressions) {
         List<ExpressionRuntime> executables = new ArrayList<>(expressions.size());
         for (String expression : expressions) {
+            if (expression == null || expression.isEmpty()) {
+                continue;
+            }
             ExpressionRuntime namedExecutable = parse(atom, expression);
             executables.add(namedExecutable);
         }

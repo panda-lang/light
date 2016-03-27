@@ -9,15 +9,10 @@ import org.panda_lang.panda.core.syntax.Essence;
 public class Scope extends Block {
 
     protected ScopeRepresentation scopeRepresentation;
-    protected ScopeUnit scopeUnit;
     protected Object object;
 
     public void initializeScopeRepresentation(ScopeRepresentation scopeRepresentation) {
         this.scopeRepresentation = scopeRepresentation;
-    }
-
-    public void initializeArguments(ScopeUnit scopeUnit) {
-        this.scopeUnit = scopeUnit;
     }
 
     @Override
@@ -33,10 +28,6 @@ public class Scope extends Block {
 
     public Object getObject() {
         return object;
-    }
-
-    public ScopeUnit getScopeUnit() {
-        return scopeUnit;
     }
 
     public ScopeRepresentation getScopeRepresentation() {

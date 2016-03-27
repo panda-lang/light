@@ -7,6 +7,7 @@ import org.panda_lang.moonlight.core.element.scope.Scope;
 import org.panda_lang.moonlight.core.element.scope.ScopeInitializer;
 import org.panda_lang.moonlight.core.element.scope.ScopeRepresentation;
 import org.panda_lang.moonlight.lang.scope.*;
+import org.panda_lang.moonlight.lang.scope.event.EventUnit;
 import org.panda_lang.moonlight.util.MoonlightElements;
 import org.panda_lang.panda.core.syntax.Block;
 
@@ -78,12 +79,13 @@ public class Scopes implements MoonlightElements {
         });
         moonlightCore.registerScope(functionScope);
 
-        ScopeRepresentation eventScope = new ScopeRepresentation(moonlightCore, EventScope.class, "on", "util");
+        ScopeRepresentation eventScope = new ScopeRepresentation(moonlightCore, EventScope.class, "on", "event");
         eventScope.initializer(new ScopeInitializer() {
             @Override
             public Scope initialize(Flash flash) {
                 String eventName = flash.getSpecifiers().get(0);
-                return new EventScope(eventName);
+                EventUnit eventUnit = moonlightCore.getEventCenter().getEventUnit(eventName);
+                return new EventScope(eventUnit);
             }
         });
         moonlightCore.registerScope(eventScope);

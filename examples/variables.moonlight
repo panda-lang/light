@@ -18,7 +18,7 @@ on load {
     set <local> to "Carpe diem"
 
     // Call function named 'test'
-    call "test"
+    call test
 }
 
 // Function 'test'

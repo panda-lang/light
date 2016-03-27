@@ -23,7 +23,7 @@ on load {
         }
 
         // Call function named 'pandaInfo'
-        call "pandaInfo"
+        call pandaInfo
 
         // Set <int> variable to 0
         set <int> to 0

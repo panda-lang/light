@@ -18,7 +18,7 @@ import org.panda_lang.panda.core.syntax.Executable;
 import org.panda_lang.panda.core.syntax.Factor;
 import org.panda_lang.panda.core.syntax.NamedExecutable;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PhraseParser implements Parser {
@@ -44,17 +44,24 @@ public class PhraseParser implements Parser {
             for (HollowPattern pattern : phraseRepresentation.getPatterns()) {
                 if (pattern.match(phraseSource)) {
 
-                    ExpressionParser expressionParser = new ExpressionParser(moonlightCore);
-                    Collection<String> hollows = pattern.getHollows();
-                    List<ExpressionRuntime> expressions = expressionParser.parse(atom, hollows);
-                    Factor[] factors = ExpressionUtils.toFactors(expressions);
+                    final ExpressionParser expressionParser = new ExpressionParser(moonlightCore);
+                    final List<String> hollows = pattern.getHollows();
+                    final List<ExpressionRuntime> expressions = new ArrayList<>(hollows.size() - phraseRepresentation.getRaw());
+                    final Factor[] factors = ExpressionUtils.toFactors(expressions);
 
                     final Phrase phrase = phraseRepresentation.getPhrase();
                     final Ray ray = new Ray()
-                            .lightScript((MoonlightScript) atom.getPandaScript())
+                            .script((MoonlightScript) atom.getPandaScript())
                             .pattern(pattern)
+                            .hollows(new ArrayList<>(hollows))
                             .expressionRuntimes(expressions)
                             .factors(factors);
+
+                    for (int i = phraseRepresentation.getRaw(); i < hollows.size(); i++) {
+                        String hollow = hollows.get(i);
+                        ExpressionRuntime expressionRuntime = expressionParser.parse(atom, hollow);
+                        expressions.add(expressionRuntime);
+                    }
 
                     return new SimplifiedNamedExecutable(new Executable() {
                         @Override

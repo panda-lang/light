@@ -13,6 +13,19 @@ on load {
         benchmark point
     }
 
+    // Call method 'result'
+    call result
+
     // Stop benchmark and display result in console
     stop benchmark
+}
+
+function result {
+    if true {
+        if true {
+            send "." to console
+            return
+        }
+    }
+    send "oops" to console
 }

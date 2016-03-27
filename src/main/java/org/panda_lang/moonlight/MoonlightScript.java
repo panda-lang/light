@@ -41,12 +41,8 @@ public class MoonlightScript extends PandaScript {
     }
 
     public void callEvent(EventScope eventScope, Object object) {
-        Ray ray = new Ray().scopeObject(object);
-        Alice alice = new Alice()
-                .pandaScript(this)
-                .memory(new Memory())
-                .custom(new Ray());
-        eventScope.run(alice);
+        Ray ray = getAssociatedRay().scopeObject(object);
+        eventScope.run(ray.getAlice());
     }
 
     public Essence callFunction(String functionName, Factor... factors) {
@@ -55,13 +51,8 @@ public class MoonlightScript extends PandaScript {
             return null;
         }
 
-        Alice alice = new Alice()
-                .pandaScript(this)
-                .memory(new Memory())
-                .factors(factors)
-                .custom(new Ray());
-
-        return functionScope.run(alice);
+        Ray ray = getAssociatedRay().factors(factors);
+        return functionScope.run(ray.getAlice());
     }
 
     public void registerEventBlock(EventScope eventScope) {
@@ -80,6 +71,11 @@ public class MoonlightScript extends PandaScript {
 
     public void registerFunctionBlock(FunctionScope functionScope) {
         functionBlockMap.put(functionScope.getFunctionName(), functionScope);
+    }
+
+    public Ray getAssociatedRay() {
+        Alice alice = new Alice(this, new Memory(), null, null);
+        return new Ray(alice);
     }
 
     public Map<String, CommandScope> getCommandBlockMap() {
