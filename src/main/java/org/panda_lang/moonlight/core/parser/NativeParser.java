@@ -58,8 +58,8 @@ public class NativeParser implements Parser {
 
         return new Runtime(null, new Executable() {
             @Override
-            public Essence run(Alice alice) {
-                return block.run(alice);
+            public Essence execute(Alice alice) {
+                return block.execute(alice);
             }
         }, null);
     }

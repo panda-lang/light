@@ -63,7 +63,7 @@ public class PhraseParser implements Parser {
 
                     return new Executable() {
                         @Override
-                        public Essence run(Alice alice) {
+                        public Essence execute(Alice alice) {
                             ray.particle(alice);
                             phrase.run(ray);
                             return null;

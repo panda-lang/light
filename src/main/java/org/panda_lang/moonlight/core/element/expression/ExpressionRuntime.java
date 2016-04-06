@@ -22,7 +22,7 @@ public class ExpressionRuntime extends Runtime {
     }
 
     @Override
-    public Essence run(Alice alice) {
+    public Essence execute(Alice alice) {
         if (ray == null) {
             ray = new Ray();
         }

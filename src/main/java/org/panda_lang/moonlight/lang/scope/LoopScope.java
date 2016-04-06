@@ -14,11 +14,11 @@ public class LoopScope extends Scope {
 
     public LoopScope(Factor factor) {
         this.factor = factor;
-        this.setName("loop::" + atomicInteger.incrementAndGet());
+        this.setName("loop::" + blockIDAssigner.incrementAndGet());
     }
 
     @Override
-    public Essence run(Alice alice) {
+    public Essence execute(Alice alice) {
         final Memory memory = alice.getMemory();
         final Cache cache = memory.getCache();
         final Numeric numeric = factor.getValue(alice);
@@ -26,7 +26,7 @@ public class LoopScope extends Scope {
 
         for (int i = 0; i < count; i++) {
             cache.slotA = i;
-            super.run(alice);
+            super.execute(alice);
         }
 
         return null;

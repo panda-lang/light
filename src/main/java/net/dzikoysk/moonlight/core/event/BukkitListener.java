@@ -28,7 +28,7 @@ public class BukkitListener implements Listener {
         new Ray(alice).scopeObject(event);
 
         for (EventScope eventScope : eventScopeCollection) {
-            eventScope.run(alice);
+            eventScope.execute(alice);
         }
     }
 

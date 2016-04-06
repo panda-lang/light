@@ -42,7 +42,7 @@ public class MoonlightScript extends PandaScript {
 
     public void callEvent(EventScope eventScope, Object object) {
         Ray ray = getAssociatedRay().scopeObject(object);
-        eventScope.run(ray.getAlice());
+        eventScope.execute(ray.getAlice());
     }
 
     public Essence callFunction(String functionName, Factor... factors) {
@@ -52,7 +52,7 @@ public class MoonlightScript extends PandaScript {
         }
 
         Ray ray = getAssociatedRay().factors(factors);
-        return functionScope.run(ray.getAlice());
+        return functionScope.execute(ray.getAlice());
     }
 
     public void registerEventBlock(EventScope eventScope) {

@@ -20,7 +20,7 @@ public class Representation<T> implements NamedExecutable {
     }
 
     @Override
-    public Essence run(Alice alice) {
+    public Essence execute(Alice alice) {
         return null;
     }
 

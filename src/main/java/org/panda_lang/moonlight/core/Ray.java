@@ -90,7 +90,7 @@ public class Ray {
         }
 
         alice.setCustom(this);
-        return (T) expressionRuntime.run(alice);
+        return (T) expressionRuntime.execute(alice);
     }
 
     @SuppressWarnings("unchecked")

@@ -12,13 +12,13 @@ public class WhileScope extends Scope {
 
     public WhileScope(Factor factor) {
         this.factor = factor;
-        this.setName("while::" + atomicInteger.incrementAndGet());
+        this.setName("while::" + blockIDAssigner.incrementAndGet());
     }
 
     @Override
-    public Essence run(Alice alice) {
+    public Essence execute(Alice alice) {
         while (factor.<BooleanEssence> getValue(alice).isTrue()) {
-            final Essence essence = super.run(alice);
+            final Essence essence = super.execute(alice);
             if (essence != null) {
                 return essence;
             }

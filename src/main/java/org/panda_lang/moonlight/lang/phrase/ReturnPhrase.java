@@ -23,7 +23,7 @@ public class ReturnPhrase implements Phrase {
         Factor factor = result != null ? result.toFactor() : null;
         Return returnElement = new Return(block, factor);
         block.addExecutable(returnElement);
-        block.run(alice);
+        block.execute(alice);
     }
 
 }

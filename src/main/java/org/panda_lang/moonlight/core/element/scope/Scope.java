@@ -16,10 +16,10 @@ public class Scope extends Block {
     }
 
     @Override
-    public Essence run(Alice alice) {
+    public Essence execute(Alice alice) {
         Ray ray = alice.getCustom();
         object = ray.getScopeObject();
-        return super.run(alice);
+        return super.execute(alice);
     }
 
     public boolean argumentBelongsToScope(ArgumentRepresentation argumentRepresentation) {
