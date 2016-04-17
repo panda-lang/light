@@ -18,7 +18,6 @@ public class ArgumentRepresentation extends Representation<Argument> {
 
     @SuppressWarnings("unchecked")
     public Object get(Ray ray) {
-        System.out.println(ray.getAlice() + " : " + ray + " : " + ray.getScopeObject());
         return argumentInitializer.get(ray, ray.getScopeObject());
     }
 

@@ -30,6 +30,16 @@ public abstract class Structure<T> extends Documentation implements Type<T> {
         expressionRepresentations.add(expressionRepresentation);
     }
 
+    public void registerRepresentations(MoonlightCore moonlightCore) {
+        moonlightCore.registerType(typeRepresentation);
+        for (PhraseRepresentation phraseRepresentation : phraseRepresentations) {
+            moonlightCore.registerPhrase(phraseRepresentation);
+        }
+        for (ExpressionRepresentation expressionRepresentation : expressionRepresentations) {
+            moonlightCore.registerExpression(expressionRepresentation);
+        }
+    }
+
     public Collection<ExpressionRepresentation> getExpressionRepresentations() {
         return expressionRepresentations;
     }

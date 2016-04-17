@@ -1,7 +1,6 @@
 package org.panda_lang.moonlight;
 
 import org.panda_lang.moonlight.core.element.Structure;
-import org.panda_lang.moonlight.core.element.StructureCenter;
 import org.panda_lang.moonlight.core.element.expression.ExpressionCenter;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.moonlight.core.element.phrase.PhraseCenter;
@@ -31,7 +30,6 @@ public class MoonlightCore {
     private final TypeCenter typeCenter;
     private final PhraseCenter phraseCenter;
     private final ExpressionCenter expressionCenter;
-    private final StructureCenter structureCenter;
     private final EventCenter eventCenter;
 
     public MoonlightCore() {
@@ -44,7 +42,6 @@ public class MoonlightCore {
         this.typeCenter = new TypeCenter();
         this.phraseCenter = new PhraseCenter();
         this.expressionCenter = new ExpressionCenter();
-        this.structureCenter = new StructureCenter();
         this.eventCenter = new EventCenter();
 
         this.variables = new Variables(this);
@@ -95,8 +92,8 @@ public class MoonlightCore {
     }
 
     public void registerStructure(Structure structure) {
-        structureCenter.registerElement(structure);
         structure.initialize(this);
+        structure.registerRepresentations(this);
     }
 
     public void initializeDefaultElements() {
@@ -105,10 +102,6 @@ public class MoonlightCore {
 
     public EventCenter getEventCenter() {
         return eventCenter;
-    }
-
-    public StructureCenter getStructureCenter() {
-        return structureCenter;
     }
 
     public ExpressionCenter getExpressionCenter() {

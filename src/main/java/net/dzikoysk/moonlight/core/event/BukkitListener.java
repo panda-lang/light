@@ -28,8 +28,6 @@ public class BukkitListener implements Listener, EventExecutor {
         Ray ray = new Ray(alice);
         ray.scopeObject(event);
 
-        System.out.println(alice + " : " + ray + " : " + event);
-
         for (EventScope eventScope : eventScopeCollection) {
             eventScope.execute(alice);
         }
