@@ -17,7 +17,7 @@ public class WhileScope extends Scope {
 
     @Override
     public Essence execute(Alice alice) {
-        while (factor.<BooleanEssence> getValue(alice).isTrue()) {
+        while (factor.<BooleanEssence>getValue(alice).isTrue()) {
             final Essence essence = super.execute(alice);
             if (essence != null) {
                 return essence;

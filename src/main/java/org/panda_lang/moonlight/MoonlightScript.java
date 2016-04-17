@@ -6,8 +6,8 @@ import org.panda_lang.moonlight.lang.scope.EventScope;
 import org.panda_lang.moonlight.lang.scope.FunctionScope;
 import org.panda_lang.panda.PandaScript;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.memory.Memory;
 import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.memory.Memory;
 import org.panda_lang.panda.core.statement.Factor;
 
 import java.util.ArrayList;

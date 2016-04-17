@@ -27,7 +27,7 @@ public class BenchmarkPhrase implements Phrase {
                 double averageMsTime = averageTime / 1000000.0;
                 double averageSecTime = averageMsTime / 1000.0;
 
-                System.out.println("Benchmark:");
+                System.out.println("Moonlight Benchmark:");
                 System.out.println("    Full: " + nsTime + "ns -> " + msTime + "ms -> " + secTime + " seconds");
                 System.out.println("    Average: " + averageTime + "ns -> " + averageMsTime + "ms -> " + averageSecTime + " seconds");
                 break;

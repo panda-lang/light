@@ -17,7 +17,7 @@ public class IfThenScope extends Scope {
 
     @Override
     public Essence execute(Alice alice) {
-        if (factor.<BooleanEssence> getValue(alice).isTrue()) {
+        if (factor.<BooleanEssence>getValue(alice).isTrue()) {
             return super.execute(alice);
         }
         else if (elseThenScope != null) {

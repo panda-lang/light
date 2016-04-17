@@ -1,9 +1,13 @@
 package net.dzikoysk.moonlight;
 
 import net.dzikoysk.moonlight.core.BukkitLoader;
+import net.dzikoysk.moonlight.core.event.BukkitEventsCenter;
+import org.panda_lang.moonlight.MoonlightCore;
+import org.panda_lang.moonlight.MoonlightScript;
 import org.panda_lang.moonlight.core.memory.Variables;
 
 import java.io.File;
+import java.util.Collection;
 
 public class MoonlightInitializer implements Runnable {
 
@@ -15,14 +19,24 @@ public class MoonlightInitializer implements Runnable {
 
     @Override
     public void run() {
-        Variables variables = moonlight.getMoonlightCore().getVariables();
+        MoonlightCore moonlightCore = moonlight.getMoonlightCore();
+
+        Variables variables = moonlightCore.getVariables();
         File variablesFile = new File(moonlight.getDataFolder(), "variables.db");
         variables.getFollowed().getStorage().initializeDatabase(variablesFile);
         variables.load();
 
         File scriptsDirectory = new File("scripts");
-        BukkitLoader bukkitLoader = new BukkitLoader(scriptsDirectory);
+        BukkitLoader bukkitLoader = new BukkitLoader(moonlight, scriptsDirectory);
         bukkitLoader.load();
+
+        BukkitEventsCenter bukkitEventsCenter = moonlight.getBukkitEventsCenter();
+        bukkitEventsCenter.registerListeners();
+
+        Collection<MoonlightScript> moonlightScripts = moonlightCore.getScripts();
+        for (MoonlightScript moonlightScript : moonlightScripts) {
+            moonlightScript.callEvent("load", null);
+        }
     }
 
     public Moonlight getMoonlight() {

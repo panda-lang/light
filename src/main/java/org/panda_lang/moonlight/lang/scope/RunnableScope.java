@@ -24,7 +24,7 @@ public class RunnableScope extends Scope {
                 String phrase = atom.getBlockInfo().getSpecifiersAsPhrase();
                 ExpressionParser expressionParser = new ExpressionParser(moonlight);
                 ExpressionRuntime condition = expressionParser.parse(atom, phrase);
-                String name = condition.run(new Ray()).toString();
+                String name = condition.get(new Ray()).toString();
                 return new RunnableScope(name);
             }
         });

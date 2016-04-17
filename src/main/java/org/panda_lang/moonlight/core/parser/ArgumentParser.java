@@ -6,6 +6,7 @@ import org.panda_lang.moonlight.core.element.expression.Expression;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRuntime;
 import org.panda_lang.moonlight.core.element.scope.Scope;
 import org.panda_lang.moonlight.core.element.scope.ScopeRepresentation;
+import org.panda_lang.moonlight.core.element.scope.ScopeUnit;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.PandaException;
 import org.panda_lang.panda.core.parser.Parser;
@@ -36,8 +37,9 @@ public class ArgumentParser implements Parser {
     public ExpressionRuntime parse(Atom atom, Scope scope) {
         String argumentSource = atom.getSourceCode();
         ScopeRepresentation scopeRepresentation = scope.getScopeRepresentation();
+        ScopeUnit scopeUnit = scopeRepresentation.getScopeUnit(scope);
 
-        for (final ArgumentRepresentation argumentRepresentation : scopeRepresentation.getArguments()) {
+        for (final ArgumentRepresentation argumentRepresentation : scopeUnit.getArgumentRepresentations()) {
             for (HollowPattern hollowPattern : argumentRepresentation.getPatterns()) {
                 if (hollowPattern.match(argumentSource)) {
 

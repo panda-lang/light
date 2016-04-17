@@ -7,8 +7,8 @@ import org.panda_lang.moonlight.core.element.scope.Scope;
 import org.panda_lang.moonlight.core.util.ModificationType;
 import org.panda_lang.moonlight.core.util.RepresentationInfo;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.statement.Factor;
 
 import java.util.List;
@@ -49,6 +49,7 @@ public class Ray {
         expressionModule.setExpressionRuntimes(expressionRuntimes);
         return this;
     }
+
     public Ray hollows(List<String> hollows) {
         this.hollows = hollows;
         return this;

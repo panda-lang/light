@@ -2,27 +2,27 @@ package org.panda_lang.moonlight.lang.scope;
 
 import org.panda_lang.moonlight.core.element.argument.ArgumentRepresentation;
 import org.panda_lang.moonlight.core.element.scope.Scope;
-import org.panda_lang.moonlight.lang.scope.event.EventUnit;
+import org.panda_lang.moonlight.core.element.scope.ScopeUnit;
 
 public class EventScope extends Scope {
 
-    private final EventUnit eventUnit;
+    private final ScopeUnit scopeUnit;
 
-    public EventScope(EventUnit eventUnit) {
-        this.eventUnit = eventUnit;
+    public EventScope(ScopeUnit scopeUnit) {
+        this.scopeUnit = scopeUnit;
     }
 
     @Override
     public boolean argumentBelongsToScope(ArgumentRepresentation argumentRepresentation) {
-        return eventUnit.contains(argumentRepresentation);
+        return scopeUnit.contains(argumentRepresentation);
     }
 
     public String getEventName() {
-        return eventUnit.getEventName();
+        return scopeUnit.getEventName();
     }
 
-    public EventUnit getEventUnit() {
-        return eventUnit;
+    public ScopeUnit getScopeUnit() {
+        return scopeUnit;
     }
 
     @Override

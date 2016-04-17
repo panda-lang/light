@@ -14,7 +14,7 @@ public class ExampleTest {
         variables.getFollowed().getStorage().initializeDatabase(new File("database"));
         variables.load();
 
-        File script = new File("examples/arguments.moonlight");
+        File script = new File("examples/native.moonlight");
         MoonlightScript moonlightScript = moonlight.getMoonlightLoader().load(script);
 
         moonlightScript.callEvent("load", null);

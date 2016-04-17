@@ -8,9 +8,9 @@ import org.panda_lang.panda.core.statement.Runtime;
 
 public class ExpressionRuntime extends Runtime {
 
-    private Expression expression;
-    private Factor factor;
-    private Ray ray;
+    protected Expression expression;
+    protected Factor factor;
+    protected Ray ray;
 
     public ExpressionRuntime(Factor factor) {
         this.factor = factor;
@@ -24,14 +24,18 @@ public class ExpressionRuntime extends Runtime {
     @Override
     public Essence execute(Alice alice) {
         if (ray == null) {
-            ray = new Ray();
+            if (alice.getCustom() != null) {
+                ray = alice.getCustom();
+            }
+            else {
+                ray = new Ray();
+            }
         }
-
         ray.particle(alice);
-        return run(ray);
+        return get(ray);
     }
 
-    public Essence run(Ray ray) {
+    public Essence get(Ray ray) {
         if (expression != null) {
             return getExpressionValue(ray);
         }

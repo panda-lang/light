@@ -66,8 +66,10 @@ public class Database {
 
     public void save() throws Exception {
         if (!file.exists()) {
+            file.getParentFile().mkdirs();
             file.createNewFile();
         }
+
         try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
             for (Map.Entry<String, DatabaseRecord> entry : records.entrySet()) {
                 byte[] data = entry.getValue().getData();

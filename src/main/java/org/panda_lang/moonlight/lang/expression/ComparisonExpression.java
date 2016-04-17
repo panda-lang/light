@@ -2,9 +2,9 @@ package org.panda_lang.moonlight.lang.expression;
 
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.expression.Expression;
+import org.panda_lang.panda.core.Essence;
 import org.panda_lang.panda.core.parser.essential.util.Numeric;
 import org.panda_lang.panda.core.parser.essential.util.NumericUtils;
-import org.panda_lang.panda.core.Essence;
 import org.panda_lang.panda.lang.BooleanEssence;
 
 public class ComparisonExpression extends Expression {

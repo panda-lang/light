@@ -1,30 +1,32 @@
 package org.panda_lang.moonlight.lang.scope.event;
 
+import org.panda_lang.moonlight.core.element.scope.ScopeUnit;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class EventCenter {
 
-    private final Map<String, EventUnit> eventUnitMap;
+    private final Map<String, ScopeUnit> eventUnitMap;
 
     public EventCenter() {
         this.eventUnitMap = new HashMap<>();
     }
 
-    public EventUnit addEventUnit(EventUnit eventUnit) {
-        return eventUnitMap.put(eventUnit.getEventName(), eventUnit);
+    public ScopeUnit addEventUnit(ScopeUnit scopeUnit) {
+        return eventUnitMap.put(scopeUnit.getEventName(), scopeUnit);
     }
 
-    public EventUnit getEventUnit(String eventName) {
-        EventUnit eventUnit = eventUnitMap.get(eventName);
-        if (eventUnit == null) {
-            eventUnit = new EventUnit(eventName);
-            addEventUnit(eventUnit);
+    public ScopeUnit getEventUnit(String eventName) {
+        ScopeUnit scopeUnit = eventUnitMap.get(eventName);
+        if (scopeUnit == null) {
+            scopeUnit = new ScopeUnit(eventName);
+            addEventUnit(scopeUnit);
         }
-        return eventUnit;
+        return scopeUnit;
     }
 
-    public Map<String, EventUnit> getEventUnitMap() {
+    public Map<String, ScopeUnit> getEventUnitMap() {
         return eventUnitMap;
     }
 

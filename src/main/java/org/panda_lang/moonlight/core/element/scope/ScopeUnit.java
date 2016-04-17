@@ -1,4 +1,4 @@
-package org.panda_lang.moonlight.lang.scope.event;
+package org.panda_lang.moonlight.core.element.scope;
 
 import org.panda_lang.moonlight.core.element.argument.ArgumentInitializer;
 import org.panda_lang.moonlight.core.element.argument.ArgumentRepresentation;
@@ -6,18 +6,19 @@ import org.panda_lang.moonlight.core.element.argument.ArgumentRepresentation;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class EventUnit {
+public class ScopeUnit {
 
     private final String eventName;
     private final Collection<ArgumentRepresentation> argumentRepresentations;
 
-    public EventUnit(String eventName) {
+    public ScopeUnit(String eventName) {
         this.eventName = eventName;
         this.argumentRepresentations = new ArrayList<>();
     }
 
     public void registerArgument(String pattern, ArgumentInitializer argumentInitializer) {
         ArgumentRepresentation argumentRepresentation = new ArgumentRepresentation();
+        argumentRepresentation.name(pattern);
         argumentRepresentation.pattern(pattern);
         argumentRepresentation.initializer(argumentInitializer);
         registerArgument(argumentRepresentation);
@@ -42,6 +43,14 @@ public class EventUnit {
 
     public String getEventName() {
         return eventName;
+    }
+
+    @Override
+    public String toString() {
+        return "ScopeUnit{" +
+                "eventName='" + eventName + '\'' +
+                ", argumentRepresentations=" + argumentRepresentations +
+                '}';
     }
 
 }

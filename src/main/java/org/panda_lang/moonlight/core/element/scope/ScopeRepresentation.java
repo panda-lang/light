@@ -9,24 +9,22 @@ import org.panda_lang.panda.core.parser.essential.util.BlockInitializer;
 import org.panda_lang.panda.core.parser.essential.util.BlockLayout;
 import org.panda_lang.panda.core.statement.Block;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 public class ScopeRepresentation {
 
     private final MoonlightCore moonlight;
     private final BlockLayout blockLayout;
-    private final Collection<ArgumentRepresentation> arguments;
+    private final ScopeUnit scopeUnit;
+    private ScopeUnitGetter scopeUnitGetter;
 
-    public ScopeRepresentation(String scope, Class<? extends Block> clazz, MoonlightCore moonlight) {
-        this.blockLayout = new BlockLayout(clazz, scope);
-        this.arguments = new ArrayList<>();
+    public ScopeRepresentation(String scopeName, Class<? extends Block> clazz, MoonlightCore moonlight) {
+        this.blockLayout = new BlockLayout(clazz, scopeName);
+        this.scopeUnit = new ScopeUnit(scopeName);
         this.moonlight = moonlight;
     }
 
     public ScopeRepresentation(MoonlightCore moonlight, Class<? extends Block> clazz, String... scopes) {
         this.blockLayout = new BlockLayout(clazz, scopes);
-        this.arguments = new ArrayList<>();
+        this.scopeUnit = new ScopeUnit(scopes[0]);
         this.moonlight = moonlight;
     }
 
@@ -44,20 +42,40 @@ public class ScopeRepresentation {
         return this;
     }
 
-    public ScopeRepresentation registerArgument(String pattern, ArgumentInitializer argumentInitializer) {
-        ArgumentRepresentation argumentRepresentation = new ArgumentRepresentation();
-        argumentRepresentation.pattern(pattern);
-        argumentRepresentation.initializer(argumentInitializer);
-        return registerArgument(argumentRepresentation);
-    }
-
-    public ScopeRepresentation registerArgument(ArgumentRepresentation argumentRepresentation) {
-        arguments.add(argumentRepresentation);
+    public ScopeRepresentation scopeUnitGetter(ScopeUnitGetter scopeUnitGetter) {
+        this.scopeUnitGetter = scopeUnitGetter;
         return this;
     }
 
-    public Collection<ArgumentRepresentation> getArguments() {
-        return arguments;
+    public void registerArgument(String pattern, ArgumentInitializer argumentInitializer) {
+        ArgumentRepresentation argumentRepresentation = new ArgumentRepresentation();
+        argumentRepresentation.pattern(pattern);
+        argumentRepresentation.initializer(argumentInitializer);
+        registerArgument(argumentRepresentation);
+    }
+
+    public void registerArgument(ArgumentRepresentation argumentRepresentation) {
+        scopeUnit.registerArgument(argumentRepresentation);
+    }
+
+    public ScopeUnit getScopeUnit(Scope scope) {
+        ScopeUnit scopeUnit = null;
+        if (scopeUnitGetter != null) {
+            scopeUnit = scopeUnitGetter.get(scope);
+        }
+        if (scopeUnit == null) {
+            scopeUnit = this.scopeUnit;
+        }
+        return scopeUnit;
+    }
+
+
+    public ScopeUnitGetter getScopeUnitGetter() {
+        return scopeUnitGetter;
+    }
+
+    public ScopeUnit getScopeUnit() {
+        return scopeUnit;
     }
 
     public BlockLayout getBlockLayout() {
@@ -68,4 +86,12 @@ public class ScopeRepresentation {
         return moonlight;
     }
 
+    @Override
+    public String toString() {
+        return "ScopeRepresentation{" +
+                "moonlight=" + moonlight +
+                ", blockLayout=" + blockLayout +
+                ", scopeUnit=" + scopeUnit +
+                '}';
+    }
 }

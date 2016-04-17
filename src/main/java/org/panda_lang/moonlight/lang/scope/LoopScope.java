@@ -2,10 +2,10 @@ package org.panda_lang.moonlight.lang.scope;
 
 import org.panda_lang.moonlight.core.element.scope.Scope;
 import org.panda_lang.panda.core.Alice;
+import org.panda_lang.panda.core.Essence;
 import org.panda_lang.panda.core.memory.Cache;
 import org.panda_lang.panda.core.memory.Memory;
 import org.panda_lang.panda.core.parser.essential.util.Numeric;
-import org.panda_lang.panda.core.Essence;
 import org.panda_lang.panda.core.statement.Factor;
 
 public class LoopScope extends Scope {

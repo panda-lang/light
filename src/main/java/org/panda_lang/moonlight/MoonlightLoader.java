@@ -8,7 +8,7 @@ import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.core.parser.Atom;
 import org.panda_lang.panda.core.parser.PandaParser;
 import org.panda_lang.panda.core.parser.util.Injection;
-import org.panda_lang.panda.core.statement.util.NamedExecutable;
+import org.panda_lang.panda.core.statement.Executable;
 import org.panda_lang.panda.util.IOUtils;
 
 import java.io.File;
@@ -50,18 +50,18 @@ public class MoonlightLoader {
 
         pandaParser.addInjection(new Injection() {
             @Override
-            public void call(Atom atom, NamedExecutable namedExecutable) {
-                if (namedExecutable instanceof EventScope) {
-                    moonlightScript.registerEventBlock((EventScope) namedExecutable);
+            public void call(Atom atom, Executable executable) {
+                if (executable instanceof EventScope) {
+                    moonlightScript.registerEventBlock((EventScope) executable);
                 }
-                else if (namedExecutable instanceof FunctionScope) {
-                    moonlightScript.registerFunctionBlock((FunctionScope) namedExecutable);
+                else if (executable instanceof FunctionScope) {
+                    moonlightScript.registerFunctionBlock((FunctionScope) executable);
                 }
-                else if (namedExecutable instanceof CommandScope) {
-                    moonlightScript.registerCommandBlock((CommandScope) namedExecutable);
+                else if (executable instanceof CommandScope) {
+                    moonlightScript.registerCommandBlock((CommandScope) executable);
                 }
                 else {
-                    atom.getParent().addExecutable(namedExecutable);
+                    atom.getParent().addExecutable(executable);
                 }
             }
         });

@@ -17,7 +17,7 @@ public class PandaVersionExpression extends Expression {
             case ADD:
                 break;
             case SET:
-                version = modification.getValue().run(modification.getRay()).toString();
+                version = modification.getValue().get(modification.getRay()).toString();
                 break;
             case REMOVE:
                 break;

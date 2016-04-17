@@ -34,26 +34,19 @@ public class PhraseParser implements Parser {
         moonlightCore.registerParser(parserLayout);
     }
 
-    public Executable parse(Atom atom) {
+    public Executable parse(final Atom atom) {
         String phraseSource = atom.getSourcesDivider().getLine().trim();
         phraseSource = phraseSource.substring(0, phraseSource.length() - 1);
 
-        for (PhraseRepresentation phraseRepresentation : moonlightCore.getPhraseCenter().getElements()) {
-            for (HollowPattern pattern : phraseRepresentation.getPatterns()) {
+        for (final PhraseRepresentation phraseRepresentation : moonlightCore.getPhraseCenter().getElements()) {
+            for (final HollowPattern pattern : phraseRepresentation.getPatterns()) {
                 if (pattern.match(phraseSource)) {
 
                     final ExpressionParser expressionParser = new ExpressionParser(moonlightCore);
                     final List<String> hollows = pattern.getHollows();
                     final List<ExpressionRuntime> expressions = new ArrayList<>(hollows.size() - phraseRepresentation.getRaw());
                     final Factor[] factors = ExpressionUtils.toFactors(expressions);
-
                     final Phrase phrase = phraseRepresentation.getPhrase();
-                    final Ray ray = new Ray()
-                            .script((MoonlightScript) atom.getPandaScript())
-                            .pattern(pattern)
-                            .hollows(new ArrayList<>(hollows))
-                            .expressionRuntimes(expressions)
-                            .factors(factors);
 
                     for (int i = phraseRepresentation.getRaw(); i < hollows.size(); i++) {
                         String hollow = hollows.get(i);
@@ -64,7 +57,17 @@ public class PhraseParser implements Parser {
                     return new Executable() {
                         @Override
                         public Essence execute(Alice alice) {
-                            ray.particle(alice);
+                            Ray ray = alice.getCustom();
+                            if (ray == null) {
+                                ray = new Ray();
+                            }
+
+                            ray.particle(alice)
+                                    .script((MoonlightScript) atom.getPandaScript())
+                                    .pattern(pattern)
+                                    .hollows(new ArrayList<>(hollows))
+                                    .expressionRuntimes(expressions)
+                                    .factors(factors);
                             phrase.run(ray);
                             return null;
                         }
