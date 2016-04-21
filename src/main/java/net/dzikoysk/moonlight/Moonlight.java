@@ -1,6 +1,7 @@
 package net.dzikoysk.moonlight;
 
-import net.dzikoysk.moonlight.core.event.BukkitEventsCenter;
+import net.dzikoysk.moonlight.core.command.BukkitCommandCenter;
+import net.dzikoysk.moonlight.core.event.BukkitEventCenter;
 import net.dzikoysk.moonlight.lang.BukkitBasis;
 import net.dzikoysk.moonlight.util.metrics.MetricsCollector;
 import org.bukkit.Bukkit;
@@ -17,12 +18,16 @@ public class Moonlight extends JavaPlugin {
     private static Moonlight moonlight;
     private final MoonlightCore moonlightCore;
     private final MoonlightInitializer moonlightInitializer;
-    private final BukkitEventsCenter bukkitEventsCenter;
+
+    private final BukkitEventCenter bukkitEventCenter;
+    private final BukkitCommandCenter bukkitCommandCenter;
 
     public Moonlight() {
         this.moonlightCore = new MoonlightCore();
         this.moonlightInitializer = new MoonlightInitializer(this);
-        this.bukkitEventsCenter = new BukkitEventsCenter(this);
+
+        this.bukkitEventCenter = new BukkitEventCenter(this);
+        this.bukkitCommandCenter = new BukkitCommandCenter(this);
     }
 
     @Override
@@ -55,7 +60,7 @@ public class Moonlight extends JavaPlugin {
     }
 
     public ScopeUnit registerEvent(Class<? extends Event> eventClass, String eventName) {
-        return bukkitEventsCenter.registerEvent(eventClass, eventName);
+        return bukkitEventCenter.registerEvent(eventClass, eventName);
     }
 
     @Override
@@ -63,8 +68,12 @@ public class Moonlight extends JavaPlugin {
         moonlightCore.getVariables().save();
     }
 
-    public BukkitEventsCenter getBukkitEventsCenter() {
-        return bukkitEventsCenter;
+    public BukkitCommandCenter getBukkitCommandCenter() {
+        return bukkitCommandCenter;
+    }
+
+    public BukkitEventCenter getBukkitEventCenter() {
+        return bukkitEventCenter;
     }
 
     public MoonlightCore getMoonlightCore() {

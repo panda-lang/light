@@ -1,6 +1,5 @@
 package org.panda_lang.moonlight;
 
-import net.dzikoysk.moonlight.lang.scope.CommandScope;
 import org.panda_lang.moonlight.core.parser.util.LightCodeUtils;
 import org.panda_lang.moonlight.lang.scope.EventScope;
 import org.panda_lang.moonlight.lang.scope.FunctionScope;
@@ -56,12 +55,6 @@ public class MoonlightLoader {
                 }
                 else if (executable instanceof FunctionScope) {
                     moonlightScript.registerFunctionBlock((FunctionScope) executable);
-                }
-                else if (executable instanceof CommandScope) {
-                    moonlightScript.registerCommandBlock((CommandScope) executable);
-                }
-                else {
-                    atom.getParent().addExecutable(executable);
                 }
             }
         });

@@ -10,12 +10,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BukkitEventsCenter {
+public class BukkitEventCenter {
 
     private final Moonlight moonlight;
     private final Map<String, BukkitEvent> bukkitEventMap;
 
-    public BukkitEventsCenter(Moonlight moonlight) {
+    public BukkitEventCenter(Moonlight moonlight) {
         this.moonlight = moonlight;
         this.bukkitEventMap = new HashMap<>();
     }
@@ -36,7 +36,6 @@ public class BukkitEventsCenter {
             for (Map.Entry<String, Collection<EventScope>> entry : eventBlockMap.entrySet()) {
                 BukkitEvent bukkitEvent = bukkitEventMap.get(entry.getKey());
                 if (bukkitEvent == null) {
-                    System.out.println("Event '" + entry.getKey() + "' is not registered!");
                     continue;
                 }
 

@@ -1,7 +1,8 @@
 package net.dzikoysk.moonlight;
 
 import net.dzikoysk.moonlight.core.BukkitLoader;
-import net.dzikoysk.moonlight.core.event.BukkitEventsCenter;
+import net.dzikoysk.moonlight.core.command.BukkitCommandCenter;
+import net.dzikoysk.moonlight.core.event.BukkitEventCenter;
 import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.MoonlightScript;
 import org.panda_lang.moonlight.core.memory.Variables;
@@ -30,8 +31,11 @@ public class MoonlightInitializer implements Runnable {
         BukkitLoader bukkitLoader = new BukkitLoader(moonlight, scriptsDirectory);
         bukkitLoader.load();
 
-        BukkitEventsCenter bukkitEventsCenter = moonlight.getBukkitEventsCenter();
-        bukkitEventsCenter.registerListeners();
+        BukkitEventCenter bukkitEventCenter = moonlight.getBukkitEventCenter();
+        bukkitEventCenter.registerListeners();
+
+        BukkitCommandCenter bukkitCommandCenter = moonlight.getBukkitCommandCenter();
+        bukkitCommandCenter.registerCommands();
 
         Collection<MoonlightScript> moonlightScripts = moonlightCore.getScripts();
         for (MoonlightScript moonlightScript : moonlightScripts) {

@@ -13,6 +13,9 @@ import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.statement.Block;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ArgumentParser implements Parser {
 
     @Override
@@ -42,17 +45,19 @@ public class ArgumentParser implements Parser {
         for (final ArgumentRepresentation argumentRepresentation : scopeUnit.getArgumentRepresentations()) {
             for (HollowPattern hollowPattern : argumentRepresentation.getPatterns()) {
                 if (hollowPattern.match(argumentSource)) {
-
                     if (!scope.argumentBelongsToScope(argumentRepresentation)) {
                         PandaException pandaException = new PandaException("Argument " + argumentSource + " is not allowed here", atom.getSourcesDivider());
                         return atom.getPandaParser().throwException(pandaException);
                     }
 
+                    final List<String> hollows = new ArrayList<>(hollowPattern.getHollows());
                     final Scope argumentScope = scope;
+
                     return new ExpressionRuntime(new Expression() {
                         @Override
                         public Object getValue(Ray ray) {
                             ray.argumentScope(argumentScope);
+                            ray.hollows(hollows);
                             return argumentRepresentation.get(ray);
                         }
                     }, null);

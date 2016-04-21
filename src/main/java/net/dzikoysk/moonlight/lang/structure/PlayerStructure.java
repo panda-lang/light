@@ -28,7 +28,7 @@ public class PlayerStructure extends Structure<Player> {
                 return new StringEssence(player.getName());
             }
         });
-        expressionRepresentation.pattern("*'s name");
+        expressionRepresentation.pattern("* name");
         addExpressionRepresentation(expressionRepresentation);
     }
 

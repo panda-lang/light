@@ -1,6 +1,5 @@
 package org.panda_lang.moonlight;
 
-import net.dzikoysk.moonlight.lang.scope.CommandScope;
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.lang.scope.EventScope;
 import org.panda_lang.moonlight.lang.scope.FunctionScope;
@@ -19,7 +18,6 @@ public class MoonlightScript extends PandaScript {
 
     private final MoonlightCore moonlight;
     private final Map<String, Collection<EventScope>> eventBlockMap;
-    private final Map<String, CommandScope> commandBlockMap;
     private final Map<String, FunctionScope> functionBlockMap;
 
     public MoonlightScript(MoonlightCore moonlight) {
@@ -27,7 +25,6 @@ public class MoonlightScript extends PandaScript {
 
         this.moonlight = moonlight;
         this.eventBlockMap = new HashMap<>();
-        this.commandBlockMap = new HashMap<>();
         this.functionBlockMap = new HashMap<>();
     }
 
@@ -65,10 +62,6 @@ public class MoonlightScript extends PandaScript {
         eventBlockMap.put(eventScope.getEventName(), eventScopes);
     }
 
-    public void registerCommandBlock(CommandScope commandScope) {
-        commandBlockMap.put(commandScope.getCommandName(), commandScope);
-    }
-
     public void registerFunctionBlock(FunctionScope functionScope) {
         functionBlockMap.put(functionScope.getFunctionName(), functionScope);
     }
@@ -76,10 +69,6 @@ public class MoonlightScript extends PandaScript {
     public Ray getAssociatedRay() {
         Alice alice = new Alice(this, new Memory(), null, null);
         return new Ray(alice);
-    }
-
-    public Map<String, CommandScope> getCommandBlockMap() {
-        return commandBlockMap;
     }
 
     public Map<String, FunctionScope> getFunctionBlockMap() {
