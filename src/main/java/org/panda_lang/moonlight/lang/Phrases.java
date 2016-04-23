@@ -27,6 +27,7 @@ public class Phrases implements MoonlightElements {
         moonlightCore.registerPhrase(functionPhrase);
 
         PhraseRepresentation returnPhrase = new PhraseRepresentation(new ReturnPhrase());
+        returnPhrase.pattern("return");
         returnPhrase.pattern("return *");
         moonlightCore.registerPhrase(returnPhrase);
 

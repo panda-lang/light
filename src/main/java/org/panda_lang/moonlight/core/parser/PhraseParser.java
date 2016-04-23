@@ -43,7 +43,7 @@ public class PhraseParser implements Parser {
                 if (pattern.match(phraseSource)) {
 
                     final ExpressionParser expressionParser = new ExpressionParser(moonlightCore);
-                    final List<String> hollows = pattern.getHollows();
+                    final List<String> hollows = new ArrayList<>(pattern.getHollows());
                     final List<ExpressionRuntime> expressions = new ArrayList<>(hollows.size() - phraseRepresentation.getRaw());
                     final Factor[] factors = ExpressionUtils.toFactors(expressions);
                     final Phrase phrase = phraseRepresentation.getPhrase();

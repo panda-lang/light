@@ -26,6 +26,11 @@ public class EventScope extends Scope {
     }
 
     @Override
+    public boolean isReturned() {
+        return true;
+    }
+
+    @Override
     public String getName() {
         return getEventName();
     }

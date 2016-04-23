@@ -22,7 +22,7 @@ public class BukkitEvent {
     }
 
     public void register() {
-        if (registered) {
+        if (registered || eventClass == null) {
             return;
         }
 

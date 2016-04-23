@@ -80,7 +80,7 @@ public class Scopes implements MoonlightElements {
         eventScopeRepresentation.initializer(new ScopeInitializer() {
             @Override
             public Scope initialize(Flash flash) {
-                String eventName = flash.getSpecifiers().get(0);
+                String eventName = flash.getFullPhrase();
                 ScopeUnit scopeUnit = moonlightCore.getEventCenter().getEventUnit(eventName);
                 return new EventScope(scopeUnit);
             }

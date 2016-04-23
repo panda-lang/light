@@ -38,7 +38,8 @@ public class EventsGenerator {
 
         for (Map.Entry<String, Collection<Class<? extends Event>>> entry : eventsMap.entrySet()) {
             String eventPackage = entry.getKey();
-            System.out.println(eventPackage + " ---------------------------------");
+            System.out.println("");
+            System.out.println("[ " + eventPackage + " --------------------------------- ]");
 
             File eventsFile = new File(directory, eventPackage + ".events");
             FileWriter fileWriter = new FileWriter(eventsFile);
@@ -49,7 +50,7 @@ public class EventsGenerator {
                 String eventNameWithSpaces = transformName(eventPackage, eventClass.getSimpleName(), true, "Event");
                 Set<Method> methods = ReflectionUtils.getAllMethods(eventClass);
 
-                System.out.println("Adding event '" + eventName + "' -> '" + eventNameWithSpaces + "'");
+                System.out.println("Adding event " + eventClassName + " -> 'on " + eventNameWithSpaces + " {}'");
                 fileWriter.write("ScopeUnit " + eventName + "ScopeUnit = moonlight.registerEvent(" + eventClass.getSimpleName() + ".class, \"" + eventNameWithSpaces + "\");");
 
                 Collection<String> addedMethods = new ArrayList<>();
@@ -58,6 +59,10 @@ public class EventsGenerator {
 
                     addMethod:
                     if (methodName.startsWith("get")) {
+                        if (method.getParameterCount() > 0) {
+                            continue;
+                        }
+
                         if (methodName.contains("Handler")) {
                             continue;
                         }
@@ -69,7 +74,7 @@ public class EventsGenerator {
                         }
 
                         String argumentName = transformName("get", methodName, true);
-                        System.out.println("::" + methodName + "() -> " + argumentName);
+                        System.out.println("- '" + argumentName + "'");
                         fileWriter.write(System.lineSeparator());
                         fileWriter.write(getArgumentInitializer(argumentName, eventName, eventClassName, "event." + methodName + "();"));
                         addedMethods.add(methodName);

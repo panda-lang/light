@@ -15,6 +15,11 @@ public class FunctionScope extends Scope {
     }
 
     @Override
+    public boolean isReturned() {
+        return true;
+    }
+
+    @Override
     public String getName() {
         return getFunctionName();
     }

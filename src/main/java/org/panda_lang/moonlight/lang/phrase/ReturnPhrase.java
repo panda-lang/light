@@ -19,6 +19,7 @@ public class ReturnPhrase implements Phrase {
 
         Alice alice = ray.getAlice();
         Block block = new Block(alice.getBlock());
+        alice.getMemory().getParent().getCache().proceed(false);
 
         Factor factor = result != null ? result.toFactor() : null;
         Return returnElement = new Return(block, factor);
