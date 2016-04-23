@@ -45,7 +45,7 @@ public class Phrases implements MoonlightElements {
         moonlightCore.registerPhrase(benchmarkPhrase);
 
         PhraseRepresentation sendPhrase = new PhraseRepresentation(new PrintPhrase());
-        sendPhrase.pattern("send * to console");
+        sendPhrase.pattern("print *");
         moonlightCore.registerPhrase(sendPhrase);
     }
 

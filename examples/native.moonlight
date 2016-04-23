@@ -2,7 +2,7 @@
 on load {
 
     // Something
-    send "Hello" to console
+    print "Hello"
 
     // Panda
     ---
@@ -23,5 +23,5 @@ on load {
     ---
 
     // Something
-    send "Goodbye" to console
+    print "Goodbye"
 }

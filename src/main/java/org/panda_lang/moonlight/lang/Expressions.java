@@ -2,6 +2,7 @@ package org.panda_lang.moonlight.lang;
 
 import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRepresentation;
+import org.panda_lang.moonlight.lang.expression.ArrayExpression;
 import org.panda_lang.moonlight.lang.expression.ComparisonExpression;
 import org.panda_lang.moonlight.lang.expression.PandaVersionExpression;
 import org.panda_lang.moonlight.lang.expression.SystemExpression;
@@ -40,6 +41,10 @@ public class Expressions implements MoonlightElements {
         systemExpression.pattern("current time milliseconds");
         systemExpression.pattern("nano time");
         moonlightCore.registerExpression(systemExpression);
+
+        ExpressionRepresentation arrayExpression = new ExpressionRepresentation(new ArrayExpression());
+        arrayExpression.pattern("* element of *");
+        moonlightCore.registerExpression(arrayExpression);
     }
 
 }

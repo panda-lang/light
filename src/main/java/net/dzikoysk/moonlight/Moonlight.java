@@ -48,15 +48,15 @@ public class Moonlight extends JavaPlugin {
     }
 
     public void registerType(TypeRepresentation typeRepresentation) {
-        moonlight.registerType(typeRepresentation);
+        moonlightCore.registerType(typeRepresentation);
     }
 
     public void registerPhrase(PhraseRepresentation phraseRepresentation) {
-        moonlight.registerPhrase(phraseRepresentation);
+        moonlightCore.registerPhrase(phraseRepresentation);
     }
 
     public void registerExpression(ExpressionRepresentation expressionRepresentation) {
-        moonlight.registerExpression(expressionRepresentation);
+        moonlightCore.registerExpression(expressionRepresentation);
     }
 
     public ScopeUnit registerEvent(Class<? extends Event> eventClass, String eventName) {

@@ -47,6 +47,15 @@ public class ScopeRepresentation {
         return this;
     }
 
+    public void registerArgument(ArgumentInitializer argumentInitializer, String... patterns) {
+        ArgumentRepresentation argumentRepresentation = new ArgumentRepresentation();
+        for (String pattern : patterns) {
+            argumentRepresentation.pattern(pattern);
+        }
+        argumentRepresentation.initializer(argumentInitializer);
+        registerArgument(argumentRepresentation);
+    }
+
     public void registerArgument(String pattern, ArgumentInitializer argumentInitializer) {
         ArgumentRepresentation argumentRepresentation = new ArgumentRepresentation();
         argumentRepresentation.pattern(pattern);

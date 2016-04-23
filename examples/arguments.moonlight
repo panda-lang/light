@@ -5,9 +5,9 @@ on load {
     initialize benchmark
 
     // Loop 1000 times
-    loop 1000 times {
+    loop 1000re times {
         // Display current index of the loop
-        send loop-index to console
+        print loop-index
 
         // Point
         benchmark point
@@ -21,7 +21,7 @@ on load {
 }
 
 function result {
-    send "." to console
+    print "."
     return
-    send "oops" to console
+    print "oops"
 }

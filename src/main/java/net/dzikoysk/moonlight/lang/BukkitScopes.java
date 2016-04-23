@@ -45,6 +45,12 @@ public class BukkitScopes implements BukkitElements {
                 return index < arguments.length ? arguments[index] : null;
             }
         });
+        commandScope.registerArgument(new ArgumentInitializer<BukkitCommandInfo>() {
+            @Override
+            public Object get(Ray ray, BukkitCommandInfo bukkitCommandInfo) {
+                return bukkitCommandInfo.getCommandSender();
+            }
+        }, "player", "command sender");
         moonlightCore.registerScope(commandScope);
     }
 

@@ -6,7 +6,7 @@ global <common>
 // Event 'on load' called when the script starts
 on load {
     // Display content of <stored> variable
-    send <stored> to console
+    print <stored>
 
     // Set followed variable to text
     set <stored> to "I'm immortal"
@@ -24,9 +24,9 @@ on load {
 // Function 'test'
 function test {
     // Display content of <stored> variable (followed variable)
-    send <stored> to console
+    print <stored>
     // Display content of <common> variable (global variable)
-    send <common> to console
+    print <common>
     // Display content of <local> variable (default variable)
-    send <local> to console
+    print <local>
 }

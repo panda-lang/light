@@ -7,19 +7,19 @@ on load {
     // Loop 10000 times
     loop 10000 times {
         // Display 'Hello Light' in console
-        send "Hello Light" to console
+        print "Hello Light"
 
         // If-statement
         if true {
             // Set <var> variable to text
             set <var> to "Variable Test"
             // Display content of <var> variable in console
-            send <var> to console
+            print <var>
             
             // Delete <var> variable
             delete <var>
             // Display content of <var> variable in console
-            send <var> to console
+            print <var>
         }
 
         // Call function named 'pandaInfo'
@@ -30,7 +30,7 @@ on load {
         // Loop when <int> variable is less than 1
         while <int> is less than 1 {
             // Display expression
-            send 5 is greater than 10 to console
+            print 5 is greater than 10
             // Set <int> variable to 1 (This will complete the loop)
             set <int> to 1
         }
@@ -46,9 +46,9 @@ on load {
 // Function 'pandaInfo'
 function pandaInfo {
     // Display text in console
-    send "Hello Panda" to console
+    print "Hello Panda"
     // Display Panda's version in console
-    send panda version to console
+    print panda version
 }
 
 

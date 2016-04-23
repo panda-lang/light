@@ -21,6 +21,9 @@ public class BukkitBasis implements BukkitElements {
 
         BukkitStructures bukkitStructures = new BukkitStructures(moonlight);
         bukkitStructures.registerBukkitElements();
+
+        BukkitPhrases bukkitPhrases = new BukkitPhrases(moonlight);
+        bukkitPhrases.registerBukkitElements();
     }
 
 }
