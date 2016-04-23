@@ -29,7 +29,13 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.8.8-R0.1-SNAPSHOT</version>
+            <version>1.9.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.10</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -38,7 +44,7 @@
         <repository>
             <id>panda-repo</id>
             <name>Panda Repository</name>
-            <url>http://repo.panda-lang.org/</url>
+            <url>https://repo.panda-lang.org/</url>
         </repository>
         <repository>
             <id>spigot-repo</id>
@@ -102,6 +108,7 @@
                     </archive>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 

@@ -14,11 +14,9 @@ import org.panda_lang.moonlight.core.element.scope.ScopeRepresentation;
 
 public class BukkitScopes implements BukkitElements {
 
-    private final Moonlight moonlight;
     private final MoonlightCore moonlightCore;
 
     public BukkitScopes(Moonlight moonlight) {
-        this.moonlight = moonlight;
         this.moonlightCore = moonlight.getMoonlightCore();
     }
 
@@ -38,13 +36,13 @@ public class BukkitScopes implements BukkitElements {
                 return bukkitCommandInfo.getArguments();
             }
         });
-        commandScope.registerArgument("arg_*", new ArgumentInitializer<BukkitCommandInfo>() {
+        commandScope.registerArgument("arg-*", new ArgumentInitializer<BukkitCommandInfo>() {
             @Override
             public Object get(Ray ray, BukkitCommandInfo bukkitCommandInfo) {
                 String[] arguments = bukkitCommandInfo.getArguments();
                 String hollow = ray.getHollows().get(0);
-                int index = Integer.parseInt(hollow);
-                return arguments[index];
+                int index = Integer.parseInt(hollow) - 1;
+                return index < arguments.length ? arguments[index] : null;
             }
         });
         moonlightCore.registerScope(commandScope);

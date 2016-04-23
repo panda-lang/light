@@ -1,11 +1,8 @@
 package net.dzikoysk.moonlight.lang;
 
 import net.dzikoysk.moonlight.Moonlight;
+import net.dzikoysk.moonlight.lang.event.*;
 import net.dzikoysk.moonlight.util.BukkitElements;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.panda_lang.moonlight.core.Ray;
-import org.panda_lang.moonlight.core.element.argument.ArgumentInitializer;
-import org.panda_lang.moonlight.core.element.scope.ScopeUnit;
 
 public class BukkitEvents implements BukkitElements {
 
@@ -17,13 +14,35 @@ public class BukkitEvents implements BukkitElements {
 
     @Override
     public void registerBukkitElements() {
-        ScopeUnit joinScopeUnit = moonlight.registerEvent(PlayerJoinEvent.class, "join");
-        joinScopeUnit.registerArgument("player", new ArgumentInitializer<PlayerJoinEvent>() {
-            @Override
-            public Object get(Ray ray, PlayerJoinEvent event) {
-                return event.getPlayer();
-            }
-        });
+        BlockEvents blockEvents = new BlockEvents(moonlight);
+        blockEvents.registerBukkitElements();
+
+        EnchantmentEvents enchantmentEvents = new EnchantmentEvents(moonlight);
+        enchantmentEvents.registerBukkitElements();
+
+        EntityEvents entityEvents = new EntityEvents(moonlight);
+        entityEvents.registerBukkitElements();
+
+        HangingEvents hangingEvents = new HangingEvents(moonlight);
+        hangingEvents.registerBukkitElements();
+
+        InventoryEvents inventoryEvents = new InventoryEvents(moonlight);
+        inventoryEvents.registerBukkitElements();
+
+        PlayerEvents playerEvents = new PlayerEvents(moonlight);
+        playerEvents.registerBukkitElements();
+
+        ServerEvents serverEvents = new ServerEvents(moonlight);
+        serverEvents.registerBukkitElements();
+
+        VehicleEvents vehicleEvents = new VehicleEvents(moonlight);
+        vehicleEvents.registerBukkitElements();
+
+        WeatherEvents weatherEvents = new WeatherEvents(moonlight);
+        weatherEvents.registerBukkitElements();
+
+        WorldEvents worldEvents = new WorldEvents(moonlight);
+        worldEvents.registerBukkitElements();
     }
 
 }

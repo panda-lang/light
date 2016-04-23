@@ -1,0 +1,1018 @@
+org.bukkit.event.player ---------------------------------
+Adding event 'playerDropItem' -> 'player drop item'
+::getItemDrop() -> item drop
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerBedLeave' -> 'player bed leave'
+::getBed() -> bed
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerMove' -> 'player move'
+::getTo() -> to
+::getEventName() -> event name
+::getFrom() -> from
+::getPlayer() -> player
+Adding event 'playerEditBook' -> 'player edit book'
+::getNewBookMeta() -> new book meta
+::getEventName() -> event name
+::getPreviousBookMeta() -> previous book meta
+::getSlot() -> slot
+::getPlayer() -> player
+Adding event 'playerToggleSprint' -> 'player toggle sprint'
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerCommandPreprocess' -> 'player command preprocess'
+::getFormat() -> format
+::getRecipients() -> recipients
+::getEventName() -> event name
+::getMessage() -> message
+::getPlayer() -> player
+Adding event 'playerPickupItem' -> 'player pickup item'
+::getItem() -> item
+::getPlayer() -> player
+::getRemaining() -> remaining
+::getEventName() -> event name
+Adding event 'asyncPlayerPreLogin' -> 'async player pre login'
+::getResult() -> result
+::getAddress() -> address
+::getLoginResult() -> login result
+::getEventName() -> event name
+::getName() -> name
+::getKickMessage() -> kick message
+::getUniqueId() -> unique id
+Adding event 'playerAnimation' -> 'player animation'
+::getAnimationType() -> animation type
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerChat' -> 'player chat'
+::getMessage() -> message
+::getEventName() -> event name
+::getRecipients() -> recipients
+::getFormat() -> format
+::getPlayer() -> player
+Adding event 'playerBucketEmpty' -> 'player bucket empty'
+::getItemStack() -> item stack
+::getBlockFace() -> block face
+::getBucket() -> bucket
+::getEventName() -> event name
+::getBlockClicked() -> block clicked
+::getPlayer() -> player
+Adding event 'playerFish' -> 'player fish'
+::getCaught() -> caught
+::getEventName() -> event name
+::getExpToDrop() -> exp to drop
+::getHook() -> hook
+::getState() -> state
+::getPlayer() -> player
+Adding event 'playerItemHeld' -> 'player item held'
+::getPlayer() -> player
+::getPreviousSlot() -> previous slot
+::getNewSlot() -> new slot
+::getEventName() -> event name
+Adding event 'playerToggleSneak' -> 'player toggle sneak'
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerJoin' -> 'player join'
+::getJoinMessage() -> join message
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'asyncPlayerChat' -> 'async player chat'
+::getFormat() -> format
+::getRecipients() -> recipients
+::getEventName() -> event name
+::getMessage() -> message
+::getPlayer() -> player
+Adding event 'playerLevelChange' -> 'player level change'
+::getOldLevel() -> old level
+::getPlayer() -> player
+::getNewLevel() -> new level
+::getEventName() -> event name
+Adding event 'playerInteract' -> 'player interact'
+::getClickedBlock() -> clicked block
+::getMaterial() -> material
+::getBlockFace() -> block face
+::getEventName() -> event name
+::getItem() -> item
+::getAction() -> action
+::getHand() -> hand
+::getPlayer() -> player
+Adding event 'playerInteractAtEntity' -> 'player interact at entity'
+::getHand() -> hand
+::getRightClicked() -> right clicked
+::getEventName() -> event name
+::getClickedPosition() -> clicked position
+::getPlayer() -> player
+Adding event 'playerInteractEntity' -> 'player interact entity'
+::getHand() -> hand
+::getPlayer() -> player
+::getRightClicked() -> right clicked
+::getEventName() -> event name
+Adding event 'playerItemBreak' -> 'player item break'
+::getBrokenItem() -> broken item
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerRegisterChannel' -> 'player register channel'
+::getChannel() -> channel
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'player' -> 'player'
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerChannel' -> 'player channel'
+::getChannel() -> channel
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerTeleport' -> 'player teleport'
+::getTo() -> to
+::getEventName() -> event name
+::getFrom() -> from
+::getCause() -> cause
+::getPlayer() -> player
+Adding event 'playerAchievementAwarded' -> 'player achievement awarded'
+::getPlayer() -> player
+::getAchievement() -> achievement
+::getEventName() -> event name
+Adding event 'playerKick' -> 'player kick'
+::getLeaveMessage() -> leave message
+::getEventName() -> event name
+::getReason() -> reason
+::getPlayer() -> player
+Adding event 'playerResourcePackStatus' -> 'player resource pack status'
+::getStatus() -> status
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerLogin' -> 'player login'
+::getRealAddress() -> real address
+::getKickMessage() -> kick message
+::getEventName() -> event name
+::getResult() -> result
+::getHostname() -> hostname
+::getPlayer() -> player
+::getAddress() -> address
+Adding event 'playerItemDamage' -> 'player item damage'
+::getDamage() -> damage
+::getItem() -> item
+::getEventName() -> event name
+::getPlayer() -> player
+Adding event 'playerExpChange' -> 'player exp change'
+::getAmount() -> amount
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerPortal' -> 'player portal'
+::getPortalTravelAgent() -> portal travel agent
+::getTo() -> to
+::getEventName() -> event name
+::getFrom() -> from
+::getCause() -> cause
+::getPlayer() -> player
+Adding event 'playerBucket' -> 'player bucket'
+::getItemStack() -> item stack
+::getBlockFace() -> block face
+::getBucket() -> bucket
+::getEventName() -> event name
+::getBlockClicked() -> block clicked
+::getPlayer() -> player
+Adding event 'playerGameModeChange' -> 'player game mode change'
+::getNewGameMode() -> new game mode
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerChangedWorld' -> 'player changed world'
+::getFrom() -> from
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerBucketFill' -> 'player bucket fill'
+::getItemStack() -> item stack
+::getBlockFace() -> block face
+::getBucket() -> bucket
+::getEventName() -> event name
+::getBlockClicked() -> block clicked
+::getPlayer() -> player
+Adding event 'playerSwapHandItems' -> 'player swap hand items'
+::getOffHandItem() -> off hand item
+::getEventName() -> event name
+::getMainHandItem() -> main hand item
+::getPlayer() -> player
+Adding event 'playerToggleFlight' -> 'player toggle flight'
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerBedEnter' -> 'player bed enter'
+::getBed() -> bed
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerEggThrow' -> 'player egg throw'
+::getNumHatches() -> num hatches
+::getEventName() -> event name
+::getEgg() -> egg
+::getPlayer() -> player
+::getHatchingType() -> hatching type
+Adding event 'playerRespawn' -> 'player respawn'
+::getRespawnLocation() -> respawn location
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerItemConsume' -> 'player item consume'
+::getPlayer() -> player
+::getItem() -> item
+::getEventName() -> event name
+Adding event 'playerPickupArrow' -> 'player pickup arrow'
+::getArrow() -> arrow
+::getItem() -> item
+::getRemaining() -> remaining
+::getEventName() -> event name
+::getPlayer() -> player
+Adding event 'playerInventory' -> 'player inventory'
+::getInventory() -> inventory
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerChatTabComplete' -> 'player chat tab complete'
+::getChatMessage() -> chat message
+::getTabCompletions() -> tab completions
+::getLastToken() -> last token
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerQuit' -> 'player quit'
+::getQuitMessage() -> quit message
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerVelocity' -> 'player velocity'
+::getPlayer() -> player
+::getVelocity() -> velocity
+::getEventName() -> event name
+Adding event 'playerArmorStandManipulate' -> 'player armor stand manipulate'
+::getSlot() -> slot
+::getHand() -> hand
+::getRightClicked() -> right clicked
+::getEventName() -> event name
+::getPlayerItem() -> player item
+::getPlayer() -> player
+::getArmorStandItem() -> armor stand item
+Adding event 'playerUnregisterChannel' -> 'player unregister channel'
+::getChannel() -> channel
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerUnleashEntity' -> 'player unleash entity'
+::getEntityType() -> entity type
+::getReason() -> reason
+::getEntity() -> entity
+::getPlayer() -> player
+::getEventName() -> event name
+Adding event 'playerPreLogin' -> 'player pre login'
+::getResult() -> result
+::getAddress() -> address
+::getEventName() -> event name
+::getName() -> name
+::getKickMessage() -> kick message
+::getUniqueId() -> unique id
+Adding event 'playerStatisticIncrement' -> 'player statistic increment'
+::getEntityType() -> entity type
+::getNewValue() -> new value
+::getStatistic() -> statistic
+::getEventName() -> event name
+::getMaterial() -> material
+::getPreviousValue() -> previous value
+::getPlayer() -> player
+Adding event 'playerShearEntity' -> 'player shear entity'
+::getEntity() -> entity
+::getPlayer() -> player
+::getEventName() -> event name
+org.bukkit.event.server ---------------------------------
+Adding event 'mapInitialize' -> 'map initialize'
+::getMap() -> map
+::getEventName() -> event name
+Adding event 'serviceUnregister' -> 'service unregister'
+::getProvider() -> provider
+::getEventName() -> event name
+Adding event 'remoteServerCommand' -> 'remote server command'
+::getSender() -> sender
+::getEventName() -> event name
+::getCommand() -> command
+Adding event 'serverListPing' -> 'server list ping'
+::getAddress() -> address
+::getEventName() -> event name
+::getNumPlayers() -> num players
+::getMaxPlayers() -> max players
+::getMotd() -> motd
+Adding event 'server' -> 'server'
+::getEventName() -> event name
+Adding event 'serviceRegister' -> 'service register'
+::getProvider() -> provider
+::getEventName() -> event name
+Adding event 'serverCommand' -> 'server command'
+::getCommand() -> command
+::getSender() -> sender
+::getEventName() -> event name
+Adding event 'service' -> 'service'
+::getProvider() -> provider
+::getEventName() -> event name
+Adding event 'pluginEnable' -> 'plugin enable'
+::getPlugin() -> plugin
+::getEventName() -> event name
+Adding event 'pluginDisable' -> 'plugin disable'
+::getPlugin() -> plugin
+::getEventName() -> event name
+Adding event 'plugin' -> 'plugin'
+::getPlugin() -> plugin
+::getEventName() -> event name
+org.bukkit.event.hanging ---------------------------------
+Adding event 'hangingPlace' -> 'hanging place'
+::getBlockFace() -> block face
+::getEventName() -> event name
+::getEntity() -> entity
+::getPlayer() -> player
+::getBlock() -> block
+Adding event 'hangingBreakByEntity' -> 'hanging break by entity'
+::getEntity() -> entity
+::getEventName() -> event name
+::getRemover() -> remover
+::getCause() -> cause
+Adding event 'hanging' -> 'hanging'
+::getEntity() -> entity
+::getEventName() -> event name
+Adding event 'hangingBreak' -> 'hanging break'
+::getEntity() -> entity
+::getEventName() -> event name
+::getCause() -> cause
+org.bukkit.event.inventory ---------------------------------
+Adding event 'brew' -> 'brew'
+::getBlock() -> block
+::getContents() -> contents
+::getEventName() -> event name
+Adding event 'inventoryDrag' -> 'inventory drag'
+::getNewItems() -> new items
+::getCursor() -> cursor
+::getOldCursor() -> old cursor
+::getViewers() -> viewers
+::getEventName() -> event name
+::getWhoClicked() -> who clicked
+::getResult() -> result
+::getInventorySlots() -> inventory slots
+::getRawSlots() -> raw slots
+::getView() -> view
+::getType() -> type
+::getInventory() -> inventory
+Adding event 'prepareItemCraft' -> 'prepare item craft'
+::getRecipe() -> recipe
+::getInventory() -> inventory
+::getViewers() -> viewers
+::getEventName() -> event name
+::getView() -> view
+Adding event 'inventoryClick' -> 'inventory click'
+::getAction() -> action
+::getCursor() -> cursor
+::getViewers() -> viewers
+::getEventName() -> event name
+::getWhoClicked() -> who clicked
+::getResult() -> result
+::getSlot() -> slot
+::getView() -> view
+::getInventory() -> inventory
+::getClickedInventory() -> clicked inventory
+::getHotbarButton() -> hotbar button
+::getSlotType() -> slot type
+::getRawSlot() -> raw slot
+::getClick() -> click
+::getCurrentItem() -> current item
+Adding event 'furnaceSmelt' -> 'furnace smelt'
+::getEventName() -> event name
+::getSource() -> source
+::getBlock() -> block
+::getResult() -> result
+Adding event 'inventoryClose' -> 'inventory close'
+::getPlayer() -> player
+::getView() -> view
+::getInventory() -> inventory
+::getViewers() -> viewers
+::getEventName() -> event name
+Adding event 'inventoryInteract' -> 'inventory interact'
+::getViewers() -> viewers
+::getEventName() -> event name
+::getWhoClicked() -> who clicked
+::getResult() -> result
+::getView() -> view
+::getInventory() -> inventory
+Adding event 'prepareAnvil' -> 'prepare anvil'
+::getResult() -> result
+::getInventory() -> inventory
+::getViewers() -> viewers
+::getEventName() -> event name
+::getView() -> view
+Adding event 'furnaceBurn' -> 'furnace burn'
+::getEventName() -> event name
+::getBurnTime() -> burn time
+::getBlock() -> block
+::getFuel() -> fuel
+Adding event 'craftItem' -> 'craft item'
+::getAction() -> action
+::getRecipe() -> recipe
+::getInventory() -> inventory
+::getCursor() -> cursor
+::getViewers() -> viewers
+::getEventName() -> event name
+::getWhoClicked() -> who clicked
+::getResult() -> result
+::getSlot() -> slot
+::getView() -> view
+::getClickedInventory() -> clicked inventory
+::getHotbarButton() -> hotbar button
+::getSlotType() -> slot type
+::getRawSlot() -> raw slot
+::getClick() -> click
+::getCurrentItem() -> current item
+Adding event 'furnaceExtract' -> 'furnace extract'
+::getExpToDrop() -> exp to drop
+::getPlayer() -> player
+::getItemAmount() -> item amount
+::getBlock() -> block
+::getItemType() -> item type
+::getEventName() -> event name
+Adding event 'inventory' -> 'inventory'
+::getView() -> view
+::getInventory() -> inventory
+::getViewers() -> viewers
+::getEventName() -> event name
+Adding event 'inventoryPickupItem' -> 'inventory pickup item'
+::getItem() -> item
+::getEventName() -> event name
+::getInventory() -> inventory
+Adding event 'inventoryCreative' -> 'inventory creative'
+::getAction() -> action
+::getCursor() -> cursor
+::getViewers() -> viewers
+::getEventName() -> event name
+::getWhoClicked() -> who clicked
+::getResult() -> result
+::getSlot() -> slot
+::getView() -> view
+::getInventory() -> inventory
+::getClickedInventory() -> clicked inventory
+::getHotbarButton() -> hotbar button
+::getSlotType() -> slot type
+::getRawSlot() -> raw slot
+::getClick() -> click
+::getCurrentItem() -> current item
+Adding event 'inventoryMoveItem' -> 'inventory move item'
+::getSource() -> source
+::getEventName() -> event name
+::getDestination() -> destination
+::getItem() -> item
+::getInitiator() -> initiator
+Adding event 'inventoryOpen' -> 'inventory open'
+::getViewers() -> viewers
+::getEventName() -> event name
+::getPlayer() -> player
+::getView() -> view
+::getInventory() -> inventory
+org.bukkit.event.entity ---------------------------------
+Adding event 'entityBreakDoor' -> 'entity break door'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getData() -> data
+::getEventName() -> event name
+::getBlock() -> block
+::getTo() -> to
+Adding event 'potionSplash' -> 'potion splash'
+::getPotion() -> potion
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getIntensity() -> intensity
+::getEventName() -> event name
+::getAffectedEntities() -> affected entities
+Adding event 'entity' -> 'entity'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+Adding event 'villagerAcquireTrade' -> 'villager acquire trade'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getRecipe() -> recipe
+::getEventName() -> event name
+Adding event 'foodLevelChange' -> 'food level change'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getFoodLevel() -> food level
+::getEventName() -> event name
+Adding event 'sheepDyeWool' -> 'sheep dye wool'
+::getEntity() -> entity
+::getEntityType() -> entity type
+::getColor() -> color
+::getEventName() -> event name
+Adding event 'itemMerge' -> 'item merge'
+::getTarget() -> target
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+Adding event 'villagerReplenishTrade' -> 'villager replenish trade'
+::getEntityType() -> entity type
+::getRecipe() -> recipe
+::getBonus() -> bonus
+::getEntity() -> entity
+::getEventName() -> event name
+Adding event 'entityTarget' -> 'entity target'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getReason() -> reason
+::getEventName() -> event name
+::getTarget() -> target
+Adding event 'entityCreatePortal' -> 'entity create portal'
+::getEntityType() -> entity type
+::getPortalType() -> portal type
+::getEntity() -> entity
+::getEventName() -> event name
+::getBlocks() -> blocks
+Adding event 'creeperPower' -> 'creeper power'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getCause() -> cause
+::getLightning() -> lightning
+::getEventName() -> event name
+Adding event 'entityTargetLivingEntity' -> 'entity target living entity'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getReason() -> reason
+::getEventName() -> event name
+::getTarget() -> target
+Adding event 'entityPortalEnter' -> 'entity portal enter'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getLocation() -> location
+::getEventName() -> event name
+Adding event 'entityPortal' -> 'entity portal'
+::getPortalTravelAgent() -> portal travel agent
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getTo() -> to
+::getEventName() -> event name
+::getFrom() -> from
+Adding event 'entityUnleash' -> 'entity unleash'
+::getEntityType() -> entity type
+::getReason() -> reason
+::getEntity() -> entity
+::getEventName() -> event name
+Adding event 'slimeSplit' -> 'slime split'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+::getCount() -> count
+Adding event 'itemDespawn' -> 'item despawn'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+::getLocation() -> location
+Adding event 'projectileHit' -> 'projectile hit'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+Adding event 'fireworkExplode' -> 'firework explode'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+Adding event 'projectileLaunch' -> 'projectile launch'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+Adding event 'areaEffectCloudApply' -> 'area effect cloud apply'
+::getAffectedEntities() -> affected entities
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+Adding event 'entitySpawn' -> 'entity spawn'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getLocation() -> location
+::getEventName() -> event name
+Adding event 'entityTame' -> 'entity tame'
+::getOwner() -> owner
+::getEntity() -> entity
+::getEntityType() -> entity type
+::getEventName() -> event name
+Adding event 'entityRegainHealth' -> 'entity regain health'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+::getRegainReason() -> regain reason
+::getAmount() -> amount
+Adding event 'entityDamageByBlock' -> 'entity damage by block'
+::getEntityType() -> entity type
+::getOriginalDamage() -> original damage
+::getEntity() -> entity
+::getDamager() -> damager
+::getEventName() -> event name
+::getFinalDamage() -> final damage
+::getCause() -> cause
+::getDamage() -> damage
+Adding event 'entityDamageByEntity' -> 'entity damage by entity'
+::getEntityType() -> entity type
+::getOriginalDamage() -> original damage
+::getDamager() -> damager
+::getEntity() -> entity
+::getEventName() -> event name
+::getFinalDamage() -> final damage
+::getCause() -> cause
+::getDamage() -> damage
+Adding event 'horseJump' -> 'horse jump'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+::getPower() -> power
+Adding event 'enderDragonChangePhase' -> 'ender dragon change phase'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getNewPhase() -> new phase
+::getEventName() -> event name
+::getCurrentPhase() -> current phase
+Adding event 'entityShootBow' -> 'entity shoot bow'
+::getEntityType() -> entity type
+::getForce() -> force
+::getBow() -> bow
+::getEntity() -> entity
+::getEventName() -> event name
+::getProjectile() -> projectile
+Adding event 'playerDeath' -> 'player death'
+::getDroppedExp() -> dropped exp
+::getEntityType() -> entity type
+::getKeepInventory() -> keep inventory
+::getEntity() -> entity
+::getKeepLevel() -> keep level
+::getEventName() -> event name
+::getDeathMessage() -> death message
+::getNewTotalExp() -> new total exp
+::getNewLevel() -> new level
+::getDrops() -> drops
+::getNewExp() -> new exp
+Adding event 'entityCombust' -> 'entity combust'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+::getDuration() -> duration
+Adding event 'entityCombustByEntity' -> 'entity combust by entity'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+::getDuration() -> duration
+::getCombuster() -> combuster
+Adding event 'entityInteract' -> 'entity interact'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getBlock() -> block
+::getEventName() -> event name
+Adding event 'creatureSpawn' -> 'creature spawn'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getLocation() -> location
+::getSpawnReason() -> spawn reason
+::getEventName() -> event name
+Adding event 'spawnerSpawn' -> 'spawner spawn'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getLocation() -> location
+::getEventName() -> event name
+::getSpawner() -> spawner
+Adding event 'entityDeath' -> 'entity death'
+::getDroppedExp() -> dropped exp
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getDrops() -> drops
+::getEventName() -> event name
+Adding event 'lingeringPotionSplash' -> 'lingering potion splash'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+::getAreaEffectCloud() -> area effect cloud
+Adding event 'entityCombustByBlock' -> 'entity combust by block'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+::getDuration() -> duration
+::getCombuster() -> combuster
+Adding event 'pigZap' -> 'pig zap'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+::getPigZombie() -> pig zombie
+::getLightning() -> lightning
+Adding event 'entityChangeBlock' -> 'entity change block'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getData() -> data
+::getEventName() -> event name
+::getBlock() -> block
+::getTo() -> to
+Adding event 'entityDamage' -> 'entity damage'
+::getEntityType() -> entity type
+::getOriginalDamage() -> original damage
+::getEntity() -> entity
+::getEventName() -> event name
+::getFinalDamage() -> final damage
+::getCause() -> cause
+::getDamage() -> damage
+Adding event 'entityExplode' -> 'entity explode'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+::getYield() -> yield
+::getLocation() -> location
+Adding event 'playerLeashEntity' -> 'player leash entity'
+::getEntity() -> entity
+::getPlayer() -> player
+::getEventName() -> event name
+::getLeashHolder() -> leash holder
+Adding event 'sheepRegrowWool' -> 'sheep regrow wool'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+Adding event 'explosionPrime' -> 'explosion prime'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getRadius() -> radius
+::getEventName() -> event name
+::getFire() -> fire
+Adding event 'entityToggleGlide' -> 'entity toggle glide'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getEventName() -> event name
+Adding event 'expBottle' -> 'exp bottle'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getExperience() -> experience
+::getEventName() -> event name
+::getShowEffect() -> show effect
+Adding event 'entityTeleport' -> 'entity teleport'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getTo() -> to
+::getEventName() -> event name
+::getFrom() -> from
+Adding event 'itemSpawn' -> 'item spawn'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getLocation() -> location
+::getEventName() -> event name
+Adding event 'entityPortalExit' -> 'entity portal exit'
+::getEntityType() -> entity type
+::getEntity() -> entity
+::getBefore() -> before
+::getAfter() -> after
+::getTo() -> to
+::getEventName() -> event name
+::getFrom() -> from
+org.bukkit.event.enchantment ---------------------------------
+Adding event 'enchantItem' -> 'enchant item'
+::getEnchanter() -> enchanter
+::getItem() -> item
+::getEnchantBlock() -> enchant block
+::getViewers() -> viewers
+::getEventName() -> event name
+::getEnchantsToAdd() -> enchants to add
+::getView() -> view
+::getExpLevelCost() -> exp level cost
+::getInventory() -> inventory
+Adding event 'prepareItemEnchant' -> 'prepare item enchant'
+::getExpLevelCostsOffered() -> exp level costs offered
+::getItem() -> item
+::getEnchantmentBonus() -> enchantment bonus
+::getEnchanter() -> enchanter
+::getEnchantBlock() -> enchant block
+::getViewers() -> viewers
+::getEventName() -> event name
+::getView() -> view
+::getInventory() -> inventory
+org.bukkit.event.block ---------------------------------
+Adding event 'blockPistonExtend' -> 'block piston extend'
+::getBlocks() -> blocks
+::getDirection() -> direction
+::getEventName() -> event name
+::getLength() -> length
+::getBlock() -> block
+Adding event 'blockDispense' -> 'block dispense'
+::getVelocity() -> velocity
+::getItem() -> item
+::getEventName() -> event name
+::getBlock() -> block
+Adding event 'blockRedstone' -> 'block redstone'
+::getOldCurrent() -> old current
+::getBlock() -> block
+::getNewCurrent() -> new current
+::getEventName() -> event name
+Adding event 'blockFade' -> 'block fade'
+::getNewState() -> new state
+::getBlock() -> block
+::getEventName() -> event name
+Adding event 'blockBreak' -> 'block break'
+::getPlayer() -> player
+::getEventName() -> event name
+::getExpToDrop() -> exp to drop
+::getBlock() -> block
+Adding event 'blockDamage' -> 'block damage'
+::getItemInHand() -> item in hand
+::getEventName() -> event name
+::getPlayer() -> player
+::getBlock() -> block
+::getInstaBreak() -> insta break
+Adding event 'notePlay' -> 'note play'
+::getInstrument() -> instrument
+::getEventName() -> event name
+::getNote() -> note
+::getBlock() -> block
+Adding event 'blockForm' -> 'block form'
+::getEventName() -> event name
+::getNewState() -> new state
+::getBlock() -> block
+Adding event 'leavesDecay' -> 'leaves decay'
+::getBlock() -> block
+::getEventName() -> event name
+Adding event 'blockExplode' -> 'block explode'
+::getEventName() -> event name
+::getYield() -> yield
+::getBlock() -> block
+Adding event 'signChange' -> 'sign change'
+::getLine(int) -> line <number>
+::getLines() -> lines
+::getPlayer() -> player
+::getEventName() -> event name
+::getBlock() -> block
+Adding event 'blockBurn' -> 'block burn'
+::getBlock() -> block
+::getEventName() -> event name
+Adding event 'blockIgnite' -> 'block ignite'
+::getIgnitingBlock() -> igniting block
+::getCause() -> cause
+::getIgnitingEntity() -> igniting entity
+::getPlayer() -> player
+::getEventName() -> event name
+::getBlock() -> block
+Adding event 'blockPlace' -> 'block place'
+::getItemInHand() -> item in hand
+::getBlockAgainst() -> block against
+::getEventName() -> event name
+::getBlockReplacedState() -> block replaced state
+::getBlockPlaced() -> block placed
+::getHand() -> hand
+::getBlock() -> block
+::getPlayer() -> player
+Adding event 'blockPhysics' -> 'block physics'
+::getChangedTypeId() -> changed type id
+::getChangedType() -> changed type
+::getBlock() -> block
+::getEventName() -> event name
+Adding event 'blockGrow' -> 'block grow'
+::getBlock() -> block
+::getEventName() -> event name
+::getNewState() -> new state
+Adding event 'blockSpread' -> 'block spread'
+::getEventName() -> event name
+::getNewState() -> new state
+::getSource() -> source
+::getBlock() -> block
+Adding event 'blockPistonRetract' -> 'block piston retract'
+::getDirection() -> direction
+::getEventName() -> event name
+::getBlocks() -> blocks
+::getBlock() -> block
+::getRetractLocation() -> retract location
+Adding event 'block' -> 'block'
+::getBlock() -> block
+::getEventName() -> event name
+Adding event 'blockExp' -> 'block exp'
+::getExpToDrop() -> exp to drop
+::getBlock() -> block
+::getEventName() -> event name
+Adding event 'entityBlockForm' -> 'entity block form'
+::getEntity() -> entity
+::getEventName() -> event name
+::getNewState() -> new state
+::getBlock() -> block
+Adding event 'blockMultiPlace' -> 'block multi place'
+::getItemInHand() -> item in hand
+::getReplacedBlockStates() -> replaced block states
+::getBlockAgainst() -> block against
+::getEventName() -> event name
+::getBlockReplacedState() -> block replaced state
+::getBlockPlaced() -> block placed
+::getHand() -> hand
+::getBlock() -> block
+::getPlayer() -> player
+Adding event 'blockPiston' -> 'block piston'
+::getBlock() -> block
+::getDirection() -> direction
+::getEventName() -> event name
+Adding event 'cauldronLevelChange' -> 'cauldron level change'
+::getNewLevel() -> new level
+::getOldLevel() -> old level
+::getEventName() -> event name
+::getEntity() -> entity
+::getBlock() -> block
+::getReason() -> reason
+Adding event 'blockFromTo' -> 'block from to'
+::getFace() -> face
+::getBlock() -> block
+::getToBlock() -> to block
+::getEventName() -> event name
+Adding event 'blockCanBuild' -> 'block can build'
+::getMaterial() -> material
+::getBlock() -> block
+::getMaterialId() -> material id
+::getEventName() -> event name
+org.bukkit.event.vehicle ---------------------------------
+Adding event 'vehicleDamage' -> 'vehicle damage'
+::getVehicle() -> vehicle
+::getDamage() -> damage
+::getEventName() -> event name
+::getAttacker() -> attacker
+Adding event 'vehicleCollision' -> 'vehicle collision'
+::getVehicle() -> vehicle
+::getEventName() -> event name
+Adding event 'vehicleEnter' -> 'vehicle enter'
+::getVehicle() -> vehicle
+::getEntered() -> entered
+::getEventName() -> event name
+Adding event 'vehicleDestroy' -> 'vehicle destroy'
+::getAttacker() -> attacker
+::getVehicle() -> vehicle
+::getEventName() -> event name
+Adding event 'vehicleEntityCollision' -> 'vehicle entity collision'
+::getEntity() -> entity
+::getVehicle() -> vehicle
+::getEventName() -> event name
+Adding event 'vehicleMove' -> 'vehicle move'
+::getFrom() -> from
+::getVehicle() -> vehicle
+::getTo() -> to
+::getEventName() -> event name
+Adding event 'vehicleUpdate' -> 'vehicle update'
+::getVehicle() -> vehicle
+::getEventName() -> event name
+Adding event 'vehicle' -> 'vehicle'
+::getVehicle() -> vehicle
+::getEventName() -> event name
+Adding event 'vehicleBlockCollision' -> 'vehicle block collision'
+::getVehicle() -> vehicle
+::getBlock() -> block
+::getEventName() -> event name
+Adding event 'vehicleExit' -> 'vehicle exit'
+::getVehicle() -> vehicle
+::getExited() -> exited
+::getEventName() -> event name
+Adding event 'vehicleCreate' -> 'vehicle create'
+::getVehicle() -> vehicle
+::getEventName() -> event name
+org.bukkit.event.world ---------------------------------
+Adding event 'worldSave' -> 'world save'
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'structureGrow' -> 'structure grow'
+::getLocation() -> location
+::getPlayer() -> player
+::getWorld() -> world
+::getBlocks() -> blocks
+::getEventName() -> event name
+::getSpecies() -> species
+Adding event 'portalCreate' -> 'portal create'
+::getReason() -> reason
+::getWorld() -> world
+::getBlocks() -> blocks
+::getEventName() -> event name
+Adding event 'chunkPopulate' -> 'chunk populate'
+::getChunk() -> chunk
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'worldLoad' -> 'world load'
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'chunk' -> 'chunk'
+::getChunk() -> chunk
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'world' -> 'world'
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'chunkUnload' -> 'chunk unload'
+::getChunk() -> chunk
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'spawnChange' -> 'spawn change'
+::getPreviousLocation() -> previous location
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'worldInit' -> 'world init'
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'chunkLoad' -> 'chunk load'
+::getChunk() -> chunk
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'worldUnload' -> 'world unload'
+::getWorld() -> world
+::getEventName() -> event name
+org.bukkit.event.weather ---------------------------------
+Adding event 'weatherChange' -> 'weather change'
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'lightningStrike' -> 'lightning strike'
+::getLightning() -> lightning
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'thunderChange' -> 'thunder change'
+::getWorld() -> world
+::getEventName() -> event name
+Adding event 'weather' -> 'weather'
+::getWorld() -> world
+::getEventName() -> event name
