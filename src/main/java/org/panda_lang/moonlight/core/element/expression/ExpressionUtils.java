@@ -1,23 +1,23 @@
 package org.panda_lang.moonlight.core.element.expression;
 
-import org.panda_lang.panda.core.statement.Factor;
+import org.panda_lang.panda.core.statement.RuntimeValue;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class ExpressionUtils {
 
-    public static Factor[] toFactors(Collection<ExpressionRuntime> expressionRuntimes) {
-        Collection<Factor> factorCollection = new ArrayList<>(expressionRuntimes.size());
+    public static RuntimeValue[] toFactors(Collection<ExpressionRuntime> expressionRuntimes) {
+        Collection<RuntimeValue> runtimeValueCollection = new ArrayList<>(expressionRuntimes.size());
         for (ExpressionRuntime expressionRuntime : expressionRuntimes) {
             if (expressionRuntime == null) {
                 continue;
             }
-            factorCollection.add(expressionRuntime.toFactor());
+            runtimeValueCollection.add(expressionRuntime.toFactor());
         }
 
-        final Factor[] array = new Factor[factorCollection.size()];
-        return factorCollection.toArray(array);
+        final RuntimeValue[] array = new RuntimeValue[runtimeValueCollection.size()];
+        return runtimeValueCollection.toArray(array);
     }
 
 }

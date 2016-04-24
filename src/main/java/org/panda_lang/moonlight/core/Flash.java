@@ -3,35 +3,35 @@ package org.panda_lang.moonlight.core;
 import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRuntime;
 import org.panda_lang.moonlight.core.parser.ExpressionParser;
-import org.panda_lang.panda.core.parser.Atom;
+import org.panda_lang.panda.core.parser.ParserInfo;
 
 import java.util.List;
 
 public class Flash {
 
     private final MoonlightCore moonlight;
-    private final Atom atom;
+    private final ParserInfo parserInfo;
 
-    public Flash(MoonlightCore moonlight, Atom atom) {
+    public Flash(MoonlightCore moonlight, ParserInfo parserInfo) {
         this.moonlight = moonlight;
-        this.atom = atom;
+        this.parserInfo = parserInfo;
     }
 
     public ExpressionRuntime parseExpression(String expression) {
         ExpressionParser expressionParser = new ExpressionParser(moonlight);
-        return expressionParser.parse(atom, expression);
+        return expressionParser.parse(parserInfo, expression);
     }
 
     public String getFullPhrase() {
-        return atom.getBlockInfo().getSpecifiersAsPhrase();
+        return parserInfo.getBlockInfo().getSpecifiersAsPhrase();
     }
 
     public List<String> getSpecifiers() {
-        return atom.getBlockInfo().getSpecifiers();
+        return parserInfo.getBlockInfo().getSpecifiers();
     }
 
-    public Atom getAtom() {
-        return atom;
+    public ParserInfo getParserInfo() {
+        return parserInfo;
     }
 
     public MoonlightCore getMoonlight() {

@@ -18,4 +18,9 @@ public class StringType implements Type<StringEssence> {
         return new StringEssence(dataSerializer.readUTF());
     }
 
+    @Override
+    public String toString(StringEssence object) {
+        return object.toString();
+    }
+
 }

@@ -9,7 +9,7 @@ import org.panda_lang.moonlight.core.util.RepresentationInfo;
 import org.panda_lang.panda.core.Alice;
 import org.panda_lang.panda.core.Essence;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
-import org.panda_lang.panda.core.statement.Factor;
+import org.panda_lang.panda.core.statement.RuntimeValue;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class Ray {
     private List<String> hollows;
     private Scope argumentScope;
     private Object scopeObject;
-    private Factor[] factors;
+    private RuntimeValue[] runtimeValues;
 
     public Ray(Alice alice) {
         this();
@@ -65,18 +65,18 @@ public class Ray {
         return this;
     }
 
-    public Ray factors(Factor... factors) {
-        this.factors = factors;
+    public Ray factors(RuntimeValue... runtimeValues) {
+        this.runtimeValues = runtimeValues;
         if (alice != null) {
-            alice.factors(factors);
+            alice.factors(runtimeValues);
         }
         return this;
     }
 
     public Ray particle(Alice alice) {
         this.alice = alice;
-        if (factors != null) {
-            alice.setFactors(factors);
+        if (runtimeValues != null) {
+            alice.setRuntimeValues(runtimeValues);
         }
 
         alice.setCustom(this);
@@ -129,8 +129,8 @@ public class Ray {
         return expressionModule;
     }
 
-    public Factor[] getFactors() {
-        return factors;
+    public RuntimeValue[] getRuntimeValues() {
+        return runtimeValues;
     }
 
     public HollowPattern getPattern() {

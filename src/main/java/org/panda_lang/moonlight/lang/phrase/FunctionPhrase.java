@@ -15,7 +15,7 @@ public class FunctionPhrase implements Phrase {
             // todo
         }
 
-        ray.getMoonlightScript().callFunction(functionName, ray.getFactors());
+        ray.getMoonlightScript().callFunction(functionName, ray.getRuntimeValues());
     }
 
 }

@@ -31,12 +31,12 @@ public class NativeParser implements Parser {
     }
 
     @Override
-    public Executable parse(Atom atom) {
-        final SourcesDivider sourcesDivider = atom.getSourcesDivider();
+    public Executable parse(ParserInfo parserInfo) {
+        final SourcesDivider sourcesDivider = parserInfo.getSourcesDivider();
         final StringBuilder nativeSourceBuilder = new StringBuilder("");
-        final Block block = new Block(atom.getCurrent());
+        final Block block = new Block(parserInfo.getCurrent());
 
-        while (sourcesDivider.hasNext() && atom.getPandaParser().isHappy()) {
+        while (sourcesDivider.hasNext() && parserInfo.getPandaParser().isHappy()) {
             String line = sourcesDivider.next();
 
             if (line.contains("---")) {

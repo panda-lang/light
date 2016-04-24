@@ -1,6 +1,7 @@
 package org.panda_lang.moonlight.core.element;
 
 import org.panda_lang.moonlight.MoonlightCore;
+import org.panda_lang.moonlight.core.element.expression.Expression;
 import org.panda_lang.moonlight.core.element.expression.ExpressionRepresentation;
 import org.panda_lang.moonlight.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.moonlight.core.element.type.Type;
@@ -28,6 +29,12 @@ public abstract class Structure<T> extends Documentation implements Type<T> {
 
     public void addExpressionRepresentation(ExpressionRepresentation expressionRepresentation) {
         expressionRepresentations.add(expressionRepresentation);
+    }
+
+    public void addExpressionRepresentation(String pattern, Expression expression) {
+        ExpressionRepresentation expressionRepresentation = new ExpressionRepresentation(expression);
+        expressionRepresentation.pattern(pattern);
+        addExpressionRepresentation(expressionRepresentation);
     }
 
     public void registerRepresentations(MoonlightCore moonlightCore) {

@@ -5,7 +5,7 @@ import org.panda_lang.moonlight.core.element.expression.ExpressionRuntime;
 import org.panda_lang.moonlight.core.element.phrase.Phrase;
 import org.panda_lang.panda.core.Alice;
 import org.panda_lang.panda.core.statement.Block;
-import org.panda_lang.panda.core.statement.Factor;
+import org.panda_lang.panda.core.statement.RuntimeValue;
 import org.panda_lang.panda.core.statement.Return;
 
 public class ReturnPhrase implements Phrase {
@@ -21,8 +21,8 @@ public class ReturnPhrase implements Phrase {
         Block block = new Block(alice.getBlock());
         alice.getMemory().getParent().getCache().proceed(false);
 
-        Factor factor = result != null ? result.toFactor() : null;
-        Return returnElement = new Return(block, factor);
+        RuntimeValue runtimeValue = result != null ? result.toFactor() : null;
+        Return returnElement = new Return(block, runtimeValue);
         block.addExecutable(returnElement);
         block.execute(alice);
     }

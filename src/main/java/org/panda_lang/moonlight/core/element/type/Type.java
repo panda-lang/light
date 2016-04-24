@@ -10,4 +10,6 @@ public interface Type<T> {
 
     T deserialize(DataSerializer dataSerializer) throws IOException;
 
+    String toString(T object);
+
 }

@@ -9,12 +9,12 @@ import org.panda_lang.moonlight.core.element.phrase.Phrase;
 import org.panda_lang.moonlight.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.panda.core.Alice;
 import org.panda_lang.panda.core.Essence;
-import org.panda_lang.panda.core.parser.Atom;
+import org.panda_lang.panda.core.parser.ParserInfo;
 import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.ParserLayout;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.statement.Executable;
-import org.panda_lang.panda.core.statement.Factor;
+import org.panda_lang.panda.core.statement.RuntimeValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +34,8 @@ public class PhraseParser implements Parser {
         moonlightCore.registerParser(parserLayout);
     }
 
-    public Executable parse(final Atom atom) {
-        String phraseSource = atom.getSourcesDivider().getLine().trim();
+    public Executable parse(final ParserInfo parserInfo) {
+        String phraseSource = parserInfo.getSourcesDivider().getLine().trim();
         phraseSource = phraseSource.substring(0, phraseSource.length() - 1);
 
         for (final PhraseRepresentation phraseRepresentation : moonlightCore.getPhraseCenter().getElements()) {
@@ -45,12 +45,12 @@ public class PhraseParser implements Parser {
                     final ExpressionParser expressionParser = new ExpressionParser(moonlightCore);
                     final List<String> hollows = new ArrayList<>(pattern.getHollows());
                     final List<ExpressionRuntime> expressions = new ArrayList<>(hollows.size() - phraseRepresentation.getRaw());
-                    final Factor[] factors = ExpressionUtils.toFactors(expressions);
+                    final RuntimeValue[] runtimeValues = ExpressionUtils.toFactors(expressions);
                     final Phrase phrase = phraseRepresentation.getPhrase();
 
                     for (int i = phraseRepresentation.getRaw(); i < hollows.size(); i++) {
                         String hollow = hollows.get(i);
-                        ExpressionRuntime expressionRuntime = expressionParser.parse(atom, hollow);
+                        ExpressionRuntime expressionRuntime = expressionParser.parse(parserInfo, hollow);
                         expressions.add(expressionRuntime);
                     }
 
@@ -63,11 +63,11 @@ public class PhraseParser implements Parser {
                             }
 
                             ray.particle(alice)
-                                    .script((MoonlightScript) atom.getPandaScript())
+                                    .script((MoonlightScript) parserInfo.getPandaScript())
                                     .pattern(pattern)
                                     .hollows(new ArrayList<>(hollows))
                                     .expressionRuntimes(expressions)
-                                    .factors(factors);
+                                    .factors(runtimeValues);
                             phrase.run(ray);
                             return null;
                         }

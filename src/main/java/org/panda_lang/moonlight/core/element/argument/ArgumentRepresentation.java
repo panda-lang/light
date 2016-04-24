@@ -6,10 +6,15 @@ import org.panda_lang.moonlight.core.util.Representation;
 public class ArgumentRepresentation extends Representation<Argument> {
 
     private String argumentName;
+    private Class<?> returnedClass;
     private ArgumentInitializer argumentInitializer;
 
     public void name(String argumentName) {
         this.argumentName = argumentName;
+    }
+
+    public void clazz(Class<?> returnedClass) {
+        this.returnedClass = returnedClass;
     }
 
     public void initializer(ArgumentInitializer argumentInitializer) {
@@ -25,16 +30,12 @@ public class ArgumentRepresentation extends Representation<Argument> {
         return argumentInitializer;
     }
 
-    public String getArgumentName() {
-        return argumentName;
+    public Class<?> getReturnedClass() {
+        return returnedClass;
     }
 
-    @Override
-    public String toString() {
-        return "ArgumentRepresentation{" +
-                "argumentName='" + argumentName + '\'' +
-                ", argumentInitializer=" + argumentInitializer +
-                '}';
+    public String getArgumentName() {
+        return argumentName;
     }
 
 }

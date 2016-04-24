@@ -7,7 +7,7 @@ import org.panda_lang.panda.PandaScript;
 import org.panda_lang.panda.core.Alice;
 import org.panda_lang.panda.core.Essence;
 import org.panda_lang.panda.core.memory.Memory;
-import org.panda_lang.panda.core.statement.Factor;
+import org.panda_lang.panda.core.statement.RuntimeValue;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,13 +42,13 @@ public class MoonlightScript extends PandaScript {
         eventScope.execute(ray.getAlice());
     }
 
-    public Essence callFunction(String functionName, Factor... factors) {
+    public Essence callFunction(String functionName, RuntimeValue... runtimeValues) {
         FunctionScope functionScope = functionBlockMap.get(functionName);
         if (functionScope == null) {
             return null;
         }
 
-        Ray ray = getAssociatedRay().factors(factors);
+        Ray ray = getAssociatedRay().factors(runtimeValues);
         return functionScope.execute(ray.getAlice());
     }
 

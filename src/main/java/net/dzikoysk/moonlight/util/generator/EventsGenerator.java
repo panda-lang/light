@@ -1,5 +1,7 @@
 package net.dzikoysk.moonlight.util.generator;
 
+import net.dzikoysk.moonlight.util.generator.util.Generator;
+import net.dzikoysk.moonlight.util.generator.util.GeneratorUtils;
 import org.bukkit.event.Event;
 import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
@@ -9,7 +11,7 @@ import java.io.FileWriter;
 import java.lang.reflect.Method;
 import java.util.*;
 
-public class EventsGenerator {
+public class EventsGenerator implements Generator {
 
     private final File directory;
 
@@ -17,7 +19,8 @@ public class EventsGenerator {
         this.directory = new File(dir);
     }
 
-    private void run() throws Exception {
+    @Override
+    public void generate() throws Exception {
         directory.mkdirs();
 
         Reflections reflections = new Reflections("org.bukkit.event");
@@ -46,8 +49,8 @@ public class EventsGenerator {
 
             for (Class<? extends Event> eventClass : entry.getValue()) {
                 String eventClassName = eventClass.getSimpleName();
-                String eventName = transformName(eventPackage, eventClass.getSimpleName(), false, "Event");
-                String eventNameWithSpaces = transformName(eventPackage, eventClass.getSimpleName(), true, "Event");
+                String eventName = GeneratorUtils.transformName(eventPackage, eventClass.getSimpleName(), false, "Event");
+                String eventNameWithSpaces = GeneratorUtils.transformName(eventPackage, eventClass.getSimpleName(), true, "Event");
                 Set<Method> methods = ReflectionUtils.getAllMethods(eventClass);
 
                 System.out.println("Adding event " + eventClassName + " -> 'on " + eventNameWithSpaces + " {}'");
@@ -73,7 +76,7 @@ public class EventsGenerator {
                             }
                         }
 
-                        String argumentName = transformName("get", methodName, true);
+                        String argumentName = GeneratorUtils.transformName("get", methodName, true);
                         System.out.println("- '" + argumentName + "'");
                         fileWriter.write(System.lineSeparator());
                         fileWriter.write(getArgumentInitializer(argumentName, eventName, eventClassName, "event." + methodName + "();"));
@@ -90,7 +93,7 @@ public class EventsGenerator {
         }
     }
 
-    private String getArgumentInitializer(String argumentName, String eventName, String eventClassName, String argumentSource) {
+    public String getArgumentInitializer(String argumentName, String eventName, String eventClassName, String argumentSource) {
         return eventName + "ScopeUnit.registerArgument(\"" + argumentName + "\", new ArgumentInitializer<" + eventClassName + ">() {\n" +
                 "    @Override\n" +
                 "    public Object get(Ray ray, " + eventClassName + " event) {\n" +
@@ -99,35 +102,9 @@ public class EventsGenerator {
                 "});";
     }
 
-    private String transformName(String firstPart, String name, boolean spaces, String... otherParts) {
-        firstPart = Character.toUpperCase(firstPart.charAt(0)) + firstPart.substring(1);
-        name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
-        name = name.replace(firstPart, "");
-        for (String otherPart : otherParts) {
-            name = name.replace(otherPart, "");
-        }
-        name = Character.toLowerCase(name.charAt(0)) + name.substring(1);
-
-        String[] parts = name.split("(?=\\p{Upper})");
-
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String s : parts) {
-            if (spaces) {
-                s = Character.toLowerCase(s.charAt(0)) + s.substring(1);
-            }
-
-            stringBuilder.append(s);
-
-            if (spaces) {
-                stringBuilder.append(" ");
-            }
-        }
-        return stringBuilder.toString().trim();
-    }
-
     public static void main(String[] args) throws Exception {
         EventsGenerator eventsGenerator = new EventsGenerator("events");
-        eventsGenerator.run();
+        eventsGenerator.generate();
     }
 
 }

@@ -113,7 +113,7 @@ function pandaInfo {
 - [ ] Basic Types
 - [ ] Basic Phrases
 - [ ] Basic Expressions
-- [ ] Events
-- [ ] Commands
+- [x] Events
+- [x] Commands
 - [ ] Tasks
-- [ ] Extensions API
+- [x] Extensions API

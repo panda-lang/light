@@ -34,7 +34,7 @@ public class Scopes implements MoonlightElements {
             @Override
             public Scope initialize(Flash flash) {
                 ElseThenScope elseThenScope = new ElseThenScope();
-                Block previous = flash.getAtom().getPrevious();
+                Block previous = flash.getParserInfo().getPrevious();
                 if (previous instanceof IfThenScope) {
                     ((IfThenScope) previous).setElseThenScope(elseThenScope);
                 }

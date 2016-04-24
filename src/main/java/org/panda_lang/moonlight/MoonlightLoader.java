@@ -4,7 +4,7 @@ import org.panda_lang.moonlight.core.parser.util.LightCodeUtils;
 import org.panda_lang.moonlight.lang.scope.EventScope;
 import org.panda_lang.moonlight.lang.scope.FunctionScope;
 import org.panda_lang.panda.Panda;
-import org.panda_lang.panda.core.parser.Atom;
+import org.panda_lang.panda.core.parser.ParserInfo;
 import org.panda_lang.panda.core.parser.PandaParser;
 import org.panda_lang.panda.core.parser.util.Injection;
 import org.panda_lang.panda.core.statement.Executable;
@@ -49,7 +49,7 @@ public class MoonlightLoader {
 
         pandaParser.addInjection(new Injection() {
             @Override
-            public void call(Atom atom, Executable executable) {
+            public void call(ParserInfo parserInfo, Executable executable) {
                 if (executable instanceof EventScope) {
                     moonlightScript.registerEventBlock((EventScope) executable);
                 }

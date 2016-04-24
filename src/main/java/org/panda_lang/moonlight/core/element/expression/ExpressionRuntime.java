@@ -3,17 +3,17 @@ package org.panda_lang.moonlight.core.element.expression;
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.panda.core.Alice;
 import org.panda_lang.panda.core.Essence;
-import org.panda_lang.panda.core.statement.Factor;
+import org.panda_lang.panda.core.statement.RuntimeValue;
 import org.panda_lang.panda.core.statement.Runtime;
 
 public class ExpressionRuntime extends Runtime {
 
     protected Expression expression;
-    protected Factor factor;
+    protected RuntimeValue runtimeValue;
     protected Ray ray;
 
-    public ExpressionRuntime(Factor factor) {
-        this.factor = factor;
+    public ExpressionRuntime(RuntimeValue runtimeValue) {
+        this.runtimeValue = runtimeValue;
     }
 
     public ExpressionRuntime(Expression expression, Ray ray) {
@@ -42,12 +42,12 @@ public class ExpressionRuntime extends Runtime {
         return getFactorValue(ray);
     }
 
-    public Factor toFactor() {
-        return new Factor(this);
+    public RuntimeValue toFactor() {
+        return new RuntimeValue(this);
     }
 
     public Essence getFactorValue(Ray ray) {
-        return factor.getValue(ray.getAlice());
+        return runtimeValue.getValue(ray.getAlice());
     }
 
     public Essence getExpressionValue(Ray ray) {

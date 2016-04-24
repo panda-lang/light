@@ -7,7 +7,7 @@ import org.panda_lang.moonlight.core.element.expression.ExpressionRuntime;
 import org.panda_lang.moonlight.core.element.scope.Scope;
 import org.panda_lang.moonlight.core.element.scope.ScopeRepresentation;
 import org.panda_lang.moonlight.core.element.scope.ScopeUnit;
-import org.panda_lang.panda.core.parser.Atom;
+import org.panda_lang.panda.core.parser.ParserInfo;
 import org.panda_lang.panda.core.parser.PandaException;
 import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
@@ -18,13 +18,15 @@ import java.util.List;
 
 public class ArgumentParser implements Parser {
 
+    private ArgumentRepresentation argumentRepresentation;
+
     @Override
-    public ExpressionRuntime parse(Atom atom) {
-        Block block = atom.getCurrent();
+    public ExpressionRuntime parse(ParserInfo parserInfo) {
+        Block block = parserInfo.getCurrent();
         while (block != null) {
             if (block instanceof Scope) {
                 Scope scope = (Scope) block;
-                ExpressionRuntime expressionRuntime = parse(atom, scope);
+                ExpressionRuntime expressionRuntime = parse(parserInfo, scope);
 
                 if (expressionRuntime != null) {
                     return expressionRuntime;
@@ -37,8 +39,8 @@ public class ArgumentParser implements Parser {
         return null;
     }
 
-    public ExpressionRuntime parse(Atom atom, Scope scope) {
-        String argumentSource = atom.getSourceCode();
+    public ExpressionRuntime parse(ParserInfo parserInfo, Scope scope) {
+        String argumentSource = parserInfo.getSourceCode();
         ScopeRepresentation scopeRepresentation = scope.getScopeRepresentation();
         ScopeUnit scopeUnit = scopeRepresentation.getScopeUnit(scope);
 
@@ -46,9 +48,10 @@ public class ArgumentParser implements Parser {
             for (HollowPattern hollowPattern : argumentRepresentation.getPatterns()) {
                 if (hollowPattern.match(argumentSource)) {
                     if (!scope.argumentBelongsToScope(argumentRepresentation)) {
-                        PandaException pandaException = new PandaException("Argument " + argumentSource + " is not allowed here", atom.getSourcesDivider());
-                        return atom.getPandaParser().throwException(pandaException);
+                        PandaException pandaException = new PandaException("Argument " + argumentSource + " is not allowed here", parserInfo.getSourcesDivider());
+                        return parserInfo.getPandaParser().throwException(pandaException);
                     }
+                    this.argumentRepresentation = argumentRepresentation;
 
                     final List<String> hollows = new ArrayList<>(hollowPattern.getHollows());
                     final Scope argumentScope = scope;
@@ -66,6 +69,10 @@ public class ArgumentParser implements Parser {
         }
 
         return null;
+    }
+
+    public ArgumentRepresentation getArgumentRepresentation() {
+        return argumentRepresentation;
     }
 
 }
