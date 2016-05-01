@@ -2,7 +2,7 @@ package org.panda_lang.moonlight.core.element.expression;
 
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.statement.RuntimeValue;
 import org.panda_lang.panda.core.statement.Runtime;
 
@@ -22,7 +22,7 @@ public class ExpressionRuntime extends Runtime {
     }
 
     @Override
-    public Essence execute(Alice alice) {
+    public Inst execute(Alice alice) {
         if (ray == null) {
             if (alice.getCustom() != null) {
                 ray = alice.getCustom();
@@ -35,7 +35,7 @@ public class ExpressionRuntime extends Runtime {
         return get(ray);
     }
 
-    public Essence get(Ray ray) {
+    public Inst get(Ray ray) {
         if (expression != null) {
             return getExpressionValue(ray);
         }
@@ -46,16 +46,16 @@ public class ExpressionRuntime extends Runtime {
         return new RuntimeValue(this);
     }
 
-    public Essence getFactorValue(Ray ray) {
+    public Inst getFactorValue(Ray ray) {
         return runtimeValue.getValue(ray.getAlice());
     }
 
-    public Essence getExpressionValue(Ray ray) {
+    public Inst getExpressionValue(Ray ray) {
         Object object = expression.getValue(ray);
-        if (object instanceof Essence) {
-            return (Essence) object;
+        if (object instanceof Inst) {
+            return (Inst) object;
         }
-        return new ExpressionEssence(object);
+        return new ExpressionInst(object);
     }
 
     public Ray getRay() {

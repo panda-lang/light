@@ -4,7 +4,7 @@ import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.MoonlightScript;
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.expression.*;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.parser.ParserInfo;
 import org.panda_lang.panda.core.parser.PandaException;
 import org.panda_lang.panda.core.parser.Parser;
@@ -41,7 +41,7 @@ public class ExpressionParser implements Parser {
 
                     return new ExpressionRuntime(expression, null) {
                         @Override
-                        public Essence get(Ray ray) {
+                        public Inst get(Ray ray) {
                             ray.script((MoonlightScript) parserInfo.getPandaScript())
                                     .pattern(pattern)
                                     .expressionRuntimes(expressions)
@@ -68,10 +68,10 @@ public class ExpressionParser implements Parser {
         }
 
         EssenceParser essenceParser = new EssenceParser();
-        Essence essence = essenceParser.parse(parserInfo);
+        Inst inst = essenceParser.parse(parserInfo);
 
-        if (essence != null) {
-            RuntimeValue runtimeValue = new RuntimeValue(essence);
+        if (inst != null) {
+            RuntimeValue runtimeValue = new RuntimeValue(inst);
             return new ExpressionRuntime(runtimeValue);
         }
 

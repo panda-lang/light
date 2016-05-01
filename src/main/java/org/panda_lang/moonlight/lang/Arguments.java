@@ -7,7 +7,7 @@ import org.panda_lang.moonlight.core.element.scope.ScopeCenter;
 import org.panda_lang.moonlight.core.element.scope.ScopeRepresentation;
 import org.panda_lang.moonlight.lang.scope.LoopScope;
 import org.panda_lang.moonlight.util.MoonlightElements;
-import org.panda_lang.panda.lang.IntEssence;
+import org.panda_lang.panda.lang.IntInst;
 
 public class Arguments implements MoonlightElements {
 
@@ -26,7 +26,7 @@ public class Arguments implements MoonlightElements {
             @Override
             public Object get(Ray ray, Object object) {
                 int loopIndex = (int) ray.getAlice().getMemory().getCache().slotA;
-                return new IntEssence(loopIndex);
+                return new IntInst(loopIndex);
             }
         });
     }

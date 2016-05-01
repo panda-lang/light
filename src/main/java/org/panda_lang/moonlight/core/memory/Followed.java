@@ -1,7 +1,7 @@
 package org.panda_lang.moonlight.core.memory;
 
 import org.panda_lang.moonlight.MoonlightCore;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.memory.Global;
 import org.panda_lang.panda.core.memory.MemoryFollower;
 
@@ -21,7 +21,7 @@ public class Followed {
         final Followed followed = this;
         Global.COMMON_MEMORY.registerMemoryFollower(new MemoryFollower() {
             @Override
-            public void put(String key, Essence value) {
+            public void put(String key, Inst value) {
                 if (key.equals(variableName)) {
                     followed.updateVariable(key, value);
                 }
@@ -29,7 +29,7 @@ public class Followed {
         });
     }
 
-    public void updateVariable(String variableName, Essence value) {
+    public void updateVariable(String variableName, Inst value) {
         try {
             storage.update(variableName, value);
         } catch (IOException e) {

@@ -5,7 +5,7 @@ import org.panda_lang.moonlight.lang.scope.EventScope;
 import org.panda_lang.moonlight.lang.scope.FunctionScope;
 import org.panda_lang.panda.PandaScript;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.memory.Memory;
 import org.panda_lang.panda.core.statement.RuntimeValue;
 
@@ -42,7 +42,7 @@ public class MoonlightScript extends PandaScript {
         eventScope.execute(ray.getAlice());
     }
 
-    public Essence callFunction(String functionName, RuntimeValue... runtimeValues) {
+    public Inst callFunction(String functionName, RuntimeValue... runtimeValues) {
         FunctionScope functionScope = functionBlockMap.get(functionName);
         if (functionScope == null) {
             return null;

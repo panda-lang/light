@@ -1,7 +1,7 @@
 package org.panda_lang.moonlight.core.element.type;
 
 import org.panda_lang.moonlight.core.element.expression.ExpressionRepresentation;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +26,7 @@ public class TypeRepresentation {
         return expressionRepresentations;
     }
 
-    public Type<Essence> getType() {
+    public Type<Inst> getType() {
         return type;
     }
 

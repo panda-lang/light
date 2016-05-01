@@ -2,7 +2,7 @@ package org.panda_lang.moonlight.lang.phrase;
 
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.phrase.Phrase;
-import org.panda_lang.panda.lang.ArrayEssence;
+import org.panda_lang.panda.lang.ArrayInst;
 
 public class FunctionPhrase implements Phrase {
 
@@ -11,7 +11,7 @@ public class FunctionPhrase implements Phrase {
         final String functionName = ray.getHollows().get(0);
 
         if (ray.getPattern().getIndex() == 0) {
-            ArrayEssence arrayEssence = ray.getExpressionValue(0);
+            ArrayInst arrayEssence = ray.getExpressionValue(0);
             // todo
         }
 

@@ -7,7 +7,7 @@ import org.panda_lang.moonlight.core.element.scope.Scope;
 import org.panda_lang.moonlight.core.util.ModificationType;
 import org.panda_lang.moonlight.core.util.RepresentationInfo;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.statement.RuntimeValue;
 
@@ -96,8 +96,8 @@ public class Ray {
 
     @SuppressWarnings("unchecked")
     public <T> T getExpressionValue(int index) {
-        Essence essence = getDefaultExpressionValue(index);
-        Object object = essence != null ? essence.getJavaValue() : null;
+        Inst inst = getDefaultExpressionValue(index);
+        Object object = inst != null ? inst.getJavaValue() : null;
         return (T) object;
     }
 

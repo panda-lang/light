@@ -2,9 +2,9 @@ package org.panda_lang.moonlight.lang.scope;
 
 import org.panda_lang.moonlight.core.element.scope.Scope;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.statement.RuntimeValue;
-import org.panda_lang.panda.lang.BooleanEssence;
+import org.panda_lang.panda.lang.BooleanInst;
 
 public class WhileScope extends Scope {
 
@@ -16,11 +16,11 @@ public class WhileScope extends Scope {
     }
 
     @Override
-    public Essence execute(Alice alice) {
-        while (runtimeValue.<BooleanEssence>getValue(alice).isTrue()) {
-            final Essence essence = super.execute(alice);
-            if (essence != null) {
-                return essence;
+    public Inst execute(Alice alice) {
+        while (runtimeValue.<BooleanInst>getValue(alice).isTrue()) {
+            final Inst inst = super.execute(alice);
+            if (inst != null) {
+                return inst;
             }
         }
         return null;

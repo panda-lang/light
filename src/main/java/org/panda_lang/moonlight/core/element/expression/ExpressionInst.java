@@ -1,10 +1,10 @@
 package org.panda_lang.moonlight.core.element.expression;
 
-import org.panda_lang.panda.lang.ObjectEssence;
+import org.panda_lang.panda.lang.ObjectInst;
 
-public class ExpressionEssence extends ObjectEssence {
+public class ExpressionInst extends ObjectInst {
 
-    public ExpressionEssence(Object object) {
+    public ExpressionInst(Object object) {
         super(object);
     }
 

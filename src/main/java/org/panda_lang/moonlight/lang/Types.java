@@ -4,7 +4,7 @@ import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.moonlight.core.element.type.TypeRepresentation;
 import org.panda_lang.moonlight.lang.type.StringType;
 import org.panda_lang.moonlight.util.MoonlightElements;
-import org.panda_lang.panda.lang.StringEssence;
+import org.panda_lang.panda.lang.StringInst;
 
 public class Types implements MoonlightElements {
 
@@ -16,7 +16,7 @@ public class Types implements MoonlightElements {
 
     @Override
     public void registerDefaultElements() {
-        TypeRepresentation typeRepresentation = new TypeRepresentation(StringEssence.class, new StringType());
+        TypeRepresentation typeRepresentation = new TypeRepresentation(StringInst.class, new StringType());
         moonlightCore.registerType(typeRepresentation);
     }
 

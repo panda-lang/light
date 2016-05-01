@@ -2,8 +2,8 @@ package org.panda_lang.moonlight.core.element.expression;
 
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.util.Representation;
-import org.panda_lang.panda.core.Essence;
-import org.panda_lang.panda.lang.ObjectEssence;
+import org.panda_lang.panda.core.Inst;
+import org.panda_lang.panda.lang.ObjectInst;
 
 public class ExpressionRepresentation extends Representation<Expression> {
 
@@ -23,12 +23,12 @@ public class ExpressionRepresentation extends Representation<Expression> {
         this.individualExpression = individualExpression;
     }
 
-    public Essence getValue(Ray ray) {
+    public Inst getValue(Ray ray) {
         Object value = expression.getValue(ray);
-        if (value instanceof Essence) {
-            return (Essence) value;
+        if (value instanceof Inst) {
+            return (Inst) value;
         }
-        return new ObjectEssence(value);
+        return new ObjectInst(value);
     }
 
     public ExpressionType getExpressionType() {

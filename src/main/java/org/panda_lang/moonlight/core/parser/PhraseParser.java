@@ -8,7 +8,7 @@ import org.panda_lang.moonlight.core.element.expression.ExpressionUtils;
 import org.panda_lang.moonlight.core.element.phrase.Phrase;
 import org.panda_lang.moonlight.core.element.phrase.PhraseRepresentation;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.parser.ParserInfo;
 import org.panda_lang.panda.core.parser.Parser;
 import org.panda_lang.panda.core.parser.ParserLayout;
@@ -56,7 +56,7 @@ public class PhraseParser implements Parser {
 
                     return new Executable() {
                         @Override
-                        public Essence execute(Alice alice) {
+                        public Inst execute(Alice alice) {
                             Ray ray = alice.getCustom();
                             if (ray == null) {
                                 ray = new Ray();

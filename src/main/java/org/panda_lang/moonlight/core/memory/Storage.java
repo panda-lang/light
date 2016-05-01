@@ -6,7 +6,7 @@ import org.panda_lang.moonlight.core.element.type.TypeRepresentation;
 import org.panda_lang.moonlight.core.memory.database.Database;
 import org.panda_lang.moonlight.core.memory.database.DatabaseRecord;
 import org.panda_lang.moonlight.core.memory.database.util.DataSerializer;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.memory.Global;
 
 import java.io.*;
@@ -41,9 +41,9 @@ public class Storage {
                 TypeRepresentation typeRepresentation = typeCenter.get(typeClass);
 
                 if (typeRepresentation != null) {
-                    Type<Essence> type = typeRepresentation.getType();
-                    Essence essence = type.deserialize(dataSerializer);
-                    Global.COMMON_MEMORY.put(databaseRecord.getRecordName(), essence);
+                    Type<Inst> type = typeRepresentation.getType();
+                    Inst inst = type.deserialize(dataSerializer);
+                    Global.COMMON_MEMORY.put(databaseRecord.getRecordName(), inst);
                 }
             } catch (ClassNotFoundException | IOException e) {
                 e.printStackTrace();
@@ -51,11 +51,11 @@ public class Storage {
         }
     }
 
-    public void update(String variableName, Essence value) throws IOException {
+    public void update(String variableName, Inst value) throws IOException {
         TypeRepresentation typeRepresentation = typeCenter.get(value.getClass());
 
         if (typeRepresentation != null) {
-            Type<Essence> type = typeRepresentation.getType();
+            Type<Inst> type = typeRepresentation.getType();
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
             DataSerializer dataSerializer = new DataSerializer(dataOutputStream);

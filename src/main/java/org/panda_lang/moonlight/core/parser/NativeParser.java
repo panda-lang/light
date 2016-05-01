@@ -4,8 +4,9 @@ import org.panda_lang.moonlight.MoonlightCore;
 import org.panda_lang.panda.Panda;
 import org.panda_lang.panda.PandaScript;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.parser.*;
+import org.panda_lang.panda.core.parser.util.SourcesDivider;
 import org.panda_lang.panda.core.parser.util.match.parser.PatternExtractor;
 import org.panda_lang.panda.core.statement.Block;
 import org.panda_lang.panda.core.statement.Executable;
@@ -56,7 +57,7 @@ public class NativeParser implements Parser {
 
         return new Executable() {
             @Override
-            public Essence execute(Alice alice) {
+            public Inst execute(Alice alice) {
                 return block.execute(alice);
             }
         };

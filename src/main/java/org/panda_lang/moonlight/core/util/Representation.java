@@ -1,7 +1,7 @@
 package org.panda_lang.moonlight.core.util;
 
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
 import org.panda_lang.panda.core.statement.util.NamedExecutable;
 import org.panda_lang.panda.util.documentation.Documentation;
@@ -20,7 +20,7 @@ public class Representation<T> implements NamedExecutable {
     }
 
     @Override
-    public Essence execute(Alice alice) {
+    public Inst execute(Alice alice) {
         return null;
     }
 

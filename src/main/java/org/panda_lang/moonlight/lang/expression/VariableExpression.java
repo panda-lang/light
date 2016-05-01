@@ -3,7 +3,7 @@ package org.panda_lang.moonlight.lang.expression;
 import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.expression.Expression;
 import org.panda_lang.moonlight.core.util.Modification;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.memory.Memory;
 
 public class VariableExpression extends Expression {
@@ -18,7 +18,7 @@ public class VariableExpression extends Expression {
     public void modify(Modification modification) {
         Ray ray = modification.getRay();
         Memory memory = ray.getAlice().getMemory();
-        Essence value = modification.getValue() != null ? modification.getValue().get(ray) : null;
+        Inst value = modification.getValue() != null ? modification.getValue().get(ray) : null;
 
         switch (modification.getType()) {
             case ADD:
@@ -35,7 +35,7 @@ public class VariableExpression extends Expression {
     }
 
     @Override
-    public Essence getValue(Ray ray) {
+    public Inst getValue(Ray ray) {
         return ray.getAlice().getMemory().get(variableName);
     }
 

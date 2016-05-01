@@ -2,7 +2,7 @@ package org.panda_lang.moonlight.lang.scope;
 
 import org.panda_lang.moonlight.core.element.scope.Scope;
 import org.panda_lang.panda.core.Alice;
-import org.panda_lang.panda.core.Essence;
+import org.panda_lang.panda.core.Inst;
 import org.panda_lang.panda.core.memory.Cache;
 import org.panda_lang.panda.core.memory.Memory;
 import org.panda_lang.panda.core.parser.essential.util.Numeric;
@@ -18,7 +18,7 @@ public class LoopScope extends Scope {
     }
 
     @Override
-    public Essence execute(Alice alice) {
+    public Inst execute(Alice alice) {
         final Memory memory = alice.getMemory();
         final Cache cache = memory.getCache();
         final Numeric numeric = runtimeValue.getValue(alice);

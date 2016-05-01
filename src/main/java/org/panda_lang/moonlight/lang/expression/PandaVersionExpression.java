@@ -4,8 +4,8 @@ import org.panda_lang.moonlight.core.Ray;
 import org.panda_lang.moonlight.core.element.expression.Expression;
 import org.panda_lang.moonlight.core.util.Modification;
 import org.panda_lang.panda.Panda;
-import org.panda_lang.panda.core.Essence;
-import org.panda_lang.panda.lang.StringEssence;
+import org.panda_lang.panda.core.Inst;
+import org.panda_lang.panda.lang.StringInst;
 
 public class PandaVersionExpression extends Expression {
 
@@ -27,8 +27,8 @@ public class PandaVersionExpression extends Expression {
     }
 
     @Override
-    public Essence getValue(Ray ray) {
-        return new StringEssence(version);
+    public Inst getValue(Ray ray) {
+        return new StringInst(version);
     }
 
 }
