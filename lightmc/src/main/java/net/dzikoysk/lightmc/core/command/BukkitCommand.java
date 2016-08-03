@@ -1,6 +1,5 @@
 package net.dzikoysk.lightmc.core.command;
 
-import net.dzikoysk.lightmc.lang.scope.CommandScope;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -34,18 +33,6 @@ public class BukkitCommand implements CommandExecutor, TabExecutor {
         this.command = command;
         this.permission = permission;
         this.aliases = aliases;
-    }
-
-    public BukkitCommand(final CommandScope commandScope, final org.panda_lang.light.core.Ray ray) {
-        this(commandScope.getCommandName(), new BukkitCommandExecutor() {
-            @Override
-            public void execute(CommandSender sender, String[] args) {
-                BukkitCommandInfo bukkitCommandInfo = new BukkitCommandInfo(sender, args);
-                ray.scopeObject(bukkitCommandInfo);
-                ray.getAlice().setCustom(ray);
-                commandScope.execute(ray.getAlice());
-            }
-        }, commandScope.getPermission(), commandScope.getAliases());
     }
 
     public void register() {

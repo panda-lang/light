@@ -2,8 +2,6 @@ package net.dzikoysk.lightmc.core;
 
 import net.dzikoysk.lightmc.Light;
 import org.panda_lang.light.LightCore;
-import org.panda_lang.light.LightLoader;
-import org.panda_lang.light.LightScript;
 
 import java.io.File;
 
