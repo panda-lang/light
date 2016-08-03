@@ -18,7 +18,8 @@
         <module>lightmc</module>
     </modules>
 
-    <description>Light is a English-like programming language built on the core of the Panda Programming Language.</description>
+    <description>Light is a English-like programming language built on the core of the Panda Programming Language.
+    </description>
     <url>http://light.panda-lang.org/</url>
     <licenses>
         <license>

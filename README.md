@@ -1,18 +1,18 @@
-#Moonlight
+#Light
 
-Moonlight is a English-like programming language built on the core of the Panda Programming Language.
+Light is a English-like programming language built on the core of the Panda Programming Language.
 <br>
 <br>
-Website: https://moonlight.panda-lang.org/
+Website: https://light.panda-lang.org/
 <br>
-Panda Language: https://panda-lang.org/
+Panda Programming Language: https://panda-lang.org/
 <br>
 #### Example
 ```javascript
 // Event 'on load' called when the script starts
 on load {
-    // Display 'Hello Moonlight' in console
-    send "Hello Moonlight" to console
+    // Display 'Hello Light' in console
+    send "Hello Light" to console
 
     // If-statement
     if true {
@@ -52,68 +52,55 @@ function pandaInfo {
     send panda version to console
 }
 ```
-#####Goals:
-- [x] Blocks
-  - [x] Event
-  - [x] Function
-  - [x] Command
-  - [x] Loop
-  - [x] While
-  - [x] If-then
-  - [x] Else-then
-  - [x] Runnable
-- [x] Types
-  - [x] Classes
-  - [x] API
-- [x] Phrases
-  - [x] Classes
-  - [x] Parser
-  - [x] API
-- [x] Expressions
-  - [x] Classes
-  - [x] Parser
-  - [x] Assistant
-  - [x] Others
-  - [x] API
-- [x] Arguments
-  - [x] Classes
-  - [x] Parser
-  - [x] Assistant
-  - [x] Others
-  - [x] API
-- [x] Structures
-  - [x] Classes
-  - [x] API
-- [x] Variable system
-  - [x] Classes
-  - [x] Global
-  - [x] Followed
-  - [x] Storage
-  - [x] Others
-- [x] Registration system
-  - [x] Phrases
-  - [x] Expressions
-  - [x] Types
-  - [x] Events
-  - [x] Commands
-  - [x] Functions
-  - [x] Arguments
-  - [x] Structures
-- [ ] Libraries
-- [ ] Repositories
-<br>
-<br>
-- Other goals
-  - Access to the Panda
-  - Develop API
-<br>
-<br>
 
-#####Goals::Bukkit:
-- [ ] Basic Types
-- [ ] Basic Phrases
-- [ ] Basic Expressions
-- [x] Events
-- [x] Commands
-- [ ] Tasks
-- [x] Extensions API
+#### Repository structure
+
+```
+light/
++--exmaples/                 Example scripts written in Light.
++--light/                    Light module
+   +----/src                 All sources of Panda
+   +----pom.xml              The main maven build script for Light module
++--lightmc/                  LightMC module
+   +------/docs              Temporary documentation for LightMC
+   +------/src               All sources of LightMC
+   +------pom.xml            The main maven build script for LightMC module
++--pom.xml                   The main maven build script
+```
+
+#### Maven
+
+Latest build of Light. Remember, API is not stable yet :o:
+```xml
+<dependency>
+    <groupId>org.panda_lang</groupId>
+    <artifactId>light</artifactId>
+    <version>indev-0.0.1-SNAPSHOT</version>
+</dependency>
+```
+Latest build of LightMC:
+```xml
+<dependency>
+    <groupId>net.dzikoysk</groupId>
+    <artifactId>lightmc</artifactId>
+    <version>indev-0.0.1-SNAPSHOT</version>
+</dependency>
+```
+The latest build of the previous edition. Remember, this is deprecated!
+```xml
+<dependency>
+    <groupId>org.panda_lang</groupId>
+    <artifactId>light</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>
+```
+Repository: https://repo.panda-lang.org/
+```xml
+<repositories>
+    <repository>
+        <id>panda-repo</id>
+        <name>Panda Repository</name>
+        <url>https://repo.panda-lang.org/</url>
+    </repository>
+</repositories>
+```

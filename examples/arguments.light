@@ -1,0 +1,27 @@
+// Event 'on load' called when the script starts
+on load {
+
+    // Initialize benchmark
+    initialize benchmark
+
+    // Loop 1000 times
+    loop 1000 times {
+        // Display current index of the loop
+        print loop-index
+
+        // Point
+        benchmark point
+    }
+
+    // Call method 'result'
+    call result
+
+    // Stop benchmark and display result in console
+    stop benchmark
+}
+
+function result {
+    print "."
+    return
+    print "oops"
+}
