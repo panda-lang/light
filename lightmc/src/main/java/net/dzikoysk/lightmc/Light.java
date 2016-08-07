@@ -1,7 +1,6 @@
 package net.dzikoysk.lightmc;
 
 import net.dzikoysk.lightmc.core.command.BukkitCommandCenter;
-import net.dzikoysk.lightmc.core.event.BukkitEventCenter;
 import net.dzikoysk.lightmc.util.metrics.MetricsCollector;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,13 +10,10 @@ public class Light extends JavaPlugin {
     private static Light light;
     private final LightInitializer lightInitializer;
 
-    private final BukkitEventCenter bukkitEventCenter;
     private final BukkitCommandCenter bukkitCommandCenter;
 
     public Light() {
         this.lightInitializer = new LightInitializer(this);
-
-        this.bukkitEventCenter = new BukkitEventCenter(this);
         this.bukkitCommandCenter = new BukkitCommandCenter(this);
     }
 
@@ -40,10 +36,6 @@ public class Light extends JavaPlugin {
 
     public BukkitCommandCenter getBukkitCommandCenter() {
         return bukkitCommandCenter;
-    }
-
-    public BukkitEventCenter getBukkitEventCenter() {
-        return bukkitEventCenter;
     }
 
     public static Light getInstance() {
