@@ -1,6 +1,6 @@
 package org.panda_lang.light;
 
-import org.panda_lang.panda.core.parser.util.match.hollow.HollowPattern;
+import org.panda_lang.panda.implementation.parser.util.match.hollow.HollowPattern;
 
 public class HollowTest {
 
