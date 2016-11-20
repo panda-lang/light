@@ -65,7 +65,7 @@ public class StructuresGenerator implements Generator {
                     }
 
                     String getValueTemplate = getValueMethodTemplate()
-                            .replace("{get_value.source}", "{structure.name} object = ray.getExpressionValue(0);\n" +
+                            .replace("{get_value.source}", "{element.name} object = ray.getExpressionValue(0);\n" +
                                     "                return object." + methodName + "();");
 
                     expressionTemplate = expressionTemplate.replace("{get_value.method}", getValueTemplate);
@@ -89,7 +89,7 @@ public class StructuresGenerator implements Generator {
 
                     String modifyTemplate = getModifyMethodTemplate()
                             .replace("{modify.source}", "if (modification.getType() == ModificationType.SET) {\n" +
-                                    "                    {structure.name} object = ray.getExpressionValue(0);\n" +
+                                    "                    {element.name} object = ray.getExpressionValue(0);\n" +
                                     "                    " + method.getParameterTypes()[0].getSimpleName() + " value = ray.getExpressionValue(1);\n" +
                                     "                    object." + methodName + "(value);\n" +
                                     "                }");
@@ -117,7 +117,7 @@ public class StructuresGenerator implements Generator {
                     .replace("{serialize}", "")
                     .replace("{deserialize}", "return null;")
                     .replace("{to_string}", "return object.toString();")
-                    .replace("{structure.name}", structureName);
+                    .replace("{element.name}", structureName);
 
             fileWriter.write(structureClassTemplate);
             fileWriter.flush();
@@ -126,27 +126,27 @@ public class StructuresGenerator implements Generator {
     }
 
     private String getClassTemplate() {
-        return "public class {structure.name}Structure extends Structure<{structure.name}> {\n" +
+        return "public class {element.name}Structure extends Structure<{element.name}> {\n" +
                 "\n" +
                 "    @Override\n" +
                 "    public void initialize(LightCore lightCore) {\n" +
-                "        hookClass({structure.name}.class);\n" +
+                "        hookClass({element.name}.class);\n" +
                 "\n" +
                 "{expressions}" +
                 "    }\n" +
                 "\n" +
                 "    @Override\n" +
-                "    public void serialize(DataSerializer dataSerializer, {structure.name} object) throws IOException {\n" +
+                "    public void serialize(DataSerializer dataSerializer, {element.name} object) throws IOException {\n" +
                 "        {serialize}\n" +
                 "    }\n" +
                 "\n" +
                 "    @Override\n" +
-                "    public {structure.name} deserialize(DataSerializer dataSerializer) throws IOException {\n" +
+                "    public {element.name} deserialize(DataSerializer dataSerializer) throws IOException {\n" +
                 "        {deserialize}\n" +
                 "    }\n" +
                 "\n" +
                 "    @Override\n" +
-                "    public String toString({structure.name} object) {\n" +
+                "    public String toString({element.name} object) {\n" +
                 "        {to_string}\n" +
                 "    }\n" +
                 "\n" +
