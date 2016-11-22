@@ -21,7 +21,11 @@ public class EventsGenerator implements Generator {
 
     @Override
     public void generate() throws Exception {
-        directory.mkdirs();
+        boolean isDirectoryCreated = directory.mkdirs();
+
+        if (!isDirectoryCreated) {
+            throw new RuntimeException("Directory " + directory.getName() + " doesn't exist and the generator cannot create it");
+        }
 
         Reflections reflections = new Reflections("org.bukkit.event");
         Set<Class<? extends Event>> eventClasses = reflections.getSubTypesOf(Event.class);
@@ -50,7 +54,7 @@ public class EventsGenerator implements Generator {
             for (Class<? extends Event> eventClass : entry.getValue()) {
                 String eventClassName = eventClass.getSimpleName();
                 String eventName = GeneratorUtils.transformName(eventPackage, eventClass.getSimpleName(), false, "Event");
-                String eventNameWithSpaces = net.dzikoysk.lightmc.util.generator.util.GeneratorUtils.transformName(eventPackage, eventClass.getSimpleName(), true, "Event");
+                String eventNameWithSpaces = GeneratorUtils.transformName(eventPackage, eventClass.getSimpleName(), true, "Event");
                 Set<Method> methods = ReflectionUtils.getAllMethods(eventClass);
 
                 System.out.println("Adding event " + eventClassName + " -> 'on " + eventNameWithSpaces + " {}'");
@@ -61,7 +65,7 @@ public class EventsGenerator implements Generator {
                     String methodName = method.getName();
 
                     addMethod:
-                    if (methodName.startsWith("get")) {
+                    if (methodName.startsWith("extractToken")) {
                         if (method.getParameterCount() > 0) {
                             continue;
                         }
@@ -76,7 +80,7 @@ public class EventsGenerator implements Generator {
                             }
                         }
 
-                        String argumentName = net.dzikoysk.lightmc.util.generator.util.GeneratorUtils.transformName("get", methodName, true);
+                        String argumentName = GeneratorUtils.transformName("extractToken", methodName, true);
                         System.out.println("- '" + argumentName + "'");
                         fileWriter.write(System.lineSeparator());
                         fileWriter.write(getArgumentInitializer(argumentName, eventName, eventClassName, "event." + methodName + "();"));
@@ -96,7 +100,7 @@ public class EventsGenerator implements Generator {
     public String getArgumentInitializer(String argumentName, String eventName, String eventClassName, String argumentSource) {
         return eventName + "ScopeUnit.registerArgument(\"" + argumentName + "\", new ArgumentInitializer<" + eventClassName + ">() {\n" +
                 "    @Override\n" +
-                "    public Object get(Ray ray, " + eventClassName + " event) {\n" +
+                "    public Object extractToken(Ray ray, " + eventClassName + " event) {\n" +
                 "        return " + argumentSource + "\n" +
                 "    }\n" +
                 "});";

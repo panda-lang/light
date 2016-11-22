@@ -28,7 +28,11 @@ public class StructuresGenerator implements Generator {
 
     @Override
     public void generate() throws Exception {
-        directory.mkdirs();
+        boolean isDirectoryCreated = directory.mkdirs();
+
+        if (!isDirectoryCreated) {
+            throw new RuntimeException("Directory " + directory.getName() + " doesn't exist and the generator cannot create it");
+        }
 
         Reflections reflections = new Reflections("org.bukkit");
         Set<Class<? extends Object>> eventClasses = reflections.getSubTypesOf(Object.class);
@@ -50,12 +54,12 @@ public class StructuresGenerator implements Generator {
             for (Method method : methods) {
                 String methodName = method.getName();
 
-                if (methodName.startsWith("get")) {
+                if (methodName.startsWith("extractToken")) {
                     if (method.getParameterCount() > 0) {
                         continue;
                     }
 
-                    String expressionNameWithSpaces = GeneratorUtils.transformName("get", methodName, true);
+                    String expressionNameWithSpaces = GeneratorUtils.transformName("extractToken", methodName, true);
                     String expressionTemplate = expressionTemplates.get(expressionNameWithSpaces);
                     String patternName = structureName.toLowerCase() + (structureName.equals("Player") || structureName.equals("Entity") ? "'s " : " ") + expressionNameWithSpaces;
 
@@ -71,14 +75,14 @@ public class StructuresGenerator implements Generator {
                     expressionTemplate = expressionTemplate.replace("{get_value.method}", getValueTemplate);
                     expressionTemplates.put(expressionNameWithSpaces, expressionTemplate);
 
-                    System.out.println("- get: \"" + patternName + "\"");
+                    System.out.println("- extractToken: \"" + patternName + "\"");
                 }
                 else if (methodName.startsWith("set")) {
                     if (method.getParameterCount() != 1) {
                         continue;
                     }
 
-                    String expressionNameWithSpaces = net.dzikoysk.lightmc.util.generator.util.GeneratorUtils.transformName("set", methodName, true);
+                    String expressionNameWithSpaces = GeneratorUtils.transformName("set", methodName, true);
                     String expressionTemplate = expressionTemplates.get(structureClassTemplate);
                     String patternName = structureName.toLowerCase() + (structureName.equals("Player") || structureName.equals("Entity") ? "'s " : " ") + expressionNameWithSpaces;
 
@@ -123,6 +127,21 @@ public class StructuresGenerator implements Generator {
             fileWriter.flush();
             fileWriter.close();
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        StructuresGenerator structuresGenerator = new StructuresGenerator("structures");
+        structuresGenerator.addClass("org.bukkit.entity.Player");
+        structuresGenerator.addClass("org.bukkit.World");
+        structuresGenerator.addClass("org.bukkit.Location");
+        structuresGenerator.addClass("org.bukkit.block.Block");
+        structuresGenerator.addClass("org.bukkit.inventory.ItemStack");
+        structuresGenerator.addClass("org.bukkit.Material");
+        structuresGenerator.addClass("org.bukkit.Bukkit");
+        structuresGenerator.addClass("org.bukkit.entity.Entity");
+        structuresGenerator.addClass("org.bukkit.util.Vector");
+        structuresGenerator.addClass("org.bukkit.inventory.Inventory");
+        structuresGenerator.generate();
     }
 
     private String getClassTemplate() {
@@ -173,21 +192,6 @@ public class StructuresGenerator implements Generator {
                 "            public Object getValue(Ray ray) {\n" +
                 "                {get_value.source}\n" +
                 "            }\n";
-    }
-
-    public static void main(String[] args) throws Exception {
-        StructuresGenerator structuresGenerator = new StructuresGenerator("structures");
-        structuresGenerator.addClass("org.bukkit.entity.Player");
-        structuresGenerator.addClass("org.bukkit.World");
-        structuresGenerator.addClass("org.bukkit.Location");
-        structuresGenerator.addClass("org.bukkit.block.Block");
-        structuresGenerator.addClass("org.bukkit.inventory.ItemStack");
-        structuresGenerator.addClass("org.bukkit.Material");
-        structuresGenerator.addClass("org.bukkit.Bukkit");
-        structuresGenerator.addClass("org.bukkit.entity.Entity");
-        structuresGenerator.addClass("org.bukkit.util.Vector");
-        structuresGenerator.addClass("org.bukkit.inventory.Inventory");
-        structuresGenerator.generate();
     }
 
 }
