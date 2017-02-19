@@ -57,7 +57,7 @@ function pandaInfo {
 
 ```
 light/
-+--exmaples/                 Example scripts written in Light.
++--examples/                 Example scripts written in Light.
 +--light/                    Light module
    +----/src                 All sources of Panda
    +----pom.xml              The main maven build script for Light module
