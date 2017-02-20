@@ -99,7 +99,7 @@ Repository: https://repo.panda-lang.org/
 <repositories>
     <repository>
         <id>panda-repo</id>
-        <name>Panda Repository</name>
+        <className>Panda Repository</className>
         <url>https://repo.panda-lang.org/</url>
     </repository>
 </repositories>

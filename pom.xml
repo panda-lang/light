@@ -5,7 +5,7 @@
     <name>Light</name>
     <groupId>org.panda_lang</groupId>
     <artifactId>light-parent</artifactId>
-    <version>indev-0.0.1-SNAPSHOT</version>
+    <version>indev-0.0.1</version>
     <packaging>pom</packaging>
 
     <scm>
@@ -14,8 +14,8 @@
         <url>https://github.com/dzikoysk/Light</url>
     </scm>
     <modules>
+        <module>light-core</module>
         <module>light</module>
-        <module>lightmc</module>
     </modules>
 
     <description>Light is a English-like programming language built on the core of the Panda Programming Language.
@@ -34,14 +34,8 @@
             <dependency>
                 <groupId>org.panda_lang</groupId>
                 <artifactId>panda</artifactId>
-                <version>indev-0.0.1-SNAPSHOT</version>
+                <version>indev-0.0.3-SNAPSHOT</version>
                 <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.spigotmc</groupId>
-                <artifactId>spigot</artifactId>
-                <version>1.9.2-R0.1-SNAPSHOT</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.reflections</groupId>
@@ -57,10 +51,6 @@
             <id>panda-repo</id>
             <name>Panda Repository</name>
             <url>https://repo.panda-lang.org/</url>
-        </repository>
-        <repository>
-            <id>spigot-repo</id>
-            <url>http://maven.elmakers.com/repository/</url>
         </repository>
     </repositories>
 
