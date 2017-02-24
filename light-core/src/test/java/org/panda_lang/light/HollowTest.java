@@ -23,7 +23,7 @@ public class HollowTest {
         /*
         HollowPattern hollowPattern = HollowPattern.builder()
                 .basis("arg")
-                .hollow()
+                .text()
                 .build();
 
         boolean matched = hollowPattern.match("arg xyz");
