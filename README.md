@@ -1,4 +1,4 @@
-#Light
+# Light
 
 Light is a English-like programming language built on the core of the Panda Programming Language.
 <br>
