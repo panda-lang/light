@@ -25,9 +25,9 @@
     <packaging>pom</packaging>
 
     <scm>
-        <connection>scm:git:https://github.com/dzikoysk/Light.git</connection>
-        <developerConnection>scm:git:https://github.com/dzikoysk/Light.git</developerConnection>
-        <url>https://github.com/dzikoysk/Light</url>
+        <connection>scm:git:https://github.com/Panda-Programming-Language/Light.git</connection>
+        <developerConnection>scm:git:https://github.com/Panda-Programming-Language/Light.git</developerConnection>
+        <url>https://github.com/Panda-Programming-Language/Light</url>
     </scm>
     <modules>
         <module>light-core</module>
@@ -45,12 +45,20 @@
         </license>
     </licenses>
 
+    <properties>
+        <light.version>indev-0.0.1-SNAPSHOT</light.version>
+        <light.java>1.8</light.java>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>${light.java}</maven.compiler.source>
+        <maven.compiler.target>${light.java}</maven.compiler.target>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.panda_lang</groupId>
+                <groupId>org.panda-lang</groupId>
                 <artifactId>panda</artifactId>
-                <version>indev-0.0.3-SNAPSHOT</version>
+                <version>indev-0.6.0</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -69,14 +77,6 @@
             <url>https://repo.panda-lang.org/</url>
         </repository>
     </repositories>
-
-    <properties>
-        <light.version>indev-0.0.1-SNAPSHOT</light.version>
-        <light.java>1.8</light.java>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>${light.java}</maven.compiler.source>
-        <maven.compiler.target>${light.java}</maven.compiler.target>
-    </properties>
 
     <build>
         <defaultGoal>clean install</defaultGoal>
