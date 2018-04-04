@@ -20,7 +20,7 @@
 
     <parent>
         <artifactId>light-parent</artifactId>
-        <groupId>org.panda_lang</groupId>
+        <groupId>org.panda-lang</groupId>
         <version>indev-0.0.1</version>
     </parent>
 
@@ -29,7 +29,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.panda_lang</groupId>
+            <groupId>org.panda-lang</groupId>
             <artifactId>panda</artifactId>
         </dependency>
     </dependencies>
