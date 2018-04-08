@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.old;
 
 public class ExampleTest {
 

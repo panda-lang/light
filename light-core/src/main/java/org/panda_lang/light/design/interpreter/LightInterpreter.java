@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.design.interpreter;
 
-public class LightCore {
+import org.panda_lang.light.design.architecture.LightApplication;
+import org.panda_lang.panda.framework.design.interpreter.Interpreter;
+import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;
 
-    private final LightLoader loader;
+public class LightInterpreter implements Interpreter {
 
-    public LightCore() {
-        this.loader = new LightLoader();
-    }
-
-    public LightLoader getLoader() {
-        return loader;
+    @Override
+    public LightApplication interpret(SourceSet sources) {
+        return null;
     }
 
 }

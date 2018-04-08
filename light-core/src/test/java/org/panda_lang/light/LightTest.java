@@ -16,16 +16,17 @@
 
 package org.panda_lang.light;
 
-public class LightCore {
+import org.panda_lang.light.design.architecture.LightApplication;
 
-    private final LightLoader loader;
+public class LightTest {
 
-    public LightCore() {
-        this.loader = new LightLoader();
-    }
+    // @Test
+    public void testLight() {
+        LightCore core = new LightCore();
+        LightLoader loader = core.getLoader();
 
-    public LightLoader getLoader() {
-        return loader;
+        LightApplication application = loader.loadFiles("../examples/current_test.light");
+        application.launch();
     }
 
 }

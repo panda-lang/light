@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2015-2018 Dzikoysk
  *
@@ -15,22 +14,33 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.design.architecture;
 
-public class HollowTest {
+import org.panda_lang.panda.framework.design.architecture.Application;
+import org.panda_lang.panda.framework.design.architecture.Script;
 
-    public static void main(String[] args) {
-        /*
-        HollowPattern hollowPattern = HollowPattern.builder()
-                .basis("arg")
-                .text()
-                .build();
+import java.util.List;
 
-        boolean matched = hollowPattern.match("arg xyz");
+public class LightApplication implements Application {
 
-        System.out.println(matched);
-        System.out.println(hollowPattern.getHollows());
-        */
+    @Override
+    public void launch() {
+
+    }
+
+    @Override
+    public void setApplicationArguments(String... arguments) {
+
+    }
+
+    @Override
+    public List<Script> getScripts() {
+        return null;
+    }
+
+    @Override
+    public String getWorkingDirectory() {
+        return null;
     }
 
 }

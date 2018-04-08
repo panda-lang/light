@@ -58,7 +58,7 @@
             <dependency>
                 <groupId>org.panda-lang</groupId>
                 <artifactId>panda</artifactId>
-                <version>indev-0.6.0</version>
+                <version>indev-0.6.5</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -66,6 +66,13 @@
                 <artifactId>reflections</artifactId>
                 <version>0.9.10</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <!-- Tests -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.0.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
