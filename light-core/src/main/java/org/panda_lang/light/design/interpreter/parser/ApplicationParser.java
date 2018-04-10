@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter;
+package org.panda_lang.light.design.interpreter.parser;
 
 import org.panda_lang.light.design.architecture.LightApplication;
-import org.panda_lang.light.design.interpreter.parser.ApplicationParser;
-import org.panda_lang.panda.framework.design.interpreter.Interpreter;
+import org.panda_lang.light.design.interpreter.LightInterpreter;
+import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
 import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;
 
-public class LightInterpreter implements Interpreter {
+public class ApplicationParser implements Parser {
 
-    @Override
-    public LightApplication interpret(SourceSet sources) {
-        ApplicationParser parser = new ApplicationParser(this);
-        return parser.parse(sources);
+    private final LightInterpreter interpreter;
+
+    public ApplicationParser(LightInterpreter interpreter) {
+        this.interpreter = interpreter;
+    }
+
+    public LightApplication parse(SourceSet sources) {
+        LightApplication application = new LightApplication();
+
+        return application;
     }
 
 }

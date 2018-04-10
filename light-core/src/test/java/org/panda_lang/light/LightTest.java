@@ -16,11 +16,12 @@
 
 package org.panda_lang.light;
 
+import org.junit.jupiter.api.Test;
 import org.panda_lang.light.design.architecture.LightApplication;
 
 public class LightTest {
 
-    // @Test
+    @Test
     public void testLight() {
         LightCore core = new LightCore();
         LightLoader loader = core.getLoader();

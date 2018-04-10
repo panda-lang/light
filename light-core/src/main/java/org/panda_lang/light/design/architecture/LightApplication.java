@@ -16,6 +16,7 @@
 
 package org.panda_lang.light.design.architecture;
 
+import org.panda_lang.light.LightCore;
 import org.panda_lang.panda.framework.design.architecture.Application;
 import org.panda_lang.panda.framework.design.architecture.Script;
 
@@ -25,7 +26,9 @@ public class LightApplication implements Application {
 
     @Override
     public void launch() {
+        LightCore.getLogger().info("Launching Light application");
 
+        LightCore.getLogger().info("Process finished with exit code 0");
     }
 
     @Override

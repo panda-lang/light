@@ -16,6 +16,8 @@
 
 package org.panda_lang.light;
 
+import org.slf4j.Logger;
+
 public class LightCore {
 
     private final LightLoader loader;
@@ -26,6 +28,10 @@ public class LightCore {
 
     public LightLoader getLoader() {
         return loader;
+    }
+
+    public static Logger getLogger() {
+        return LightLogger.LIGHT_LOGGER;
     }
 
 }
