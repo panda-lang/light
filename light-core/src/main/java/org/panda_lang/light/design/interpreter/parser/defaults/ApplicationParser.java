@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.parser;
+package org.panda_lang.light.design.interpreter.parser.defaults;
 
 import org.panda_lang.light.design.architecture.LightApplication;
+import org.panda_lang.light.design.architecture.LightScript;
 import org.panda_lang.light.design.interpreter.LightInterpreter;
+import org.panda_lang.light.design.interpreter.parser.LightComponents;
+import org.panda_lang.panda.design.interpreter.parser.PandaParserInfo;
 import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
+import org.panda_lang.panda.framework.design.interpreter.parser.ParserInfo;
+import org.panda_lang.panda.framework.design.interpreter.source.Source;
 import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;
 
 public class ApplicationParser implements Parser {
@@ -31,6 +36,19 @@ public class ApplicationParser implements Parser {
 
     public LightApplication parse(SourceSet sources) {
         LightApplication application = new LightApplication();
+
+        ParserInfo delegatedInfo = new PandaParserInfo();
+        delegatedInfo.setComponent(LightComponents.APPLICATION, application);
+        delegatedInfo.setComponent(LightComponents.INTERPRETER, interpreter);
+
+        for (Source source : sources) {
+            LightScript script = new LightScript(source.getTitle());
+            delegatedInfo.setComponent(LightComponents.SCRIPT, script);
+
+
+
+            application.addScript(script);
+        }
 
         return application;
     }

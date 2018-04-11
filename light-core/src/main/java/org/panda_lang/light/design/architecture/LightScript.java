@@ -16,45 +16,39 @@
 
 package org.panda_lang.light.design.architecture;
 
-import org.panda_lang.light.LightCore;
-import org.panda_lang.panda.framework.design.architecture.Application;
 import org.panda_lang.panda.framework.design.architecture.Script;
+import org.panda_lang.panda.framework.design.architecture.statement.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LightApplication implements Application {
+public class LightScript implements Script {
 
-    private final List<Script> scripts;
+    private final String scriptName;
+    private final List<Statement> statements;
 
-    public LightApplication() {
-        this.scripts = new ArrayList<>();
+    public LightScript(String scriptName) {
+        this.scriptName = scriptName;
+        this.statements = new ArrayList<>();
     }
 
     @Override
-    public void launch() {
-        LightCore.getLogger().info("Launching Light application");
-
-        LightCore.getLogger().info("Process finished with exit code 0");
-    }
-
-    public void addScript(Script script) {
-        this.scripts.add(script);
-    }
-
-    @Override
-    public void setApplicationArguments(String... arguments) {
-
-    }
-
-    @Override
-    public List<Script> getScripts() {
-        return scripts;
-    }
-
-    @Override
-    public String getWorkingDirectory() {
+    public <T extends Statement> List<T> select(Class<? extends T> statementClass) {
         return null;
+    }
+
+    public void addStatement(Statement statement) {
+        this.statements.add(statement);
+    }
+
+    @Override
+    public List<Statement> getStatements() {
+        return statements;
+    }
+
+    @Override
+    public String getScriptName() {
+        return scriptName;
     }
 
 }

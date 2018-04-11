@@ -14,19 +14,14 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter;
+package org.panda_lang.light.design.interpreter.parser;
 
-import org.panda_lang.light.design.architecture.LightApplication;
-import org.panda_lang.light.design.interpreter.parser.defaults.ApplicationParser;
-import org.panda_lang.panda.framework.design.interpreter.Interpreter;
-import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;
+public class LightComponents {
 
-public class LightInterpreter implements Interpreter {
+    public static final String APPLICATION = "light-application";
 
-    @Override
-    public LightApplication interpret(SourceSet sources) {
-        ApplicationParser parser = new ApplicationParser(this);
-        return parser.parse(sources);
-    }
+    public static final String INTERPRETER = "light-interpreter";
+
+    public static final String SCRIPT = "light-script";
 
 }
