@@ -37,15 +37,15 @@ public class ApplicationParser implements Parser {
     public LightApplication parse(SourceSet sources) {
         LightApplication application = new LightApplication();
 
-        ParserInfo delegatedInfo = new PandaParserInfo();
-        delegatedInfo.setComponent(LightComponents.APPLICATION, application);
-        delegatedInfo.setComponent(LightComponents.INTERPRETER, interpreter);
+        ParserInfo baseInfo = new PandaParserInfo();
+        baseInfo.setComponent(LightComponents.APPLICATION, application);
+        baseInfo.setComponent(LightComponents.INTERPRETER, interpreter);
 
         for (Source source : sources) {
+            ParserInfo delegatedInfo = baseInfo.fork();
+
             LightScript script = new LightScript(source.getTitle());
             delegatedInfo.setComponent(LightComponents.SCRIPT, script);
-
-
 
             application.addScript(script);
         }
