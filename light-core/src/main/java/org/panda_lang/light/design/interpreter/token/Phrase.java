@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.parser;
+package org.panda_lang.light.design.interpreter.token;
 
-public class LightComponents {
+import org.panda_lang.panda.framework.design.interpreter.token.TokenType;
+import org.panda_lang.panda.framework.language.interpreter.token.PandaToken;
 
-    public static final String APPLICATION = "light-application";
+public class Phrase extends PandaToken {
 
-    public static final String INTERPRETER = "light-interpreter";
+    private static final TokenType TYPE = new TokenType("phrase");
 
-    public static final String SCRIPT = "light-script";
-
-    public static final String SOURCE = "light-script-source";
+    public Phrase(String phrase) {
+        super(TYPE, phrase);
+    }
 
 }

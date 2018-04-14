@@ -20,6 +20,7 @@ import org.panda_lang.light.design.architecture.LightApplication;
 import org.panda_lang.light.design.architecture.LightScript;
 import org.panda_lang.light.design.interpreter.LightInterpreter;
 import org.panda_lang.light.design.interpreter.parser.LightComponents;
+import org.panda_lang.light.design.interpreter.source.LightSourceStream;
 import org.panda_lang.panda.design.interpreter.parser.PandaParserInfo;
 import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
 import org.panda_lang.panda.framework.design.interpreter.parser.ParserInfo;
@@ -46,6 +47,9 @@ public class ApplicationParser implements Parser {
 
             LightScript script = new LightScript(source.getTitle());
             delegatedInfo.setComponent(LightComponents.SCRIPT, script);
+
+            LightSourceStream stream = new LightSourceStream(source.getContent());
+            delegatedInfo.setComponent(LightComponents.SOURCE, stream);
 
             application.addScript(script);
         }

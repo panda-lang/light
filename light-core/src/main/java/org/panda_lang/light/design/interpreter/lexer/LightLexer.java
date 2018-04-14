@@ -14,16 +14,22 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.parser;
+package org.panda_lang.light.design.interpreter.lexer;
 
-public class LightComponents {
+import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
+import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
 
-    public static final String APPLICATION = "light-application";
+public class LightLexer implements Lexer {
 
-    public static final String INTERPRETER = "light-interpreter";
+    private final String source;
 
-    public static final String SCRIPT = "light-script";
+    public LightLexer(String source) {
+        this.source = source;
+    }
 
-    public static final String SOURCE = "light-script-source";
+    @Override
+    public TokenizedSource convert() {
+        return null;
+    }
 
 }
