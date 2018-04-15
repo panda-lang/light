@@ -16,12 +16,20 @@
 
 package org.panda_lang.light.design.interpreter.lexer;
 
+import org.panda_lang.light.design.interpreter.source.LightTokenizedSource;
+import org.panda_lang.light.design.interpreter.token.Phrase;
+import org.panda_lang.light.design.interpreter.token.PhraseRepresentation;
 import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
+import org.panda_lang.panda.framework.design.interpreter.token.TokenRepresentation;
 import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LightLexer implements Lexer {
 
     private final String source;
+    private String lineSeparator = System.lineSeparator();
 
     public LightLexer(String source) {
         this.source = source;
@@ -29,7 +37,69 @@ public class LightLexer implements Lexer {
 
     @Override
     public TokenizedSource convert() {
-        return null;
+        List<TokenRepresentation> tokens = new ArrayList<>();
+
+        String[] lines = source.split(lineSeparator);
+        StringBuilder lineBuilder = new StringBuilder();
+        boolean multiline = false;
+        int previousLine = -1;
+
+        for (int lineNumber = 0; lineNumber < lines.length; lineNumber++) {
+            String line = lines[lineNumber];
+            String preparedLine = line.trim();
+
+            if (preparedLine.isEmpty()) {
+                continue;
+            }
+
+            if (previousLine == -1) {
+                previousLine = lineNumber;
+            }
+
+            boolean startsWithMultiline = preparedLine.startsWith(">");
+            boolean endsWithMultiline = preparedLine.endsWith(">");
+
+            if (!multiline && !startsWithMultiline && lineBuilder.length() > 0) {
+                Phrase phrase = new Phrase(lineBuilder.toString());
+                PhraseRepresentation representation = new PhraseRepresentation(phrase, previousLine);
+                tokens.add(representation);
+
+                lineBuilder.setLength(0);
+                previousLine = lineNumber;
+                multiline = false;
+            }
+
+            boolean currentMultiline = false;
+
+            if (startsWithMultiline) {
+                preparedLine = preparedLine.substring(2, preparedLine.length());
+                currentMultiline = true;
+            }
+
+            if (endsWithMultiline) {
+                preparedLine = preparedLine.substring(0, preparedLine.length() - 2);
+                currentMultiline = true;
+            }
+
+            if (lineBuilder.length() > 0) {
+                lineBuilder.append(" ");
+            }
+
+            lineBuilder.append(preparedLine);
+            multiline = endsWithMultiline;
+        }
+
+        if (lineBuilder.length() > 0) {
+            Phrase phrase = new Phrase(lineBuilder.toString());
+            PhraseRepresentation representation = new PhraseRepresentation(phrase, previousLine);
+            tokens.add(representation);
+        }
+
+        return new LightTokenizedSource(tokens);
+    }
+
+    public void setLineSeparator(String regex) {
+        this.lineSeparator = regex;
     }
 
 }

@@ -1,0 +1,22 @@
+main {
+    send >
+        "Hello Light" >
+        to console
+}
+
+main {
+    send
+        > "Hello Light"
+        > to console
+}
+
+main {
+    send >
+         > "Hello Light"
+         > to console
+}
+
+main {
+    send >
+        "Hello Light" to console
+}
