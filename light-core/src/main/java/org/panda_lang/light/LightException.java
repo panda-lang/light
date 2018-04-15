@@ -14,18 +14,27 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.parser;
+package org.panda_lang.light;
 
-public class LightComponents {
+import org.panda_lang.panda.framework.PandaFrameworkException;
 
-    public static final String APPLICATION = "light-application";
+public class LightException extends PandaFrameworkException {
 
-    public static final String INTERPRETER = "light-interpreter";
+    public LightException() {
+        super();
+    }
 
-    public static final String SCRIPT = "light-script";
+    public LightException(String message) {
+        super(message);
+    }
 
-    public static final String SOURCE = "light-script-source";
+    public LightException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-    public static final String PARSER_PIPELINE = "light-parser-pipeline";
+    public LightException(Throwable cause) {
+        super(cause);
+    }
 
 }
+

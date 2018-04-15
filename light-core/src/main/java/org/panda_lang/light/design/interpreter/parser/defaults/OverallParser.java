@@ -16,13 +16,29 @@
 
 package org.panda_lang.light.design.interpreter.parser.defaults;
 
+import org.panda_lang.light.design.interpreter.parser.LightComponents;
+import org.panda_lang.light.design.interpreter.parser.LightParserException;
+import org.panda_lang.light.language.interpreter.parsers.LightPipelines;
 import org.panda_lang.panda.framework.design.interpreter.parser.ParserInfo;
 import org.panda_lang.panda.framework.design.interpreter.parser.UnifiedParser;
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.ParserPipeline;
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.ParserPipelineRegistry;
+import org.panda_lang.panda.framework.design.interpreter.token.distributor.SourceStream;
 
 public class OverallParser implements UnifiedParser {
 
     @Override
     public void parse(ParserInfo info) {
+        ParserPipelineRegistry parserPipelineRegistry = info.getComponent(LightComponents.PARSER_PIPELINE);
+        ParserPipeline pipeline = parserPipelineRegistry.getPipeline(LightPipelines.OVERALL);
+
+        SourceStream sourceStream = info.getComponent(LightComponents.SOURCE);
+        UnifiedParser parser = pipeline.handle(sourceStream);
+
+        if (parser == null) {
+            throw new LightParserException("Cannot find parser for source " + sourceStream.toTokenizedSource().toString());
+        }
+
 
     }
 

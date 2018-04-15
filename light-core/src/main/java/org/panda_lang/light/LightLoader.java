@@ -19,13 +19,19 @@ package org.panda_lang.light;
 import org.panda_lang.light.design.architecture.LightApplication;
 import org.panda_lang.light.design.architecture.LightEnvironment;
 import org.panda_lang.light.design.interpreter.LightInterpreter;
+import org.panda_lang.panda.framework.PandaFrameworkException;
 import org.panda_lang.panda.framework.design.interpreter.source.SourceProvider;
 import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;
-import org.panda_lang.panda.framework.language.PandaFrameworkException;
 import org.panda_lang.panda.framework.language.interpreter.source.providers.FileSourceProvider;
 import org.panda_lang.panda.utilities.commons.io.FileUtils;
 
 public class LightLoader {
+
+    private final LightCore light;
+
+    public LightLoader(LightCore light) {
+        this.light = light;
+    }
 
     public LightApplication loadFiles(String... paths) {
         return load(new FileSourceProvider(FileUtils.toFiles(paths)));
@@ -38,7 +44,7 @@ public class LightLoader {
             throw new PandaFrameworkException("Sources are not provided");
         }
 
-        LightEnvironment environment = new LightEnvironment();
+        LightEnvironment environment = new LightEnvironment(light);
         LightInterpreter interpreter = environment.getInterpreter();
         LightApplication application = interpreter.interpret(sourceSet);
 

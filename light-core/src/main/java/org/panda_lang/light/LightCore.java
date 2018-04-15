@@ -16,18 +16,25 @@
 
 package org.panda_lang.light;
 
+import org.panda_lang.light.language.LightLanguage;
 import org.slf4j.Logger;
 
 public class LightCore {
 
+    private final LightLanguage language;
     private final LightLoader loader;
 
     public LightCore() {
-        this.loader = new LightLoader();
+        this.language = new LightLanguage();
+        this.loader = new LightLoader(this);
     }
 
     public LightLoader getLoader() {
         return loader;
+    }
+
+    public LightLanguage getLanguage() {
+        return language;
     }
 
     public static Logger getLogger() {

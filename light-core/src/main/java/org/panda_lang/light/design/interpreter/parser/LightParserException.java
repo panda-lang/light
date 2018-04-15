@@ -16,16 +16,24 @@
 
 package org.panda_lang.light.design.interpreter.parser;
 
-public class LightComponents {
+import org.panda_lang.light.LightException;
 
-    public static final String APPLICATION = "light-application";
+public class LightParserException extends LightException {
 
-    public static final String INTERPRETER = "light-interpreter";
+    public LightParserException() {
+        super();
+    }
 
-    public static final String SCRIPT = "light-script";
+    public LightParserException(String message) {
+        super(message);
+    }
 
-    public static final String SOURCE = "light-script-source";
+    public LightParserException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-    public static final String PARSER_PIPELINE = "light-parser-pipeline";
+    public LightParserException(Throwable cause) {
+        super(cause);
+    }
 
 }

@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.parser;
+package org.panda_lang.light.language.interpreter.parsers.scope;
 
-public class LightComponents {
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.ParserHandler;
+import org.panda_lang.panda.framework.design.interpreter.token.reader.TokenReader;
 
-    public static final String APPLICATION = "light-application";
+public class DeclarationParserHandler implements ParserHandler {
 
-    public static final String INTERPRETER = "light-interpreter";
-
-    public static final String SCRIPT = "light-script";
-
-    public static final String SOURCE = "light-script-source";
-
-    public static final String PARSER_PIPELINE = "light-parser-pipeline";
+    @Override
+    public boolean handle(TokenReader reader) {
+        return reader.read().getTokenValue().endsWith("{");
+    }
 
 }

@@ -14,18 +14,10 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.parser;
+package org.panda_lang.light.language.interpreter.parsers;
 
-public class LightComponents {
+public class LightPipelines {
 
-    public static final String APPLICATION = "light-application";
-
-    public static final String INTERPRETER = "light-interpreter";
-
-    public static final String SCRIPT = "light-script";
-
-    public static final String SOURCE = "light-script-source";
-
-    public static final String PARSER_PIPELINE = "light-parser-pipeline";
+    public static final String OVERALL = "light-overall";
 
 }

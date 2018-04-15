@@ -18,15 +18,26 @@ package org.panda_lang.light.design.interpreter;
 
 import org.panda_lang.light.design.architecture.LightApplication;
 import org.panda_lang.light.design.interpreter.parser.defaults.ApplicationParser;
+import org.panda_lang.light.language.LightLanguage;
 import org.panda_lang.panda.framework.design.interpreter.Interpreter;
 import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;
 
 public class LightInterpreter implements Interpreter {
 
+    private final LightLanguage language;
+
+    public LightInterpreter(LightLanguage language) {
+        this.language = language;
+    }
+
     @Override
     public LightApplication interpret(SourceSet sources) {
         ApplicationParser parser = new ApplicationParser(this);
         return parser.parse(sources);
+    }
+
+    public LightLanguage getLanguage() {
+        return language;
     }
 
 }

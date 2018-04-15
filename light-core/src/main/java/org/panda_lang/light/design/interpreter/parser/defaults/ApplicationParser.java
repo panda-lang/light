@@ -22,6 +22,7 @@ import org.panda_lang.light.design.interpreter.LightInterpreter;
 import org.panda_lang.light.design.interpreter.lexer.LightLexer;
 import org.panda_lang.light.design.interpreter.parser.LightComponents;
 import org.panda_lang.light.design.interpreter.source.LightSourceStream;
+import org.panda_lang.light.language.LightLanguage;
 import org.panda_lang.panda.design.interpreter.parser.PandaParserInfo;
 import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
 import org.panda_lang.panda.framework.design.interpreter.parser.ParserInfo;
@@ -44,6 +45,9 @@ public class ApplicationParser implements Parser {
         baseInfo.setComponent(LightComponents.APPLICATION, application);
         baseInfo.setComponent(LightComponents.INTERPRETER, interpreter);
 
+        LightLanguage language = interpreter.getLanguage();
+        baseInfo.setComponent(LightComponents.PARSER_PIPELINE, language.getParserPipelineRegistry());
+
         for (Source source : sources) {
             ParserInfo delegatedInfo = baseInfo.fork();
 
@@ -55,6 +59,9 @@ public class ApplicationParser implements Parser {
 
             LightSourceStream stream = new LightSourceStream(tokenizedSource);
             delegatedInfo.setComponent(LightComponents.SOURCE, stream);
+
+            OverallParser parser = new OverallParser();
+            parser.parse(delegatedInfo);
 
             application.addScript(script);
         }
