@@ -33,13 +33,14 @@ public class OverallParser implements UnifiedParser {
         ParserPipeline pipeline = parserPipelineRegistry.getPipeline(LightPipelines.OVERALL);
 
         SourceStream sourceStream = info.getComponent(LightComponents.SOURCE);
-        UnifiedParser parser = pipeline.handle(sourceStream);
 
-        if (parser == null) {
-            throw new LightParserException("Cannot find parser for source " + sourceStream.toTokenizedSource().toString());
+        while (sourceStream.hasUnreadSource()) {
+            UnifiedParser parser = pipeline.handle(sourceStream);
+
+            if (parser == null) {
+                throw new LightParserException("Cannot find parser for source " + sourceStream.toTokenizedSource().toString());
+            }
         }
-
-
     }
 
 }

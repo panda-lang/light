@@ -16,6 +16,7 @@
 
 package org.panda_lang.light.language;
 
+import org.panda_lang.light.LightCore;
 import org.panda_lang.light.LightException;
 import org.panda_lang.panda.design.interpreter.parser.pipeline.registry.ParserRegistrationLoader;
 import org.panda_lang.panda.framework.design.interpreter.lexer.Syntax;
@@ -28,7 +29,7 @@ public class LightLanguage implements Language {
 
     public LightLanguage() {
         ParserRegistrationLoader loader = new ParserRegistrationLoader();
-        this.pipelineRegistry = loader.load();
+        this.pipelineRegistry = loader.load(LightCore.class);
     }
 
     @Override
