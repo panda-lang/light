@@ -23,9 +23,14 @@ import org.panda_lang.light.design.interpreter.lexer.LightLexer;
 import org.panda_lang.light.design.interpreter.parser.LightComponents;
 import org.panda_lang.light.design.interpreter.source.LightSourceStream;
 import org.panda_lang.light.language.LightLanguage;
-import org.panda_lang.panda.design.interpreter.parser.PandaParserInfo;
+import org.panda_lang.light.language.interpreter.parsers.LightPipelines;
+import org.panda_lang.panda.design.interpreter.parser.PandaParserData;
+import org.panda_lang.panda.design.interpreter.parser.defaults.OverallParser;
+import org.panda_lang.panda.design.interpreter.parser.generation.PandaCasualParserGeneration;
 import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
-import org.panda_lang.panda.framework.design.interpreter.parser.ParserInfo;
+import org.panda_lang.panda.framework.design.interpreter.parser.ParserData;
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.ParserPipeline;
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.ParserPipelineRegistry;
 import org.panda_lang.panda.framework.design.interpreter.source.Source;
 import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;
 import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
@@ -39,17 +44,21 @@ public class ApplicationParser implements Parser {
     }
 
     public LightApplication parse(SourceSet sources) {
-        LightApplication application = new LightApplication();
-
-        ParserInfo baseInfo = new PandaParserInfo();
-        baseInfo.setComponent(LightComponents.APPLICATION, application);
+        ParserData baseInfo = new PandaParserData();
         baseInfo.setComponent(LightComponents.INTERPRETER, interpreter);
 
+        LightApplication application = new LightApplication();
+        baseInfo.setComponent(LightComponents.APPLICATION, application);
+
+        PandaCasualParserGeneration generation = new PandaCasualParserGeneration();
+        baseInfo.setComponent(LightComponents.GENERATION, generation);
+
         LightLanguage language = interpreter.getLanguage();
-        baseInfo.setComponent(LightComponents.PARSER_PIPELINE, language.getParserPipelineRegistry());
+        ParserPipelineRegistry pipelineRegistry = language.getParserPipelineRegistry();
+        baseInfo.setComponent(LightComponents.PARSER_PIPELINE, pipelineRegistry);
 
         for (Source source : sources) {
-            ParserInfo delegatedInfo = baseInfo.fork();
+            ParserData delegatedInfo = baseInfo.fork();
 
             LightScript script = new LightScript(source.getTitle());
             delegatedInfo.setComponent(LightComponents.SCRIPT, script);
@@ -60,11 +69,17 @@ public class ApplicationParser implements Parser {
             LightSourceStream stream = new LightSourceStream(tokenizedSource);
             delegatedInfo.setComponent(LightComponents.SOURCE, stream);
 
-            OverallParser parser = new OverallParser();
-            parser.parse(delegatedInfo);
+            ParserPipeline pipeline = pipelineRegistry.getPipeline(LightPipelines.OVERALL);
+            OverallParser parser = new OverallParser(pipeline, generation, stream);
+
+            while (parser.hasNext()) {
+                parser.next(delegatedInfo);
+            }
 
             application.addScript(script);
         }
+
+        generation.execute(baseInfo);
 
         return application;
     }

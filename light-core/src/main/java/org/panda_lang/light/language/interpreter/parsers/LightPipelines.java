@@ -20,4 +20,8 @@ public class LightPipelines {
 
     public static final String OVERALL = "light-overall";
 
+    public static final String SCOPE = "light-scope";
+
+    public static final String BLOCK = "light-block";
+
 }

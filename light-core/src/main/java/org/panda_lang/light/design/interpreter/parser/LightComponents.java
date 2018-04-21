@@ -28,4 +28,14 @@ public class LightComponents {
 
     public static final String PARSER_PIPELINE = "light-parser-pipeline";
 
+    public static final String GENERATION = "light-generation";
+
+    public class Scope {
+
+        public static final String DECLARATION = "light-scope-declaration";
+
+        public static final String CONTENT = "light-scope-content";
+
+    }
+
 }

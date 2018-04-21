@@ -16,13 +16,18 @@
 
 package org.panda_lang.light.design.interpreter.source;
 
-import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
+import org.panda_lang.panda.framework.design.interpreter.token.*;
+import org.panda_lang.panda.framework.language.interpreter.token.*;
 import org.panda_lang.panda.framework.language.interpreter.token.distributor.PandaSourceStream;
 
 public class LightSourceStream extends PandaSourceStream {
 
     public LightSourceStream(TokenizedSource tokenizedSource) {
         super(tokenizedSource);
+    }
+
+    public LightSourceStream(TokenRepresentation tokenRepresentation) {
+        super(new PandaTokenizedSource().addToken(tokenRepresentation));
     }
 
 }

@@ -19,7 +19,7 @@ package org.panda_lang.light.language.interpreter.parsers.scope;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.ParserHandler;
 import org.panda_lang.panda.framework.design.interpreter.token.reader.TokenReader;
 
-public class DeclarationParserHandler implements ParserHandler {
+public class ScopeParserHandler implements ParserHandler {
 
     @Override
     public boolean handle(TokenReader reader) {
