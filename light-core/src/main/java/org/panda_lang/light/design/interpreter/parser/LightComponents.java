@@ -16,26 +16,11 @@
 
 package org.panda_lang.light.design.interpreter.parser;
 
+import org.panda_lang.light.design.interpreter.*;
+import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
+
 public class LightComponents {
 
-    public static final String APPLICATION = "light-application";
-
-    public static final String INTERPRETER = "light-interpreter";
-
-    public static final String SCRIPT = "light-script";
-
-    public static final String SOURCE = "light-script-source";
-
-    public static final String PARSER_PIPELINE = "light-parser-pipeline";
-
-    public static final String GENERATION = "light-generation";
-
-    public class Scope {
-
-        public static final String DECLARATION = "light-scope-declaration";
-
-        public static final String CONTENT = "light-scope-content";
-
-    }
+    public static final Component<LightInterpreter> INTERPRETER = Component.of("light-interpreter", LightInterpreter.class);
 
 }

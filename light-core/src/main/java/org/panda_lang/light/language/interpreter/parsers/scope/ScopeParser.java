@@ -16,12 +16,12 @@
 
 package org.panda_lang.light.language.interpreter.parsers.scope;
 
-import org.panda_lang.light.design.interpreter.parser.*;
 import org.panda_lang.light.design.interpreter.parser.defaults.*;
 import org.panda_lang.light.design.interpreter.source.*;
 import org.panda_lang.light.language.interpreter.parsers.*;
 import org.panda_lang.panda.design.interpreter.parser.pipeline.registry.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.*;
+import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.*;
 import org.panda_lang.panda.framework.design.interpreter.token.*;
@@ -32,17 +32,17 @@ import org.panda_lang.panda.utilities.redact.match.text.*;
 public class ScopeParser implements UnifiedParser {
 
     private static final TextHollowPattern PATTERN = TextHollowPattern.builder()
-            .compile("+* { +* }")
+            .compile("* { * }")
             .build();
 
     @Override
     public void parse(ParserData data) {
-        SourceStream sourceStream = data.getComponent(LightComponents.SOURCE);
+        SourceStream sourceStream = data.getComponent(UniversalComponents.SOURCE_STREAM);
 
         TokenRepresentation declarationSignature = sourceStream.read();
-        data.setComponent(LightComponents.Scope.DECLARATION, declarationSignature);
+        data.setComponent(ScopeComponents.DECLARATION, declarationSignature);
 
-        ParserPipelineRegistry pipelineRegistry = data.getComponent(LightComponents.PARSER_PIPELINE);
+        PipelineRegistry pipelineRegistry = data.getComponent(UniversalComponents.PIPELINE);
         ParserPipeline pipeline = pipelineRegistry.getPipeline(LightPipelines.SCOPE);
 
         SourceStream declarationSignatureStream = new LightSourceStream(declarationSignature);
@@ -50,7 +50,7 @@ public class ScopeParser implements UnifiedParser {
 
         ContentParser contentParser = new ContentParser();
         TokenRepresentation[] content = contentParser.parse(data);
-        data.setComponent(LightComponents.Scope.CONTENT, content);
+        data.setComponent(ScopeComponents.CONTENT, content);
 
         scopeParser.parse(data);
     }

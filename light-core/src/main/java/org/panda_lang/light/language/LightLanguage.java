@@ -20,12 +20,12 @@ import org.panda_lang.light.LightCore;
 import org.panda_lang.light.LightException;
 import org.panda_lang.panda.design.interpreter.parser.pipeline.registry.ParserRegistrationLoader;
 import org.panda_lang.panda.framework.design.interpreter.lexer.Syntax;
-import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.ParserPipelineRegistry;
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.PipelineRegistry;
 import org.panda_lang.panda.framework.language.Language;
 
 public class LightLanguage implements Language {
 
-    private final ParserPipelineRegistry pipelineRegistry;
+    private final PipelineRegistry pipelineRegistry;
 
     public LightLanguage() {
         ParserRegistrationLoader loader = new ParserRegistrationLoader();
@@ -33,7 +33,7 @@ public class LightLanguage implements Language {
     }
 
     @Override
-    public ParserPipelineRegistry getParserPipelineRegistry() {
+    public PipelineRegistry getParserPipelineRegistry() {
         return pipelineRegistry;
     }
 

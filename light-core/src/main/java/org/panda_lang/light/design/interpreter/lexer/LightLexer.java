@@ -16,15 +16,12 @@
 
 package org.panda_lang.light.design.interpreter.lexer;
 
-import org.panda_lang.light.design.interpreter.source.LightTokenizedSource;
-import org.panda_lang.light.design.interpreter.token.Phrase;
-import org.panda_lang.light.design.interpreter.token.PhraseRepresentation;
-import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
-import org.panda_lang.panda.framework.design.interpreter.token.TokenRepresentation;
-import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
+import org.panda_lang.light.design.interpreter.source.*;
+import org.panda_lang.light.design.interpreter.token.*;
+import org.panda_lang.panda.framework.design.interpreter.lexer.*;
+import org.panda_lang.panda.framework.design.interpreter.token.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LightLexer implements Lexer {
 
@@ -60,25 +57,43 @@ public class LightLexer implements Lexer {
             boolean endsWithMultiline = preparedLine.endsWith(">");
 
             if (!multiline && !startsWithMultiline && lineBuilder.length() > 0) {
-                Phrase phrase = new Phrase(lineBuilder.toString());
+                String phraseValue = lineBuilder.toString();
+
+                /*
+                boolean open = phraseValue.endsWith("{");
+                boolean close = phraseValue.startsWith("}");
+
+                if (open) {
+                    phraseValue = phraseValue.substring(0, phraseValue.length() - 1);
+                }
+
+                if (close) {
+                    phraseValue = phraseValue.substring(1, phraseValue.length());
+                }
+                */
+
+                Phrase phrase = new Phrase(phraseValue);
                 PhraseRepresentation representation = new PhraseRepresentation(phrase, previousLine);
                 tokens.add(representation);
 
+                /*
+                if (open || close) {
+                    Token operator = open ? Separators.LEFT_BRACE_DELIMITER : Separators.RIGHT_BRACE_DELIMITER;
+                    TokenRepresentation separatorRepresentation = new PandaTokenRepresentation(operator, previousLine);
+                    tokens.add(separatorRepresentation);
+                }
+                */
+
                 lineBuilder.setLength(0);
                 previousLine = lineNumber;
-                multiline = false;
             }
-
-            boolean currentMultiline = false;
 
             if (startsWithMultiline) {
                 preparedLine = preparedLine.substring(2, preparedLine.length());
-                currentMultiline = true;
             }
 
             if (endsWithMultiline) {
                 preparedLine = preparedLine.substring(0, preparedLine.length() - 2);
-                currentMultiline = true;
             }
 
             if (lineBuilder.length() > 0) {

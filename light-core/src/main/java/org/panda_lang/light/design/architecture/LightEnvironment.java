@@ -16,17 +16,20 @@
 
 package org.panda_lang.light.design.architecture;
 
-import org.panda_lang.light.LightCore;
-import org.panda_lang.light.design.interpreter.LightInterpreter;
-import org.panda_lang.panda.framework.design.architecture.Environment;
-import org.panda_lang.panda.framework.design.architecture.module.ModuleRegistry;
+import org.panda_lang.light.*;
+import org.panda_lang.light.design.interpreter.*;
+import org.panda_lang.light.language.*;
+import org.panda_lang.panda.framework.design.architecture.*;
+import org.panda_lang.panda.framework.design.architecture.module.*;
 
 public class LightEnvironment implements Environment {
 
+    private final LightLanguage language;
     private final LightInterpreter interpreter;
 
     public LightEnvironment(LightCore lightCore) {
-        this.interpreter = new LightInterpreter(lightCore.getLanguage());
+        this.language = lightCore.getLanguage();
+        this.interpreter = new LightInterpreter(this);
     }
 
     @Override
@@ -37,6 +40,10 @@ public class LightEnvironment implements Environment {
     @Override
     public LightInterpreter getInterpreter() {
         return interpreter;
+    }
+
+    public LightLanguage getLanguage() {
+        return language;
     }
 
 }
