@@ -74,7 +74,7 @@ public class ApplicationParser implements Parser {
             OverallParser parser = new OverallParser(pipeline, generation, stream);
 
             while (parser.hasNext()) {
-                parser.next(delegatedInfo);
+                parser.parseNext(delegatedInfo);
             }
 
             application.addScript(script);
