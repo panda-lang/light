@@ -28,7 +28,7 @@ import org.panda_lang.panda.framework.design.interpreter.token.*;
 import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
 import org.panda_lang.panda.utilities.redact.match.text.*;
 
-@ParserRegistration(target = LightPipelines.OVERALL, parserClass = ScopeParser.class, handlerClass = ScopeParserHandler.class)
+@ParserRegistration(target = UniversalPipelines.OVERALL, parserClass = ScopeParser.class, handlerClass = ScopeParserHandler.class)
 public class ScopeParser implements UnifiedParser {
 
     private static final TextHollowPattern PATTERN = TextHollowPattern.builder()

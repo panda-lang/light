@@ -17,72 +17,76 @@
 package org.panda_lang.light.design.interpreter.parser.defaults;
 
 import org.panda_lang.light.design.architecture.*;
-import org.panda_lang.light.design.interpreter.*;
 import org.panda_lang.light.design.interpreter.lexer.*;
-import org.panda_lang.light.design.interpreter.parser.*;
 import org.panda_lang.light.design.interpreter.source.*;
-import org.panda_lang.light.language.*;
-import org.panda_lang.light.language.interpreter.parsers.*;
 import org.panda_lang.panda.design.interpreter.parser.*;
-import org.panda_lang.panda.design.interpreter.parser.defaults.*;
 import org.panda_lang.panda.design.interpreter.parser.generation.*;
+import org.panda_lang.panda.framework.design.architecture.*;
+import org.panda_lang.panda.framework.design.interpreter.*;
+import org.panda_lang.panda.framework.design.interpreter.lexer.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
-import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.*;
+import org.panda_lang.panda.framework.design.interpreter.parser.generation.casual.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.*;
 import org.panda_lang.panda.framework.design.interpreter.source.*;
 import org.panda_lang.panda.framework.design.interpreter.token.*;
+import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
+import org.panda_lang.panda.framework.language.*;
+import org.panda_lang.panda.framework.language.interpreter.messenger.translators.*;
+import org.panda_lang.panda.framework.language.interpreter.parser.defaults.*;
 
 public class ApplicationParser implements Parser {
 
-    private final LightInterpreter interpreter;
+    private final Interpretation interpretation;
 
-    public ApplicationParser(LightInterpreter interpreter) {
-        this.interpreter = interpreter;
+    public ApplicationParser(Interpretation interpretation) {
+        this.interpretation = interpretation;
     }
 
     public LightApplication parse(SourceSet sources) {
-        ParserData baseInfo = new PandaParserData();
-        baseInfo.setComponent(LightComponents.INTERPRETER, interpreter);
-
-        LightEnvironment environment = interpreter.getEnvironment();
-        baseInfo.setComponent(UniversalComponents.ENVIRONMENT, environment);
-
         LightApplication application = new LightApplication();
-        baseInfo.setComponent(UniversalComponents.APPLICATION, application);
 
-        PandaCasualParserGeneration generation = new PandaCasualParserGeneration();
-        baseInfo.setComponent(UniversalComponents.GENERATION, generation);
-
-        LightLanguage language = environment.getLanguage();
+        Language language = interpretation.getLanguage();
         PipelineRegistry pipelineRegistry = language.getParserPipelineRegistry();
-        baseInfo.setComponent(UniversalComponents.PIPELINE, pipelineRegistry);
+        CasualParserGeneration generation = new PandaCasualParserGeneration();
+
+        ParserData baseData = new PandaParserData();
+        baseData.setComponent(UniversalComponents.APPLICATION, application);
+        baseData.setComponent(UniversalComponents.INTERPRETATION, interpretation);
+        baseData.setComponent(UniversalComponents.GENERATION, generation);
+        baseData.setComponent(UniversalComponents.PIPELINE, pipelineRegistry);
+
+        ExceptionTranslator exceptionTranslator = new ExceptionTranslator();
+        interpretation.getMessenger().addMessageTranslator(exceptionTranslator);
 
         for (Source source : sources) {
-            ParserData delegatedInfo = baseInfo.fork();
+            Script script = new LightScript(source.getTitle());
+            exceptionTranslator.updateLocation(source.getTitle());
 
-            LightScript script = new LightScript(source.getTitle());
-            delegatedInfo.setComponent(UniversalComponents.SCRIPT, script);
+            interpretation.execute(() -> {
+                Lexer lexer = new LightLexer(source.getContent());
+                TokenizedSource tokenizedSource = lexer.convert();
 
-            LightLexer lexer = new LightLexer(source.getContent());
-            TokenizedSource tokenizedSource = lexer.convert();
+                SourceStream stream = new LightSourceStream(tokenizedSource);
+                exceptionTranslator.updateSource(stream);
 
-            LightSourceStream stream = new LightSourceStream(tokenizedSource);
-            delegatedInfo.setComponent(UniversalComponents.SOURCE_STREAM, stream);
+                ParserData delegatedInfo = baseData.fork();
+                delegatedInfo.setComponent(UniversalComponents.SOURCE, tokenizedSource);
+                delegatedInfo.setComponent(UniversalComponents.SOURCE_STREAM, stream);
+                delegatedInfo.setComponent(UniversalComponents.SCRIPT, script);
 
-            ParserPipeline pipeline = pipelineRegistry.getPipeline(LightPipelines.OVERALL);
-            OverallParser parser = new OverallParser(pipeline, generation, stream);
+                OverallParser parser = new OverallParser(delegatedInfo);
+                application.addScript(script);
 
-            while (parser.hasNext()) {
-                parser.parseNext(delegatedInfo);
-            }
-
-            application.addScript(script);
+                while (interpretation.isHealthy() && parser.hasNext()) {
+                    parser.parseNext(delegatedInfo);
+                }
+            });
         }
 
-        generation.execute(baseInfo);
-
-        return application;
+        return interpretation
+                .execute(() -> generation.execute(baseData))
+                .execute(() -> application);
     }
 
 }

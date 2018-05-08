@@ -19,7 +19,9 @@ package org.panda_lang.light.design.interpreter;
 import org.panda_lang.light.design.architecture.*;
 import org.panda_lang.light.design.interpreter.parser.defaults.*;
 import org.panda_lang.panda.framework.design.interpreter.*;
+import org.panda_lang.panda.framework.design.interpreter.messenger.*;
 import org.panda_lang.panda.framework.design.interpreter.source.*;
+import org.panda_lang.panda.framework.language.interpreter.*;
 
 public class LightInterpreter implements Interpreter {
 
@@ -31,8 +33,17 @@ public class LightInterpreter implements Interpreter {
 
     @Override
     public LightApplication interpret(SourceSet sources) {
-        ApplicationParser parser = new ApplicationParser(this);
-        return parser.parse(sources);
+        Interpretation interpretation = new PandaInterpretation(environment, this, environment.getLanguage());
+
+        ApplicationParser parser = new ApplicationParser(interpretation);
+        LightApplication application = parser.parse(sources);
+
+        if (!interpretation.isHealthy()) {
+            interpretation.getMessenger().sendMessage(MessengerMessage.Level.FAILURE, "Interpretation failed, cannot parse specified sources");
+            return null;
+        }
+
+        return application;
     }
 
     public LightEnvironment getEnvironment() {

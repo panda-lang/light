@@ -23,7 +23,7 @@ public class MainScopeParserHandler implements ParserHandler {
 
     @Override
     public boolean handle(TokenReader reader) {
-        return reader.read().getTokenValue().equals("main");
+        return reader.read().getTokenValue().equals("main {");
     }
 
 }
