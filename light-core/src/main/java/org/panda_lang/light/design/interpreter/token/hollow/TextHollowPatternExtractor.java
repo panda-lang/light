@@ -20,6 +20,12 @@ import org.panda_lang.panda.framework.design.interpreter.token.*;
 
 public class TextHollowPatternExtractor {
 
+    private final String pattern;
+
+    public TextHollowPatternExtractor(String pattern) {
+        this.pattern = pattern;
+    }
+
     public TokenRepresentation[] extract() {
         return null;
     }

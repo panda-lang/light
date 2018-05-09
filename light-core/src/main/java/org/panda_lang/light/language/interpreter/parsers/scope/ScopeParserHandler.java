@@ -16,14 +16,18 @@
 
 package org.panda_lang.light.language.interpreter.parsers.scope;
 
-import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.ParserHandler;
-import org.panda_lang.panda.framework.design.interpreter.token.reader.TokenReader;
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.*;
+import org.panda_lang.panda.framework.design.interpreter.token.*;
+import org.panda_lang.panda.framework.design.interpreter.token.reader.*;
+
+import java.util.*;
 
 public class ScopeParserHandler implements ParserHandler {
 
     @Override
     public boolean handle(TokenReader reader) {
-        return reader.read().getTokenValue().endsWith("{");
+        List<TokenizedSource> hollows = ScopeParser.PATTERN.extractor().extract(reader);
+        return hollows != null && hollows.size() == 2;
     }
 
 }

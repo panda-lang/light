@@ -24,9 +24,15 @@ public class LightTest {
     @Test
     public void testLight() {
         LightCore core = new LightCore();
-        LightLoader loader = core.getLoader();
 
+        LightLoader loader = core.getLoader();
         LightApplication application = loader.loadFiles("../examples/current_test.light");
+
+        if (application == null) {
+            LightCore.getLogger().warn("Cannot launch this application");
+            return;
+        }
+
         application.launch();
     }
 

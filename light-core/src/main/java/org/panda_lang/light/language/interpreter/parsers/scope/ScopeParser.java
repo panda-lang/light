@@ -20,19 +20,21 @@ import org.panda_lang.light.design.interpreter.parser.defaults.*;
 import org.panda_lang.light.design.interpreter.source.*;
 import org.panda_lang.light.language.interpreter.parsers.*;
 import org.panda_lang.panda.design.interpreter.parser.pipeline.registry.*;
+import org.panda_lang.panda.design.interpreter.token.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.*;
 import org.panda_lang.panda.framework.design.interpreter.token.*;
 import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
-import org.panda_lang.panda.utilities.redact.match.text.*;
+import org.panda_lang.panda.framework.language.interpreter.token.pattern.abyss.*;
+import org.panda_lang.panda.language.interpreter.*;
 
 @ParserRegistration(target = UniversalPipelines.OVERALL, parserClass = ScopeParser.class, handlerClass = ScopeParserHandler.class)
 public class ScopeParser implements UnifiedParser {
 
-    private static final TextHollowPattern PATTERN = TextHollowPattern.builder()
-            .compile("* { * }")
+    protected static final AbyssPattern PATTERN = new AbyssPatternBuilder()
+            .compile(PandaSyntax.getInstance(), "+* { +* }")
             .build();
 
     @Override

@@ -48,10 +48,6 @@ public class LightLoader {
         LightInterpreter interpreter = environment.getInterpreter();
         LightApplication application = interpreter.interpret(sourceSet);
 
-        if (application == null) {
-            throw new RuntimeException("Application does not exist");
-        }
-
         return application;
     }
 
