@@ -16,7 +16,6 @@
 
 package org.panda_lang.light.language.interpreter.parsers.scope;
 
-import org.panda_lang.light.design.interpreter.parser.defaults.*;
 import org.panda_lang.light.design.interpreter.source.*;
 import org.panda_lang.light.language.interpreter.parsers.*;
 import org.panda_lang.panda.design.interpreter.parser.pipeline.registry.*;
@@ -25,9 +24,9 @@ import org.panda_lang.panda.framework.design.interpreter.parser.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.*;
-import org.panda_lang.panda.framework.design.interpreter.token.*;
 import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
 import org.panda_lang.panda.framework.language.interpreter.token.pattern.abyss.*;
+import org.panda_lang.panda.framework.language.interpreter.token.pattern.abyss.redactor.*;
 import org.panda_lang.panda.language.interpreter.*;
 
 @ParserRegistration(target = UniversalPipelines.OVERALL, parserClass = ScopeParser.class, handlerClass = ScopeParserHandler.class)
@@ -39,21 +38,16 @@ public class ScopeParser implements UnifiedParser {
 
     @Override
     public void parse(ParserData data) {
-        SourceStream sourceStream = data.getComponent(UniversalComponents.SOURCE_STREAM);
+        AbyssRedactor redactor = AbyssPatternAssistant.traditionalMapping(PATTERN, data, "scope-declaration", "scope-content");
 
-        TokenRepresentation declarationSignature = sourceStream.read();
-        data.setComponent(ScopeComponents.DECLARATION, declarationSignature);
+        data.setComponent(ScopeComponents.DECLARATION, redactor.get("scope-declaration"));
+        data.setComponent(ScopeComponents.CONTENT, redactor.get("scope-content"));
 
         PipelineRegistry pipelineRegistry = data.getComponent(UniversalComponents.PIPELINE);
         ParserPipeline pipeline = pipelineRegistry.getPipeline(LightPipelines.SCOPE);
 
-        SourceStream declarationSignatureStream = new LightSourceStream(declarationSignature);
+        SourceStream declarationSignatureStream = new LightSourceStream(data.getComponent(ScopeComponents.DECLARATION));
         UnifiedParser scopeParser = pipeline.handle(declarationSignatureStream);
-
-        ContentParser contentParser = new ContentParser();
-        TokenRepresentation[] content = contentParser.parse(data);
-        data.setComponent(ScopeComponents.CONTENT, content);
-
         scopeParser.parse(data);
     }
 

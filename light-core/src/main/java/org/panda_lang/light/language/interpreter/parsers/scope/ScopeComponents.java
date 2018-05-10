@@ -21,8 +21,8 @@ import org.panda_lang.panda.framework.design.interpreter.token.*;
 
 public class ScopeComponents {
 
-    public static final Component<TokenRepresentation> DECLARATION = Component.of("light-scope-declaration", TokenRepresentation.class);
+    public static final Component<TokenizedSource> DECLARATION = Component.of("light-scope-declaration", TokenizedSource.class);
 
-    public static final Component<TokenRepresentation[]> CONTENT = Component.of("light-scope-content", TokenRepresentation[].class);
+    public static final Component<TokenizedSource> CONTENT = Component.of("light-scope-content", TokenizedSource.class);
 
 }
