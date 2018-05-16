@@ -16,6 +16,7 @@
 
 package org.panda_lang.light.language.interpreter.parsers.scope;
 
+import org.panda_lang.panda.framework.design.architecture.statement.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
 import org.panda_lang.panda.framework.design.interpreter.token.*;
 
@@ -24,5 +25,7 @@ public class ScopeComponents {
     public static final Component<TokenizedSource> DECLARATION = Component.of("light-scope-declaration", TokenizedSource.class);
 
     public static final Component<TokenizedSource> CONTENT = Component.of("light-scope-content", TokenizedSource.class);
+
+    public static final Component<Scope> SCOPE = Component.of("light-scope", Scope.class);
 
 }

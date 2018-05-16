@@ -21,14 +21,13 @@ import org.panda_lang.light.language.interpreter.parsers.*;
 import org.panda_lang.light.language.interpreter.parsers.scope.*;
 import org.panda_lang.panda.design.interpreter.parser.pipeline.registry.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.*;
-import org.panda_lang.panda.framework.design.interpreter.token.*;
 
 @ParserRegistration(target = LightPipelines.SCOPE, parserClass = MainScopeParser.class, handlerClass = MainScopeParserHandler.class)
 public class MainScopeParser implements UnifiedParser {
 
     @Override
     public void parse(ParserData data) {
-        TokenizedSource declarationSource = data.getComponent(ScopeComponents.DECLARATION);
+        data.setComponent(ScopeComponents.SCOPE, new MainScope());
     }
 
 }

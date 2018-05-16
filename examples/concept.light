@@ -1,0 +1,30 @@
+project {
+    name as ExampleProject
+    author as dzikoysk
+    version as 1.0.0
+}
+
+dependencies {
+    provided sdk-1.0.0 by dzikoysk
+    internal utils-indev-2.0.1 by lily
+}
+
+command /version {
+    send "ExampleProject {version of ExampleProject}" to @player
+}
+
+on player join {
+    if @player has played before {
+        send "Hello {@player's name}!" to @player and end
+    }
+
+    set <@player:account:balance> to {configuration:default balance}
+}
+
+phrase 'version of ExampleProject' {
+    return version of project
+}
+
+
+
+

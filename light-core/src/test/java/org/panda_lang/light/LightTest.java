@@ -16,8 +16,9 @@
 
 package org.panda_lang.light;
 
-import org.junit.jupiter.api.Test;
-import org.panda_lang.light.design.architecture.LightApplication;
+import org.junit.jupiter.api.*;
+import org.panda_lang.light.design.architecture.*;
+import org.panda_lang.panda.utilities.commons.*;
 
 public class LightTest {
 
@@ -34,6 +35,11 @@ public class LightTest {
         }
 
         application.launch();
+    }
+
+    static {
+        LoggingUtils.skipJansi();
+        LoggingUtils.muteReflections();
     }
 
 }

@@ -67,7 +67,7 @@ public class ApplicationParser implements Parser {
                 Lexer lexer = new LightLexer(source.getContent());
                 TokenizedSource tokenizedSource = lexer.convert();
 
-                System.out.println(tokenizedSource.toString());
+                // System.out.println(tokenizedSource.toString());
 
                 SourceStream stream = new LightSourceStream(tokenizedSource);
                 exceptionTranslator.updateSource(stream);
