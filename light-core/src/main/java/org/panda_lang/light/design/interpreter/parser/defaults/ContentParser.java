@@ -16,14 +16,40 @@
 
 package org.panda_lang.light.design.interpreter.parser.defaults;
 
-import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
-import org.panda_lang.panda.framework.design.interpreter.parser.ParserData;
-import org.panda_lang.panda.framework.design.interpreter.token.TokenRepresentation;
+import org.panda_lang.light.design.interpreter.token.*;
+import org.panda_lang.light.language.interpreter.parsers.scope.*;
+import org.panda_lang.panda.framework.design.architecture.statement.*;
+import org.panda_lang.panda.framework.design.interpreter.parser.*;
+import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
+import org.panda_lang.panda.framework.design.interpreter.token.*;
+import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
+import org.panda_lang.panda.framework.language.interpreter.parser.*;
 
-public class ContentParser implements Parser {
+public class ContentParser implements UnifiedParser {
 
-    public TokenRepresentation[] parse(ParserData info) {
-        return null;
+    @Override
+    public void parse(ParserData data) {
+        PhraseParser phraseParser = new PhraseParser();
+
+        SourceStream source = data.getComponent(UniversalComponents.SOURCE_STREAM);
+        Scope scope = data.getComponent(ScopeComponents.SCOPE);
+
+        while (source.hasUnreadSource()) {
+            TokenRepresentation phrase = source.read();
+
+            if (phrase instanceof PhraseRepresentation) {
+                Statement statement = phraseParser.parse((PhraseRepresentation) phrase);
+
+                if (statement != null) {
+                    scope.addStatement(statement);
+                    continue;
+                }
+
+                throw new PandaParserFailure("Unknown statement", data);
+            }
+
+            throw new PandaParserFailure("Unknown token type", data);
+        }
     }
 
 }

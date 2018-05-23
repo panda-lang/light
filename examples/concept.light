@@ -5,8 +5,8 @@ project {
 }
 
 dependencies {
-    provided sdk-1.0.0 by dzikoysk
-    internal utils-indev-2.0.1 by lily
+    provided sdk by dzikoysk
+    internal utils by lily
 }
 
 command /version {

@@ -1,7 +1,3 @@
 main {
-
+    send "test" to console
 }
-
-
-
-

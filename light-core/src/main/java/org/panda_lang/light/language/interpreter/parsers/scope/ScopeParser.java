@@ -16,15 +16,19 @@
 
 package org.panda_lang.light.language.interpreter.parsers.scope;
 
+import org.panda_lang.light.design.interpreter.parser.defaults.*;
 import org.panda_lang.light.design.interpreter.source.*;
 import org.panda_lang.light.language.interpreter.parsers.*;
 import org.panda_lang.panda.design.interpreter.parser.pipeline.registry.*;
 import org.panda_lang.panda.design.interpreter.token.*;
+import org.panda_lang.panda.framework.design.architecture.*;
+import org.panda_lang.panda.framework.design.architecture.statement.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.*;
 import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
+import org.panda_lang.panda.framework.language.interpreter.parser.*;
 import org.panda_lang.panda.framework.language.interpreter.token.pattern.abyss.*;
 import org.panda_lang.panda.framework.language.interpreter.token.pattern.abyss.redactor.*;
 import org.panda_lang.panda.language.interpreter.*;
@@ -48,7 +52,22 @@ public class ScopeParser implements UnifiedParser {
 
         SourceStream declarationSignatureStream = new LightSourceStream(data.getComponent(ScopeComponents.DECLARATION));
         UnifiedParser scopeParser = pipeline.handle(declarationSignatureStream);
+
         scopeParser.parse(data);
+        Scope scope = data.getComponent(ScopeComponents.SCOPE);
+
+        if (scope == null) {
+            throw new PandaParserFailure("Unknown scope signature", data);
+        }
+
+        SourceStream contentStream = new LightSourceStream(data.getComponent(ScopeComponents.CONTENT));
+        ParserData contentData = data.fork().setComponent(UniversalComponents.SOURCE_STREAM, contentStream);
+
+        ContentParser contentParser = new ContentParser();
+        contentParser.parse(contentData);
+
+        Script script = data.getComponent(UniversalComponents.SCRIPT);
+        script.getStatements().add(scope);
     }
 
 }

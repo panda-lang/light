@@ -20,7 +20,7 @@ import org.junit.jupiter.api.*;
 import org.panda_lang.light.design.architecture.*;
 import org.panda_lang.panda.utilities.commons.*;
 
-public class LightTest {
+public  class LightTest {
 
     @Test
     public void testLight() {
