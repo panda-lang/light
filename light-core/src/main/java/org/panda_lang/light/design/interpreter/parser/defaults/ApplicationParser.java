@@ -32,7 +32,7 @@ import org.panda_lang.panda.framework.design.interpreter.source.*;
 import org.panda_lang.panda.framework.design.interpreter.token.*;
 import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
 import org.panda_lang.panda.framework.language.*;
-import org.panda_lang.panda.framework.language.interpreter.messenger.translators.*;
+import org.panda_lang.panda.framework.language.interpreter.messenger.translators.exception.*;
 import org.panda_lang.panda.framework.language.interpreter.parser.defaults.*;
 
 public class ApplicationParser implements Parser {
@@ -56,7 +56,7 @@ public class ApplicationParser implements Parser {
         baseData.setComponent(UniversalComponents.GENERATION, generation);
         baseData.setComponent(UniversalComponents.PIPELINE, pipelineRegistry);
 
-        ExceptionTranslator exceptionTranslator = new ExceptionTranslator();
+        ExceptionTranslator exceptionTranslator = new ExceptionTranslator(interpretation);
         interpretation.getMessenger().addMessageTranslator(exceptionTranslator);
 
         for (Source source : sources) {
