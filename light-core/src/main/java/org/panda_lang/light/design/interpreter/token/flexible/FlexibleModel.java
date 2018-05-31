@@ -26,6 +26,10 @@ public class FlexibleModel {
         this.scheme = element;
     }
 
+    public FlexibleModelElement getScheme() {
+        return scheme;
+    }
+
     public static FlexibleModelBuilder builder() {
         return new FlexibleModelBuilder();
     }

@@ -16,6 +16,21 @@
 
 package org.panda_lang.light.design.interpreter.token.flexible.tree;
 
+import org.panda_lang.light.design.interpreter.token.*;
+import org.panda_lang.light.design.interpreter.token.flexible.*;
+
 public class FlexibleTree {
+
+    public FlexibleTree() {
+
+    }
+
+    public void apply(FlexibleModel model) {
+
+    }
+
+    public void find(Phrase phrase) {
+
+    }
 
 }

@@ -17,7 +17,9 @@
 package org.panda_lang.light.flexible;
 
 import org.junit.jupiter.api.*;
+import org.panda_lang.light.design.interpreter.token.*;
 import org.panda_lang.light.design.interpreter.token.flexible.*;
+import org.panda_lang.light.design.interpreter.token.flexible.tree.*;
 
 public class FlexibleModelTest {
 
@@ -39,6 +41,12 @@ public class FlexibleModelTest {
                         .apply()
                     .finish()
                 .createModel();
+
+        FlexibleTree tree = new FlexibleTree();
+        tree.apply(model);
+
+        Phrase phrase = new Phrase("send 'Hello Panda' to console");
+        tree.find(phrase);
     }
 
 }
