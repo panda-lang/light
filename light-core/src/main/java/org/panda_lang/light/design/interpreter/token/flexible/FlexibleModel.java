@@ -17,21 +17,51 @@
 package org.panda_lang.light.design.interpreter.token.flexible;
 
 import org.panda_lang.light.design.interpreter.token.flexible.builder.*;
+import org.panda_lang.panda.framework.design.architecture.dynamic.*;
 
 public class FlexibleModel {
 
-    private final FlexibleModelElement scheme;
+    private final FlexibleModelElement structure;
+    private final Executable executable;
 
-    protected FlexibleModel(FlexibleModelElement element) {
-        this.scheme = element;
+    protected FlexibleModel(FlexibleModelElement element, Executable executable) {
+        this.structure = element;
+        this.executable = executable;
     }
 
-    public FlexibleModelElement getScheme() {
-        return scheme;
+    public Executable getExecutable() {
+        return executable;
+    }
+
+    public FlexibleModelElement getStructure() {
+        return structure;
     }
 
     public static FlexibleModelBuilder builder() {
         return new FlexibleModelBuilder();
+    }
+
+    public static class FlexibleModelBuilder {
+
+        private final FlexibleModelElementBuilder primaryBuilder = new FlexibleModelElementBuilder(this, null, false);
+        private Executable executable;
+
+        protected FlexibleModelBuilder() {
+        }
+
+        public FlexibleModelElementBuilder compose() {
+            return primaryBuilder;
+        }
+
+        public FlexibleModelBuilder statement(Executable executable) {
+            this.executable = executable;
+            return this;
+        }
+
+        public FlexibleModel createModel() {
+            return new FlexibleModel(primaryBuilder.getElement(), executable);
+        }
+
     }
 
 }

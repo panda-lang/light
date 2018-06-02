@@ -20,11 +20,11 @@ import org.panda_lang.light.design.interpreter.token.flexible.*;
 
 public class FlexibleModelElementBuilder {
 
-    protected final FlexibleModelBuilder builder;
+    protected final FlexibleModel.FlexibleModelBuilder builder;
     protected final FlexibleModelElementBuilder parent;
     protected final FlexibleModelElement element;
 
-    public FlexibleModelElementBuilder(FlexibleModelBuilder builder, FlexibleModelElementBuilder parent, boolean optional) {
+    public FlexibleModelElementBuilder(FlexibleModel.FlexibleModelBuilder builder, FlexibleModelElementBuilder parent, boolean optional) {
         this.builder = builder;
         this.parent = parent;
         this.element = new FlexibleModelElement(optional);
@@ -53,7 +53,7 @@ public class FlexibleModelElementBuilder {
         return parent;
     }
 
-    public FlexibleModelBuilder finish() {
+    public FlexibleModel.FlexibleModelBuilder finish() {
         return builder;
     }
 

@@ -20,19 +20,22 @@ import org.junit.jupiter.api.*;
 import org.panda_lang.light.design.interpreter.token.*;
 import org.panda_lang.light.design.interpreter.token.flexible.*;
 import org.panda_lang.light.design.interpreter.token.flexible.tree.*;
+import org.panda_lang.panda.framework.design.architecture.dynamic.*;
 
 public class FlexibleModelTest {
+
+    // send [message] %string% to (terminal|console)
 
     @Test
     public void testModel() {
         FlexibleModel model = FlexibleModel.builder()
                 .compose()
-                    .basic("send")
+                    .basic("send ")
                     .optional()
-                        .basic("message")
+                        .basic("message ")
                         .apply()
                     .expression(String.class)
-                    .basic("to")
+                    .basic(" to ")
                     .variant()
                         .option()
                             .basic("terminal")
@@ -43,10 +46,10 @@ public class FlexibleModelTest {
                 .createModel();
 
         FlexibleTree tree = new FlexibleTree();
-        tree.apply(model);
+        tree.merge(model);
 
-        Phrase phrase = new Phrase("send 'Hello Panda' to console");
-        tree.find(phrase);
+        Phrase phrase = new Phrase("send 'Flexible Model Test' to console");
+        Executable statement = tree.find(phrase);
     }
 
 }

@@ -18,19 +18,92 @@ package org.panda_lang.light.design.interpreter.token.flexible.tree;
 
 import org.panda_lang.light.design.interpreter.token.*;
 import org.panda_lang.light.design.interpreter.token.flexible.*;
+import org.panda_lang.panda.framework.design.architecture.dynamic.*;
 
+import java.util.*;
+
+/**
+ * tree { map: node { } }
+ * tree.find -> phrase by char
+ *
+ */
 public class FlexibleTree {
 
+    private FlexibleTreeNode node;
+
     public FlexibleTree() {
-
+        this.node = new FlexibleTreeNode();
     }
 
-    public void apply(FlexibleModel model) {
-
+    public void merge(FlexibleModel model) {
+        FlexibleModelElement modelElement = model.getStructure();
+        this.mergeBranch(modelElement);
     }
 
-    public void find(Phrase phrase) {
+    public void mergeBranch(FlexibleModelElement element) {
+        Collection<FlexibleTreeNode> previousNodes = new HashSet<>();
+        previousNodes.add(node);
 
+        for (Object[] level : element.getElements()) {
+            for (FlexibleTreeNode previousNode : previousNodes) {
+
+                this.mergeFragment(previousNode, level);
+            }
+
+            previousNodes.clear();
+        }
+    }
+
+    public void mergeFragment(FlexibleTreeNode parent, Object[] elements) {
+        for (Object element : elements) {
+            FlexibleTreeElement treeElement = new FlexibleTreeElement(element);
+        }
+    }
+
+    /*
+
+    tree {
+        send {
+            message {
+                <string> {
+                    to {
+                        console {
+                            return id:1
+                        }
+
+                        terminal {
+                            retuen id:1
+                        }
+                    }
+                }
+            }
+
+            <string> {
+                to {
+                    console {
+                        return id:1
+                    }
+
+                    terminal {
+                        return id:1
+                    }
+                }
+            }
+        }
+    }
+
+
+
+     */
+    public Executable find(Phrase phrase) {
+        String value = phrase.getTokenValue();
+
+        for (int i = 0; i < value.toCharArray().length; i++) {
+            String current = value.substring(0, i);
+
+        }
+
+        return null;
     }
 
 }

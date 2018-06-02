@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token.flexible.builder;
+package org.panda_lang.light.design.interpreter.token.flexible;
 
 import java.util.*;
 
@@ -38,7 +38,7 @@ public class FlexibleModelElement {
         this.add(expression);
     }
 
-    protected void add(Object... variants) {
+    public void add(Object... variants) {
         this.elements.add(variants);
     }
 

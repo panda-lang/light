@@ -14,23 +14,20 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token.flexible;
+package org.panda_lang.light.design.interpreter.token.lexical;
 
-import org.panda_lang.light.design.interpreter.token.flexible.builder.*;
+import java.util.*;
 
-public class FlexibleModelBuilder {
+public class LexicalExtractor {
 
-    private final FlexibleModelElementBuilder primaryBuilder = new FlexibleModelElementBuilder(this, null, false);
+    private final LexicalPattern pattern;
 
-    protected FlexibleModelBuilder() {
+    public LexicalExtractor(LexicalPattern pattern) {
+        this.pattern = pattern;
     }
 
-    public FlexibleModelElementBuilder compose() {
-        return primaryBuilder;
-    }
-
-    public FlexibleModel createModel() {
-        return new FlexibleModel(primaryBuilder.getElement());
+    public List<String> extract(String phrase) {
+        return null;
     }
 
 }

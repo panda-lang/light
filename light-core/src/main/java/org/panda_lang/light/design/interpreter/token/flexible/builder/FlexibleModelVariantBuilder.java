@@ -24,7 +24,7 @@ public class FlexibleModelVariantBuilder extends FlexibleModelElementBuilder {
 
     private final List<FlexibleModelElement> variants = new ArrayList<>(3);
 
-    protected FlexibleModelVariantBuilder(FlexibleModelBuilder builder, FlexibleModelElementBuilder parent, boolean optional) {
+    protected FlexibleModelVariantBuilder(FlexibleModel.FlexibleModelBuilder builder, FlexibleModelElementBuilder parent, boolean optional) {
         super(builder, parent, optional);
     }
 
@@ -34,7 +34,7 @@ public class FlexibleModelVariantBuilder extends FlexibleModelElementBuilder {
 
     public static class FlexibleModelVariantElementBuilder extends FlexibleModelElementBuilder {
 
-        private FlexibleModelVariantElementBuilder(FlexibleModelBuilder builder, FlexibleModelVariantBuilder parent, boolean optional) {
+        private FlexibleModelVariantElementBuilder(FlexibleModel.FlexibleModelBuilder builder, FlexibleModelVariantBuilder parent, boolean optional) {
             super(builder, parent, optional);
         }
 
