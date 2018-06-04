@@ -18,10 +18,11 @@ package org.panda_lang.light.design.interpreter.token.lexical;
 
 public class LexicalPatternUnit extends LexicalPatternElement {
 
-    private UnitType type;
-    private String value;
+    private final UnitType type;
+    private final String value;
 
-    public LexicalPatternUnit(UnitType type, String element) {
+    public LexicalPatternUnit(UnitType type, String element, boolean optional) {
+        super.optional = optional;
         this.type = type;
         this.value = element;
     }

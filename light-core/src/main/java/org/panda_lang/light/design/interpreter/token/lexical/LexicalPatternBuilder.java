@@ -5,10 +5,10 @@ import java.util.*;
 public class LexicalPatternBuilder {
 
     private final List<LexicalPatternElement> elements = new ArrayList<>();
+    private final LexicalPatternCompiler compiler = new LexicalPatternCompiler();
 
     public LexicalPatternBuilder compile(String pattern) {
-        LexicalPatternCompiler compiler = new LexicalPatternCompiler(pattern);
-        List<LexicalPatternElement> compiledElements = compiler.compile();
+        List<LexicalPatternElement> compiledElements = compiler.compile(pattern);
 
         if (compiledElements == null) {
             throw new RuntimeException("Cannot compile pattern: " + pattern);

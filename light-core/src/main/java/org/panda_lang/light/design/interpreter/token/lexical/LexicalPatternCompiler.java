@@ -9,54 +9,55 @@ import java.util.*;
 
 public class LexicalPatternCompiler {
 
-    private final String expression;
-    private final List<LexicalPatternElement> units;
-
-    public LexicalPatternCompiler(String expression) {
-        this.expression = expression;
-        this.units = new ArrayList<>();
-    }
-
-    public List<LexicalPatternElement> compile() {
+    public List<LexicalPatternElement> compile(String pattern) {
+        List<LexicalPatternElement> elements = new ArrayList<>();
         StringBuilder unitBuilder = new StringBuilder();
-        units.clear();
 
-        CharArrayDistributor distributor = new CharArrayDistributor(expression.toCharArray());
+        CharArrayDistributor distributor = new CharArrayDistributor(pattern.toCharArray());
         BracketContentReader contentReader = new BracketContentReader(distributor);
 
         while (distributor.hasNext()) {
             char currentChar = distributor.next();
 
+            if ((currentChar == '[' || currentChar == '<' || currentChar == '(') && unitBuilder.length() > 0) {
+                String unitContent = unitBuilder.toString();
+
+                LexicalPatternUnit unit = new LexicalPatternUnit(LexicalPatternUnit.UnitType.STATIC, unitContent, false);
+                elements.add(unit);
+
+                unitBuilder.setLength(0);
+            }
+
             if (currentChar == '[') {
                 LexicalPatternElement optionalElement = this.compileOptional(contentReader.read());
-                units.add(optionalElement);
+                elements.add(optionalElement);
             }
             else if (currentChar == '<') {
-                LexicalPatternElement typeElement = this.compileExpression(contentReader.read());
-                units.add(typeElement);
+                LexicalPatternElement typeElement = this.compileType(contentReader.read());
+                elements.add(typeElement);
             }
             else if (currentChar == '(') {
-                LexicalPatternElement variantElement = this.compileExpression(contentReader.read());
-                units.add(variantElement);
+                LexicalPatternElement variantElement = this.compileVariant(contentReader.read());
+                elements.add(variantElement);
             }
             else {
                 unitBuilder.append(currentChar);
             }
         }
 
-        return units;
+        return elements;
     }
 
-    private LexicalPatternElement compileExpression(String pattern) {
-        return new LexicalPatternUnit(LexicalPatternUnit.UnitType.EXPRESSION, pattern);
+    private LexicalPatternElement compileType(String pattern) {
+        return new LexicalPatternUnit(LexicalPatternUnit.UnitType.EXPRESSION, pattern.substring(1, pattern.length() - 1), false);
     }
 
     private LexicalPatternElement compileOptional(String pattern) {
-        return new LexicalPatternUnit(LexicalPatternUnit.UnitType.STATIC, pattern);
+        return new LexicalPatternUnit(LexicalPatternUnit.UnitType.STATIC, pattern, true);
     }
 
     private LexicalPatternElement compileVariant(String pattern) {
-        return new LexicalPatternNode();
+        return new LexicalPatternNode(false);
     }
 
 }

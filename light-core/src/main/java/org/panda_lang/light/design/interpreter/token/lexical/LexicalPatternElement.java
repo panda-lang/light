@@ -18,6 +18,12 @@ package org.panda_lang.light.design.interpreter.token.lexical;
 
 public abstract class LexicalPatternElement {
 
+    protected boolean optional;
+
+    public boolean isOptional() {
+        return optional;
+    }
+
     public boolean isUnit() {
         return this instanceof LexicalPatternUnit;
     }

@@ -18,4 +18,8 @@ package org.panda_lang.light.design.interpreter.token.lexical;
 
 public class LexicalPatternNode extends LexicalPatternElement {
 
+    public LexicalPatternNode(boolean optional) {
+        super.optional = optional;
+    }
+
 }
