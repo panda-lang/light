@@ -16,32 +16,33 @@
 
 package org.panda_lang.light.design.interpreter.token.lexical;
 
-public class LexicalPatternUnit {
+public class LexicalPatternUnit extends LexicalPatternElement {
 
-    private Object value;
-    private boolean specified;
-    private boolean expression;
+    private UnitType type;
+    private String value;
 
-    public LexicalPatternUnit(Object element) {
+    public LexicalPatternUnit(UnitType type, String element) {
+        this.type = type;
         this.value = element;
-        this.specified = element instanceof String;
-        this.expression = element instanceof Class;
     }
 
     public boolean isExpression() {
-        return expression;
+        return type == UnitType.EXPRESSION;
     }
 
-    public boolean isSpecified() {
-        return specified;
+    public boolean isStatic() {
+        return type == UnitType.STATIC;
     }
 
-    public Class<?> getExpression() {
-        return (Class<?>) value;
+    public String getValue() {
+        return value;
     }
 
-    public String getSpecified() {
-        return (String) value;
+    public enum UnitType {
+
+        EXPRESSION,
+        STATIC
+
     }
 
 }

@@ -16,17 +16,6 @@
 
 package org.panda_lang.light.design.interpreter.token.lexical;
 
-import java.util.*;
-
-public class LexicalPattern {
-
-    public List<String> extract(String phrase) {
-        LexicalExtractor extractor = new LexicalExtractor(this);
-        return extractor.extract(phrase);
-    }
-
-    public static LexicalPatternBuilder builder() {
-        return new LexicalPatternBuilder();
-    }
+public class LexicalPatternNode extends LexicalPatternElement {
 
 }
