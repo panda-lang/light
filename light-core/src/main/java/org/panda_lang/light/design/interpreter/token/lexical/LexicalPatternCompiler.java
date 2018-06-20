@@ -33,15 +33,15 @@ public class LexicalPatternCompiler {
             }
 
             if (currentChar == '[') {
-                LexicalPatternElement optionalElement = this.compileOptional(contentReader.read());
+                LexicalPatternElement optionalElement = this.compileOptional(contentReader.readCurrent());
                 elements.add(optionalElement);
             }
             else if (currentChar == '<') {
-                LexicalPatternElement typeElement = this.compileType(contentReader.read());
+                LexicalPatternElement typeElement = this.compileType(contentReader.readCurrent());
                 elements.add(typeElement);
             }
             else if (currentChar == '(') {
-                LexicalPatternElement variantElement = this.compileVariant(contentReader.read());
+                LexicalPatternElement variantElement = this.compileVariant(contentReader.readCurrent());
                 elements.add(variantElement);
             }
             else {

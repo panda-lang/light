@@ -31,6 +31,10 @@ public class LexicalPattern {
         return extractor.extract(phrase);
     }
 
+    protected LexicalPatternElement getPattern() {
+        return pattern;
+    }
+
     public static LexicalPatternBuilder builder() {
         return new LexicalPatternBuilder();
     }

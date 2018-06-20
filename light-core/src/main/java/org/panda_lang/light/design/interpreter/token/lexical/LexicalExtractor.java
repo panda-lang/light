@@ -16,6 +16,8 @@
 
 package org.panda_lang.light.design.interpreter.token.lexical;
 
+import org.jetbrains.annotations.*;
+
 import java.util.*;
 
 public class LexicalExtractor {
@@ -26,8 +28,35 @@ public class LexicalExtractor {
         this.pattern = pattern;
     }
 
-    public List<String> extract(String phrase) {
-        return null;
+    public @Nullable List<String> extract(String phrase) {
+        List<String> matches = new ArrayList<>();
+        LexicalPatternElement mainElement = pattern.getPattern();
+
+        if (mainElement.isUnit()) {
+            return mainElement.toUnit().getValue().equals(phrase) ? matches : null;
+        }
+
+        String currentPhrase = phrase;
+        LexicalPatternNode mainNode = mainElement.toNode();
+        int currentIndex = 0;
+
+        for (LexicalPatternElement nodeElement : mainNode.getElements()) {
+            if (nodeElement.isUnit()) {
+                LexicalPatternUnit unit = nodeElement.toUnit();
+
+                if (unit.isStatic()) {
+                    int index = phrase.indexOf(unit.getValue(), currentIndex);
+
+                    if (index == -1) {
+                        return null;
+                    }
+
+                    currentIndex = index;
+                }
+            }
+        }
+
+        return matches;
     }
 
 }
