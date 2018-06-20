@@ -9,7 +9,11 @@ import java.util.*;
 
 public class LexicalPatternCompiler {
 
-    public List<LexicalPatternElement> compile(String pattern) {
+    public LexicalPatternElement compile(String pattern) {
+        return this.compile(pattern, false);
+    }
+
+    public LexicalPatternElement compile(String pattern, boolean optional) {
         List<LexicalPatternElement> elements = new ArrayList<>();
         StringBuilder unitBuilder = new StringBuilder();
 
@@ -22,7 +26,7 @@ public class LexicalPatternCompiler {
             if ((currentChar == '[' || currentChar == '<' || currentChar == '(') && unitBuilder.length() > 0) {
                 String unitContent = unitBuilder.toString();
 
-                LexicalPatternUnit unit = new LexicalPatternUnit(LexicalPatternUnit.UnitType.STATIC, unitContent, false);
+                LexicalPatternUnit unit = new LexicalPatternUnit(LexicalPatternUnit.UnitType.STATIC, unitContent, optional);
                 elements.add(unit);
 
                 unitBuilder.setLength(0);
@@ -45,19 +49,37 @@ public class LexicalPatternCompiler {
             }
         }
 
-        return elements;
+        if (unitBuilder.length() > 0) {
+            LexicalPatternUnit unit = new LexicalPatternUnit(LexicalPatternUnit.UnitType.STATIC, unitBuilder.toString(), false);
+            elements.add(unit);
+        }
+
+        if (elements.size() == 0) {
+            throw new RuntimeException("Empty element");
+        }
+
+        return elements.size() == 1 ? elements.get(0) : new LexicalPatternNode(elements, optional);
     }
 
     private LexicalPatternElement compileType(String pattern) {
-        return new LexicalPatternUnit(LexicalPatternUnit.UnitType.EXPRESSION, pattern.substring(1, pattern.length() - 1), false);
+        return new LexicalPatternUnit(LexicalPatternUnit.UnitType.EXPRESSION, pattern, false);
     }
 
     private LexicalPatternElement compileOptional(String pattern) {
-        return new LexicalPatternUnit(LexicalPatternUnit.UnitType.STATIC, pattern, true);
+        return this.compile(pattern, true);
     }
 
     private LexicalPatternElement compileVariant(String pattern) {
-        return new LexicalPatternNode(false);
+        AttentiveContentReader contentReader = new AttentiveContentReader(pattern);
+
+        List<String> variants = contentReader.select('|');
+        List<LexicalPatternElement> elements = new ArrayList<>(variants.size());
+
+        for (String variant : variants) {
+            elements.add(this.compile(variant));
+        }
+
+        return new LexicalPatternNode(elements, false, true);
     }
 
 }

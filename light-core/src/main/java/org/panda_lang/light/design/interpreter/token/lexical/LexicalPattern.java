@@ -20,6 +20,12 @@ import java.util.*;
 
 public class LexicalPattern {
 
+    private final LexicalPatternElement pattern;
+
+    public LexicalPattern(LexicalPatternElement elements) {
+        this.pattern = elements;
+    }
+
     public List<String> extract(String phrase) {
         LexicalExtractor extractor = new LexicalExtractor(this);
         return extractor.extract(phrase);

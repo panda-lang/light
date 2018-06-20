@@ -8,8 +8,10 @@ public class LexicalPatternTest {
     @Test
     public void testLexicalPattern() {
         LexicalPattern pattern = LexicalPattern.builder()
-                .compile("send [message] <string> to (console|terminal)")
+                .compile("send[ message] <string> to (console|terminal [screen])")
                 .build();
+
+        System.out.println(pattern);
     }
 
 }

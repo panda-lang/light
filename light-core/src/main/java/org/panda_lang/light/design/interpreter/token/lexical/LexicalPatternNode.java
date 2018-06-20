@@ -16,10 +16,45 @@
 
 package org.panda_lang.light.design.interpreter.token.lexical;
 
+import java.util.*;
+
 public class LexicalPatternNode extends LexicalPatternElement {
 
-    public LexicalPatternNode(boolean optional) {
+    private final List<LexicalPatternElement> elements;
+    private final boolean variant;
+
+    public LexicalPatternNode(List<LexicalPatternElement> elements, boolean optional, boolean variant) {
         super.optional = optional;
+        this.elements = elements;
+        this.variant = variant;
+    }
+
+    public LexicalPatternNode(List<LexicalPatternElement> elements, boolean optional) {
+        this(elements, optional, false);
+    }
+
+    public LexicalPatternNode(boolean optional, boolean variant) {
+        this(new ArrayList<>(), optional, variant);
+    }
+
+    public LexicalPatternNode(boolean optional) {
+        this(new ArrayList<>(), optional);
+    }
+
+    protected void add(LexicalPatternElement element) {
+        this.elements.add(element);
+    }
+
+    protected void addAll(List<LexicalPatternElement> elements) {
+        this.elements.addAll(elements);
+    }
+
+    public boolean isVariant() {
+        return variant;
+    }
+
+    public List<LexicalPatternElement> getElements() {
+        return elements;
     }
 
 }

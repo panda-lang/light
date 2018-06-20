@@ -24,12 +24,16 @@ public abstract class LexicalPatternElement {
         return optional;
     }
 
-    public boolean isUnit() {
-        return this instanceof LexicalPatternUnit;
+    public boolean isVariant() {
+        return this.isNode() && this.toNode().isVariant();
     }
 
     public boolean isNode() {
         return this instanceof LexicalPatternNode;
+    }
+
+    public boolean isUnit() {
+        return this instanceof LexicalPatternUnit;
     }
 
     public LexicalPatternUnit toUnit() {
