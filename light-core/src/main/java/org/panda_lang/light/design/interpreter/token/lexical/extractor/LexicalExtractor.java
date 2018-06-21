@@ -49,10 +49,9 @@ public class LexicalExtractor {
             return this.matchVariant(node, phrase);
         }
 
+        List<String> dynamic = new ArrayList<>();
         List<LexicalPatternUnit> units = node.selectUnits(true);
         int index = 0;
-
-        List<String> staticContent = new ArrayList<>();
 
         for (int i = index; i < units.size(); i++) {
             LexicalPatternUnit unit = units.get(i);
@@ -69,18 +68,38 @@ public class LexicalExtractor {
             String before = phrase.substring(index, unitIndex).trim();
 
             if (before.length() > 0) {
-                staticContent.add(before);
+                dynamic.add(before);
             }
 
             index = unitIndex + unit.getValue().length();
         }
 
         if (index < phrase.length()) {
-            staticContent.add(phrase.substring(index, phrase.length()));
+            dynamic.add(phrase.substring(index, phrase.length()));
         }
 
-        System.out.println(staticContent);
-        return new LexicalExtractorResult(true);
+        LexicalExtractorResult result = new LexicalExtractorResult(true);
+        int elementIndex = 0;
+
+        for (LexicalPatternElement nodeElement : node.getElements()) {
+            if (nodeElement.isUnit()) {
+                continue;
+            }
+
+            if (dynamic.size() == 0 && nodeElement.isOptional()) {
+                continue;
+            }
+
+            LexicalExtractorResult nodeElementResult = this.extract(nodeElement, dynamic.get(elementIndex++));
+
+            if (!nodeElementResult.isMatched()) {
+                return new LexicalExtractorResult(false);
+            }
+
+            result.merge(nodeElementResult);
+        }
+
+        return result;
     }
 
     private LexicalExtractorResult matchVariant(LexicalPatternNode variantNode, String phrase) {

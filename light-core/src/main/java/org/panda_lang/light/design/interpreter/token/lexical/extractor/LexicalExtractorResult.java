@@ -35,6 +35,23 @@ public class LexicalExtractorResult {
         return this;
     }
 
+    public void merge(LexicalExtractorResult result) {
+        if (!result.isMatched()) {
+            throw new RuntimeException("Cannot merge unmatched result");
+        }
+
+        this.ids.addAll(result.ids);
+        this.wildcards.addAll(result.wildcards);
+    }
+
+    public List<Integer> getIds() {
+        return ids;
+    }
+
+    public List<String> getWildcards() {
+        return wildcards;
+    }
+
     public boolean isMatched() {
         return matched;
     }
