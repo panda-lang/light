@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token.lexical;
+package org.panda_lang.light.design.interpreter.token.lexical.elements;
 
 import java.util.*;
 
-public class LexicalPatternNode extends LexicalPatternElement {
+public class LexicalPatternNode extends DefaultLexicalPatternElement {
 
     private final List<LexicalPatternElement> elements;
     private final boolean variant;
@@ -41,11 +41,39 @@ public class LexicalPatternNode extends LexicalPatternElement {
         this(new ArrayList<>(), optional);
     }
 
-    protected void add(LexicalPatternElement element) {
+    public int countUnits() {
+        int i = 0;
+
+        for (LexicalPatternElement element : elements) {
+            i += element.isUnit() ? 1 : 0;
+        }
+
+        return i;
+    }
+
+    public List<LexicalPatternUnit> selectUnits(boolean all) {
+        List<LexicalPatternUnit> units = new ArrayList<>();
+
+        for (LexicalPatternElement element : elements) {
+            if (!element.isUnit()) {
+                continue;
+            }
+
+            if (!all && element.isOptional()) {
+                continue;
+            }
+
+            units.add(element.toUnit());
+        }
+
+        return units;
+    }
+
+    public void add(LexicalPatternElement element) {
         this.elements.add(element);
     }
 
-    protected void addAll(List<LexicalPatternElement> elements) {
+    public void addAll(List<LexicalPatternElement> elements) {
         this.elements.addAll(elements);
     }
 

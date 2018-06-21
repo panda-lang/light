@@ -1,5 +1,7 @@
 package org.panda_lang.light.design.interpreter.token.lexical;
 
+import org.panda_lang.light.design.interpreter.token.lexical.elements.*;
+
 public class LexicalPatternBuilder {
 
     private final LexicalPatternCompiler compiler = new LexicalPatternCompiler();

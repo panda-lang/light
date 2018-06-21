@@ -14,36 +14,19 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token.lexical;
+package org.panda_lang.light.design.interpreter.token.lexical.elements;
 
-public class LexicalPatternUnit extends LexicalPatternElement {
+public class LexicalPatternUnit extends DefaultLexicalPatternElement {
 
-    private final UnitType type;
     private final String value;
 
-    public LexicalPatternUnit(UnitType type, String element, boolean optional) {
+    public LexicalPatternUnit(String element, boolean optional) {
         super.optional = optional;
-        this.type = type;
         this.value = element;
-    }
-
-    public boolean isExpression() {
-        return type == UnitType.EXPRESSION;
-    }
-
-    public boolean isStatic() {
-        return type == UnitType.STATIC;
     }
 
     public String getValue() {
         return value;
-    }
-
-    public enum UnitType {
-
-        EXPRESSION,
-        STATIC
-
     }
 
 }

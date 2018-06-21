@@ -16,7 +16,8 @@
 
 package org.panda_lang.light.design.interpreter.token.lexical;
 
-import java.util.*;
+import org.panda_lang.light.design.interpreter.token.lexical.elements.*;
+import org.panda_lang.light.design.interpreter.token.lexical.extractor.*;
 
 public class LexicalPattern {
 
@@ -26,12 +27,12 @@ public class LexicalPattern {
         this.pattern = elements;
     }
 
-    public List<String> extract(String phrase) {
+    public LexicalExtractorResult extract(String phrase) {
         LexicalExtractor extractor = new LexicalExtractor(this);
         return extractor.extract(phrase);
     }
 
-    protected LexicalPatternElement getPattern() {
+    public LexicalPatternElement getModel() {
         return pattern;
     }
 

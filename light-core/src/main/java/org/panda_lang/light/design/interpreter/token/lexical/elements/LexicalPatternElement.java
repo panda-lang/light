@@ -14,34 +14,44 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token.lexical;
+package org.panda_lang.light.design.interpreter.token.lexical.elements;
 
-public abstract class LexicalPatternElement {
+public interface LexicalPatternElement {
 
-    protected boolean optional;
+    int getId();
 
-    public boolean isOptional() {
-        return optional;
+    boolean isOptional();
+
+    default boolean hasId() {
+        return getId() != -1;
     }
 
-    public boolean isVariant() {
+    default boolean isVariant() {
         return this.isNode() && this.toNode().isVariant();
     }
 
-    public boolean isNode() {
+    default boolean isWildcard() {
+        return this instanceof LexicalPatternWildcard;
+    }
+
+    default boolean isNode() {
         return this instanceof LexicalPatternNode;
     }
 
-    public boolean isUnit() {
+    default boolean isUnit() {
         return this instanceof LexicalPatternUnit;
     }
 
-    public LexicalPatternUnit toUnit() {
-        return (LexicalPatternUnit) this;
+    default LexicalPatternWildcard toWildcard() {
+        return (LexicalPatternWildcard) this;
     }
 
-    public LexicalPatternNode toNode() {
+    default LexicalPatternNode toNode() {
         return (LexicalPatternNode) this;
+    }
+
+    default LexicalPatternUnit toUnit() {
+        return (LexicalPatternUnit) this;
     }
 
 }

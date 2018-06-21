@@ -1,5 +1,6 @@
 package org.panda_lang.light.design.interpreter.token.lexical;
 
+import org.panda_lang.light.design.interpreter.token.lexical.elements.*;
 import org.panda_lang.panda.utilities.commons.arrays.*;
 import org.panda_lang.panda.utilities.commons.arrays.character.*;
 
@@ -23,10 +24,10 @@ public class LexicalPatternCompiler {
         while (distributor.hasNext()) {
             char currentChar = distributor.next();
 
-            if ((currentChar == '[' || currentChar == '<' || currentChar == '(') && unitBuilder.length() > 0) {
+            if ((currentChar == '[' || currentChar == '<' || currentChar == '(' || currentChar == '*') && unitBuilder.length() > 0) {
                 String unitContent = unitBuilder.toString();
 
-                LexicalPatternUnit unit = new LexicalPatternUnit(LexicalPatternUnit.UnitType.STATIC, unitContent, optional);
+                LexicalPatternUnit unit = new LexicalPatternUnit(unitContent, optional);
                 elements.add(unit);
 
                 unitBuilder.setLength(0);
@@ -36,13 +37,12 @@ public class LexicalPatternCompiler {
                 LexicalPatternElement optionalElement = this.compileOptional(contentReader.readCurrent());
                 elements.add(optionalElement);
             }
-            else if (currentChar == '<') {
-                LexicalPatternElement typeElement = this.compileType(contentReader.readCurrent());
-                elements.add(typeElement);
-            }
             else if (currentChar == '(') {
                 LexicalPatternElement variantElement = this.compileVariant(contentReader.readCurrent());
                 elements.add(variantElement);
+            }
+            else if (currentChar == '*') {
+                elements.add(new LexicalPatternWildcard(optional));
             }
             else {
                 unitBuilder.append(currentChar);
@@ -50,7 +50,7 @@ public class LexicalPatternCompiler {
         }
 
         if (unitBuilder.length() > 0) {
-            LexicalPatternUnit unit = new LexicalPatternUnit(LexicalPatternUnit.UnitType.STATIC, unitBuilder.toString(), false);
+            LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString(), optional);
             elements.add(unit);
         }
 
@@ -59,10 +59,6 @@ public class LexicalPatternCompiler {
         }
 
         return elements.size() == 1 ? elements.get(0) : new LexicalPatternNode(elements, optional);
-    }
-
-    private LexicalPatternElement compileType(String pattern) {
-        return new LexicalPatternUnit(LexicalPatternUnit.UnitType.EXPRESSION, pattern, false);
     }
 
     private LexicalPatternElement compileOptional(String pattern) {
