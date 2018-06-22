@@ -16,6 +16,13 @@ public class LexicalPatternTest {
         System.out.println(result.getWildcards());
 
         Assertions.assertTrue(result.isMatched());
+        Assertions.assertNotNull(result.getIds());
+        Assertions.assertNotNull(result.getWildcards());
+
+        Assertions.assertAll(
+                () -> Assertions.assertEquals("'test'", result.getWildcards().get(0)),
+                () -> Assertions.assertEquals("X11", result.getWildcards().get(1))
+        );
     }
 
 }
