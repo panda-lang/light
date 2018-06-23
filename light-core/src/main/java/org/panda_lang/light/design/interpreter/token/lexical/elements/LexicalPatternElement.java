@@ -22,6 +22,10 @@ public interface LexicalPatternElement {
 
     boolean isOptional();
 
+    Isolation getIsolationType();
+
+    void setIsolationType(Isolation isolationType);
+
     default boolean hasId() {
         return getId() != -1;
     }
@@ -52,6 +56,40 @@ public interface LexicalPatternElement {
 
     default LexicalPatternUnit toUnit() {
         return (LexicalPatternUnit) this;
+    }
+
+    enum Isolation {
+
+        NONE(false, false),
+        START(true, false),
+        END(false, true),
+        BOTH(true, true);
+
+        private final boolean start, end;
+
+        Isolation(boolean start, boolean end) {
+            this.start = start;
+            this.end = end;
+        }
+
+        public boolean isStart() {
+            return start;
+        }
+
+        public boolean isEnd() {
+            return end;
+        }
+
+        public static LexicalPatternUnit.Isolation of(boolean start, boolean end) {
+            for (LexicalPatternUnit.Isolation isolation : values()) {
+                if (isolation.start == start && isolation.end == end) {
+                    return isolation;
+                }
+            }
+
+            return LexicalPatternUnit.Isolation.NONE;
+        }
+
     }
 
 }

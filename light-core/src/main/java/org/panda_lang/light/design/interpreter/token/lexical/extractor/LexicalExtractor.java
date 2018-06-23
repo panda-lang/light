@@ -18,6 +18,7 @@ package org.panda_lang.light.design.interpreter.token.lexical.extractor;
 
 import org.panda_lang.light.design.interpreter.token.lexical.*;
 import org.panda_lang.light.design.interpreter.token.lexical.elements.*;
+import org.panda_lang.panda.utilities.commons.objects.*;
 
 import java.util.*;
 
@@ -40,7 +41,7 @@ public class LexicalExtractor {
         }
 
         if (pattern.isWildcard()) {
-            return new LexicalExtractorResult(true).addWildcard(phrase);
+            return new LexicalExtractorResult(true).addWildcard(this.pattern.hasSoftMatching() ? phrase.trim() : phrase);
         }
 
         LexicalPatternNode node = pattern.toNode();
@@ -49,12 +50,18 @@ public class LexicalExtractor {
             return this.matchVariant(node, phrase);
         }
 
-        List<String> dynamic = new ArrayList<>();
-        List<LexicalPatternUnit> units = node.selectUnits(true);
+        List<LexicalPatternElement> elements = node.getElements();
+        String[] dynamic = new String[elements.size()];
         int index = 0;
 
-        for (int i = index; i < units.size(); i++) {
-            LexicalPatternUnit unit = units.get(i);
+        for (int i = index; i < elements.size(); i++) {
+            LexicalPatternElement element = elements.get(i);
+
+            if (!element.isUnit()) {
+                continue;
+            }
+
+            LexicalPatternUnit unit = element.toUnit();
             int unitIndex = phrase.indexOf(unit.getValue(), index);
 
             if (unitIndex == -1) {
@@ -68,35 +75,53 @@ public class LexicalExtractor {
             String before = phrase.substring(index, unitIndex).trim();
 
             if (before.length() > 0) {
-                dynamic.add(before);
+                if (i - 1 < 0) {
+                    return new LexicalExtractorResult(false);
+                }
+
+                dynamic[i - 1] = before;
             }
 
             index = unitIndex + unit.getValue().length();
         }
 
         if (index < phrase.length()) {
-            dynamic.add(phrase.substring(index, phrase.length()));
+            dynamic[dynamic.length - 1] = phrase.substring(index, phrase.length());
         }
 
         LexicalExtractorResult result = new LexicalExtractorResult(true);
-        int elementIndex = 0;
 
-        for (LexicalPatternElement nodeElement : node.getElements()) {
+        for (int i = 0; i < elements.size(); i++) {
+            LexicalPatternElement nodeElement = elements.get(i);
+
             if (nodeElement.isUnit()) {
                 continue;
             }
 
-            if (dynamic.size() == 0 && nodeElement.isOptional()) {
+            if (dynamic.length == 0 && nodeElement.isOptional()) {
                 continue;
             }
 
-            LexicalExtractorResult nodeElementResult = this.extract(nodeElement, dynamic.get(elementIndex++));
+            String nodeContent = dynamic[i];
+            dynamic[i] = null;
+
+            if (nodeContent == null) {
+                return new LexicalExtractorResult(false);
+            }
+
+            LexicalExtractorResult nodeElementResult = this.extract(nodeElement, nodeContent);
 
             if (!nodeElementResult.isMatched()) {
                 return new LexicalExtractorResult(false);
             }
 
             result.merge(nodeElementResult);
+        }
+
+        for (String dynamicContent : dynamic) {
+            if (!StringUtils.isEmpty(dynamicContent)) {
+                return new LexicalExtractorResult(false);
+            }
         }
 
         return result;

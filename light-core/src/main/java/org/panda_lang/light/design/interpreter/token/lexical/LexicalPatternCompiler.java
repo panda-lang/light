@@ -6,9 +6,13 @@ import org.panda_lang.panda.utilities.commons.arrays.character.*;
 
 import java.util.*;
 
-// send [message] <string> to (console|terminal)
-
 public class LexicalPatternCompiler {
+
+    private final boolean softMatching;
+
+    public LexicalPatternCompiler(boolean softMatching) {
+        this.softMatching = softMatching;
+    }
 
     public LexicalPatternElement compile(String pattern) {
         return this.compile(pattern, false);
@@ -25,11 +29,8 @@ public class LexicalPatternCompiler {
             char currentChar = distributor.next();
 
             if ((currentChar == '[' || currentChar == '<' || currentChar == '(' || currentChar == '*') && unitBuilder.length() > 0) {
-                String unitContent = unitBuilder.toString();
-
-                LexicalPatternUnit unit = new LexicalPatternUnit(unitContent, optional);
+                LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString(), optional, softMatching);
                 elements.add(unit);
-
                 unitBuilder.setLength(0);
             }
 
@@ -50,7 +51,7 @@ public class LexicalPatternCompiler {
         }
 
         if (unitBuilder.length() > 0) {
-            LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString(), optional);
+            LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString(), optional, softMatching);
             elements.add(unit);
         }
 

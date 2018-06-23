@@ -20,10 +20,21 @@ public abstract class DefaultLexicalPatternElement implements LexicalPatternElem
 
     protected int id = -1;
     protected boolean optional;
+    protected Isolation isolationType;
+
+    @Override
+    public void setIsolationType(Isolation isolationType) {
+        this.isolationType = isolationType;
+    }
 
     @Override
     public boolean isOptional() {
         return optional;
+    }
+
+    @Override
+    public Isolation getIsolationType() {
+        return isolationType;
     }
 
     @Override

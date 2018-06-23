@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.lexer;
+package org.panda_lang.light.design.lexer;
 
 import org.junit.jupiter.api.Test;
 import org.panda_lang.light.design.interpreter.lexer.LightLexer;

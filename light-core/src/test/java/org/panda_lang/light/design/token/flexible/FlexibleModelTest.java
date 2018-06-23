@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.token.flexible;
+package org.panda_lang.light.design.token.flexible;
 
 import org.junit.jupiter.api.*;
 import org.panda_lang.light.design.interpreter.token.*;

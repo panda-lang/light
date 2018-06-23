@@ -21,7 +21,7 @@
     <parent>
         <artifactId>light-parent</artifactId>
         <groupId>org.panda-lang</groupId>
-        <version>indev-0.2.0</version>
+        <version>indev-0.2.5</version>
     </parent>
 
     <artifactId>light-core</artifactId>
@@ -50,7 +50,7 @@
                         <manifestEntries>
                             <Main-Class>org.panda_lang.light.LightCore</Main-Class>
                             <Implementation-Title>Light</Implementation-Title>
-                            <Implementation-Version>${light.version}</Implementation-Version>
+                            <Implementation-Version>${project.version}</Implementation-Version>
                             <Specification-Title>Light</Specification-Title>
                         </manifestEntries>
                     </archive>

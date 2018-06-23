@@ -1,4 +1,4 @@
-package org.panda_lang.light.token.lexical;
+package org.panda_lang.light.design.token.lexical;
 
 import org.junit.jupiter.api.*;
 import org.panda_lang.light.design.interpreter.token.lexical.*;
@@ -9,7 +9,7 @@ public class LexicalPatternTest {
     @Test
     public void testLexicalPattern() {
         LexicalPattern pattern = LexicalPattern.builder()
-                .compile("(send[ message] * to (console|(terminal[ ][screen *])|rand)")
+                .compile("(send [message] * to (console|(terminal[ ][screen *])|rand)")
                 .build();
 
         LexicalExtractorResult result = pattern.extract("send 'test' to terminal screen X11");

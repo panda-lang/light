@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.token.hollow;
+package org.panda_lang.light.design.token.hollow;
 
 import org.junit.jupiter.api.Test;
 import org.panda_lang.panda.utilities.redact.match.text.TextHollowPattern;

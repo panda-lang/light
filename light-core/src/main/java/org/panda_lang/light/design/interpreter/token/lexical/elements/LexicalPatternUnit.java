@@ -16,13 +16,20 @@
 
 package org.panda_lang.light.design.interpreter.token.lexical.elements;
 
+import org.panda_lang.panda.utilities.commons.objects.*;
+
 public class LexicalPatternUnit extends DefaultLexicalPatternElement {
 
     private final String value;
 
-    public LexicalPatternUnit(String element, boolean optional) {
+    public LexicalPatternUnit(String element, boolean optional, boolean soft) {
         super.optional = optional;
-        this.value = element;
+
+        boolean start = CharacterUtils.isWhitespace(element.charAt(0));
+        boolean end = CharacterUtils.isWhitespace(element.charAt(element.length() - 1));
+
+        this.value = soft ? element.trim() : element;
+        this.isolationType = Isolation.of(start, end);
     }
 
     public String getValue() {
