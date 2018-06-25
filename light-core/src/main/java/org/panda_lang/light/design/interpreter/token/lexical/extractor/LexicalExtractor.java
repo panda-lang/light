@@ -52,6 +52,7 @@ public class LexicalExtractor {
 
         List<LexicalPatternElement> elements = node.getElements();
         String[] dynamic = new String[elements.size()];
+        boolean isolation = false;
         int index = 0;
 
         for (int i = index; i < elements.size(); i++) {
@@ -62,6 +63,11 @@ public class LexicalExtractor {
             }
 
             LexicalPatternUnit unit = element.toUnit();
+
+            if (unit.getIsolationType().isStart() && !isolation) {
+                ++index;
+            }
+
             int unitIndex = phrase.indexOf(unit.getValue(), index);
 
             if (unitIndex == -1) {
@@ -72,6 +78,7 @@ public class LexicalExtractor {
                 return new LexicalExtractorResult(false);
             }
 
+            isolation = false;
             String before = phrase.substring(index, unitIndex).trim();
 
             if (before.length() > 0) {
@@ -83,6 +90,11 @@ public class LexicalExtractor {
             }
 
             index = unitIndex + unit.getValue().length();
+
+            if (unit.getIsolationType().isEnd()) {
+                isolation = true;
+                ++index;
+            }
         }
 
         if (index < phrase.length()) {

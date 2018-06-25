@@ -16,6 +16,8 @@
 
 package org.panda_lang.light.design.interpreter.token.lexical.elements;
 
+import org.panda_lang.panda.utilities.commons.objects.*;
+
 public interface LexicalPatternElement {
 
     int getId();
@@ -87,7 +89,11 @@ public interface LexicalPatternElement {
                 }
             }
 
-            return LexicalPatternUnit.Isolation.NONE;
+            return LexicalPatternElement.Isolation.NONE;
+        }
+
+        public static LexicalPatternUnit.Isolation of(char start, char end) {
+            return LexicalPatternElement.Isolation.of(CharacterUtils.isWhitespace(start), CharacterUtils.isWhitespace(end));
         }
 
     }

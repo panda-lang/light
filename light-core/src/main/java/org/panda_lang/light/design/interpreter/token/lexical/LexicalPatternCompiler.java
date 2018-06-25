@@ -29,24 +29,38 @@ public class LexicalPatternCompiler {
             char currentChar = distributor.next();
 
             if ((currentChar == '[' || currentChar == '<' || currentChar == '(' || currentChar == '*') && unitBuilder.length() > 0) {
-                LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString(), optional, softMatching);
-                elements.add(unit);
-                unitBuilder.setLength(0);
+                String unitContent = unitBuilder.toString();
+
+                if (softMatching) {
+                    unitContent = unitContent.trim();
+                }
+
+                if (unitContent.length() > 0) {
+                    LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString(), optional, softMatching);
+                    elements.add(unit);
+                    unitBuilder.setLength(0);
+                }
             }
 
+            char previousChar = distributor.getPrevious();
+            LexicalPatternElement element = null;
+
             if (currentChar == '[') {
-                LexicalPatternElement optionalElement = this.compileOptional(contentReader.readCurrent());
-                elements.add(optionalElement);
+                element = this.compileOptional(contentReader.readCurrent());
             }
             else if (currentChar == '(') {
-                LexicalPatternElement variantElement = this.compileVariant(contentReader.readCurrent());
-                elements.add(variantElement);
+                element = this.compileVariant(contentReader.readCurrent());
             }
             else if (currentChar == '*') {
-                elements.add(new LexicalPatternWildcard(optional));
+                element = new LexicalPatternWildcard(optional);
             }
             else {
                 unitBuilder.append(currentChar);
+            }
+
+            if (element != null) {
+                element.setIsolationType(softMatching ? LexicalPatternElement.Isolation.of(previousChar, distributor.getNext()) : LexicalPatternElement.Isolation.NONE);
+                elements.add(element);
             }
         }
 
