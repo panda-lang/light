@@ -29,7 +29,7 @@ public interface LexicalPatternElement {
     void setIsolationType(Isolation isolationType);
 
     default boolean hasId() {
-        return getId() != -1;
+        return this.getId() != -1;
     }
 
     default boolean isVariant() {
@@ -82,6 +82,14 @@ public interface LexicalPatternElement {
             return end;
         }
 
+        public static LexicalPatternUnit.Isolation of(String string) {
+            return LexicalPatternElement.Isolation.of(string.charAt(0), string.charAt(string.length() - 1));
+        }
+
+        public static LexicalPatternUnit.Isolation of(char start, char end) {
+            return LexicalPatternElement.Isolation.of(CharacterUtils.isWhitespace(start), CharacterUtils.isWhitespace(end));
+        }
+
         public static LexicalPatternUnit.Isolation of(boolean start, boolean end) {
             for (LexicalPatternUnit.Isolation isolation : values()) {
                 if (isolation.start == start && isolation.end == end) {
@@ -90,10 +98,6 @@ public interface LexicalPatternElement {
             }
 
             return LexicalPatternElement.Isolation.NONE;
-        }
-
-        public static LexicalPatternUnit.Isolation of(char start, char end) {
-            return LexicalPatternElement.Isolation.of(CharacterUtils.isWhitespace(start), CharacterUtils.isWhitespace(end));
         }
 
     }

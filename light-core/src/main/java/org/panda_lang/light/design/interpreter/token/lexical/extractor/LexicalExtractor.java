@@ -78,10 +78,22 @@ public class LexicalExtractor {
                 return new LexicalExtractorResult(false);
             }
 
-            isolation = false;
             String before = phrase.substring(index, unitIndex).trim();
 
-            if (before.length() > 0) {
+            if (unit.isOptional() && i + 1 < elements.size() && !StringUtils.isEmpty(before)) {
+                LexicalPatternElement nextElement = elements.get(i + 1);
+                LexicalExtractorResult result = this.extract(nextElement, before);
+
+                if (!result.isMatched()) {
+                    // TODO: Advanced research
+                    unitIndex = -unit.getValue().length() + index;
+                    before = null;
+                }
+            }
+
+            isolation = false;
+
+            if (!StringUtils.isEmpty(before)) {
                 if (i - 1 < 0) {
                     return new LexicalExtractorResult(false);
                 }

@@ -29,10 +29,10 @@ public class LexicalPatternTest {
     public void testLexicalPattern() {
         LexicalPattern pattern = LexicalPattern.builder()
                 .disableSoftMatching()
-                .compile("(send[ message] * to (console|terminal[ ][screen *])|rand)")
+                .compile("(send[ message] * to (console|terminal[ ]screen *)|rand)")
                 .build();
 
-        LexicalExtractorResult result = pattern.extract("send 'test' to terminal screen X11");
+        LexicalExtractorResult result = pattern.extract("send 'test' to terminalscreen X11");
         System.out.println(result.getWildcards());
 
         Assertions.assertTrue(result.isMatched());
