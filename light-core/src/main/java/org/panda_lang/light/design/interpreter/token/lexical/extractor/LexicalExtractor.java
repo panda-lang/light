@@ -41,7 +41,7 @@ public class LexicalExtractor {
         }
 
         if (pattern.isWildcard()) {
-            return new LexicalExtractorResult(true).addWildcard(this.pattern.hasSoftMatching() ? phrase.trim() : phrase);
+            return new LexicalExtractorResult(true).addWildcard(phrase.trim());
         }
 
         LexicalPatternNode node = pattern.toNode();
@@ -84,7 +84,7 @@ public class LexicalExtractor {
                 LexicalPatternElement nextElement = elements.get(i + 1);
                 LexicalExtractorResult result = this.extract(nextElement, before);
 
-                if (!result.isMatched()) {
+                if (result.isMatched()) {
                     // TODO: Advanced research
                     unitIndex = -unit.getValue().length() + index;
                     before = null;

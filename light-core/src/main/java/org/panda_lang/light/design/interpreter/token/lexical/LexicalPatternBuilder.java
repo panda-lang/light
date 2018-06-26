@@ -5,10 +5,9 @@ import org.panda_lang.light.design.interpreter.token.lexical.elements.*;
 public class LexicalPatternBuilder {
 
     private LexicalPatternElement pattern;
-    private boolean softMatching = true;
 
     public LexicalPatternBuilder compile(String pattern) {
-        LexicalPatternCompiler compiler = new LexicalPatternCompiler(softMatching);
+        LexicalPatternCompiler compiler = new LexicalPatternCompiler();
         LexicalPatternElement compiledPattern = compiler.compile(pattern);
 
         if (compiledPattern == null) {
@@ -19,13 +18,8 @@ public class LexicalPatternBuilder {
         return this;
     }
 
-    public LexicalPatternBuilder disableSoftMatching() {
-        this.softMatching = false;
-        return this;
-    }
-
     public LexicalPattern build() {
-        return new LexicalPattern(pattern, softMatching);
+        return new LexicalPattern(pattern);
     }
 
 }

@@ -8,12 +8,6 @@ import java.util.*;
 
 public class LexicalPatternCompiler {
 
-    private final boolean softMatching;
-
-    public LexicalPatternCompiler(boolean softMatching) {
-        this.softMatching = softMatching;
-    }
-
     public LexicalPatternElement compile(String pattern) {
         return this.compile(pattern, false);
     }
@@ -29,14 +23,10 @@ public class LexicalPatternCompiler {
             char currentChar = distributor.next();
 
             if ((currentChar == '[' || currentChar == '<' || currentChar == '(' || currentChar == '*') && unitBuilder.length() > 0) {
-                String unitContent = unitBuilder.toString();
-
-                if (softMatching) {
-                    unitContent = unitContent.trim();
-                }
+                String unitContent = unitBuilder.toString().trim();
 
                 if (unitContent.length() > 0) {
-                    LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString(), optional, softMatching);
+                    LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString(), optional);
                     elements.add(unit);
                     unitBuilder.setLength(0);
                 }
@@ -59,13 +49,13 @@ public class LexicalPatternCompiler {
             }
 
             if (element != null) {
-                element.setIsolationType(softMatching ? LexicalPatternElement.Isolation.of(previousChar, distributor.getNext()) : LexicalPatternElement.Isolation.NONE);
+                element.setIsolationType(LexicalPatternElement.Isolation.of(previousChar, distributor.getNext()));
                 elements.add(element);
             }
         }
 
         if (unitBuilder.length() > 0) {
-            LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString(), optional, softMatching);
+            LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString(), optional);
             elements.add(unit);
         }
 

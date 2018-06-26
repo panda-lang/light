@@ -22,20 +22,14 @@ import org.panda_lang.light.design.interpreter.token.lexical.extractor.*;
 public class LexicalPattern {
 
     private final LexicalPatternElement pattern;
-    private final boolean softMatching;
 
-    public LexicalPattern(LexicalPatternElement elements, boolean softMatching) {
+    public LexicalPattern(LexicalPatternElement elements) {
         this.pattern = elements;
-        this.softMatching = softMatching;
     }
 
     public LexicalExtractorResult extract(String phrase) {
         LexicalExtractor extractor = new LexicalExtractor(this);
         return extractor.extract(phrase);
-    }
-
-    public boolean hasSoftMatching() {
-        return softMatching;
     }
 
     public LexicalPatternElement getModel() {
