@@ -102,8 +102,8 @@ public class LightLexer implements Lexer {
         phraseValue = phraseValue.trim();
 
         if (phraseValue.length() > 0) {
-            Phrase phrase = new Phrase(phraseValue);
-            PhraseRepresentation representation = new PhraseRepresentation(phrase, previousLine);
+            Sentence phrase = new Sentence(phraseValue);
+            SentenceRepresentation representation = new SentenceRepresentation(phrase, previousLine);
             tokens.add(representation);
         }
 

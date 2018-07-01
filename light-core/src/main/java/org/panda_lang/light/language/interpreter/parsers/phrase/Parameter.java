@@ -14,15 +14,10 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token;
+package org.panda_lang.light.language.interpreter.parsers.phrase;
 
-import org.panda_lang.panda.framework.design.interpreter.token.Token;
-import org.panda_lang.panda.framework.language.interpreter.token.PandaTokenRepresentation;
+public @interface Parameter {
 
-public class PhraseRepresentation extends PandaTokenRepresentation {
-
-    public PhraseRepresentation(Token token, int line) {
-        super(token, line);
-    }
+    int id();
 
 }

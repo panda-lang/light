@@ -95,7 +95,7 @@ public class FlexibleTree {
 
 
      */
-    public Executable find(Phrase phrase) {
+    public Executable find(Sentence phrase) {
         String value = phrase.getTokenValue();
 
         for (int i = 0; i < value.toCharArray().length; i++) {

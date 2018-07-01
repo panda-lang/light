@@ -29,7 +29,7 @@ public class ContentParser implements UnifiedParser {
 
     @Override
     public void parse(ParserData data) {
-        PhraseParser phraseParser = new PhraseParser();
+        SentenceParser sentenceParser = new SentenceParser();
 
         SourceStream source = data.getComponent(UniversalComponents.SOURCE_STREAM);
         Scope scope = data.getComponent(ScopeComponents.SCOPE);
@@ -37,8 +37,8 @@ public class ContentParser implements UnifiedParser {
         while (source.hasUnreadSource()) {
             TokenRepresentation phrase = source.read();
 
-            if (phrase instanceof PhraseRepresentation) {
-                Statement statement = phraseParser.parse((PhraseRepresentation) phrase);
+            if (phrase instanceof SentenceRepresentation) {
+                Statement statement = sentenceParser.parse((SentenceRepresentation) phrase);
 
                 if (statement != null) {
                     scope.addStatement(statement);

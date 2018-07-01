@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token;
+package org.panda_lang.light.language.interpreter.parsers.phrase;
 
-import org.panda_lang.panda.framework.design.interpreter.token.TokenType;
-import org.panda_lang.panda.framework.language.interpreter.token.PandaToken;
+import java.io.*;
 
-public class Phrase extends PandaToken {
+public class SendPhraseme {
 
-    private static final TokenType TYPE = new TokenType("phrase");
+    @PhrasemeRepresentation(phrase = "send <message> to (1: <player>|2: console)")
+    public void send(String message, @Parameter(id = 1) Object player, @Parameter(id = 2) String console) {
 
-    public Phrase(String phrase) {
-        super(TYPE, phrase);
+    }
+
+    @PhrasemeRepresentation(phrase = "send <message> to <file>")
+    public void send(String message, File file) {
+
     }
 
 }

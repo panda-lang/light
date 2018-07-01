@@ -48,7 +48,7 @@ public class FlexibleModelTest {
         FlexibleTree tree = new FlexibleTree();
         tree.merge(model);
 
-        Phrase phrase = new Phrase("send 'Flexible Model Test' to console");
+        Sentence phrase = new Sentence("send 'Flexible Model Test' to console");
         Executable statement = tree.find(phrase);
     }
 
