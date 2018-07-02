@@ -20,7 +20,7 @@ import java.io.*;
 
 public class SendPhraseme {
 
-    @PhrasemeRepresentation(phrase = "send <message> to (1: <player>|2: console)")
+    @PhrasemeRepresentation(phrase = "send <message> to (1: <player>|2: <file>)")
     public void send(String message, @Parameter(id = 1) Object player, @Parameter(id = 2) String console) {
 
     }

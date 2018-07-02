@@ -16,15 +16,27 @@
 
 package org.panda_lang.light.design.interpreter.token.lexical.elements;
 
+import org.panda_lang.panda.utilities.commons.objects.*;
+
 public abstract class DefaultLexicalPatternElement implements LexicalPatternElement {
 
-    protected int id = -1;
+    protected Isolation isolationType = Isolation.NONE;
     protected boolean optional;
-    protected Isolation isolationType;
+    protected String identifier;
+
+    @Override
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
     @Override
     public void setIsolationType(Isolation isolationType) {
         this.isolationType = isolationType;
+    }
+
+    @Override
+    public boolean hasIdentifier() {
+        return !StringUtils.isEmpty(identifier);
     }
 
     @Override
@@ -33,13 +45,13 @@ public abstract class DefaultLexicalPatternElement implements LexicalPatternElem
     }
 
     @Override
-    public Isolation getIsolationType() {
-        return isolationType;
+    public String getIdentifier() {
+        return identifier;
     }
 
     @Override
-    public int getId() {
-        return id;
+    public Isolation getIsolationType() {
+        return isolationType;
     }
 
 }

@@ -20,17 +20,17 @@ import org.panda_lang.panda.utilities.commons.objects.*;
 
 public interface LexicalPatternElement {
 
-    int getId();
-
-    boolean isOptional();
-
-    Isolation getIsolationType();
+    void setIdentifier(String identifier);
 
     void setIsolationType(Isolation isolationType);
 
-    default boolean hasId() {
-        return this.getId() != -1;
-    }
+    boolean isOptional();
+
+    boolean hasIdentifier();
+
+    Isolation getIsolationType();
+
+    String getIdentifier();
 
     default boolean isVariant() {
         return this.isNode() && this.toNode().isVariant();
@@ -82,22 +82,26 @@ public interface LexicalPatternElement {
             return end;
         }
 
-        public static LexicalPatternUnit.Isolation of(String string) {
-            return LexicalPatternElement.Isolation.of(string.charAt(0), string.charAt(string.length() - 1));
+        public static Isolation merge(Isolation a, Isolation b) {
+            return Isolation.of(a.isStart() || b.isStart(), a.isEnd() || b.isEnd());
         }
 
-        public static LexicalPatternUnit.Isolation of(char start, char end) {
-            return LexicalPatternElement.Isolation.of(CharacterUtils.isWhitespace(start), CharacterUtils.isWhitespace(end));
+        public static Isolation of(String string) {
+            return Isolation.of(string.charAt(0), string.charAt(string.length() - 1));
         }
 
-        public static LexicalPatternUnit.Isolation of(boolean start, boolean end) {
+        public static Isolation of(char start, char end) {
+            return Isolation.of(CharacterUtils.isWhitespace(start), CharacterUtils.isWhitespace(end));
+        }
+
+        public static Isolation of(boolean start, boolean end) {
             for (LexicalPatternUnit.Isolation isolation : values()) {
                 if (isolation.start == start && isolation.end == end) {
                     return isolation;
                 }
             }
 
-            return LexicalPatternElement.Isolation.NONE;
+            return Isolation.NONE;
         }
 
     }
