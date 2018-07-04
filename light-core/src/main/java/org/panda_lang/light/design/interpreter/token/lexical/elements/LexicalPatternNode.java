@@ -23,22 +23,21 @@ public class LexicalPatternNode extends DefaultLexicalPatternElement {
     private final List<LexicalPatternElement> elements;
     private final boolean variant;
 
-    public LexicalPatternNode(List<LexicalPatternElement> elements, boolean optional, boolean variant) {
-        super.optional = optional;
+    public LexicalPatternNode(List<LexicalPatternElement> elements, boolean variant) {
         this.elements = elements;
         this.variant = variant;
     }
 
-    public LexicalPatternNode(List<LexicalPatternElement> elements, boolean optional) {
-        this(elements, optional, false);
+    public LexicalPatternNode(List<LexicalPatternElement> elements) {
+        this(elements, false);
     }
 
-    public LexicalPatternNode(boolean optional, boolean variant) {
-        this(new ArrayList<>(), optional, variant);
+    public LexicalPatternNode(boolean variant) {
+        this(new ArrayList<>(), variant);
     }
 
-    public LexicalPatternNode(boolean optional) {
-        this(new ArrayList<>(), optional);
+    public LexicalPatternNode() {
+        this(new ArrayList<>());
     }
 
     public int countUnits() {

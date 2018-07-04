@@ -20,8 +20,7 @@ public class LexicalPatternUnit extends DefaultLexicalPatternElement {
 
     private final String value;
 
-    public LexicalPatternUnit(String element, boolean optional) {
-        super.optional = optional;
+    public LexicalPatternUnit(String element) {
         super.isolationType = Isolation.of(element);
         this.value = element.trim();
     }

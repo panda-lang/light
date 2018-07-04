@@ -18,8 +18,4 @@ package org.panda_lang.light.design.interpreter.token.lexical.elements;
 
 public class LexicalPatternWildcard extends DefaultLexicalPatternElement {
 
-    public LexicalPatternWildcard(boolean optional) {
-        super.optional = optional;
-    }
-
 }

@@ -25,6 +25,11 @@ public abstract class DefaultLexicalPatternElement implements LexicalPatternElem
     protected String identifier;
 
     @Override
+    public void setOptional(boolean optional) {
+        this.optional = optional;
+    }
+
+    @Override
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }

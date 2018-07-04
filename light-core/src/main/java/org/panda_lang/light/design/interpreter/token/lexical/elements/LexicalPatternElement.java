@@ -20,6 +20,8 @@ import org.panda_lang.panda.utilities.commons.objects.*;
 
 public interface LexicalPatternElement {
 
+    void setOptional(boolean optional);
+
     void setIdentifier(String identifier);
 
     void setIsolationType(Isolation isolationType);

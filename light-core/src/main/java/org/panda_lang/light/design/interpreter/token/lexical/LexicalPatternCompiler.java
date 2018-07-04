@@ -12,10 +12,6 @@ public class LexicalPatternCompiler {
     private static final char[] IDENTIFIER_CHARACTERS = CharacterUtils.mergeArrays(CharacterUtils.LETTERS, CharacterUtils.DIGITS, CharacterUtils.arrayOf('-'));
 
     public LexicalPatternElement compile(String pattern) {
-        return this.compile(pattern, false);
-    }
-
-    public LexicalPatternElement compile(String pattern, boolean optional) {
         List<LexicalPatternElement> elements = new ArrayList<>();
         StringBuilder unitBuilder = new StringBuilder();
 
@@ -28,6 +24,7 @@ public class LexicalPatternCompiler {
 
             if ((currentChar == '[' || currentChar == '<' || currentChar == '(' || currentChar == '*') && unitBuilder.length() > 0) {
                 String unitContent = unitBuilder.toString();
+                unitBuilder.setLength(0);
 
                 if (!StringUtils.isEmpty(unitContent)) {
                     identifier = this.compileIdentifier(unitContent);
@@ -46,7 +43,7 @@ public class LexicalPatternCompiler {
                     }
 
                     if (!StringUtils.isEmpty(unitContent)) {
-                        LexicalPatternUnit unit = new LexicalPatternUnit(unitContent, optional);
+                        LexicalPatternUnit unit = new LexicalPatternUnit(unitContent);
 
                         if (current) {
                             unit.setIdentifier(identifier);
@@ -54,7 +51,6 @@ public class LexicalPatternCompiler {
                         }
 
                         elements.add(unit);
-                        unitBuilder.setLength(0);
                     }
                 }
             }
@@ -69,7 +65,7 @@ public class LexicalPatternCompiler {
                 element = this.compileVariant(contentReader.readCurrent());
             }
             else if (currentChar == '*') {
-                element = new LexicalPatternWildcard(optional);
+                element = new LexicalPatternWildcard();
             }
             else {
                 unitBuilder.append(currentChar);
@@ -89,7 +85,7 @@ public class LexicalPatternCompiler {
         }
 
         if (unitBuilder.length() > 0) {
-            LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString(), optional);
+            LexicalPatternUnit unit = new LexicalPatternUnit(unitBuilder.toString());
             elements.add(unit);
         }
 
@@ -97,11 +93,13 @@ public class LexicalPatternCompiler {
             throw new RuntimeException("Empty element");
         }
 
-        return elements.size() == 1 ? elements.get(0) : new LexicalPatternNode(elements, optional);
+        return elements.size() == 1 ? elements.get(0) : new LexicalPatternNode(elements);
     }
 
     private LexicalPatternElement compileOptional(String pattern) {
-        return this.compile(pattern, true);
+        LexicalPatternElement element = this.compile(pattern);
+        element.setOptional(true);
+        return element;
     }
 
     private LexicalPatternElement compileVariant(String pattern) {
@@ -114,7 +112,7 @@ public class LexicalPatternCompiler {
             elements.add(this.compile(variant));
         }
 
-        return new LexicalPatternNode(elements, false, true);
+        return new LexicalPatternNode(elements, true);
     }
 
     private String compileIdentifier(String pattern) {
@@ -124,7 +122,7 @@ public class LexicalPatternCompiler {
             return null;
         }
 
-        String identifier = null;
+        String identifier;
 
         if (pattern.endsWith(":")) {
             int lastIndex = pattern.lastIndexOf(" ");

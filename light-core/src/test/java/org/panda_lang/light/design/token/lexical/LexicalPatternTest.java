@@ -9,7 +9,7 @@ public class LexicalPatternTest {
     @Test
     public void testLexicalPattern() {
         LexicalPattern pattern = LexicalPattern.builder()
-                .compile("(send 1:[message] * to (console|terminalIdentifier:terminal[ ][screen *])|rand)")
+                .compile("(send msg:[message] wildcard:* 3:to (console|terminalIdentifier:terminal[ ][screen *])|rand)")
                 .build();
 
         LexicalExtractorResult result = pattern.extract("send 'test' to terminal screen X11");
