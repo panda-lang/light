@@ -16,8 +16,10 @@
 
 package org.panda_lang.light.design.interpreter.token.lexical.extractor;
 
+import org.jetbrains.annotations.*;
 import org.panda_lang.light.design.interpreter.token.lexical.*;
 import org.panda_lang.light.design.interpreter.token.lexical.elements.*;
+import org.panda_lang.panda.utilities.commons.arrays.*;
 import org.panda_lang.panda.utilities.commons.objects.*;
 
 import java.util.*;
@@ -51,8 +53,19 @@ public class LexicalExtractor {
         }
 
         List<LexicalPatternElement> elements = node.getElements();
-        String[] dynamic = new String[elements.size()];
-        boolean isolation = false;
+        String[] dynamics = this.matchUnits(phrase, elements);
+
+        if (dynamics == null) {
+            return new LexicalExtractorResult(false);
+        }
+
+        return this.matchDynamics(elements, dynamics);
+    }
+
+    private @Nullable String[] matchUnits(String phrase, List<LexicalPatternElement> elements) {
+        Stack<LexicalPatternUnit> units = new Stack<>();
+        String[] dynamics = new String[elements.size()];
+        // boolean isolation = false;
         int index = 0;
 
         for (int i = index; i < elements.size(); i++) {
@@ -63,19 +76,49 @@ public class LexicalExtractor {
             }
 
             LexicalPatternUnit unit = element.toUnit();
+            units.push(unit);
 
-            if (unit.getIsolationType().isStart() && !isolation) {
-                ++index;
-            }
+            ArrayDistributor<LexicalPatternUnit> unitArrayDistributor = new ArrayDistributor<>(units, LexicalPatternUnit.class);
+            unitArrayDistributor.reverse();
+            int unitIndex = -1;
 
-            int unitIndex = phrase.indexOf(unit.getValue(), index);
-
-            if (unitIndex == -1) {
-                if (unit.isOptional()) {
-                    continue;
+            for (LexicalPatternUnit currentUnit : unitArrayDistributor) {
+                if (index < 0) {
+                    return null;
                 }
 
-                return new LexicalExtractorResult(false);
+                LexicalPatternUnit previousUnit = unitArrayDistributor.getPrevious();
+
+                if (currentUnit.equals(previousUnit)) {
+                    previousUnit = null;
+                }
+
+                boolean isolation = unit.getIsolationType().isStart() || (previousUnit != null && previousUnit.getIsolationType().isEnd());
+                unitIndex = phrase.indexOf(unit.getValue(), index + (isolation ? 1 : 0));
+
+                if (unitIndex != -1) {
+                    break;
+                }
+
+                if (unit.isOptional()) {
+                    break;
+                }
+
+                unitIndex = -2;
+
+                if (previousUnit == null) {
+                    break;
+                }
+
+                index -= previousUnit.getValue().length();
+            }
+
+            if (unitIndex == -2) {
+                return null;
+            }
+
+            if (unitIndex == -1) {
+                continue;
             }
 
             String before = phrase.substring(index, unitIndex).trim();
@@ -91,28 +134,25 @@ public class LexicalExtractor {
                 }
             }
 
-            isolation = false;
-
             if (!StringUtils.isEmpty(before)) {
                 if (i - 1 < 0) {
-                    return new LexicalExtractorResult(false);
+                    return null;
                 }
 
-                dynamic[i - 1] = before;
+                dynamics[i - 1] = before;
             }
 
             index = unitIndex + unit.getValue().length();
-
-            if (unit.getIsolationType().isEnd()) {
-                isolation = true;
-                ++index;
-            }
         }
 
         if (index < phrase.length()) {
-            dynamic[dynamic.length - 1] = phrase.substring(index, phrase.length());
+            dynamics[dynamics.length - 1] = phrase.substring(index, phrase.length());
         }
 
+        return dynamics;
+    }
+
+    private LexicalExtractorResult matchDynamics(List<LexicalPatternElement> elements, String[] dynamics) {
         LexicalExtractorResult result = new LexicalExtractorResult(true);
 
         for (int i = 0; i < elements.size(); i++) {
@@ -122,12 +162,12 @@ public class LexicalExtractor {
                 continue;
             }
 
-            if (dynamic.length == 0 && nodeElement.isOptional()) {
+            if (dynamics.length == 0 && nodeElement.isOptional()) {
                 continue;
             }
 
-            String nodeContent = dynamic[i];
-            dynamic[i] = null;
+            String nodeContent = dynamics[i];
+            dynamics[i] = null;
 
             if (nodeContent == null) {
                 return new LexicalExtractorResult(false);
@@ -142,7 +182,7 @@ public class LexicalExtractor {
             result.merge(nodeElementResult);
         }
 
-        for (String dynamicContent : dynamic) {
+        for (String dynamicContent : dynamics) {
             if (!StringUtils.isEmpty(dynamicContent)) {
                 return new LexicalExtractorResult(false);
             }
@@ -165,6 +205,12 @@ public class LexicalExtractor {
         }
 
         return new LexicalExtractorResult(false);
+    }
+
+    class Wiezienie {
+
+        final List<String> members = new ArrayList<String>() {{ add("greg"); }};
+
     }
 
 }
