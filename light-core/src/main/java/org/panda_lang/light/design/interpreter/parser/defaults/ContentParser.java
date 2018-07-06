@@ -17,7 +17,7 @@
 package org.panda_lang.light.design.interpreter.parser.defaults;
 
 import org.panda_lang.light.design.interpreter.token.*;
-import org.panda_lang.light.language.interpreter.parsers.scope.*;
+import org.panda_lang.light.language.interpreter.parser.scope.*;
 import org.panda_lang.panda.framework.design.architecture.statement.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.*;

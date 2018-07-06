@@ -20,11 +20,11 @@ import org.junit.jupiter.api.Test;
 import org.panda_lang.light.design.interpreter.lexer.LightLexer;
 import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
 import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
-import org.panda_lang.panda.framework.language.interpreter.source.PandaCodeSource;
+import org.panda_lang.panda.framework.language.interpreter.source.PandaURLSource;
 
 public class MultilineLexerTest {
 
-    private final PandaCodeSource source = PandaCodeSource.fromPath("../examples/lexer/multiline_test.light");
+    private final PandaURLSource source = PandaURLSource.fromPath("../examples/lexer/multiline_test.light");
 
     @Test
     public void testLexer() {

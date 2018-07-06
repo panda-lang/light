@@ -21,7 +21,7 @@
     <parent>
         <artifactId>light-parent</artifactId>
         <groupId>org.panda-lang</groupId>
-        <version>indev-0.2.5</version>
+        <version>indev-0.3.0</version>
     </parent>
 
     <artifactId>light-core</artifactId>
