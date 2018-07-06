@@ -87,7 +87,7 @@ public class LexicalExtractor {
                 }
 
                 if (StringUtils.isEmpty(unit.getValue())) {
-                    if (unit.getIsolationType().isAny() && !unit.isOptional()) {
+                    if (!unit.isOptional() && unit.getIsolationType().isAny()) {
                         ++index;
                     }
 
