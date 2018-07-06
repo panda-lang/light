@@ -17,12 +17,10 @@ public class LexicalPatternTest {
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result.isMatched());
 
-        System.out.println(result.getWildcards());
+        Assertions.assertNotNull(result.getIdentifiers());
+        Assertions.assertNotNull(result.getWildcards());
 
-        Assertions.assertAll(
-                () -> Assertions.assertNotNull(result.getIds()),
-                () -> Assertions.assertNotNull(result.getWildcards())
-        );
+        System.out.println(result.getWildcards());
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals("'test'", result.getWildcards().get(0)),

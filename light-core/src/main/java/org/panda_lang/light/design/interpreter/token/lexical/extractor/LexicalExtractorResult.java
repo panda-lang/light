@@ -16,17 +16,19 @@
 
 package org.panda_lang.light.design.interpreter.token.lexical.extractor;
 
+import org.jetbrains.annotations.*;
+
 import java.util.*;
 
 public class LexicalExtractorResult {
 
     private final boolean matched;
-    private final List<Integer> ids;
+    private final List<String> identifiers;
     private final List<String> wildcards;
 
     public LexicalExtractorResult(boolean matched) {
         this.matched = matched;
-        this.ids = matched ? new ArrayList<>() : null;
+        this.identifiers = matched ? new ArrayList<>() : null;
         this.wildcards = matched ? new ArrayList<>() : null;
     }
 
@@ -40,15 +42,15 @@ public class LexicalExtractorResult {
             throw new RuntimeException("Cannot merge unmatched result");
         }
 
-        this.ids.addAll(result.ids);
+        this.identifiers.addAll(result.identifiers);
         this.wildcards.addAll(result.wildcards);
     }
 
-    public List<Integer> getIds() {
-        return ids;
+    public @Nullable List<String> getIdentifiers() {
+        return identifiers;
     }
 
-    public List<String> getWildcards() {
+    public @Nullable List<String> getWildcards() {
         return wildcards;
     }
 
