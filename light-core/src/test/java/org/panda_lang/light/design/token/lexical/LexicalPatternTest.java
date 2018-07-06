@@ -1,8 +1,8 @@
 package org.panda_lang.light.design.token.lexical;
 
 import org.junit.jupiter.api.*;
-import org.panda_lang.light.design.interpreter.token.lexical.*;
-import org.panda_lang.light.design.interpreter.token.lexical.extractor.*;
+import org.panda_lang.light.design.interpreter.token.pattern.lexical.*;
+import org.panda_lang.light.design.interpreter.token.pattern.lexical.extractor.*;
 
 public class LexicalPatternTest {
 
@@ -19,8 +19,6 @@ public class LexicalPatternTest {
 
         Assertions.assertNotNull(result.getIdentifiers());
         Assertions.assertNotNull(result.getWildcards());
-
-        System.out.println(result.getWildcards());
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals("'test'", result.getWildcards().get(0)),

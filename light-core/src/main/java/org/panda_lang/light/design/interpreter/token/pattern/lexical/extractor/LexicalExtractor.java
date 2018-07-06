@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token.lexical.extractor;
+package org.panda_lang.light.design.interpreter.token.pattern.lexical.extractor;
 
 import org.jetbrains.annotations.*;
-import org.panda_lang.light.design.interpreter.token.lexical.*;
-import org.panda_lang.light.design.interpreter.token.lexical.elements.*;
+import org.panda_lang.light.design.interpreter.token.pattern.lexical.*;
+import org.panda_lang.light.design.interpreter.token.pattern.lexical.elements.*;
 import org.panda_lang.panda.utilities.commons.arrays.*;
 import org.panda_lang.panda.utilities.commons.objects.*;
 

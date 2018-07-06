@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token.flexible.tree;
+package org.panda_lang.light.design.interpreter.token.pattern.flexible.tree;
 
 import org.panda_lang.light.design.interpreter.token.*;
-import org.panda_lang.light.design.interpreter.token.flexible.*;
+import org.panda_lang.light.design.interpreter.token.pattern.flexible.*;
 import org.panda_lang.panda.framework.design.architecture.dynamic.*;
 
 import java.util.*;

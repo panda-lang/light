@@ -18,8 +18,8 @@ package org.panda_lang.light.design.token.flexible;
 
 import org.junit.jupiter.api.*;
 import org.panda_lang.light.design.interpreter.token.*;
-import org.panda_lang.light.design.interpreter.token.flexible.*;
-import org.panda_lang.light.design.interpreter.token.flexible.tree.*;
+import org.panda_lang.light.design.interpreter.token.pattern.flexible.*;
+import org.panda_lang.light.design.interpreter.token.pattern.flexible.tree.*;
 import org.panda_lang.panda.framework.design.architecture.dynamic.*;
 
 public class FlexibleModelTest {

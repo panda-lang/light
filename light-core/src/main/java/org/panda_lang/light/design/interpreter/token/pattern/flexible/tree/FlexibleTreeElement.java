@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token.flexible.tree;
+package org.panda_lang.light.design.interpreter.token.pattern.flexible.tree;
 
 public class FlexibleTreeElement {
 

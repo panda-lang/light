@@ -1,6 +1,6 @@
-package org.panda_lang.light.design.interpreter.token.lexical;
+package org.panda_lang.light.design.interpreter.token.pattern.lexical;
 
-import org.panda_lang.light.design.interpreter.token.lexical.elements.*;
+import org.panda_lang.light.design.interpreter.token.pattern.lexical.elements.*;
 import org.panda_lang.panda.utilities.commons.arrays.*;
 import org.panda_lang.panda.utilities.commons.arrays.character.*;
 import org.panda_lang.panda.utilities.commons.objects.*;

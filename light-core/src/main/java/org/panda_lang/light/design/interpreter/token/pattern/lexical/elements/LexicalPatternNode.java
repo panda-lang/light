@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token.lexical.elements;
+package org.panda_lang.light.design.interpreter.token.pattern.lexical.elements;
 
 import java.util.*;
 

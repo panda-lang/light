@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.token.flexible;
+package org.panda_lang.light.design.interpreter.token.pattern.flexible;
 
-import org.panda_lang.light.design.interpreter.token.flexible.builder.*;
+import org.panda_lang.light.design.interpreter.token.pattern.flexible.builder.*;
 import org.panda_lang.panda.framework.design.architecture.dynamic.*;
 
 public class FlexibleModel {
