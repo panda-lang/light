@@ -65,7 +65,6 @@ public class LexicalExtractor {
     private @Nullable String[] matchUnits(String phrase, List<LexicalPatternElement> elements) {
         Stack<LexicalPatternUnit> units = new Stack<>();
         String[] dynamics = new String[elements.size()];
-        // boolean isolation = false;
         int index = 0;
 
         for (int i = index; i < elements.size(); i++) {
@@ -85,6 +84,14 @@ public class LexicalExtractor {
             for (LexicalPatternUnit currentUnit : unitArrayDistributor) {
                 if (index < 0) {
                     return null;
+                }
+
+                if (StringUtils.isEmpty(unit.getValue())) {
+                    if (unit.getIsolationType().isAny() && !unit.isOptional()) {
+                        ++index;
+                    }
+
+                    continue;
                 }
 
                 LexicalPatternUnit previousUnit = unitArrayDistributor.getPrevious();
@@ -205,12 +212,6 @@ public class LexicalExtractor {
         }
 
         return new LexicalExtractorResult(false);
-    }
-
-    class Wiezienie {
-
-        final List<String> members = new ArrayList<String>() {{ add("greg"); }};
-
     }
 
 }

@@ -76,6 +76,10 @@ public interface LexicalPatternElement {
             this.end = end;
         }
 
+        public boolean isAny() {
+            return this.isStart() || this.isEnd();
+        }
+
         public boolean isStart() {
             return start;
         }
