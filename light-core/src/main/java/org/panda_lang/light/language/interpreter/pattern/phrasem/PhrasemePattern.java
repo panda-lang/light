@@ -18,11 +18,11 @@ package org.panda_lang.light.language.interpreter.pattern.phrasem;
 
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.*;
 
-public class PhrasemPattern {
+public class PhrasemePattern {
 
     private final LexicalPattern lexicalPattern;
 
-    private PhrasemPattern(LexicalPattern lexicalPattern) {
+    private PhrasemePattern(LexicalPattern lexicalPattern) {
         this.lexicalPattern = lexicalPattern;
     }
 

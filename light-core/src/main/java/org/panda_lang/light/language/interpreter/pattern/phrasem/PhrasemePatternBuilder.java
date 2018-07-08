@@ -16,6 +16,6 @@
 
 package org.panda_lang.light.language.interpreter.pattern.phrasem;
 
-public class PhrasemPatternCompiler {
+public class PhrasemePatternBuilder {
 
 }
