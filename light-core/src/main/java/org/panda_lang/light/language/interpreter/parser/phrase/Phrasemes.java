@@ -8,5 +8,10 @@ public class Phrasemes {
     private final Collection<Phraseme> phrasemes = new HashSet<>();
 
 
+    public void registerPhraseme(Phraseme phraseme) {
+        phrasemes.add(phraseme);
+    }
+
+
 
 }

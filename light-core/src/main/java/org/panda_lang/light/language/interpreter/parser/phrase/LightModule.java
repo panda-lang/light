@@ -4,32 +4,41 @@ import org.panda_lang.panda.framework.design.architecture.module.Module;
 import org.panda_lang.panda.framework.design.architecture.prototype.ClassPrototype;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LightModule implements Module {
 
+    private final String moduleName;
+    private final Map<String, ClassPrototype> types = new HashMap<>();
+
+    public LightModule(String moduleName) {
+        this.moduleName = moduleName;
+    }
+
     @Override
     public ClassPrototype add(ClassPrototype prototype) {
-        return null;
+        return types.put(prototype.getClassName(), prototype);
     }
 
     @Override
     public ClassPrototype get(String className) {
-        return null;
+        return types.get(className);
     }
 
     @Override
     public int getPrototypeCount() {
-        return 0;
+        return types.size();
     }
 
     @Override
     public Collection<ClassPrototype> getPrototypes() {
-        return null;
+        return types.values();
     }
 
     @Override
     public String getName() {
-        return null;
+        return moduleName;
     }
 
 }
