@@ -14,6 +14,10 @@ public class Phrasemes {
     }
 
     public PhrasemePatternResult find(String sentence) {
+        for (Phraseme phraseme : phrasemes) {
+            //phraseme.getPattern()
+        }
+
         return null;
     }
 
