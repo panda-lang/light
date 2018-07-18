@@ -1,5 +1,7 @@
 package org.panda_lang.light.language.interpreter.parser.phrase;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -9,6 +11,18 @@ public class PhrasemesGroup {
 
     public void importPhrasemes(Phrasemes phrasemes) {
         group.add(phrasemes);
+    }
+
+    public PhrasemesCandidate find(String sentence, @Nullable PhrasemesCandidate previousResult) {
+        for (Phrasemes phrasemes : group) {
+            PhrasemesCandidate candidate = phrasemes.find(sentence, previousResult);
+
+            if (candidate.isMatched()) {
+                return candidate;
+            }
+        }
+
+        return new PhrasemesCandidate();
     }
 
     public Collection<? extends Phrasemes> getPhrasemes() {

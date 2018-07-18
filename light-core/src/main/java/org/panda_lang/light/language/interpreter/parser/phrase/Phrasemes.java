@@ -1,5 +1,7 @@
 package org.panda_lang.light.language.interpreter.parser.phrase;
 
+import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.design.interpreter.parser.phrase.PhrasemePattern;
 import org.panda_lang.light.language.interpreter.pattern.phrasem.PhrasemePatternResult;
 
 import java.util.Collection;
@@ -13,12 +15,28 @@ public class Phrasemes {
         phrasemes.add(phraseme);
     }
 
-    public PhrasemePatternResult find(String sentence) {
+    public PhrasemesCandidate find(String sentence, @Nullable PhrasemesCandidate previousResult) {
         for (Phraseme phraseme : phrasemes) {
-            //phraseme.getPattern()
+            PhrasemesCandidate candidate = this.match(sentence, previousResult, phraseme);
+
+            if (candidate.isMatched()) {
+                return candidate;
+            }
         }
 
-        return null;
+        return new PhrasemesCandidate();
+    }
+
+    private PhrasemesCandidate match(String sentence, @Nullable PhrasemesCandidate previousResult, Phraseme phraseme) {
+        PhrasemePattern pattern = phraseme.getPattern();
+        PhrasemePatternResult result = pattern.match(sentence, previousResult);
+
+        if (!result.isMatched()) {
+            return new PhrasemesCandidate();
+        }
+
+
+        return new PhrasemesCandidate(phraseme, result);
     }
 
 }

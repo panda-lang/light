@@ -43,6 +43,4 @@ hardunits in message:
  Phrasemes:
    PhrasemesCandidate find(String sentence, @Nullable PhrasemeCandidate previousResult)
 
- Phraseme:
-   PhrasemesPatternResult match(String sentence, @Nullable PhrasemesPatternResult)
 

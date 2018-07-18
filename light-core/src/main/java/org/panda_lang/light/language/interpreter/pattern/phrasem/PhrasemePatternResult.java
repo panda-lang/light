@@ -7,7 +7,16 @@ import java.util.Collection;
 
 public class PhrasemePatternResult {
 
+    private final boolean matched;
     private LexicalExtractorResult lexicalResult;
     private Collection<Phraseme> phrasemes;
+
+    public PhrasemePatternResult(boolean matched) {
+        this.matched = matched;
+    }
+
+    public boolean isMatched() {
+        return matched;
+    }
 
 }

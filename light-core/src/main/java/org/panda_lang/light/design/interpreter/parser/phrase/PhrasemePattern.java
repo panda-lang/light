@@ -16,6 +16,21 @@
 
 package org.panda_lang.light.design.interpreter.parser.phrase;
 
+import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesCandidate;
+import org.panda_lang.light.language.interpreter.pattern.phrasem.PhrasemePatternResult;
+import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
+
 public class PhrasemePattern {
+
+    private final LexicalPattern pattern;
+
+    public PhrasemePattern(LexicalPattern pattern) {
+        this.pattern = pattern;
+    }
+
+    public PhrasemePatternResult match(String sentence, @Nullable PhrasemesCandidate previousResult) {
+        return null;
+    }
 
 }
