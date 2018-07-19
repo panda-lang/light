@@ -50,6 +50,8 @@ public class FlexibleModelTest {
 
         Sentence phrase = new Sentence("send 'Flexible Model Test' to console");
         Executable statement = tree.find(phrase);
+
+        System.out.println(statement);
     }
 
 }
