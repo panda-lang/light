@@ -17,7 +17,7 @@ public class Phrasemes {
 
     public PhrasemesCandidate find(PhrasemesGroup group, String sentence, @Nullable PhrasemesCandidate previousResult) {
         for (Phraseme phraseme : phrasemes) {
-            PhrasemesCandidate candidate = this.match(group, sentence, previousResult, phraseme);
+            PhrasemesCandidate candidate = this.match(phraseme, sentence, previousResult);
 
             if (candidate.isMatched()) {
                 return candidate;
@@ -27,9 +27,9 @@ public class Phrasemes {
         return new PhrasemesCandidate();
     }
 
-    private PhrasemesCandidate match(PhrasemesGroup group, String sentence, @Nullable PhrasemesCandidate previousResult, Phraseme phraseme) {
+    private PhrasemesCandidate match(Phraseme phraseme, String sentence, @Nullable PhrasemesCandidate previousResult) {
         PhrasemePattern pattern = phraseme.getPattern();
-        PhrasemePatternResult result = pattern.match(group, sentence, previousResult);
+        PhrasemePatternResult result = pattern.match(sentence, previousResult);
 
         if (result == null || !result.isMatched()) {
             return new PhrasemesCandidate();

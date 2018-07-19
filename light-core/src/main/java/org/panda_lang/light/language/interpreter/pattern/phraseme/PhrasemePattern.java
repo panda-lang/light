@@ -18,8 +18,7 @@ package org.panda_lang.light.language.interpreter.pattern.phraseme;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesCandidate;
-import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesGroup;
-import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.*;
+import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 
 public class PhrasemePattern {
 
@@ -33,7 +32,7 @@ public class PhrasemePattern {
         return new PhrasemePatternBuilder();
     }
 
-    public PhrasemePatternResult match(PhrasemesGroup group, String sentence, @Nullable PhrasemesCandidate previousResult) {
+    public PhrasemePatternResult match(String sentence, @Nullable PhrasemesCandidate previousResult) {
         return null;
     }
 
