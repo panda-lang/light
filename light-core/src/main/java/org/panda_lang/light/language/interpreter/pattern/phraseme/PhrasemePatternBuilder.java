@@ -16,11 +16,12 @@
 
 package org.panda_lang.light.language.interpreter.pattern.phraseme;
 
+import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 
 public class PhrasemePatternBuilder {
 
-    private LexicalPattern pattern;
+    private LexicalPattern<Phraseme> pattern;
 
     public PhrasemePatternBuilder compile(String pattern) {
         PhrasemePatternCompiler compiler = new PhrasemePatternCompiler(pattern);
