@@ -15,7 +15,7 @@ public class PhrasemesGroup {
 
     public PhrasemesCandidate find(String sentence, @Nullable PhrasemesCandidate previousResult) {
         for (Phrasemes phrasemes : group) {
-            PhrasemesCandidate candidate = phrasemes.find(sentence, previousResult);
+            PhrasemesCandidate candidate = phrasemes.find(this, sentence, previousResult);
 
             if (candidate.isMatched()) {
                 return candidate;

@@ -14,16 +14,27 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.language.interpreter.pattern.phrasem;
+package org.panda_lang.light.language.interpreter.pattern.phraseme;
 
+import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesCandidate;
+import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesGroup;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.*;
 
 public class PhrasemePattern {
 
     private final LexicalPattern lexicalPattern;
 
-    private PhrasemePattern(LexicalPattern lexicalPattern) {
+    public PhrasemePattern(LexicalPattern lexicalPattern) {
         this.lexicalPattern = lexicalPattern;
+    }
+
+    public static PhrasemePatternBuilder builder() {
+        return new PhrasemePatternBuilder();
+    }
+
+    public PhrasemePatternResult match(PhrasemesGroup group, String sentence, @Nullable PhrasemesCandidate previousResult) {
+        return null;
     }
 
 }

@@ -1,7 +1,7 @@
 package org.panda_lang.light.language.interpreter.parser.phrase;
 
 import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.language.interpreter.pattern.phrasem.PhrasemePatternResult;
+import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePatternResult;
 
 public class PhrasemesCandidate {
 

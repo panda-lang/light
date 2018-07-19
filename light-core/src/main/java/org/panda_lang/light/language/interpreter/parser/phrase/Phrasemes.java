@@ -1,8 +1,8 @@
 package org.panda_lang.light.language.interpreter.parser.phrase;
 
 import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.design.interpreter.parser.phrase.PhrasemePattern;
-import org.panda_lang.light.language.interpreter.pattern.phrasem.PhrasemePatternResult;
+import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePattern;
+import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePatternResult;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -15,9 +15,9 @@ public class Phrasemes {
         phrasemes.add(phraseme);
     }
 
-    public PhrasemesCandidate find(String sentence, @Nullable PhrasemesCandidate previousResult) {
+    public PhrasemesCandidate find(PhrasemesGroup group, String sentence, @Nullable PhrasemesCandidate previousResult) {
         for (Phraseme phraseme : phrasemes) {
-            PhrasemesCandidate candidate = this.match(sentence, previousResult, phraseme);
+            PhrasemesCandidate candidate = this.match(group, sentence, previousResult, phraseme);
 
             if (candidate.isMatched()) {
                 return candidate;
@@ -27,11 +27,11 @@ public class Phrasemes {
         return new PhrasemesCandidate();
     }
 
-    private PhrasemesCandidate match(String sentence, @Nullable PhrasemesCandidate previousResult, Phraseme phraseme) {
+    private PhrasemesCandidate match(PhrasemesGroup group, String sentence, @Nullable PhrasemesCandidate previousResult, Phraseme phraseme) {
         PhrasemePattern pattern = phraseme.getPattern();
-        PhrasemePatternResult result = pattern.match(sentence, previousResult);
+        PhrasemePatternResult result = pattern.match(group, sentence, previousResult);
 
-        if (!result.isMatched()) {
+        if (result == null || !result.isMatched()) {
             return new PhrasemesCandidate();
         }
 

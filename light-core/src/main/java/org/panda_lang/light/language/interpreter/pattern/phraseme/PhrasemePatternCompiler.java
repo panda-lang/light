@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.language.interpreter.pattern.phrasem;
+package org.panda_lang.light.language.interpreter.pattern.phraseme;
+
+import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 
 public class PhrasemePatternCompiler {
 
-    public void compile() {
-
+    public LexicalPattern compile(String pattern) {
+        return null;
     }
 
 }
