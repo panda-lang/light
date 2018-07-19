@@ -23,8 +23,8 @@ public class PhrasemePatternBuilder {
     private LexicalPattern pattern;
 
     public PhrasemePatternBuilder compile(String pattern) {
-        PhrasemePatternCompiler compiler = new PhrasemePatternCompiler();
-        this.pattern = compiler.compile(pattern);
+        PhrasemePatternCompiler compiler = new PhrasemePatternCompiler(pattern);
+        compiler.compile();
         return this;
     }
 

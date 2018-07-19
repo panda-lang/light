@@ -17,14 +17,16 @@
 package org.panda_lang.light.language.interpreter.pattern.phraseme;
 
 import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
 import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesCandidate;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
+import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
 public class PhrasemePattern {
 
-    private final LexicalPattern lexicalPattern;
+    private final LexicalPattern<Phraseme> lexicalPattern;
 
-    public PhrasemePattern(LexicalPattern lexicalPattern) {
+    public PhrasemePattern(LexicalPattern<Phraseme> lexicalPattern) {
         this.lexicalPattern = lexicalPattern;
     }
 
@@ -33,7 +35,8 @@ public class PhrasemePattern {
     }
 
     public PhrasemePatternResult match(String sentence, @Nullable PhrasemesCandidate previousResult) {
-        return null;
+        LexicalExtractorResult<Phraseme> result = lexicalPattern.extract(sentence);
+        return new PhrasemePatternResult(result);
     }
 
 }
