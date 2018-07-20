@@ -26,6 +26,8 @@ public class PhrasemePatternBuilder {
     public PhrasemePatternBuilder compile(String pattern) {
         PhrasemePatternCompiler compiler = new PhrasemePatternCompiler(pattern);
         compiler.compile();
+
+        this.pattern = compiler.getLexicalPattern();
         return this;
     }
 

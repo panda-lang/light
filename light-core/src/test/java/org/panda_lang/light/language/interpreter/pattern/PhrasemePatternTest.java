@@ -2,9 +2,11 @@ package org.panda_lang.light.language.interpreter.pattern;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.panda_lang.light.language.interpreter.parser.phrase.*;
+import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
+import org.panda_lang.light.language.interpreter.parser.phrase.Phrasemes;
+import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesCandidate;
+import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesGroup;
 import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePattern;
-import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
 public class PhrasemePatternTest {
 
@@ -14,12 +16,7 @@ public class PhrasemePatternTest {
                 .compile("add <string> to <string>")
                 .build();
 
-        Phraseme phraseme = new Phraseme(pattern, new PhrasemeCallback() {
-            @Override
-            public void execute(ExecutableBranch branch) {
-                // nvm
-            }
-        });
+        Phraseme phraseme = new Phraseme(pattern, branch -> System.out.println("D:"));
 
         Phrasemes phrasemes = new Phrasemes();
         phrasemes.registerPhraseme(phraseme);
@@ -28,9 +25,13 @@ public class PhrasemePatternTest {
         group.importPhrasemes(phrasemes);
 
         PhrasemesCandidate candidate = group.find("add \"abc\" to \"def\"", null);
+        Phraseme matchedPhraseme = candidate.getPhraseme();
 
         Assertions.assertTrue(candidate.isMatched());
-        Assertions.assertEquals(phraseme, candidate.getPhraseme());
+        Assertions.assertNotNull(matchedPhraseme);
+        Assertions.assertEquals(phraseme, matchedPhraseme);
+
+        matchedPhraseme.execute(null);
     }
 
 }

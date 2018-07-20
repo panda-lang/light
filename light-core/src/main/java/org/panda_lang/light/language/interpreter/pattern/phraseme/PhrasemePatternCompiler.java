@@ -19,26 +19,19 @@ package org.panda_lang.light.language.interpreter.pattern.phraseme;
 import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PhrasemePatternCompiler {
 
     private final String pattern;
     private LexicalPattern<Phraseme> lexicalPattern;
-    private List<String> types;
 
     public PhrasemePatternCompiler(String pattern) {
         this.pattern = pattern;
-        this.types = new ArrayList<>();
     }
 
     public void compile() {
-
-    }
-
-    public List<String> getTypes() {
-        return types;
+        this.lexicalPattern = LexicalPattern.<Phraseme> builder()
+                .compile(pattern)
+                .build();
     }
 
     public LexicalPattern<Phraseme> getLexicalPattern() {
