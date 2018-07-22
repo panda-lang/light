@@ -39,4 +39,8 @@ public class PhrasemePattern {
         return new PhrasemePatternResult(result);
     }
 
+    public LexicalPattern<Phraseme> getLexicalPattern() {
+        return lexicalPattern;
+    }
+
 }

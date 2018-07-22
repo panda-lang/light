@@ -1,4 +1,4 @@
-package org.panda_lang.light.language.interpreter.pattern;
+package org.panda_lang.light.language.interpreter.pattern.phraseme;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -6,9 +6,8 @@ import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
 import org.panda_lang.light.language.interpreter.parser.phrase.Phrasemes;
 import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesCandidate;
 import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesGroup;
-import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePattern;
 
-public class PhrasemePatternTest {
+public class PhrasemeMatcherTest {
 
     @Test
     public void testPhrasemePattern() {
