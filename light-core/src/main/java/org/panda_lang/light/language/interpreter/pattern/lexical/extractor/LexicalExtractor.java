@@ -14,5 +14,21 @@
  * limitations under the License.
  */
 
-@Deprecated
-package org.panda_lang.light.language.interpreter.pattern.flexible;
+package org.panda_lang.light.language.interpreter.pattern.lexical.extractor;
+
+import org.panda_lang.light.language.interpreter.pattern.lexical.*;
+
+public class LexicalExtractor<T> {
+
+    private final LexicalPattern pattern;
+
+    public LexicalExtractor(LexicalPattern pattern) {
+        this.pattern = pattern;
+    }
+
+    public LexicalExtractorResult<T> extract(String phrase) {
+        LexicalExtractorWorker<T> extractorWorker = new LexicalExtractorWorker<>();
+        return extractorWorker.extract(pattern.getModel(), phrase);
+    }
+
+}

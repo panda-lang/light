@@ -14,12 +14,19 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.language.interpreter.pattern.flexible.tree;
+package org.panda_lang.light.language.interpreter.pattern.lexical.elements;
 
-public class FlexibleTreeNode {
+public class LexicalPatternUnit extends DefaultLexicalPatternElement {
 
-    public FlexibleTreeNode() {
+    private final String value;
 
+    public LexicalPatternUnit(String element) {
+        super.isolationType = Isolation.of(element);
+        this.value = element.trim();
+    }
+
+    public String getValue() {
+        return value;
     }
 
 }

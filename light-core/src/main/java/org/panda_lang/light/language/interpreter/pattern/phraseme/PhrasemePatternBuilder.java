@@ -17,7 +17,8 @@
 package org.panda_lang.light.language.interpreter.pattern.phraseme;
 
 import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
-import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
+import org.panda_lang.light.language.interpreter.pattern.lexical.LexicalPattern;
+import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
 public class PhrasemePatternBuilder {
 
@@ -28,6 +29,11 @@ public class PhrasemePatternBuilder {
         compiler.compile();
 
         this.pattern = compiler.getLexicalPattern();
+        return this;
+    }
+
+    public PhrasemePatternBuilder addWildcardProcessor(WildcardProcessor<Phraseme> processor) {
+        pattern.registerWildcardProcessor(processor);
         return this;
     }
 

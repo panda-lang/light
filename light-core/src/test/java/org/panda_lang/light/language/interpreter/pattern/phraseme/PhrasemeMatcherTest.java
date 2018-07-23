@@ -6,13 +6,21 @@ import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
 import org.panda_lang.light.language.interpreter.parser.phrase.Phrasemes;
 import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesCandidate;
 import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesGroup;
+import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
 public class PhrasemeMatcherTest {
 
     @Test
     public void testPhrasemePattern() {
         PhrasemePattern pattern = PhrasemePattern.builder()
+                // add "x" to "y"
                 .compile("add <string> to <string>")
+                .addWildcardProcessor(new WildcardProcessor<Phraseme>() {
+                    @Override
+                    public Phraseme handle(String wildcard) {
+                        return null;
+                    }
+                })
                 .build();
 
         Phraseme phraseme = new Phraseme(pattern, branch -> System.out.println("D:"));
