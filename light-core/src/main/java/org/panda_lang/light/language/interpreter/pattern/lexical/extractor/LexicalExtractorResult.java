@@ -36,7 +36,12 @@ public class LexicalExtractorResult<T> {
     }
 
     public LexicalExtractorResult<T> addWildcard(String wildcardContent) {
-        this.wildcards.add(wildcardContent);
+        wildcards.add(wildcardContent);
+        return this;
+    }
+
+    public LexicalExtractorResult<T> addProcessedValue(ProcessedValue<T> processedValue) {
+        processedValues.add(processedValue);
         return this;
     }
 
@@ -45,8 +50,8 @@ public class LexicalExtractorResult<T> {
             throw new RuntimeException("Cannot merge unmatched result");
         }
 
-        this.identifiers.addAll(result.identifiers);
-        this.wildcards.addAll(result.wildcards);
+        identifiers.addAll(result.identifiers);
+        wildcards.addAll(result.wildcards);
     }
 
     public boolean isMatched() {

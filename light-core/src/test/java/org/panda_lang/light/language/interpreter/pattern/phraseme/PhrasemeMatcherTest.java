@@ -1,5 +1,6 @@
 package org.panda_lang.light.language.interpreter.pattern.phraseme;
 
+import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
@@ -15,9 +16,9 @@ public class PhrasemeMatcherTest {
         PhrasemePattern pattern = PhrasemePattern.builder()
                 // add "x" to "y"
                 .compile("add <string> to <string>")
-                .addWildcardProcessor(new WildcardProcessor<Phraseme>() {
+                .addWildcardProcessor(new PhrasemeWildcardProcessor() {
                     @Override
-                    public Phraseme handle(String wildcard) {
+                    public Phraseme handle(PhrasemesGroup group, String wildcard, @Nullable PhrasemesCandidate previousCandidate) {
                         return null;
                     }
                 })

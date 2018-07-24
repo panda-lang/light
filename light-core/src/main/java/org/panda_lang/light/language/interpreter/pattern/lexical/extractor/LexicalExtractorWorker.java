@@ -18,6 +18,7 @@ package org.panda_lang.light.language.interpreter.pattern.lexical.extractor;
 
 import org.jetbrains.annotations.*;
 import org.panda_lang.light.language.interpreter.pattern.lexical.elements.*;
+import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 import org.panda_lang.panda.utilities.commons.arrays.*;
 import org.panda_lang.panda.utilities.commons.objects.*;
 
@@ -25,13 +26,23 @@ import java.util.*;
 
 public class LexicalExtractorWorker<T> {
 
-    protected LexicalExtractorResult<T> extract(LexicalPatternElement pattern, String phrase) {
+    private final Collection<WildcardProcessor<T>> wildcardProcessors;
+
+    public LexicalExtractorWorker(Collection<WildcardProcessor<T>> wildcardProcessors) {
+        this.wildcardProcessors = wildcardProcessors;
+    }
+
+    public LexicalExtractorResult<T> extract(LexicalPatternElement pattern, String phrase) {
         if (pattern.isUnit()) {
             return new LexicalExtractorResult<>(phrase.equals(pattern.toUnit().getValue()));
         }
 
         if (pattern.isWildcard()) {
             // TODO: Validate
+            String wildcard = phrase.trim();
+
+
+
             return new LexicalExtractorResult<T>(true).addWildcard(phrase.trim());
         }
 

@@ -33,8 +33,7 @@ public class LexicalPattern<T> {
         this.processors = processors;
     }
 
-    public LexicalExtractorResult<T> extract(String phrase) {
-        LexicalExtractor<T> extractor = new LexicalExtractor<>(this);
+    public LexicalExtractorResult<T> extract(LexicalExtractor<T> extractor, String phrase) {
         return extractor.extract(phrase);
     }
 
