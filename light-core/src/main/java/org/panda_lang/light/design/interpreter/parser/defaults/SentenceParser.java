@@ -27,7 +27,7 @@ public class SentenceParser implements Parser {
 
 
 
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
 }

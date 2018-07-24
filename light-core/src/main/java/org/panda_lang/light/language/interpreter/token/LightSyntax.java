@@ -34,27 +34,27 @@ public class LightSyntax implements Syntax {
 
     @Override
     public List<Sequence> getSequences() {
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public List<Operator> getOperators() {
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public List<Separator> getSeparators() {
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public List<Literal> getLiterals() {
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public List<Keyword> getKeywords() {
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
 }

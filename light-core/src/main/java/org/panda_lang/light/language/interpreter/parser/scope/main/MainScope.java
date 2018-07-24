@@ -24,7 +24,7 @@ public class MainScope extends AbstractScope {
 
     @Override
     public ScopeInstance createInstance(ExecutableBranch branch) {
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
 }

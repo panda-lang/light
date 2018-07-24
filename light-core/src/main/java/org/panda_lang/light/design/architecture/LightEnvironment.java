@@ -34,7 +34,7 @@ public class LightEnvironment implements Environment {
 
     @Override
     public ModuleRegistry getModuleRegistry() {
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
     @Override

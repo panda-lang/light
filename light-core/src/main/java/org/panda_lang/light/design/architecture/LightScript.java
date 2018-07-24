@@ -34,7 +34,7 @@ public class LightScript implements Script {
 
     @Override
     public <T extends Statement> List<T> select(Class<? extends T> statementClass) {
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
     public void addStatement(Statement statement) {

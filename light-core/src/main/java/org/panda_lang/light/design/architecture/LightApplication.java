@@ -54,7 +54,7 @@ public class LightApplication implements Application {
 
     @Override
     public String getWorkingDirectory() {
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 
 }

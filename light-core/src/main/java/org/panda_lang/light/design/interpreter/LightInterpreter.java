@@ -16,12 +16,15 @@
 
 package org.panda_lang.light.design.interpreter;
 
-import org.panda_lang.light.design.architecture.*;
-import org.panda_lang.light.design.interpreter.parser.defaults.*;
-import org.panda_lang.panda.framework.design.interpreter.*;
-import org.panda_lang.panda.framework.design.interpreter.messenger.*;
-import org.panda_lang.panda.framework.design.interpreter.source.*;
-import org.panda_lang.panda.framework.language.interpreter.*;
+import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.design.architecture.LightApplication;
+import org.panda_lang.light.design.architecture.LightEnvironment;
+import org.panda_lang.light.design.interpreter.parser.defaults.ApplicationParser;
+import org.panda_lang.panda.framework.design.interpreter.Interpretation;
+import org.panda_lang.panda.framework.design.interpreter.Interpreter;
+import org.panda_lang.panda.framework.design.interpreter.messenger.MessengerMessage;
+import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;
+import org.panda_lang.panda.framework.language.interpreter.PandaInterpretation;
 
 public class LightInterpreter implements Interpreter {
 
@@ -32,7 +35,7 @@ public class LightInterpreter implements Interpreter {
     }
 
     @Override
-    public LightApplication interpret(SourceSet sources) {
+    public @Nullable LightApplication interpret(SourceSet sources) {
         Interpretation interpretation = new PandaInterpretation(environment, this, environment.getLanguage());
 
         ApplicationParser parser = new ApplicationParser(interpretation);

@@ -46,9 +46,8 @@ public class LightLoader {
 
         LightEnvironment environment = new LightEnvironment(light);
         LightInterpreter interpreter = environment.getInterpreter();
-        LightApplication application = interpreter.interpret(sourceSet);
 
-        return application;
+        return interpreter.interpret(sourceSet);
     }
 
 }
