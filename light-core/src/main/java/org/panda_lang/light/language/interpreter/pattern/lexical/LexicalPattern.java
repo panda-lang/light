@@ -16,34 +16,42 @@
 
 package org.panda_lang.light.language.interpreter.pattern.lexical;
 
+import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.language.interpreter.pattern.lexical.elements.LexicalPatternElement;
 import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.LexicalExtractor;
 import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
+import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.LexicalExtractorWorker;
 import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
-
-import java.util.Collection;
 
 public class LexicalPattern<T> {
 
     private final LexicalPatternElement pattern;
-    private final Collection<WildcardProcessor<T>> processors;
+    private @Nullable WildcardProcessor<T> processor;
 
-    public LexicalPattern(LexicalPatternElement elements, Collection<WildcardProcessor<T>> processors) {
+    public LexicalPattern(LexicalPatternElement elements, @Nullable WildcardProcessor<T> processor) {
         this.pattern = elements;
-        this.processors = processors;
+        this.processor = processor;
     }
 
     public LexicalExtractorResult<T> extract(LexicalExtractor<T> extractor, String phrase) {
         return extractor.extract(phrase);
     }
 
-    public LexicalPattern<T> registerWildcardProcessor(WildcardProcessor<T> processor) {
-        processors.add(processor);
+    public LexicalExtractorResult<T> extract(String phrase) {
+        return extract(new DefaultLexicalExtractor<>(this), phrase);
+    }
+
+    public LexicalPattern<T> setWildcardProcessor(WildcardProcessor<T> processor) {
+        this.processor = processor;
         return this;
     }
 
-    public Collection<? extends WildcardProcessor<T>> getProcessors() {
-        return processors;
+    public boolean hasWildcardProcessor() {
+        return processor != null;
+    }
+
+    public @Nullable WildcardProcessor<T> getWildcardProcessor() {
+        return processor;
     }
 
     public LexicalPatternElement getModel() {
@@ -52,6 +60,21 @@ public class LexicalPattern<T> {
 
     public static <T> LexicalPatternBuilder<T> builder() {
         return new LexicalPatternBuilder<>();
+    }
+
+    private static class DefaultLexicalExtractor<T> implements LexicalExtractor<T> {
+
+        private final LexicalPattern<T> pattern;
+
+        public DefaultLexicalExtractor(LexicalPattern<T> pattern) {
+            this.pattern = pattern;
+        }
+
+        @Override
+        public LexicalExtractorResult<T> extract(String phrase) {
+            return new LexicalExtractorWorker<T>(null).extract(pattern.getModel(), phrase);
+        }
+
     }
 
 }

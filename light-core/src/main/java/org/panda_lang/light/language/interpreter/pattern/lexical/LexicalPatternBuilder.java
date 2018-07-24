@@ -3,13 +3,10 @@ package org.panda_lang.light.language.interpreter.pattern.lexical;
 import org.panda_lang.light.language.interpreter.pattern.lexical.elements.LexicalPatternElement;
 import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 public class LexicalPatternBuilder<T> {
 
     private LexicalPatternElement pattern;
-    private Collection<WildcardProcessor<T>> wildcardProcessors = new ArrayList<>();
+    private WildcardProcessor<T> wildcardProcessor;
 
     public LexicalPatternBuilder<T> compile(String pattern) {
         LexicalPatternCompiler compiler = new LexicalPatternCompiler();
@@ -23,18 +20,13 @@ public class LexicalPatternBuilder<T> {
         return this;
     }
 
-    public LexicalPatternBuilder<T> addWildcardProcessor(WildcardProcessor<T> wildcardProcessor) {
-        wildcardProcessors.add(wildcardProcessor);
-        return this;
-    }
-
-    public LexicalPatternBuilder<T> addWildcardProcessors(Collection<WildcardProcessor<T>> processors) {
-        wildcardProcessors.addAll(processors);
+    public LexicalPatternBuilder<T> setWildcardProcessor(WildcardProcessor<T> wildcardProcessor) {
+        this.wildcardProcessor = wildcardProcessor;
         return this;
     }
 
     public LexicalPattern<T> build() {
-        return new LexicalPattern<>(pattern, wildcardProcessors);
+        return new LexicalPattern<>(pattern, wildcardProcessor);
     }
 
 }

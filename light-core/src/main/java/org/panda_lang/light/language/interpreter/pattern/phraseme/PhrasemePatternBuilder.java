@@ -23,6 +23,7 @@ import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.proce
 public class PhrasemePatternBuilder {
 
     private LexicalPattern<Phraseme> pattern;
+    private PhrasemeWildcardProcessor wildcardProcessor;
 
     public PhrasemePatternBuilder compile(String pattern) {
         PhrasemePatternCompiler compiler = new PhrasemePatternCompiler(pattern);
@@ -32,13 +33,18 @@ public class PhrasemePatternBuilder {
         return this;
     }
 
-    public PhrasemePatternBuilder addWildcardProcessor(WildcardProcessor<Phraseme> processor) {
-        pattern.registerWildcardProcessor(processor);
+    public PhrasemePatternBuilder setWildcardProcessor(WildcardProcessor<Phraseme> wildcardProcessor) {
+        pattern.setWildcardProcessor(wildcardProcessor);
+        return this;
+    }
+
+    public PhrasemePatternBuilder setWildcardProcessor(PhrasemeWildcardProcessor wildcardProcessor) {
+        this.wildcardProcessor = wildcardProcessor;
         return this;
     }
 
     public PhrasemePattern build() {
-        return new PhrasemePattern(pattern);
+        return new PhrasemePattern(pattern, wildcardProcessor);
     }
 
 }

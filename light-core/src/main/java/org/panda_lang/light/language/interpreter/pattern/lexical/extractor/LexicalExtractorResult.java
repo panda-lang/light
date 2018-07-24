@@ -18,6 +18,7 @@ package org.panda_lang.light.language.interpreter.pattern.lexical.extractor;
 
 import org.jetbrains.annotations.*;
 import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.processed.ProcessedValue;
+import org.panda_lang.panda.utilities.commons.objects.StringUtils;
 
 import java.util.*;
 
@@ -35,13 +36,27 @@ public class LexicalExtractorResult<T> {
         this.processedValues = matched ? new ArrayList<>() : null;
     }
 
-    public LexicalExtractorResult<T> addWildcard(String wildcardContent) {
-        wildcards.add(wildcardContent);
+    public LexicalExtractorResult<T> addWildcard(@Nullable String wildcardContent) {
+        if (!StringUtils.isEmpty(wildcardContent)) {
+            wildcards.add(wildcardContent);
+        }
+
         return this;
     }
 
-    public LexicalExtractorResult<T> addProcessedValue(ProcessedValue<T> processedValue) {
-        processedValues.add(processedValue);
+    public LexicalExtractorResult<T> addIdentifier(@Nullable String identifier) {
+        if (!StringUtils.isEmpty(identifier)) {
+            identifiers.add(identifier);
+        }
+
+        return this;
+    }
+
+    public LexicalExtractorResult<T> addProcessedValue(@Nullable ProcessedValue<T> processedValue) {
+        if (processedValue != null) {
+            processedValues.add(processedValue);
+        }
+
         return this;
     }
 
@@ -50,6 +65,7 @@ public class LexicalExtractorResult<T> {
             throw new RuntimeException("Cannot merge unmatched result");
         }
 
+        processedValues.addAll(result.processedValues);
         identifiers.addAll(result.identifiers);
         wildcards.addAll(result.wildcards);
     }
@@ -58,7 +74,7 @@ public class LexicalExtractorResult<T> {
         return matched;
     }
 
-    public List<ProcessedValue<T>> getProcessedValues() {
+    public @Nullable List<ProcessedValue<T>> getProcessedValues() {
         return processedValues;
     }
 

@@ -26,9 +26,11 @@ import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.Lexic
 public class PhrasemePattern {
 
     private final LexicalPattern<Phraseme> lexicalPattern;
+    private final @Nullable PhrasemeWildcardProcessor wildcardProcessor;
 
-    public PhrasemePattern(LexicalPattern<Phraseme> lexicalPattern) {
+    public PhrasemePattern(LexicalPattern<Phraseme> lexicalPattern, @Nullable PhrasemeWildcardProcessor wildcardProcessor) {
         this.lexicalPattern = lexicalPattern;
+        this.wildcardProcessor = wildcardProcessor;
     }
 
     public static PhrasemePatternBuilder builder() {
@@ -36,10 +38,18 @@ public class PhrasemePattern {
     }
 
     public PhrasemePatternResult match(String sentence, PhrasemesGroup group, @Nullable PhrasemesCandidate previousResult) {
-        PhrasemeExtractor extractor = new PhrasemeExtractor(group, previousResult);
+        PhrasemeExtractor extractor = new PhrasemeExtractor(this, group, previousResult);
         LexicalExtractorResult<Phraseme> result = lexicalPattern.extract(extractor, sentence);
 
         return new PhrasemePatternResult(result);
+    }
+
+    public boolean hasWildcardProcessor() {
+        return wildcardProcessor != null;
+    }
+
+    public @Nullable PhrasemeWildcardProcessor getWildcardProcessor() {
+        return wildcardProcessor;
     }
 
     public LexicalPattern<Phraseme> getLexicalPattern() {

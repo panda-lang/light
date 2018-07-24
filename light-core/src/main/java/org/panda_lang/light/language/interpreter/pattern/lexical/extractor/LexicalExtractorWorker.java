@@ -18,6 +18,7 @@ package org.panda_lang.light.language.interpreter.pattern.lexical.extractor;
 
 import org.jetbrains.annotations.*;
 import org.panda_lang.light.language.interpreter.pattern.lexical.elements.*;
+import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.processed.ProcessedValue;
 import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 import org.panda_lang.panda.utilities.commons.arrays.*;
 import org.panda_lang.panda.utilities.commons.objects.*;
@@ -26,24 +27,42 @@ import java.util.*;
 
 public class LexicalExtractorWorker<T> {
 
-    private final Collection<WildcardProcessor<T>> wildcardProcessors;
+    private final @Nullable WildcardProcessor<T> wildcardProcessor;
 
-    public LexicalExtractorWorker(Collection<WildcardProcessor<T>> wildcardProcessors) {
-        this.wildcardProcessors = wildcardProcessors;
+    public LexicalExtractorWorker(@Nullable WildcardProcessor<T> wildcardProcessor) {
+        this.wildcardProcessor = wildcardProcessor;
     }
 
     public LexicalExtractorResult<T> extract(LexicalPatternElement pattern, String phrase) {
         if (pattern.isUnit()) {
-            return new LexicalExtractorResult<>(phrase.equals(pattern.toUnit().getValue()));
+            boolean matched = phrase.equals(pattern.toUnit().getValue());
+
+            if (!matched) {
+                return new LexicalExtractorResult<>(false);
+            }
+
+            return new LexicalExtractorResult<T>(true).addIdentifier(pattern.getIdentifier());
         }
 
         if (pattern.isWildcard()) {
-            // TODO: Validate
             String wildcard = phrase.trim();
 
+            if (wildcardProcessor != null) {
+                T result = wildcardProcessor.handle(wildcard);
 
+                if (result == null) {
+                    return new LexicalExtractorResult<>(false);
+                }
 
-            return new LexicalExtractorResult<T>(true).addWildcard(phrase.trim());
+                return new LexicalExtractorResult<T>(true)
+                        .addProcessedValue(new ProcessedValue<>(result, pattern.getIdentifier()))
+                        .addIdentifier(pattern.getIdentifier())
+                        .addWildcard(wildcard);
+            }
+
+            return new LexicalExtractorResult<T>(true)
+                    .addIdentifier(pattern.getIdentifier())
+                    .addWildcard(wildcard);
         }
 
         LexicalPatternNode node = pattern.toNode();
@@ -186,6 +205,7 @@ public class LexicalExtractorWorker<T> {
                 return new LexicalExtractorResult<>(false);
             }
 
+            result.addIdentifier(nodeElement.getIdentifier());
             result.merge(nodeElementResult);
         }
 
