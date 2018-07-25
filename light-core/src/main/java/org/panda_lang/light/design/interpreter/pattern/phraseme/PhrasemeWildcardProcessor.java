@@ -14,10 +14,15 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.language.interpreter.parser.phrase;
+package org.panda_lang.light.design.interpreter.pattern.phraseme;
 
-public class DynamicPhraseme {
+import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.design.architecture.phraseme.Phraseme;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemeCandidate;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemesGroup;
 
+public interface PhrasemeWildcardProcessor {
 
+    Phraseme handle(PhrasemesGroup group, String wildcard, @Nullable PhrasemeCandidate previousCandidate);
 
 }

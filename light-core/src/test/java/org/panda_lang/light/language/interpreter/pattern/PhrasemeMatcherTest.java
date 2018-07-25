@@ -18,14 +18,14 @@ package org.panda_lang.light.language.interpreter.pattern;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
-import org.panda_lang.light.language.interpreter.parser.phrase.Phrasemes;
-import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemeCandidate;
-import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesGroup;
+import org.panda_lang.light.design.architecture.phraseme.Phraseme;
+import org.panda_lang.light.design.architecture.phraseme.Phrasemes;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemeCandidate;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemesGroup;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.ProcessedValue;
-import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePattern;
-import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePatternResult;
+import org.panda_lang.light.design.interpreter.pattern.phraseme.PhrasemePattern;
+import org.panda_lang.light.design.interpreter.pattern.phraseme.PhrasemePatternResult;
 
 import java.util.List;
 

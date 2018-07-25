@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.language.interpreter.parser.phrase;
+package org.panda_lang.light.design.architecture.phraseme;
 
-import org.panda_lang.panda.framework.design.architecture.dynamic.Executable;
+public class DynamicPhraseme {
 
-public interface PhrasemeCallback extends Executable {
+
 
 }

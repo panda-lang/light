@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.language.interpreter.parser.phrase;
+package org.panda_lang.light.design.architecture.phraseme;
 
 import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePattern;
-import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePatternResult;
+import org.panda_lang.light.design.interpreter.pattern.phraseme.PhrasemePattern;
+import org.panda_lang.light.design.interpreter.pattern.phraseme.PhrasemePatternResult;
 
 import java.util.Collection;
 import java.util.HashSet;

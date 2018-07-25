@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.language.interpreter.parser.phrase;
+package org.panda_lang.light.design.architecture.phraseme;
 
-import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePattern;
+import org.panda_lang.light.design.interpreter.pattern.phraseme.PhrasemePattern;
 import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
 public class Phraseme {

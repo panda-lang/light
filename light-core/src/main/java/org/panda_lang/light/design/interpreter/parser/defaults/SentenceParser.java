@@ -25,6 +25,8 @@ public class SentenceParser implements Parser {
     public Statement parse(ParserData data, SentenceRepresentation representation) {
         String sentenceSource = representation.getTokenValue();
 
+
+
         throw new RuntimeException("Not implemented");
     }
 

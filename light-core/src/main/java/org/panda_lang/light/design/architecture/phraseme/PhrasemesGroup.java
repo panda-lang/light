@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.language.interpreter.parser.phrase;
+package org.panda_lang.light.design.architecture.phraseme;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -23,10 +23,14 @@ import java.util.HashSet;
 
 public class PhrasemesGroup {
 
-    private final Collection<Phrasemes> group = new HashSet<>();
+    private final Collection<Phrasemes> group;
 
-    public void importPhrasemes(Phrasemes phrasemes) {
-        group.add(phrasemes);
+    private PhrasemesGroup(Collection<Phrasemes> group) {
+        this.group = new HashSet<>(group);
+    }
+
+    public PhrasemesGroup() {
+        this(new HashSet<>());
     }
 
     public PhrasemeCandidate find(String sentence, @Nullable PhrasemeCandidate previousResult) {
@@ -39,6 +43,14 @@ public class PhrasemesGroup {
         }
 
         return new PhrasemeCandidate();
+    }
+
+    public void importPhrasemes(Phrasemes phrasemes) {
+        group.add(phrasemes);
+    }
+
+    public PhrasemesGroup fork() {
+        return new PhrasemesGroup(group);
     }
 
     public Collection<? extends Phrasemes> getPhrasemes() {
