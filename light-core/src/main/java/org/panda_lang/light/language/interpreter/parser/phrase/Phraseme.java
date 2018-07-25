@@ -17,10 +17,9 @@
 package org.panda_lang.light.language.interpreter.parser.phrase;
 
 import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePattern;
-import org.panda_lang.panda.framework.design.architecture.dynamic.Executable;
 import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
-public class Phraseme implements Executable {
+public class Phraseme {
 
     private final PhrasemePattern pattern;
     private final PhrasemeCallback callback;
@@ -30,10 +29,10 @@ public class Phraseme implements Executable {
         this.callback = callback;
     }
 
-    @Override
     public void execute(ExecutableBranch branch) {
         callback.execute(branch);
     }
+
 
     public PhrasemePattern getPattern() {
         return pattern;

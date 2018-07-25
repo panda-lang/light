@@ -31,28 +31,28 @@ public class Phrasemes {
         phrasemes.add(phraseme);
     }
 
-    public PhrasemesCandidate find(PhrasemesGroup group, String sentence, @Nullable PhrasemesCandidate previousResult) {
+    public PhrasemeCandidate find(PhrasemesGroup group, String sentence, @Nullable PhrasemeCandidate previousResult) {
         for (Phraseme phraseme : phrasemes) {
-            PhrasemesCandidate candidate = this.match(phraseme, sentence, group, previousResult);
+            PhrasemeCandidate candidate = this.match(phraseme, sentence, group, previousResult);
 
             if (candidate.isMatched()) {
                 return candidate;
             }
         }
 
-        return new PhrasemesCandidate();
+        return new PhrasemeCandidate();
     }
 
-    private PhrasemesCandidate match(Phraseme phraseme, String sentence, PhrasemesGroup group, @Nullable PhrasemesCandidate previousResult) {
+    private PhrasemeCandidate match(Phraseme phraseme, String sentence, PhrasemesGroup group, @Nullable PhrasemeCandidate previousResult) {
         PhrasemePattern pattern = phraseme.getPattern();
         PhrasemePatternResult result = pattern.match(sentence, group, previousResult);
 
         if (result == null || !result.isMatched()) {
-            return new PhrasemesCandidate();
+            return new PhrasemeCandidate();
         }
 
 
-        return new PhrasemesCandidate(phraseme, result);
+        return new PhrasemeCandidate(phraseme, result);
     }
 
 }

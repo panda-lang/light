@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.language.interpreter.pattern.phraseme;
+package org.panda_lang.light.language.interpreter.pattern;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
 import org.panda_lang.light.language.interpreter.parser.phrase.Phrasemes;
-import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesCandidate;
+import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemeCandidate;
 import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesGroup;
-import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
-import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.processed.ProcessedValue;
+import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
+import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.ProcessedValue;
+import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePattern;
+import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePatternResult;
 
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class PhrasemeMatcherTest {
         PhrasemesGroup group = new PhrasemesGroup();
         group.importPhrasemes(phrasemes);
 
-        PhrasemesCandidate candidate = group.find("add \"abc\" to \"def\"", null);
+        PhrasemeCandidate candidate = group.find("add \"abc\" to \"def\"", null);
         Assertions.assertTrue(candidate.isMatched());
 
         Phraseme matchedPhraseme = candidate.getPhraseme();

@@ -29,16 +29,16 @@ public class PhrasemesGroup {
         group.add(phrasemes);
     }
 
-    public PhrasemesCandidate find(String sentence, @Nullable PhrasemesCandidate previousResult) {
+    public PhrasemeCandidate find(String sentence, @Nullable PhrasemeCandidate previousResult) {
         for (Phrasemes phrasemes : group) {
-            PhrasemesCandidate candidate = phrasemes.find(this, sentence, previousResult);
+            PhrasemeCandidate candidate = phrasemes.find(this, sentence, previousResult);
 
             if (candidate.isMatched()) {
                 return candidate;
             }
         }
 
-        return new PhrasemesCandidate();
+        return new PhrasemeCandidate();
     }
 
     public Collection<? extends Phrasemes> getPhrasemes() {

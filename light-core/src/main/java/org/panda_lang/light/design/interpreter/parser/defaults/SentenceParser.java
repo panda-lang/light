@@ -22,10 +22,8 @@ import org.panda_lang.panda.framework.design.interpreter.parser.*;
 
 public class SentenceParser implements Parser {
 
-    public Statement parse(SentenceRepresentation representation) {
+    public Statement parse(ParserData data, SentenceRepresentation representation) {
         String sentenceSource = representation.getTokenValue();
-
-
 
         throw new RuntimeException("Not implemented");
     }

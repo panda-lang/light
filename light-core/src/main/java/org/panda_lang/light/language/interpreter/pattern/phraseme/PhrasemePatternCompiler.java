@@ -17,7 +17,7 @@
 package org.panda_lang.light.language.interpreter.pattern.phraseme;
 
 import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
-import org.panda_lang.light.language.interpreter.pattern.lexical.LexicalPattern;
+import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 
 public class PhrasemePatternCompiler {
 

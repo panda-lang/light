@@ -18,10 +18,10 @@ package org.panda_lang.light.language.interpreter.pattern.phraseme;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
-import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesCandidate;
+import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemeCandidate;
 import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesGroup;
-import org.panda_lang.light.language.interpreter.pattern.lexical.LexicalPattern;
-import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
+import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
+import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
 public class PhrasemePattern {
 
@@ -37,7 +37,7 @@ public class PhrasemePattern {
         return new PhrasemePatternBuilder();
     }
 
-    public PhrasemePatternResult match(String sentence, PhrasemesGroup group, @Nullable PhrasemesCandidate previousResult) {
+    public PhrasemePatternResult match(String sentence, PhrasemesGroup group, @Nullable PhrasemeCandidate previousResult) {
         PhrasemeExtractor extractor = new PhrasemeExtractor(this, group, previousResult);
         LexicalExtractorResult<Phraseme> result = lexicalPattern.extract(extractor, sentence);
 

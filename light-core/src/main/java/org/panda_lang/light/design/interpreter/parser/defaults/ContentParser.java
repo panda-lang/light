@@ -38,7 +38,7 @@ public class ContentParser implements UnifiedParser {
             TokenRepresentation phrase = source.read();
 
             if (phrase instanceof SentenceRepresentation) {
-                Statement statement = sentenceParser.parse((SentenceRepresentation) phrase);
+                Statement statement = sentenceParser.parse(data.fork(), (SentenceRepresentation) phrase);
 
                 if (statement != null) {
                     scope.addStatement(statement);

@@ -19,23 +19,23 @@ package org.panda_lang.light.language.interpreter.parser.phrase;
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.language.interpreter.pattern.phraseme.PhrasemePatternResult;
 
-public class PhrasemesCandidate {
+public class PhrasemeCandidate {
 
     private final boolean matched;
     private Phraseme phraseme;
     private PhrasemePatternResult patternResult;
 
-    protected PhrasemesCandidate(boolean matched) {
+    protected PhrasemeCandidate(boolean matched) {
         this.matched = matched;
     }
 
-    public PhrasemesCandidate(Phraseme phraseme, PhrasemePatternResult patternResult) {
+    public PhrasemeCandidate(Phraseme phraseme, PhrasemePatternResult patternResult) {
         this(true);
         this.phraseme = phraseme;
         this.patternResult = patternResult;
     }
 
-    public PhrasemesCandidate() {
+    public PhrasemeCandidate() {
         this(false);
     }
 
