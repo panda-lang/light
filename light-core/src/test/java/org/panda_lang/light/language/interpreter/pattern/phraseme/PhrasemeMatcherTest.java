@@ -22,19 +22,21 @@ import org.panda_lang.light.language.interpreter.parser.phrase.Phraseme;
 import org.panda_lang.light.language.interpreter.parser.phrase.Phrasemes;
 import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesCandidate;
 import org.panda_lang.light.language.interpreter.parser.phrase.PhrasemesGroup;
+import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
+import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.processed.ProcessedValue;
+
+import java.util.List;
 
 public class PhrasemeMatcherTest {
 
     @Test
     public void testPhrasemePattern() {
+        Phraseme fakePhraseme = new Phraseme(null, null);
+
         PhrasemePattern pattern = PhrasemePattern.builder()
                 .compile("add <string> to <string>")
-                .setWildcardProcessor((group, wildcard, previousCandidate) -> {
-                    // Fake phraseme
-                    return new Phraseme(null, null);
-                })
+                .setWildcardProcessor((group, wildcard, previousCandidate) -> fakePhraseme)
                 .build();
-
         Phraseme phraseme = new Phraseme(pattern, branch -> System.out.println("D:"));
 
         Phrasemes phrasemes = new Phrasemes();
@@ -44,11 +46,24 @@ public class PhrasemeMatcherTest {
         group.importPhrasemes(phrasemes);
 
         PhrasemesCandidate candidate = group.find("add \"abc\" to \"def\"", null);
-        Phraseme matchedPhraseme = candidate.getPhraseme();
-
         Assertions.assertTrue(candidate.isMatched());
+
+        Phraseme matchedPhraseme = candidate.getPhraseme();
         Assertions.assertNotNull(matchedPhraseme);
         Assertions.assertEquals(phraseme, matchedPhraseme);
+
+        PhrasemePatternResult result = candidate.getPatternResult();
+        Assertions.assertNotNull(result);
+
+        LexicalExtractorResult<Phraseme> originalResult = result.getLexicalResult();
+        Assertions.assertTrue(originalResult.isMatched());
+
+        List<ProcessedValue<Phraseme>> processedValues = originalResult.getProcessedValues();
+        Assertions.assertNotNull(processedValues);
+        Assertions.assertEquals(2, processedValues.size());
+
+        Assertions.assertEquals(fakePhraseme, processedValues.get(0).getValue());
+        Assertions.assertEquals(fakePhraseme, processedValues.get(1).getValue());
 
         matchedPhraseme.execute(null);
     }

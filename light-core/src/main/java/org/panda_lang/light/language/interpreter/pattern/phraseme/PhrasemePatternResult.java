@@ -22,7 +22,7 @@ import org.panda_lang.light.language.interpreter.pattern.lexical.extractor.Lexic
 public class PhrasemePatternResult {
 
     private final boolean matched;
-    protected LexicalExtractorResult<Phraseme> lexicalResult;
+    private LexicalExtractorResult<Phraseme> lexicalResult;
 
     public PhrasemePatternResult(boolean matched) {
         this.matched = matched;
@@ -35,6 +35,10 @@ public class PhrasemePatternResult {
 
     public boolean isMatched() {
         return matched;
+    }
+
+    public LexicalExtractorResult<Phraseme> getLexicalResult() {
+        return lexicalResult;
     }
 
 }
