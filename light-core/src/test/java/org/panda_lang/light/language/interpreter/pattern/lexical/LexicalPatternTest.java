@@ -27,7 +27,7 @@ public class LexicalPatternTest {
                 .compile("(send msg:[message] wildcard:* 3:to (console|terminalIdentifier:terminal[ ][screen *])|rand)")
                 .build();
 
-        LexicalExtractorResult<String> result = pattern.extract("send 'test' to terminalscreen X11");
+        LexicalExtractorResult<String> result = pattern.extract("send 'test' to terminal screen X11");
 
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result.isMatched());
