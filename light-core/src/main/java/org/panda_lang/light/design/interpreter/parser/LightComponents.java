@@ -16,11 +16,14 @@
 
 package org.panda_lang.light.design.interpreter.parser;
 
-import org.panda_lang.light.design.interpreter.*;
-import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemesGroup;
+import org.panda_lang.light.design.interpreter.LightInterpreter;
+import org.panda_lang.panda.framework.design.interpreter.parser.component.Component;
 
 public class LightComponents {
 
     public static final Component<LightInterpreter> INTERPRETER = Component.of("light-interpreter", LightInterpreter.class);
+
+    public static final Component<PhrasemesGroup> PHRASEMES = Component.of("light-phrasemes", PhrasemesGroup.class);
 
 }

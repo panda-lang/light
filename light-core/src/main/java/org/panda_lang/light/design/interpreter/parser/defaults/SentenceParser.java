@@ -16,18 +16,40 @@
 
 package org.panda_lang.light.design.interpreter.parser.defaults;
 
-import org.panda_lang.light.design.interpreter.token.*;
-import org.panda_lang.panda.framework.design.architecture.statement.*;
-import org.panda_lang.panda.framework.design.interpreter.parser.*;
+import org.panda_lang.light.design.architecture.phraseme.Phraseme;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemeCandidate;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemesGroup;
+import org.panda_lang.light.design.interpreter.parser.LightComponents;
+import org.panda_lang.light.design.interpreter.token.SentenceRepresentation;
+import org.panda_lang.panda.framework.design.architecture.statement.Statement;
+import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
+import org.panda_lang.panda.framework.design.interpreter.parser.ParserData;
+import org.panda_lang.panda.framework.language.interpreter.parser.PandaParserFailure;
 
 public class SentenceParser implements Parser {
 
-    public Statement parse(ParserData data, SentenceRepresentation representation) {
-        String sentenceSource = representation.getTokenValue();
+    public Statement parse(ParserData data, SentenceRepresentation sentenceRepresentation) {
+        String sentence = sentenceRepresentation.getTokenValue();
 
+        PhrasemesGroup phrasemes = data.getComponent(LightComponents.PHRASEMES);
+        PhrasemeCandidate candidate = null;
 
+        while (true) {
+            candidate = phrasemes.find(sentence, candidate);
 
-        throw new RuntimeException("Not implemented");
+            if (!candidate.isMatched()) {
+                break;
+            }
+
+            break;
+        }
+
+        if (!candidate.isMatched()) {
+            throw new PandaParserFailure("Unknown sentence", data);
+        }
+
+        Phraseme phraseme = candidate.getPhraseme();
+        return null;
     }
 
 }
