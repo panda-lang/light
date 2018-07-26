@@ -75,15 +75,7 @@ Latest build of Light. Remember, API is not stable yet :o:
 <dependency>
     <groupId>org.panda_lang</groupId>
     <artifactId>light</artifactId>
-    <version>indev-0.0.1-SNAPSHOT</version>
-</dependency>
-```
-Latest build of LightMC:
-```xml
-<dependency>
-    <groupId>net.dzikoysk</groupId>
-    <artifactId>lightmc</artifactId>
-    <version>indev-0.0.1-SNAPSHOT</version>
+    <version>indev-0.4.0</version>
 </dependency>
 ```
 The latest build of the previous edition. Remember, this is deprecated!
@@ -98,7 +90,7 @@ Repository: https://repo.panda-lang.org/
 ```xml
 <repositories>
     <repository>
-        <id>panda-repo</id>
+        <id>panda-repository</id>
         <name>Panda Repository</name>
         <url>https://repo.panda-lang.org/</url>
     </repository>
