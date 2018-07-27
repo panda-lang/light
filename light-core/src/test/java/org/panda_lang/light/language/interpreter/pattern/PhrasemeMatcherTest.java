@@ -18,10 +18,7 @@ package org.panda_lang.light.language.interpreter.pattern;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.panda_lang.light.design.architecture.phraseme.Phraseme;
-import org.panda_lang.light.design.architecture.phraseme.Phrasemes;
-import org.panda_lang.light.design.architecture.phraseme.PhrasemeCandidate;
-import org.panda_lang.light.design.architecture.phraseme.PhrasemesGroup;
+import org.panda_lang.light.design.architecture.phraseme.*;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.ProcessedValue;
 import org.panda_lang.light.design.interpreter.pattern.phraseme.PhrasemePattern;
@@ -39,10 +36,12 @@ public class PhrasemeMatcherTest {
                 .compile("add <string> to <string>")
                 .setWildcardProcessor((group, wildcard, previousCandidate) -> fakePhraseme)
                 .build();
-        Phraseme phraseme = new Phraseme(pattern, branch -> System.out.println("D:"));
+
+        Phraseme phraseme = new Phraseme(null, branch -> System.out.println("D:"));
+        PhrasemeRepresentation representation = new PhrasemeRepresentation(pattern, phraseme);
 
         Phrasemes phrasemes = new Phrasemes();
-        phrasemes.registerPhraseme(phraseme);
+        phrasemes.registerPhraseme(representation);
 
         PhrasemesGroup group = new PhrasemesGroup();
         group.importPhrasemes(phrasemes);

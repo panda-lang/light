@@ -25,15 +25,15 @@ import java.util.HashSet;
 
 public class Phrasemes {
 
-    private final Collection<Phraseme> phrasemes = new HashSet<>();
+    private final Collection<PhrasemeRepresentation> phrasemeRepresentations = new HashSet<>();
 
-    public void registerPhraseme(Phraseme phraseme) {
-        phrasemes.add(phraseme);
+    public void registerPhraseme(PhrasemeRepresentation phraseme) {
+        phrasemeRepresentations.add(phraseme);
     }
 
     public PhrasemeCandidate find(PhrasemesGroup group, String sentence, @Nullable PhrasemeCandidate previousResult) {
-        for (Phraseme phraseme : phrasemes) {
-            PhrasemeCandidate candidate = this.match(phraseme, sentence, group, previousResult);
+        for (PhrasemeRepresentation representation : phrasemeRepresentations) {
+            PhrasemeCandidate candidate = this.match(representation, sentence, group, previousResult);
 
             if (candidate.isMatched()) {
                 return candidate;
@@ -43,8 +43,8 @@ public class Phrasemes {
         return new PhrasemeCandidate();
     }
 
-    private PhrasemeCandidate match(Phraseme phraseme, String sentence, PhrasemesGroup group, @Nullable PhrasemeCandidate previousResult) {
-        PhrasemePattern pattern = phraseme.getPattern();
+    private PhrasemeCandidate match(PhrasemeRepresentation representation, String sentence, PhrasemesGroup group, @Nullable PhrasemeCandidate previousResult) {
+        PhrasemePattern pattern = representation.getPattern();
         PhrasemePatternResult result = pattern.match(sentence, group, previousResult);
 
         if (result == null || !result.isMatched()) {
@@ -52,7 +52,7 @@ public class Phrasemes {
         }
 
 
-        return new PhrasemeCandidate(phraseme, result);
+        return new PhrasemeCandidate(representation.getPhraseme(), result);
     }
 
 }

@@ -16,29 +16,24 @@
 
 package org.panda_lang.light.design.architecture.phraseme;
 
-import org.panda_lang.light.design.architecture.type.Type;
-import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
+import org.panda_lang.light.design.interpreter.pattern.phraseme.PhrasemePattern;
 
-public class Phraseme {
+public class PhrasemeRepresentation {
 
-    private final PhrasemeCallback callback;
-    private final Type returnType;
+    private final PhrasemePattern pattern;
+    private final Phraseme phraseme;
 
-    public Phraseme(Type returnType, PhrasemeCallback callback) {
-        this.callback = callback;
-        this.returnType = returnType;
+    public PhrasemeRepresentation(PhrasemePattern pattern, Phraseme phraseme) {
+        this.pattern = pattern;
+        this.phraseme = phraseme;
     }
 
-    public void execute(ExecutableBranch branch) {
-        callback.execute(branch);
+    public Phraseme getPhraseme() {
+        return phraseme;
     }
 
-    public PhrasemeCallback getCallback() {
-        return callback;
-    }
-
-    public Type getReturnType() {
-        return returnType;
+    public PhrasemePattern getPattern() {
+        return pattern;
     }
 
 }
