@@ -17,12 +17,13 @@
 package org.panda_lang.light.design.interpreter.pattern.phraseme;
 
 import org.panda_lang.light.design.architecture.phraseme.Phraseme;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemeRepresentation;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
 public class PhrasemePatternBuilder {
 
-    private LexicalPattern<Phraseme> pattern;
+    private LexicalPattern<PhrasemeRepresentation> pattern;
     private PhrasemeWildcardProcessor wildcardProcessor;
 
     public PhrasemePatternBuilder compile(String pattern) {
@@ -33,7 +34,7 @@ public class PhrasemePatternBuilder {
         return this;
     }
 
-    public PhrasemePatternBuilder setWildcardProcessor(WildcardProcessor<Phraseme> wildcardProcessor) {
+    public PhrasemePatternBuilder setWildcardProcessor(WildcardProcessor<PhrasemeRepresentation> wildcardProcessor) {
         pattern.setWildcardProcessor(wildcardProcessor);
         return this;
     }

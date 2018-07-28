@@ -16,19 +16,19 @@
 
 package org.panda_lang.light.design.interpreter.pattern.phraseme;
 
-import org.panda_lang.light.design.architecture.phraseme.Phraseme;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemeRepresentation;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
 public class PhrasemePatternResult {
 
     private final boolean matched;
-    private LexicalExtractorResult<Phraseme> lexicalResult;
+    private LexicalExtractorResult<PhrasemeRepresentation> lexicalResult;
 
     public PhrasemePatternResult(boolean matched) {
         this.matched = matched;
     }
 
-    public PhrasemePatternResult(LexicalExtractorResult<Phraseme> result) {
+    public PhrasemePatternResult(LexicalExtractorResult<PhrasemeRepresentation> result) {
         this.matched = result.isMatched();
         this.lexicalResult = result;
     }
@@ -37,7 +37,7 @@ public class PhrasemePatternResult {
         return matched;
     }
 
-    public LexicalExtractorResult<Phraseme> getLexicalResult() {
+    public LexicalExtractorResult<PhrasemeRepresentation> getLexicalResult() {
         return lexicalResult;
     }
 

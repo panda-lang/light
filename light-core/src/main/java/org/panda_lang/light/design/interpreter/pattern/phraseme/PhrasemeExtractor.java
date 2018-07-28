@@ -19,13 +19,14 @@ package org.panda_lang.light.design.interpreter.pattern.phraseme;
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.design.architecture.phraseme.Phraseme;
 import org.panda_lang.light.design.architecture.phraseme.PhrasemeCandidate;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemeRepresentation;
 import org.panda_lang.light.design.architecture.phraseme.PhrasemesGroup;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractor;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorWorker;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
-public class PhrasemeExtractor implements LexicalExtractor<Phraseme> {
+public class PhrasemeExtractor implements LexicalExtractor<PhrasemeRepresentation> {
 
     private final PhrasemePattern pattern;
     private final PhrasemesGroup group;
@@ -38,8 +39,8 @@ public class PhrasemeExtractor implements LexicalExtractor<Phraseme> {
     }
 
     @Override
-    public LexicalExtractorResult<Phraseme> extract(String phrase) {
-        WildcardProcessor<Phraseme> wildcardProcessor = null;
+    public LexicalExtractorResult<PhrasemeRepresentation> extract(String phrase) {
+        WildcardProcessor<PhrasemeRepresentation> wildcardProcessor = null;
 
         if (pattern.getWildcardProcessor() != null) {
             wildcardProcessor = wildcard -> pattern.getWildcardProcessor().handle(group, wildcard, previousCandidate);
@@ -49,7 +50,7 @@ public class PhrasemeExtractor implements LexicalExtractor<Phraseme> {
             wildcardProcessor = pattern.getLexicalPattern().getWildcardProcessor();
         }
 
-        LexicalExtractorWorker<Phraseme> extractorWorker = new LexicalExtractorWorker<>(wildcardProcessor);
+        LexicalExtractorWorker<PhrasemeRepresentation> extractorWorker = new LexicalExtractorWorker<>(wildcardProcessor);
         return extractorWorker.extract(pattern.getLexicalPattern().getModel(), phrase);
     }
 

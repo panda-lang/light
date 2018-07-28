@@ -16,8 +16,8 @@
 
 package org.panda_lang.light.design.interpreter.parser.defaults;
 
-import org.panda_lang.light.design.architecture.phraseme.Phraseme;
 import org.panda_lang.light.design.architecture.phraseme.PhrasemeCandidate;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemeRepresentation;
 import org.panda_lang.light.design.architecture.phraseme.PhrasemesGroup;
 import org.panda_lang.light.design.interpreter.parser.LightComponents;
 import org.panda_lang.light.design.interpreter.token.SentenceRepresentation;
@@ -41,6 +41,8 @@ public class SentenceParser implements Parser {
                 break;
             }
 
+
+
             break;
         }
 
@@ -48,7 +50,7 @@ public class SentenceParser implements Parser {
             throw new PandaParserFailure("Unknown sentence", data);
         }
 
-        Phraseme phraseme = candidate.getPhraseme();
+        PhrasemeRepresentation phraseme = candidate.getMatchedPhraseme();
         return null;
     }
 

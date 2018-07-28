@@ -16,25 +16,25 @@
 
 package org.panda_lang.light.design.interpreter.pattern.phraseme;
 
-import org.panda_lang.light.design.architecture.phraseme.Phraseme;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemeRepresentation;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 
 public class PhrasemePatternCompiler {
 
     private final String pattern;
-    private LexicalPattern<Phraseme> lexicalPattern;
+    private LexicalPattern<PhrasemeRepresentation> lexicalPattern;
 
     public PhrasemePatternCompiler(String pattern) {
         this.pattern = pattern;
     }
 
     public void compile() {
-        this.lexicalPattern = LexicalPattern.<Phraseme> builder()
+        this.lexicalPattern = LexicalPattern.<PhrasemeRepresentation> builder()
                 .compile(pattern)
                 .build();
     }
 
-    public LexicalPattern<Phraseme> getLexicalPattern() {
+    public LexicalPattern<PhrasemeRepresentation> getLexicalPattern() {
         return lexicalPattern;
     }
 

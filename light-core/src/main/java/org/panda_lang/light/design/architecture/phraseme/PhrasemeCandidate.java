@@ -22,16 +22,16 @@ import org.panda_lang.light.design.interpreter.pattern.phraseme.PhrasemePatternR
 public class PhrasemeCandidate {
 
     private final boolean matched;
-    private Phraseme phraseme;
+    private PhrasemeRepresentation matchedPhraseme;
     private PhrasemePatternResult patternResult;
 
     protected PhrasemeCandidate(boolean matched) {
         this.matched = matched;
     }
 
-    public PhrasemeCandidate(Phraseme phraseme, PhrasemePatternResult patternResult) {
+    public PhrasemeCandidate(PhrasemeRepresentation matchedPhraseme, PhrasemePatternResult patternResult) {
         this(true);
-        this.phraseme = phraseme;
+        this.matchedPhraseme = matchedPhraseme;
         this.patternResult = patternResult;
     }
 
@@ -47,8 +47,8 @@ public class PhrasemeCandidate {
         return patternResult;
     }
 
-    public @Nullable Phraseme getPhraseme() {
-        return phraseme;
+    public @Nullable PhrasemeRepresentation getMatchedPhraseme() {
+        return matchedPhraseme;
     }
 
 }

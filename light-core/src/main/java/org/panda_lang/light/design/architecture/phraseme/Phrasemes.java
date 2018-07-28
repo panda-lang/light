@@ -52,7 +52,7 @@ public class Phrasemes {
         }
 
 
-        return new PhrasemeCandidate(representation.getPhraseme(), result);
+        return new PhrasemeCandidate(representation, result);
     }
 
 }

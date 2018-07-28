@@ -19,16 +19,17 @@ package org.panda_lang.light.design.interpreter.pattern.phraseme;
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.design.architecture.phraseme.Phraseme;
 import org.panda_lang.light.design.architecture.phraseme.PhrasemeCandidate;
+import org.panda_lang.light.design.architecture.phraseme.PhrasemeRepresentation;
 import org.panda_lang.light.design.architecture.phraseme.PhrasemesGroup;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
 public class PhrasemePattern {
 
-    private final LexicalPattern<Phraseme> lexicalPattern;
+    private final LexicalPattern<PhrasemeRepresentation> lexicalPattern;
     private final @Nullable PhrasemeWildcardProcessor wildcardProcessor;
 
-    public PhrasemePattern(LexicalPattern<Phraseme> lexicalPattern, @Nullable PhrasemeWildcardProcessor wildcardProcessor) {
+    public PhrasemePattern(LexicalPattern<PhrasemeRepresentation> lexicalPattern, @Nullable PhrasemeWildcardProcessor wildcardProcessor) {
         this.lexicalPattern = lexicalPattern;
         this.wildcardProcessor = wildcardProcessor;
     }
@@ -39,7 +40,7 @@ public class PhrasemePattern {
 
     public PhrasemePatternResult match(String sentence, PhrasemesGroup group, @Nullable PhrasemeCandidate previousResult) {
         PhrasemeExtractor extractor = new PhrasemeExtractor(this, group, previousResult);
-        LexicalExtractorResult<Phraseme> result = lexicalPattern.extract(extractor, sentence);
+        LexicalExtractorResult<PhrasemeRepresentation> result = lexicalPattern.extract(extractor, sentence);
 
         return new PhrasemePatternResult(result);
     }
@@ -52,7 +53,7 @@ public class PhrasemePattern {
         return wildcardProcessor;
     }
 
-    public LexicalPattern<Phraseme> getLexicalPattern() {
+    public LexicalPattern<PhrasemeRepresentation> getLexicalPattern() {
         return lexicalPattern;
     }
 

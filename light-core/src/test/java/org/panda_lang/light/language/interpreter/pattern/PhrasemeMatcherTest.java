@@ -30,7 +30,7 @@ public class PhrasemeMatcherTest {
 
     @Test
     public void testPhrasemePattern() {
-        Phraseme fakePhraseme = new Phraseme(null, null);
+        PhrasemeRepresentation fakePhraseme = new PhrasemeRepresentation(null, new Phraseme(null, null));
 
         PhrasemePattern pattern = PhrasemePattern.builder()
                 .compile("add <string> to <string>")
@@ -49,24 +49,22 @@ public class PhrasemeMatcherTest {
         PhrasemeCandidate candidate = group.find("add \"abc\" to \"def\"", null);
         Assertions.assertTrue(candidate.isMatched());
 
-        Phraseme matchedPhraseme = candidate.getPhraseme();
+        PhrasemeRepresentation matchedPhraseme = candidate.getMatchedPhraseme();
         Assertions.assertNotNull(matchedPhraseme);
-        Assertions.assertEquals(phraseme, matchedPhraseme);
+        Assertions.assertEquals(representation, matchedPhraseme);
 
         PhrasemePatternResult result = candidate.getPatternResult();
         Assertions.assertNotNull(result);
 
-        LexicalExtractorResult<Phraseme> originalResult = result.getLexicalResult();
+        LexicalExtractorResult<PhrasemeRepresentation> originalResult = result.getLexicalResult();
         Assertions.assertTrue(originalResult.isMatched());
 
-        List<ProcessedValue<Phraseme>> processedValues = originalResult.getProcessedValues();
+        List<ProcessedValue<PhrasemeRepresentation>> processedValues = originalResult.getProcessedValues();
         Assertions.assertNotNull(processedValues);
         Assertions.assertEquals(2, processedValues.size());
 
         Assertions.assertEquals(fakePhraseme, processedValues.get(0).getValue());
         Assertions.assertEquals(fakePhraseme, processedValues.get(1).getValue());
-
-        matchedPhraseme.execute(null);
     }
 
 }
