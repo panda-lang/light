@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter;
+package org.panda_lang.light.language.interpreter;
 
 import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.design.architecture.LightApplication;
-import org.panda_lang.light.design.architecture.LightEnvironment;
-import org.panda_lang.light.design.interpreter.parser.defaults.ApplicationParser;
+import org.panda_lang.light.language.architecture.LightApplication;
+import org.panda_lang.light.language.architecture.LightEnvironment;
+import org.panda_lang.light.language.interpreter.parser.defaults.ApplicationParser;
 import org.panda_lang.panda.framework.design.interpreter.Interpretation;
 import org.panda_lang.panda.framework.design.interpreter.Interpreter;
 import org.panda_lang.panda.framework.design.interpreter.messenger.MessengerMessage;

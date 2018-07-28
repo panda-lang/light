@@ -17,7 +17,7 @@
 package org.panda_lang.light.design.interpreter.parser;
 
 import org.panda_lang.light.design.architecture.phraseme.PhrasemesGroup;
-import org.panda_lang.light.design.interpreter.LightInterpreter;
+import org.panda_lang.light.language.interpreter.LightInterpreter;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.Component;
 
 public class LightComponents {

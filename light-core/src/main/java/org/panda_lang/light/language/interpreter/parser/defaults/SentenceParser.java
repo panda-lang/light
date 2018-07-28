@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.parser.defaults;
+package org.panda_lang.light.language.interpreter.parser.defaults;
 
 import org.panda_lang.light.design.architecture.phraseme.Phraseme;
 import org.panda_lang.light.design.architecture.phraseme.PhrasemeCandidate;

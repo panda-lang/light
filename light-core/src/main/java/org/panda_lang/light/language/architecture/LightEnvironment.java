@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.architecture;
+package org.panda_lang.light.language.architecture;
 
 import org.panda_lang.light.*;
-import org.panda_lang.light.design.interpreter.*;
 import org.panda_lang.light.language.*;
+import org.panda_lang.light.language.interpreter.LightInterpreter;
 import org.panda_lang.panda.framework.design.architecture.*;
 import org.panda_lang.panda.framework.design.architecture.module.*;
 

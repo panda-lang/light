@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.architecture;
+package org.panda_lang.light.language.architecture;
 
 import org.panda_lang.light.LightCore;
 import org.panda_lang.panda.framework.design.architecture.Application;

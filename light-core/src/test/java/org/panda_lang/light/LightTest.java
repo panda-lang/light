@@ -17,7 +17,7 @@
 package org.panda_lang.light;
 
 import org.junit.jupiter.api.*;
-import org.panda_lang.light.design.architecture.*;
+import org.panda_lang.light.language.architecture.LightApplication;
 import org.panda_lang.panda.utilities.commons.*;
 
 public  class LightTest {

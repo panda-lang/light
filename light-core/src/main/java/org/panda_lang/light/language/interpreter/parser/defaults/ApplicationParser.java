@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.design.interpreter.parser.defaults;
+package org.panda_lang.light.language.interpreter.parser.defaults;
 
-import org.panda_lang.light.design.architecture.*;
 import org.panda_lang.light.design.architecture.phraseme.PhrasemesGroup;
 import org.panda_lang.light.design.interpreter.lexer.*;
 import org.panda_lang.light.design.interpreter.parser.LightComponents;
 import org.panda_lang.light.design.interpreter.source.*;
+import org.panda_lang.light.language.architecture.LightApplication;
+import org.panda_lang.light.language.architecture.LightScript;
 import org.panda_lang.panda.design.interpreter.parser.*;
 import org.panda_lang.panda.design.interpreter.parser.generation.*;
 import org.panda_lang.panda.framework.design.architecture.*;
