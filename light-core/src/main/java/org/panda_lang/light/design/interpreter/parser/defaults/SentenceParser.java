@@ -16,14 +16,17 @@
 
 package org.panda_lang.light.design.interpreter.parser.defaults;
 
+import org.panda_lang.light.design.architecture.phraseme.Phraseme;
 import org.panda_lang.light.design.architecture.phraseme.PhrasemeCandidate;
 import org.panda_lang.light.design.architecture.phraseme.PhrasemeRepresentation;
 import org.panda_lang.light.design.architecture.phraseme.PhrasemesGroup;
 import org.panda_lang.light.design.interpreter.parser.LightComponents;
 import org.panda_lang.light.design.interpreter.token.SentenceRepresentation;
+import org.panda_lang.panda.framework.design.architecture.dynamic.ExecutableStatement;
 import org.panda_lang.panda.framework.design.architecture.statement.Statement;
 import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
 import org.panda_lang.panda.framework.design.interpreter.parser.ParserData;
+import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 import org.panda_lang.panda.framework.language.interpreter.parser.PandaParserFailure;
 
 public class SentenceParser implements Parser {
@@ -32,26 +35,36 @@ public class SentenceParser implements Parser {
         String sentence = sentenceRepresentation.getTokenValue();
 
         PhrasemesGroup phrasemes = data.getComponent(LightComponents.PHRASEMES);
-        PhrasemeCandidate candidate = null;
+        PhrasemeCandidate candidate = phrasemes.find(sentence, null);
 
-        while (true) {
-            candidate = phrasemes.find(sentence, candidate);
-
-            if (!candidate.isMatched()) {
+        while (candidate != null) {
+            if (!candidate.isMatched() || candidate.isDefinite()) {
                 break;
             }
 
+            PhrasemeCandidate currentCandidate = phrasemes.find(sentence, candidate);
 
+            if (candidate.equals(currentCandidate)) {
+                candidate = null;
+                break;
+            }
 
-            break;
+            candidate = currentCandidate;
         }
 
-        if (!candidate.isMatched()) {
+        if (candidate == null || !candidate.isMatched()) {
             throw new PandaParserFailure("Unknown sentence", data);
         }
 
-        PhrasemeRepresentation phraseme = candidate.getMatchedPhraseme();
-        return null;
+        PhrasemeRepresentation matchedPhraseme = candidate.getMatchedPhraseme();
+        Phraseme phraseme = matchedPhraseme.getPhraseme();
+
+        return new ExecutableStatement() {
+            @Override
+            public void execute(ExecutableBranch branch) {
+                phraseme.execute(branch);
+            }
+        };
     }
 
 }

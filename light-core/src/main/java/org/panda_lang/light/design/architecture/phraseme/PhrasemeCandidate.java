@@ -16,7 +16,6 @@
 
 package org.panda_lang.light.design.architecture.phraseme;
 
-import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.design.interpreter.pattern.phraseme.PhrasemePatternResult;
 
 public class PhrasemeCandidate {
@@ -24,6 +23,7 @@ public class PhrasemeCandidate {
     private final boolean matched;
     private PhrasemeRepresentation matchedPhraseme;
     private PhrasemePatternResult patternResult;
+    private boolean definite;
 
     protected PhrasemeCandidate(boolean matched) {
         this.matched = matched;
@@ -39,15 +39,19 @@ public class PhrasemeCandidate {
         this(false);
     }
 
+    public boolean isDefinite() {
+        return definite;
+    }
+
     public boolean isMatched() {
         return matched;
     }
 
-    public @Nullable PhrasemePatternResult getPatternResult() {
+    public PhrasemePatternResult getPatternResult() {
         return patternResult;
     }
 
-    public @Nullable PhrasemeRepresentation getMatchedPhraseme() {
+    public PhrasemeRepresentation getMatchedPhraseme() {
         return matchedPhraseme;
     }
 

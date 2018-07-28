@@ -51,7 +51,6 @@ public class Phrasemes {
             return new PhrasemeCandidate();
         }
 
-
         return new PhrasemeCandidate(representation, result);
     }
 
