@@ -23,7 +23,7 @@ public class PhrasemeCandidate {
     private final boolean matched;
     private PhrasemeRepresentation matchedPhraseme;
     private PhrasemePatternResult patternResult;
-    private boolean definite;
+    private boolean definite = true; // TODO: lookup
 
     protected PhrasemeCandidate(boolean matched) {
         this.matched = matched;

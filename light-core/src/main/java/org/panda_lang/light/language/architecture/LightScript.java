@@ -16,39 +16,12 @@
 
 package org.panda_lang.light.language.architecture;
 
-import org.panda_lang.panda.framework.design.architecture.Script;
-import org.panda_lang.panda.framework.design.architecture.statement.Statement;
+import org.panda_lang.panda.framework.language.architecture.AbstractScript;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class LightScript implements Script {
-
-    private final String scriptName;
-    private final List<Statement> statements;
+public class LightScript extends AbstractScript {
 
     public LightScript(String scriptName) {
-        this.scriptName = scriptName;
-        this.statements = new ArrayList<>();
-    }
-
-    @Override
-    public <T extends Statement> List<T> select(Class<? extends T> statementClass) {
-        throw new RuntimeException("Not implemented");
-    }
-
-    public void addStatement(Statement statement) {
-        this.statements.add(statement);
-    }
-
-    @Override
-    public List<Statement> getStatements() {
-        return statements;
-    }
-
-    @Override
-    public String getScriptName() {
-        return scriptName;
+        super(scriptName);
     }
 
 }

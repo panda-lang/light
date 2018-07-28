@@ -16,15 +16,18 @@
 
 package org.panda_lang.light.language.interpreter.parser.scope.main;
 
-import org.panda_lang.panda.framework.design.architecture.dynamic.*;
-import org.panda_lang.panda.framework.design.runtime.*;
-import org.panda_lang.panda.framework.language.architecture.statement.*;
+import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
+import org.panda_lang.panda.framework.language.architecture.dynamic.AbstractScopeInstance;
 
-public class MainScope extends AbstractScope {
+public class MainInstance extends AbstractScopeInstance<MainScope> {
+
+    protected MainInstance(MainScope scope) {
+        super(scope);
+    }
 
     @Override
-    public ScopeInstance createInstance(ExecutableBranch branch) {
-        return new MainInstance(this);
+    public void execute(ExecutableBranch branch) {
+        branch.call(super.getScope().getStatementCells());
     }
 
 }

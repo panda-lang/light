@@ -22,6 +22,7 @@ import org.panda_lang.light.design.interpreter.parser.LightComponents;
 import org.panda_lang.light.design.interpreter.source.*;
 import org.panda_lang.light.language.architecture.LightApplication;
 import org.panda_lang.light.language.architecture.LightScript;
+import org.panda_lang.light.language.runtime.DefaultLightPhrasemes;
 import org.panda_lang.panda.design.interpreter.parser.*;
 import org.panda_lang.panda.design.interpreter.parser.generation.*;
 import org.panda_lang.panda.framework.design.architecture.*;
@@ -79,7 +80,10 @@ public class ApplicationParser implements Parser {
                 delegatedInfo.setComponent(UniversalComponents.SOURCE, tokenizedSource);
                 delegatedInfo.setComponent(UniversalComponents.SOURCE_STREAM, stream);
                 delegatedInfo.setComponent(UniversalComponents.SCRIPT, script);
-                delegatedInfo.setComponent(LightComponents.PHRASEMES, new PhrasemesGroup());
+
+                PhrasemesGroup defaultPhrasemes = new PhrasemesGroup();
+                defaultPhrasemes.importPhrasemes(new DefaultLightPhrasemes().generate());
+                delegatedInfo.setComponent(LightComponents.PHRASEMES, defaultPhrasemes);
 
                 OverallParser parser = new OverallParser(delegatedInfo);
                 application.addScript(script);

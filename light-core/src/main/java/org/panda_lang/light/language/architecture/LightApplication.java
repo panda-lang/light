@@ -17,8 +17,12 @@
 package org.panda_lang.light.language.architecture;
 
 import org.panda_lang.light.LightCore;
+import org.panda_lang.light.language.interpreter.parser.scope.main.MainScope;
+import org.panda_lang.panda.design.runtime.PandaExecutableProcess;
+import org.panda_lang.panda.design.runtime.PandaRuntimeException;
 import org.panda_lang.panda.framework.design.architecture.Application;
 import org.panda_lang.panda.framework.design.architecture.Script;
+import org.panda_lang.panda.framework.design.runtime.ExecutableProcess;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,21 @@ public class LightApplication implements Application {
     @Override
     public void launch() {
         LightCore.getLogger().info("Launching Light application");
+
+        for (Script script : scripts) {
+            List<MainScope> mainScopes = script.select(MainScope.class);
+
+            if (mainScopes.size() == 0) {
+                throw new PandaRuntimeException("Main not found");
+            }
+
+            if (mainScopes.size() > 1) {
+                throw new PandaRuntimeException("Duplicated main section");
+            }
+
+            ExecutableProcess process = new PandaExecutableProcess(this, mainScopes.get(0));
+            process.execute();
+        }
 
         LightCore.getLogger().info("Process finished with exit code 0");
     }
