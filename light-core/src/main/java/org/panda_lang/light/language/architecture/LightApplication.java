@@ -18,11 +18,11 @@ package org.panda_lang.light.language.architecture;
 
 import org.panda_lang.light.LightCore;
 import org.panda_lang.light.language.interpreter.parser.scope.main.MainScope;
-import org.panda_lang.panda.framework.design.runtime.PandaExecutableProcess;
-import org.panda_lang.panda.framework.design.runtime.PandaRuntimeException;
 import org.panda_lang.panda.framework.design.architecture.Application;
 import org.panda_lang.panda.framework.design.architecture.Script;
 import org.panda_lang.panda.framework.design.runtime.ExecutableProcess;
+import org.panda_lang.panda.framework.language.runtime.PandaExecutableProcess;
+import org.panda_lang.panda.framework.language.runtime.PandaRuntimeException;
 
 import java.util.ArrayList;
 import java.util.List;
