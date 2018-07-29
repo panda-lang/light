@@ -14,31 +14,16 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.framework.design.interpreter.parser;
 
-import org.panda_lang.light.framework.language.LightLanguage;
-import org.slf4j.Logger;
+import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemesGroup;
+import org.panda_lang.light.framework.language.interpreter.LightInterpreter;
+import org.panda_lang.panda.framework.design.interpreter.parser.component.Component;
 
-public class LightCore {
+public class LightComponents {
 
-    private final LightLanguage language;
-    private final LightLoader loader;
+    public static final Component<LightInterpreter> INTERPRETER = Component.of("light-interpreter", LightInterpreter.class);
 
-    public LightCore() {
-        this.language = new LightLanguage();
-        this.loader = new LightLoader(this);
-    }
-
-    public LightLoader getLoader() {
-        return loader;
-    }
-
-    public LightLanguage getLanguage() {
-        return language;
-    }
-
-    public static Logger getLogger() {
-        return LightLogger.LIGHT_LOGGER;
-    }
+    public static final Component<PhrasemesGroup> PHRASEMES = Component.of("light-phrasemes", PhrasemesGroup.class);
 
 }

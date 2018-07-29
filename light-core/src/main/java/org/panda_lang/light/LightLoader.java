@@ -16,9 +16,9 @@
 
 package org.panda_lang.light;
 
-import org.panda_lang.light.language.architecture.LightApplication;
-import org.panda_lang.light.language.architecture.LightEnvironment;
-import org.panda_lang.light.language.interpreter.LightInterpreter;
+import org.panda_lang.light.framework.language.architecture.LightApplication;
+import org.panda_lang.light.framework.language.architecture.LightEnvironment;
+import org.panda_lang.light.framework.language.interpreter.LightInterpreter;
 import org.panda_lang.panda.framework.PandaFrameworkException;
 import org.panda_lang.panda.framework.design.interpreter.source.SourceProvider;
 import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;

@@ -14,31 +14,20 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.framework.language.interpreter.parser.phrase;
 
-import org.panda_lang.light.framework.language.LightLanguage;
-import org.slf4j.Logger;
+import java.io.*;
 
-public class LightCore {
+public class SendPhraseme {
 
-    private final LightLanguage language;
-    private final LightLoader loader;
+    @PhrasemeRepresentation(phrase = "send <message> to (1: <player>|2: <file>)")
+    public void send(String message, @Parameter(id = 1) Object player, @Parameter(id = 2) String console) {
 
-    public LightCore() {
-        this.language = new LightLanguage();
-        this.loader = new LightLoader(this);
     }
 
-    public LightLoader getLoader() {
-        return loader;
-    }
+    @PhrasemeRepresentation(phrase = "send <message> to <file>")
+    public void send(String message, File file) {
 
-    public LightLanguage getLanguage() {
-        return language;
-    }
-
-    public static Logger getLogger() {
-        return LightLogger.LIGHT_LOGGER;
     }
 
 }

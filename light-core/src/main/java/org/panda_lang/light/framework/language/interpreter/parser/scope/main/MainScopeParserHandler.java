@@ -14,31 +14,16 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.framework.language.interpreter.parser.scope.main;
 
-import org.panda_lang.light.framework.language.LightLanguage;
-import org.slf4j.Logger;
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.*;
+import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
 
-public class LightCore {
+public class MainScopeParserHandler implements ParserHandler {
 
-    private final LightLanguage language;
-    private final LightLoader loader;
-
-    public LightCore() {
-        this.language = new LightLanguage();
-        this.loader = new LightLoader(this);
-    }
-
-    public LightLoader getLoader() {
-        return loader;
-    }
-
-    public LightLanguage getLanguage() {
-        return language;
-    }
-
-    public static Logger getLogger() {
-        return LightLogger.LIGHT_LOGGER;
+    @Override
+    public boolean handle(TokenReader reader) {
+        return "main".equals(reader.read().getTokenValue());
     }
 
 }

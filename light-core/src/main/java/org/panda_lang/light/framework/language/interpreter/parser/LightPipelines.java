@@ -14,31 +14,14 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.framework.language.interpreter.parser;
 
-import org.panda_lang.light.framework.language.LightLanguage;
-import org.slf4j.Logger;
+public class LightPipelines {
 
-public class LightCore {
+    public static final String OVERALL = "light-overall";
 
-    private final LightLanguage language;
-    private final LightLoader loader;
+    public static final String SCOPE = "light-scope";
 
-    public LightCore() {
-        this.language = new LightLanguage();
-        this.loader = new LightLoader(this);
-    }
-
-    public LightLoader getLoader() {
-        return loader;
-    }
-
-    public LightLanguage getLanguage() {
-        return language;
-    }
-
-    public static Logger getLogger() {
-        return LightLogger.LIGHT_LOGGER;
-    }
+    public static final String BLOCK = "light-block";
 
 }

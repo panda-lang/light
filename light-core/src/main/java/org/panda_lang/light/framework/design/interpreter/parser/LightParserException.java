@@ -14,31 +14,26 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.framework.design.interpreter.parser;
 
-import org.panda_lang.light.framework.language.LightLanguage;
-import org.slf4j.Logger;
+import org.panda_lang.light.LightException;
 
-public class LightCore {
+public class LightParserException extends LightException {
 
-    private final LightLanguage language;
-    private final LightLoader loader;
-
-    public LightCore() {
-        this.language = new LightLanguage();
-        this.loader = new LightLoader(this);
+    public LightParserException() {
+        super();
     }
 
-    public LightLoader getLoader() {
-        return loader;
+    public LightParserException(String message) {
+        super(message);
     }
 
-    public LightLanguage getLanguage() {
-        return language;
+    public LightParserException(String message, Throwable cause) {
+        super(message, cause);
     }
 
-    public static Logger getLogger() {
-        return LightLogger.LIGHT_LOGGER;
+    public LightParserException(Throwable cause) {
+        super(cause);
     }
 
 }

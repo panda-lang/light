@@ -14,31 +14,34 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.framework.design.architecture.value;
 
-import org.panda_lang.light.framework.language.LightLanguage;
-import org.slf4j.Logger;
+import org.panda_lang.light.framework.design.architecture.type.Type;
 
-public class LightCore {
+public class LightTypeValue implements TypeValue {
 
-    private final LightLanguage language;
-    private final LightLoader loader;
+    private final Type type;
+    private final Object value;
 
-    public LightCore() {
-        this.language = new LightLanguage();
-        this.loader = new LightLoader(this);
+    public LightTypeValue(Type type, Object value) {
+        this.type = type;
+        this.value = value;
     }
 
-    public LightLoader getLoader() {
-        return loader;
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T getValue() {
+        return (T) value;
     }
 
-    public LightLanguage getLanguage() {
-        return language;
+    @Override
+    public Object getObject() {
+        return value;
     }
 
-    public static Logger getLogger() {
-        return LightLogger.LIGHT_LOGGER;
+    @Override
+    public Type getType() {
+        return type;
     }
 
 }

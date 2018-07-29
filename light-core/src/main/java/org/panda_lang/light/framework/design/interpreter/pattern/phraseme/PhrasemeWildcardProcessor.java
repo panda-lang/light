@@ -14,31 +14,15 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.framework.design.interpreter.pattern.phraseme;
 
-import org.panda_lang.light.framework.language.LightLanguage;
-import org.slf4j.Logger;
+import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeCandidate;
+import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
+import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemesGroup;
 
-public class LightCore {
+public interface PhrasemeWildcardProcessor {
 
-    private final LightLanguage language;
-    private final LightLoader loader;
-
-    public LightCore() {
-        this.language = new LightLanguage();
-        this.loader = new LightLoader(this);
-    }
-
-    public LightLoader getLoader() {
-        return loader;
-    }
-
-    public LightLanguage getLanguage() {
-        return language;
-    }
-
-    public static Logger getLogger() {
-        return LightLogger.LIGHT_LOGGER;
-    }
+    PhrasemeRepresentation handle(PhrasemesGroup group, String wildcard, @Nullable PhrasemeCandidate previousCandidate);
 
 }

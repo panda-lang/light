@@ -14,31 +14,14 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.framework.language.architecture;
 
-import org.panda_lang.light.framework.language.LightLanguage;
-import org.slf4j.Logger;
+import org.panda_lang.panda.framework.language.architecture.AbstractScript;
 
-public class LightCore {
+public class LightScript extends AbstractScript {
 
-    private final LightLanguage language;
-    private final LightLoader loader;
-
-    public LightCore() {
-        this.language = new LightLanguage();
-        this.loader = new LightLoader(this);
-    }
-
-    public LightLoader getLoader() {
-        return loader;
-    }
-
-    public LightLanguage getLanguage() {
-        return language;
-    }
-
-    public static Logger getLogger() {
-        return LightLogger.LIGHT_LOGGER;
+    public LightScript(String scriptName) {
+        super(scriptName);
     }
 
 }

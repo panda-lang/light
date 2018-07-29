@@ -14,31 +14,17 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.framework.language.interpreter.parser.scope.main;
 
-import org.panda_lang.light.framework.language.LightLanguage;
-import org.slf4j.Logger;
+import org.panda_lang.panda.framework.design.architecture.dynamic.*;
+import org.panda_lang.panda.framework.design.runtime.*;
+import org.panda_lang.panda.framework.language.architecture.statement.*;
 
-public class LightCore {
+public class MainScope extends AbstractScope {
 
-    private final LightLanguage language;
-    private final LightLoader loader;
-
-    public LightCore() {
-        this.language = new LightLanguage();
-        this.loader = new LightLoader(this);
-    }
-
-    public LightLoader getLoader() {
-        return loader;
-    }
-
-    public LightLanguage getLanguage() {
-        return language;
-    }
-
-    public static Logger getLogger() {
-        return LightLogger.LIGHT_LOGGER;
+    @Override
+    public ScopeInstance createInstance(ExecutableBranch branch) {
+        return new MainInstance(this);
     }
 
 }

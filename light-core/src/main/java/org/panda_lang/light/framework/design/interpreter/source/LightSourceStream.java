@@ -14,31 +14,20 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light;
+package org.panda_lang.light.framework.design.interpreter.source;
 
-import org.panda_lang.light.framework.language.LightLanguage;
-import org.slf4j.Logger;
+import org.panda_lang.panda.framework.design.interpreter.token.*;
+import org.panda_lang.panda.framework.language.interpreter.token.*;
+import org.panda_lang.panda.framework.language.interpreter.token.distributor.PandaSourceStream;
 
-public class LightCore {
+public class LightSourceStream extends PandaSourceStream {
 
-    private final LightLanguage language;
-    private final LightLoader loader;
-
-    public LightCore() {
-        this.language = new LightLanguage();
-        this.loader = new LightLoader(this);
+    public LightSourceStream(TokenizedSource tokenizedSource) {
+        super(tokenizedSource);
     }
 
-    public LightLoader getLoader() {
-        return loader;
-    }
-
-    public LightLanguage getLanguage() {
-        return language;
-    }
-
-    public static Logger getLogger() {
-        return LightLogger.LIGHT_LOGGER;
+    public LightSourceStream(TokenRepresentation tokenRepresentation) {
+        super(new PandaTokenizedSource().addToken(tokenRepresentation));
     }
 
 }
