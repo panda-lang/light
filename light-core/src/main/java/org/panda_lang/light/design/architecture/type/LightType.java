@@ -16,7 +16,7 @@
 
 package org.panda_lang.light.design.architecture.type;
 
-import org.panda_lang.panda.design.architecture.prototype.PandaClassPrototype;
+import org.panda_lang.panda.framework.design.architecture.prototype.PandaClassPrototype;
 import org.panda_lang.panda.framework.design.architecture.module.Module;
 
 public class LightType extends PandaClassPrototype implements Type {

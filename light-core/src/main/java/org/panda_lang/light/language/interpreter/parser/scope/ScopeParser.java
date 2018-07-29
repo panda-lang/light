@@ -19,19 +19,18 @@ package org.panda_lang.light.language.interpreter.parser.scope;
 import org.panda_lang.light.language.interpreter.parser.defaults.*;
 import org.panda_lang.light.design.interpreter.source.*;
 import org.panda_lang.light.language.interpreter.parser.*;
-import org.panda_lang.panda.design.interpreter.parser.pipeline.registry.*;
-import org.panda_lang.panda.design.interpreter.token.*;
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.*;
+import org.panda_lang.panda.framework.design.interpreter.token.*;
 import org.panda_lang.panda.framework.design.architecture.*;
 import org.panda_lang.panda.framework.design.architecture.statement.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.*;
-import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.*;
 import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
 import org.panda_lang.panda.framework.language.interpreter.parser.*;
 import org.panda_lang.panda.framework.language.interpreter.pattern.abyss.*;
 import org.panda_lang.panda.framework.language.interpreter.pattern.abyss.redactor.*;
-import org.panda_lang.panda.language.interpreter.*;
+import org.panda_lang.panda.framework.language.interpreter.*;
 
 @ParserRegistration(target = UniversalPipelines.OVERALL, parserClass = ScopeParser.class, handlerClass = ScopeParserHandler.class)
 public class ScopeParser implements UnifiedParser {

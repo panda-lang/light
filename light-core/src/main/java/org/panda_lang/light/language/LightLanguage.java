@@ -18,7 +18,7 @@ package org.panda_lang.light.language;
 
 import org.panda_lang.light.LightCore;
 import org.panda_lang.light.LightException;
-import org.panda_lang.panda.design.interpreter.parser.pipeline.registry.ParserRegistrationLoader;
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.ParserRegistrationLoader;
 import org.panda_lang.panda.framework.design.interpreter.lexer.Syntax;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.PipelineRegistry;
 import org.panda_lang.panda.framework.language.Language;

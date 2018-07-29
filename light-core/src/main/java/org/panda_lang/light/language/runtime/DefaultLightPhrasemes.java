@@ -44,4 +44,5 @@ public class DefaultLightPhrasemes {
 
         return defaultPhrasemes;
     }
+
 }
