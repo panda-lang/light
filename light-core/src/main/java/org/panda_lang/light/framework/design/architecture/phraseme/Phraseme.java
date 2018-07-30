@@ -17,7 +17,7 @@
 package org.panda_lang.light.framework.design.architecture.phraseme;
 
 import org.panda_lang.light.framework.design.architecture.type.Type;
-import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
+import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 public class Phraseme {
 

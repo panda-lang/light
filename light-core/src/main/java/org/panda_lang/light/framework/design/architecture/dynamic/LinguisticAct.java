@@ -18,7 +18,7 @@ package org.panda_lang.light.framework.design.architecture.dynamic;
 
 import org.panda_lang.light.framework.design.architecture.value.TypeValue;
 import org.panda_lang.panda.framework.design.architecture.dynamic.StandaloneExecutable;
-import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
+import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 public interface LinguisticAct extends StandaloneExecutable {
 

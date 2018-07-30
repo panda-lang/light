@@ -16,7 +16,7 @@
 
 package org.panda_lang.light.framework.language.interpreter.token;
 
-import org.panda_lang.panda.framework.design.interpreter.lexer.Syntax;
+import org.panda_lang.panda.framework.design.interpreter.token.Syntax;
 import org.panda_lang.panda.framework.language.interpreter.token.defaults.keyword.*;
 import org.panda_lang.panda.framework.language.interpreter.token.defaults.literal.*;
 import org.panda_lang.panda.framework.language.interpreter.token.defaults.operator.*;

@@ -20,7 +20,7 @@ import org.panda_lang.light.LightCore;
 import org.panda_lang.light.framework.language.interpreter.parser.scope.main.MainScope;
 import org.panda_lang.panda.framework.design.architecture.Application;
 import org.panda_lang.panda.framework.design.architecture.Script;
-import org.panda_lang.panda.framework.design.runtime.ExecutableProcess;
+import org.panda_lang.panda.language.runtime.ExecutableProcess;
 import org.panda_lang.panda.framework.language.runtime.PandaExecutableProcess;
 import org.panda_lang.panda.framework.language.runtime.PandaRuntimeException;
 

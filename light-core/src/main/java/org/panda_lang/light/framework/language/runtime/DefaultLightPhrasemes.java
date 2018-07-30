@@ -21,7 +21,7 @@ import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeCallb
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
 import org.panda_lang.light.framework.design.architecture.phraseme.Phrasemes;
 import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.PhrasemePattern;
-import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
+import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 public class DefaultLightPhrasemes {
 

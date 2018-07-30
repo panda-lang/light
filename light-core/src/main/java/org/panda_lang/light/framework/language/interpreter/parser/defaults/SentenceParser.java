@@ -26,7 +26,7 @@ import org.panda_lang.panda.framework.design.architecture.dynamic.ExecutableStat
 import org.panda_lang.panda.framework.design.architecture.statement.Statement;
 import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
 import org.panda_lang.panda.framework.design.interpreter.parser.ParserData;
-import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
+import org.panda_lang.panda.language.runtime.ExecutableBranch;
 import org.panda_lang.panda.framework.language.interpreter.parser.PandaParserFailure;
 
 public class SentenceParser implements Parser {
