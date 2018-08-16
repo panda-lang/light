@@ -39,7 +39,6 @@ public  class LightTest {
 
     static {
         LoggingUtils.skipJansi();
-        LoggingUtils.muteReflections();
     }
 
 }

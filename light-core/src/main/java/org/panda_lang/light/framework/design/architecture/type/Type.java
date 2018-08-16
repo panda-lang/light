@@ -18,6 +18,14 @@ package org.panda_lang.light.framework.design.architecture.type;
 
 import org.panda_lang.panda.framework.design.architecture.prototype.ClassPrototype;
 
+import java.util.function.Function;
+
 public interface Type extends ClassPrototype {
+
+    TypeSerializer getSerializer();
+
+    TypeTransformer getTypeTransformer();
+
+    Function<?, String> getStringifier();
 
 }

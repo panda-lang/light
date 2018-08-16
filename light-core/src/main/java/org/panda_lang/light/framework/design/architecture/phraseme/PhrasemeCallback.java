@@ -16,8 +16,20 @@
 
 package org.panda_lang.light.framework.design.architecture.phraseme;
 
-import org.panda_lang.panda.framework.design.architecture.dynamic.Executable;
+import org.panda_lang.light.framework.design.architecture.dynamic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.type.Type;
 
-public interface PhrasemeCallback extends Executable {
+public abstract class PhrasemeCallback implements LinguisticAct {
+
+    private final Type type;
+
+    protected PhrasemeCallback(Type type) {
+        this.type = type;
+    }
+
+    @Override
+    public Type getType() {
+        return type;
+    }
 
 }

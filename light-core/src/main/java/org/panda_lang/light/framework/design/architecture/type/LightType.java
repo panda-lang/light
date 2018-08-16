@@ -17,12 +17,40 @@
 package org.panda_lang.light.framework.design.architecture.type;
 
 import org.panda_lang.panda.framework.design.architecture.prototype.PandaClassPrototype;
-import org.panda_lang.panda.framework.design.architecture.module.Module;
+
+import java.util.function.Function;
 
 public class LightType extends PandaClassPrototype implements Type {
 
-    public LightType(Module module, String className, Class<?> associated, String... aliases) {
-        super(module, className, associated, aliases);
+    private final TypeSerializer<?> serializer;
+    private final TypeTransformer transformer;
+    private final Function<?, String> stringifier;
+
+    public LightType(LightTypeBuilder builder) {
+        super(builder);
+
+        this.serializer = builder.serializer;
+        this.transformer = builder.transformer;
+        this.stringifier = builder.stringifier;
+    }
+
+    @Override
+    public TypeSerializer getSerializer() {
+        return serializer;
+    }
+
+    @Override
+    public TypeTransformer getTypeTransformer() {
+        return transformer;
+    }
+
+    @Override
+    public Function<?, String> getStringifier() {
+        return stringifier;
+    }
+
+    public static LightTypeBuilder builder() {
+        return new LightTypeBuilder();
     }
 
 }

@@ -18,11 +18,15 @@ package org.panda_lang.light.framework.language.interpreter.pattern;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.panda_lang.light.framework.design.architecture.dynamic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.phraseme.*;
+import org.panda_lang.light.framework.design.architecture.type.Type;
+import org.panda_lang.light.framework.design.architecture.value.TypeValue;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.ProcessedValue;
 import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.PhrasemePattern;
 import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.PhrasemePatternResult;
+import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 import java.util.List;
 
@@ -37,7 +41,18 @@ public class PhrasemeMatcherTest {
                 .setWildcardProcessor((group, wildcard, previousCandidate) -> fakePhraseme)
                 .build();
 
-        Phraseme phraseme = new Phraseme(null, branch -> System.out.println("D:"));
+        Phraseme phraseme = new Phraseme(null, new LinguisticAct() {
+            @Override
+            public TypeValue perform(ExecutableBranch branch) {
+                System.out.println("D:");
+                return null;
+            }
+
+            @Override
+            public Type getType() {
+                return null;
+            }
+        });
         PhrasemeRepresentation representation = new PhrasemeRepresentation(pattern, phraseme);
 
         Phrasemes phrasemes = new Phrasemes();

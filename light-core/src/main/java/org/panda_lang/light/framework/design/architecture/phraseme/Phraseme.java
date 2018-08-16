@@ -16,25 +16,30 @@
 
 package org.panda_lang.light.framework.design.architecture.phraseme;
 
+import org.panda_lang.light.framework.design.architecture.dynamic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.type.Type;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 public class Phraseme {
 
-    private final PhrasemeCallback callback;
+    private final LinguisticAct act;
     private final Type returnType;
 
-    public Phraseme(Type returnType, PhrasemeCallback callback) {
-        this.callback = callback;
-        this.returnType = returnType;
+    public Phraseme(PhrasemeCallback act) {
+        this(act.getType(), act);
+    }
+
+    public Phraseme(Type type, LinguisticAct act) {
+        this.act = act;
+        this.returnType = type;
     }
 
     public void execute(ExecutableBranch branch) {
-        callback.execute(branch);
+        act.execute(branch);
     }
 
-    public PhrasemeCallback getCallback() {
-        return callback;
+    public LinguisticAct getAct() {
+        return act;
     }
 
     public Type getReturnType() {

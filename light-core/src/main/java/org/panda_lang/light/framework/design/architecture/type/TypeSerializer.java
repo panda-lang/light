@@ -14,21 +14,12 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.dynamic;
+package org.panda_lang.light.framework.design.architecture.type;
 
-import org.panda_lang.light.framework.design.architecture.type.Type;
-import org.panda_lang.light.framework.design.architecture.value.TypeValue;
-import org.panda_lang.panda.framework.design.architecture.dynamic.StandaloneExecutable;
-import org.panda_lang.panda.language.runtime.ExecutableBranch;
+public interface TypeSerializer<T> {
 
-public interface LinguisticAct extends StandaloneExecutable {
+    T serialize(String data);
 
-    TypeValue perform(ExecutableBranch branch);
-
-    default void execute(ExecutableBranch branch) {
-        this.perform(branch);
-    }
-
-    Type getType();
+    String deserialize(T object);
 
 }

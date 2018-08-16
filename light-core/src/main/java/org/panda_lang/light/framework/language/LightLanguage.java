@@ -16,20 +16,19 @@
 
 package org.panda_lang.light.framework.language;
 
-import org.panda_lang.light.LightCore;
 import org.panda_lang.light.LightException;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.ParserRegistrationLoader;
-import org.panda_lang.panda.framework.design.interpreter.token.Syntax;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.PipelineRegistry;
+import org.panda_lang.panda.framework.design.interpreter.token.Syntax;
 import org.panda_lang.panda.framework.language.Language;
+import org.panda_lang.panda.util.PandaUtils;
 
 public class LightLanguage implements Language {
 
-    private final PipelineRegistry pipelineRegistry;
+    private PipelineRegistry pipelineRegistry;
 
     public LightLanguage() {
-        ParserRegistrationLoader loader = new ParserRegistrationLoader();
-        this.pipelineRegistry = loader.load(LightCore.class);
+        this.pipelineRegistry = new ParserRegistrationLoader().load(PandaUtils.DEFAULT_PANDA_SCANNER);
     }
 
     @Override

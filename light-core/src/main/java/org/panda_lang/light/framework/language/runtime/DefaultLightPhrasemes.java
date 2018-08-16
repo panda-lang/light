@@ -20,26 +20,26 @@ import org.panda_lang.light.framework.design.architecture.phraseme.Phraseme;
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeCallback;
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
 import org.panda_lang.light.framework.design.architecture.phraseme.Phrasemes;
+import org.panda_lang.light.framework.design.architecture.value.TypeValue;
 import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.PhrasemePattern;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 public class DefaultLightPhrasemes {
 
     public Phrasemes generate() {
+        PhrasemeRepresentation sendRepresentation = new PhrasemeRepresentation(
+                PhrasemePattern.builder()
+                    .compile("send * to console")
+                    .build(),
+                new Phraseme(new PhrasemeCallback(null) {
+                    @Override
+                    public TypeValue perform(ExecutableBranch branch) {
+                        System.out.println("Test val");
+                        return null;
+                    }
+                }));
+
         Phrasemes defaultPhrasemes = new Phrasemes();
-
-        Phraseme sendPhraseme = new Phraseme(null, new PhrasemeCallback() {
-            @Override
-            public void execute(ExecutableBranch branch) {
-                System.out.println("Test");
-            }
-        });
-
-        PhrasemeRepresentation sendRepresentation = new PhrasemeRepresentation(PhrasemePattern.builder()
-                .compile("send * to console")
-                .build(),
-                sendPhraseme);
-
         defaultPhrasemes.registerPhraseme(sendRepresentation);
 
         return defaultPhrasemes;
