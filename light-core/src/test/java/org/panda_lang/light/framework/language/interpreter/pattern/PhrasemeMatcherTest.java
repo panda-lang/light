@@ -22,10 +22,9 @@ import org.panda_lang.light.framework.design.architecture.dynamic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.phraseme.*;
 import org.panda_lang.light.framework.design.architecture.type.Type;
 import org.panda_lang.light.framework.design.architecture.value.TypeValue;
+import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.*;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.ProcessedValue;
-import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.PhrasemePattern;
-import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.PhrasemePatternResult;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 import java.util.List;

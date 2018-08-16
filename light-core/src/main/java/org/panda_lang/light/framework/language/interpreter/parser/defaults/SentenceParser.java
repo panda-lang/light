@@ -17,9 +17,9 @@
 package org.panda_lang.light.framework.language.interpreter.parser.defaults;
 
 import org.panda_lang.light.framework.design.architecture.phraseme.Phraseme;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeCandidate;
+import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.PhrasemeCandidate;
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemesGroup;
+import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.PhrasemesGroup;
 import org.panda_lang.light.framework.design.interpreter.parser.LightComponents;
 import org.panda_lang.light.framework.design.interpreter.token.SentenceRepresentation;
 import org.panda_lang.panda.framework.design.architecture.dynamic.ExecutableStatement;

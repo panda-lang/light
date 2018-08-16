@@ -17,9 +17,7 @@
 package org.panda_lang.light.framework.design.interpreter.pattern.phraseme;
 
 import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeCandidate;
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemesGroup;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractor;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorWorker;

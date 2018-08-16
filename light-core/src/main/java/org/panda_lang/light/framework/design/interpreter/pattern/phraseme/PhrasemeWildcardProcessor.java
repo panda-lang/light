@@ -17,9 +17,7 @@
 package org.panda_lang.light.framework.design.interpreter.pattern.phraseme;
 
 import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeCandidate;
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemesGroup;
 
 public interface PhrasemeWildcardProcessor {
 
