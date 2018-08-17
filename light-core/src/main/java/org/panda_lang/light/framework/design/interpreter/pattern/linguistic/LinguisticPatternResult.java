@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.interpreter.pattern.phraseme;
+package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
-public class PhrasemePatternResult {
+public class LinguisticPatternResult {
 
     private final boolean matched;
     private LexicalExtractorResult<PhrasemeRepresentation> lexicalResult;
 
-    public PhrasemePatternResult(boolean matched) {
+    public LinguisticPatternResult(boolean matched) {
         this.matched = matched;
     }
 
-    public PhrasemePatternResult(LexicalExtractorResult<PhrasemeRepresentation> result) {
+    public LinguisticPatternResult(LexicalExtractorResult<PhrasemeRepresentation> result) {
         this.matched = result.isMatched();
         this.lexicalResult = result;
     }

@@ -14,22 +14,24 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.interpreter.pattern.phraseme;
+package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemeCandidate;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemesGroup;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractor;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorWorker;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
-public class PhrasemeExtractor implements LexicalExtractor<PhrasemeRepresentation> {
+public class LinguisticExtractor implements LexicalExtractor<PhrasemeRepresentation> {
 
-    private final PhrasemePattern pattern;
+    private final LinguisticPattern pattern;
     private final PhrasemesGroup group;
     private final @Nullable PhrasemeCandidate previousCandidate;
 
-    public PhrasemeExtractor(PhrasemePattern pattern, PhrasemesGroup group, @Nullable PhrasemeCandidate previousResult) {
+    public LinguisticExtractor(LinguisticPattern pattern, PhrasemesGroup group, @Nullable PhrasemeCandidate previousResult) {
         this.pattern = pattern;
         this.group = group;
         this.previousCandidate = previousResult;

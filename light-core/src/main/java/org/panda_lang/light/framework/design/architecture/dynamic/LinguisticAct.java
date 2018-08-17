@@ -18,16 +18,11 @@ package org.panda_lang.light.framework.design.architecture.dynamic;
 
 import org.panda_lang.light.framework.design.architecture.type.Type;
 import org.panda_lang.light.framework.design.architecture.value.TypeValue;
-import org.panda_lang.panda.framework.design.architecture.dynamic.StandaloneExecutable;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
-public interface LinguisticAct extends StandaloneExecutable {
+public interface LinguisticAct {
 
     TypeValue perform(ExecutableBranch branch);
-
-    default void execute(ExecutableBranch branch) {
-        this.perform(branch);
-    }
 
     Type getType();
 

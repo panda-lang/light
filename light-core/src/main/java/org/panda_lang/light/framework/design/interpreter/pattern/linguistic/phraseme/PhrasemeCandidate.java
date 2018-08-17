@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.interpreter.pattern.phraseme;
+package org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme;
 
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternResult;
 
 public class PhrasemeCandidate {
 
     private final boolean matched;
     private PhrasemeRepresentation matchedPhraseme;
-    private PhrasemePatternResult patternResult;
+    private LinguisticPatternResult patternResult;
     private boolean definite = true; // TODO: lookup
 
     protected PhrasemeCandidate(boolean matched) {
         this.matched = matched;
     }
 
-    public PhrasemeCandidate(PhrasemeRepresentation matchedPhraseme, PhrasemePatternResult patternResult) {
+    public PhrasemeCandidate(PhrasemeRepresentation matchedPhraseme, LinguisticPatternResult patternResult) {
         this(true);
         this.matchedPhraseme = matchedPhraseme;
         this.patternResult = patternResult;
@@ -47,7 +48,7 @@ public class PhrasemeCandidate {
         return matched;
     }
 
-    public PhrasemePatternResult getPatternResult() {
+    public LinguisticPatternResult getPatternResult() {
         return patternResult;
     }
 

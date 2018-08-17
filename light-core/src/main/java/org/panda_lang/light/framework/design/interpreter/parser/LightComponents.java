@@ -16,7 +16,7 @@
 
 package org.panda_lang.light.framework.design.interpreter.parser;
 
-import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.PhrasemesGroup;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemesGroup;
 import org.panda_lang.light.framework.language.interpreter.LightInterpreter;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.Component;
 

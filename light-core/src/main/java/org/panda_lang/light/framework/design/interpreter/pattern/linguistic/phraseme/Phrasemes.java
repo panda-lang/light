@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.interpreter.pattern.phraseme;
+package org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternResult;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -43,8 +45,8 @@ public class Phrasemes {
     }
 
     private PhrasemeCandidate match(PhrasemeRepresentation representation, String sentence, PhrasemesGroup group, @Nullable PhrasemeCandidate previousResult) {
-        PhrasemePattern pattern = representation.getPattern();
-        PhrasemePatternResult result = pattern.match(sentence, group, previousResult);
+        LinguisticPattern pattern = representation.getPattern();
+        LinguisticPatternResult result = pattern.match(sentence, group, previousResult);
 
         if (result == null || !result.isMatched()) {
             return new PhrasemeCandidate();

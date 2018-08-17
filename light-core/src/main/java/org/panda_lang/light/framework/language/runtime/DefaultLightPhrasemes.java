@@ -19,16 +19,16 @@ package org.panda_lang.light.framework.language.runtime;
 import org.panda_lang.light.framework.design.architecture.phraseme.Phraseme;
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeCallback;
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
-import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.Phrasemes;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.Phrasemes;
 import org.panda_lang.light.framework.design.architecture.value.TypeValue;
-import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.PhrasemePattern;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 public class DefaultLightPhrasemes {
 
     public Phrasemes generate() {
         PhrasemeRepresentation sendRepresentation = new PhrasemeRepresentation(
-                PhrasemePattern.builder()
+                LinguisticPattern.builder()
                     .compile("send * to console")
                     .build(),
                 new Phraseme(new PhrasemeCallback(null) {

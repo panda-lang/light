@@ -14,37 +14,38 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.interpreter.pattern.phraseme;
+package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemeWildcardProcessor;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
-public class PhrasemePatternBuilder {
+public class LinguisticPatternBuilder {
 
     private LexicalPattern<PhrasemeRepresentation> pattern;
     private PhrasemeWildcardProcessor wildcardProcessor;
 
-    public PhrasemePatternBuilder compile(String pattern) {
-        PhrasemePatternCompiler compiler = new PhrasemePatternCompiler(pattern);
+    public LinguisticPatternBuilder compile(String pattern) {
+        LinguisticPatternCompiler compiler = new LinguisticPatternCompiler(pattern);
         compiler.compile();
 
         this.pattern = compiler.getLexicalPattern();
         return this;
     }
 
-    public PhrasemePatternBuilder setWildcardProcessor(WildcardProcessor<PhrasemeRepresentation> wildcardProcessor) {
+    public LinguisticPatternBuilder setWildcardProcessor(WildcardProcessor<PhrasemeRepresentation> wildcardProcessor) {
         pattern.setWildcardProcessor(wildcardProcessor);
         return this;
     }
 
-    public PhrasemePatternBuilder setWildcardProcessor(PhrasemeWildcardProcessor wildcardProcessor) {
+    public LinguisticPatternBuilder setWildcardProcessor(PhrasemeWildcardProcessor wildcardProcessor) {
         this.wildcardProcessor = wildcardProcessor;
         return this;
     }
 
-    public PhrasemePattern build() {
-        return new PhrasemePattern(pattern, wildcardProcessor);
+    public LinguisticPattern build() {
+        return new LinguisticPattern(pattern, wildcardProcessor);
     }
 
 }

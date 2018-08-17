@@ -18,7 +18,6 @@ package org.panda_lang.light.framework.design.architecture.phraseme;
 
 import org.panda_lang.light.framework.design.architecture.dynamic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.type.Type;
-import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 public class Phraseme {
 
@@ -32,10 +31,6 @@ public class Phraseme {
     public Phraseme(Type type, LinguisticAct act) {
         this.act = act;
         this.returnType = type;
-    }
-
-    public void execute(ExecutableBranch branch) {
-        act.execute(branch);
     }
 
     public LinguisticAct getAct() {

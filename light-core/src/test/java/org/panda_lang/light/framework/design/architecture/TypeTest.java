@@ -17,9 +17,12 @@
 package org.panda_lang.light.framework.design.architecture;
 
 import org.junit.jupiter.api.Test;
+import org.panda_lang.light.framework.design.architecture.dynamic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.type.LightType;
 import org.panda_lang.light.framework.design.architecture.type.Type;
 import org.panda_lang.light.framework.design.architecture.type.TypeSerializer;
+import org.panda_lang.light.framework.design.architecture.value.TypeValue;
+import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 import java.util.function.Function;
 
@@ -45,8 +48,25 @@ public class TypeTest {
                 .stringifier(new Function<String, String>() {
                     @Override
                     public String apply(String typeValue) {
-                        return typeValue.toString();
+                        return typeValue;
                     }
+                })
+                .transformer(sentence -> {
+                    if (sentence.startsWith("\"") && sentence.endsWith("\"")) {
+                        return new LinguisticAct() {
+                            @Override
+                            public TypeValue perform(ExecutableBranch branch) {
+                                return null;
+                            }
+
+                            @Override
+                            public Type getType() {
+                                return null;
+                            }
+                        };
+                    }
+
+                    return null;
                 })
                 .build();
     }

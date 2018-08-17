@@ -22,7 +22,10 @@ import org.panda_lang.light.framework.design.architecture.dynamic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.phraseme.*;
 import org.panda_lang.light.framework.design.architecture.type.Type;
 import org.panda_lang.light.framework.design.architecture.value.TypeValue;
-import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.*;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.*;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemeCandidate;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.Phrasemes;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemesGroup;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.ProcessedValue;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
@@ -35,7 +38,7 @@ public class PhrasemeMatcherTest {
     public void testPhrasemePattern() {
         PhrasemeRepresentation fakePhraseme = new PhrasemeRepresentation(null, new Phraseme(null, null));
 
-        PhrasemePattern pattern = PhrasemePattern.builder()
+        LinguisticPattern pattern = LinguisticPattern.builder()
                 .compile("add <string> to <string>")
                 .setWildcardProcessor((group, wildcard, previousCandidate) -> fakePhraseme)
                 .build();
@@ -67,7 +70,7 @@ public class PhrasemeMatcherTest {
         Assertions.assertNotNull(matchedPhraseme);
         Assertions.assertEquals(representation, matchedPhraseme);
 
-        PhrasemePatternResult result = candidate.getPatternResult();
+        LinguisticPatternResult result = candidate.getPatternResult();
         Assertions.assertNotNull(result);
 
         LexicalExtractorResult<PhrasemeRepresentation> originalResult = result.getLexicalResult();

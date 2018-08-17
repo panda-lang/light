@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.interpreter.pattern.phraseme;
+package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 
-public class PhrasemePatternCompiler {
+public class LinguisticPatternCompiler {
 
     private final String pattern;
     private LexicalPattern<PhrasemeRepresentation> lexicalPattern;
 
-    public PhrasemePatternCompiler(String pattern) {
+    public LinguisticPatternCompiler(String pattern) {
         this.pattern = pattern;
     }
 

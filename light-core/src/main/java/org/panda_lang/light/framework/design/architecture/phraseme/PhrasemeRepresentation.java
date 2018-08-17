@@ -16,14 +16,14 @@
 
 package org.panda_lang.light.framework.design.architecture.phraseme;
 
-import org.panda_lang.light.framework.design.interpreter.pattern.phraseme.PhrasemePattern;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 
 public class PhrasemeRepresentation {
 
-    private final PhrasemePattern pattern;
+    private final LinguisticPattern pattern;
     private final Phraseme phraseme;
 
-    public PhrasemeRepresentation(PhrasemePattern pattern, Phraseme phraseme) {
+    public PhrasemeRepresentation(LinguisticPattern pattern, Phraseme phraseme) {
         this.pattern = pattern;
         this.phraseme = phraseme;
     }
@@ -32,7 +32,7 @@ public class PhrasemeRepresentation {
         return phraseme;
     }
 
-    public PhrasemePattern getPattern() {
+    public LinguisticPattern getPattern() {
         return pattern;
     }
 
