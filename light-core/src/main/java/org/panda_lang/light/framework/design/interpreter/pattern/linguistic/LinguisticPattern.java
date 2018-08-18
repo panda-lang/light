@@ -17,30 +17,23 @@
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemeCandidate;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemeWildcardProcessor;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemesGroup;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
 public class LinguisticPattern {
 
-    private final LexicalPattern<PhrasemeRepresentation> lexicalPattern;
-    private final @Nullable PhrasemeWildcardProcessor wildcardProcessor;
+    private final LexicalPattern<LinguisticAct> lexicalPattern;
+    private final @Nullable LinguisticWildcardProcessor wildcardProcessor;
 
-    public LinguisticPattern(LexicalPattern<PhrasemeRepresentation> lexicalPattern, @Nullable PhrasemeWildcardProcessor wildcardProcessor) {
+    public LinguisticPattern(LexicalPattern<LinguisticAct> lexicalPattern, @Nullable LinguisticWildcardProcessor wildcardProcessor) {
         this.lexicalPattern = lexicalPattern;
         this.wildcardProcessor = wildcardProcessor;
     }
 
-    public static LinguisticPatternBuilder builder() {
-        return new LinguisticPatternBuilder();
-    }
-
-    public LinguisticPatternResult match(String sentence, PhrasemesGroup group, @Nullable PhrasemeCandidate previousResult) {
-        LinguisticExtractor extractor = new LinguisticExtractor(this, group, previousResult);
-        LexicalExtractorResult<PhrasemeRepresentation> result = lexicalPattern.extract(extractor, sentence);
+    public LinguisticPatternResult match(String sentence, LinguisticPatternContext context, @Nullable LinguisticCandidate<LinguisticAct> previousResult) {
+        LinguisticExtractor extractor = new LinguisticExtractor(this, context, previousResult);
+        LexicalExtractorResult<LinguisticAct> result = lexicalPattern.extract(extractor, sentence);
 
         return new LinguisticPatternResult(result);
     }
@@ -49,12 +42,16 @@ public class LinguisticPattern {
         return wildcardProcessor != null;
     }
 
-    public @Nullable PhrasemeWildcardProcessor getWildcardProcessor() {
+    public @Nullable LinguisticWildcardProcessor getWildcardProcessor() {
         return wildcardProcessor;
     }
 
-    public LexicalPattern<PhrasemeRepresentation> getLexicalPattern() {
+    public LexicalPattern<LinguisticAct> getLexicalPattern() {
         return lexicalPattern;
+    }
+
+    public static LinguisticPatternBuilder builder() {
+        return new LinguisticPatternBuilder();
     }
 
 }

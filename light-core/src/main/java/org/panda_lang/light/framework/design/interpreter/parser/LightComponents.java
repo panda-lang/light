@@ -16,7 +16,7 @@
 
 package org.panda_lang.light.framework.design.interpreter.parser;
 
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemesGroup;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternContext;
 import org.panda_lang.light.framework.language.interpreter.LightInterpreter;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.Component;
 
@@ -24,6 +24,6 @@ public class LightComponents {
 
     public static final Component<LightInterpreter> INTERPRETER = Component.of("light-interpreter", LightInterpreter.class);
 
-    public static final Component<PhrasemesGroup> PHRASEMES = Component.of("light-phrasemes", PhrasemesGroup.class);
+    public static final Component<LinguisticPatternContext> PHRASEMES = Component.of("light-phrasemes", LinguisticPatternContext.class);
 
 }

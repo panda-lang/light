@@ -17,10 +17,10 @@
 package org.panda_lang.light.framework.design.architecture;
 
 import org.junit.jupiter.api.Test;
-import org.panda_lang.light.framework.design.architecture.dynamic.LinguisticAct;
-import org.panda_lang.light.framework.design.architecture.type.LightType;
-import org.panda_lang.light.framework.design.architecture.type.Type;
-import org.panda_lang.light.framework.design.architecture.type.TypeSerializer;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.LightType;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.TypeSerializer;
 import org.panda_lang.light.framework.design.architecture.value.TypeValue;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
@@ -30,7 +30,7 @@ public class TypeTest {
 
     @Test
     void testType() {
-        Type type = LightType.builder()
+        Type type = LightType.<String> builder()
                 .name("string")
                 .associated(String.class)
                 .aliases("String")

@@ -16,7 +16,7 @@
 
 package org.panda_lang.light.framework.language.interpreter.parser.defaults;
 
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemesGroup;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternContext;
 import org.panda_lang.light.framework.design.interpreter.lexer.*;
 import org.panda_lang.light.framework.design.interpreter.parser.LightComponents;
 import org.panda_lang.light.framework.design.interpreter.source.*;
@@ -81,8 +81,8 @@ public class ApplicationParser implements Parser {
                 delegatedInfo.setComponent(UniversalComponents.SOURCE_STREAM, stream);
                 delegatedInfo.setComponent(UniversalComponents.SCRIPT, script);
 
-                PhrasemesGroup defaultPhrasemes = new PhrasemesGroup();
-                defaultPhrasemes.importPhrasemes(new DefaultLightPhrasemes().generate());
+                LinguisticPatternContext defaultPhrasemes = new LinguisticPatternContext();
+                defaultPhrasemes.importComponent(new DefaultLightPhrasemes().generate());
                 delegatedInfo.setComponent(LightComponents.PHRASEMES, defaultPhrasemes);
 
                 OverallParser parser = new OverallParser(delegatedInfo);

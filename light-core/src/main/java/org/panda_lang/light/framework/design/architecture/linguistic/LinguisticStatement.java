@@ -14,34 +14,22 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.value;
+package org.panda_lang.light.framework.design.architecture.linguistic;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
+import org.panda_lang.panda.framework.design.architecture.dynamic.ExecutableStatement;
+import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
-public class LightTypeValue implements TypeValue {
+public class LinguisticStatement extends ExecutableStatement {
 
-    private final Type type;
-    private final Object value;
+    private final LinguisticAct linguisticAct;
 
-    public LightTypeValue(Type type, Object value) {
-        this.type = type;
-        this.value = value;
+    public LinguisticStatement(LinguisticAct linguisticAct) {
+        this.linguisticAct = linguisticAct;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T> T getValue() {
-        return (T) value;
-    }
-
-    @Override
-    public Object getObject() {
-        return value;
-    }
-
-    @Override
-    public Type getType() {
-        return type;
+    public void execute(ExecutableBranch branch) {
+        linguisticAct.perform(branch);
     }
 
 }

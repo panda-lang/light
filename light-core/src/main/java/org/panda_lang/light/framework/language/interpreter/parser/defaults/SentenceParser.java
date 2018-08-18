@@ -16,17 +16,15 @@
 
 package org.panda_lang.light.framework.language.interpreter.parser.defaults;
 
-import org.panda_lang.light.framework.design.architecture.phraseme.Phraseme;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemeCandidate;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemesGroup;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticStatement;
 import org.panda_lang.light.framework.design.interpreter.parser.LightComponents;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternContext;
 import org.panda_lang.light.framework.design.interpreter.token.SentenceRepresentation;
-import org.panda_lang.panda.framework.design.architecture.dynamic.ExecutableStatement;
 import org.panda_lang.panda.framework.design.architecture.statement.Statement;
 import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
 import org.panda_lang.panda.framework.design.interpreter.parser.ParserData;
-import org.panda_lang.panda.language.runtime.ExecutableBranch;
 import org.panda_lang.panda.framework.language.interpreter.parser.PandaParserFailure;
 
 public class SentenceParser implements Parser {
@@ -34,15 +32,15 @@ public class SentenceParser implements Parser {
     public Statement parse(ParserData data, SentenceRepresentation sentenceRepresentation) {
         String sentence = sentenceRepresentation.getTokenValue();
 
-        PhrasemesGroup phrasemes = data.getComponent(LightComponents.PHRASEMES);
-        PhrasemeCandidate candidate = phrasemes.find(sentence, null);
+        LinguisticPatternContext phrasemes = data.getComponent(LightComponents.PHRASEMES);
+        LinguisticCandidate<LinguisticAct> candidate = phrasemes.find(sentence, null);
 
         while (candidate != null) {
             if (!candidate.isMatched() || candidate.isDefinite()) {
                 break;
             }
 
-            PhrasemeCandidate currentCandidate = phrasemes.find(sentence, candidate);
+            LinguisticCandidate<LinguisticAct> currentCandidate = phrasemes.find(sentence, candidate);
 
             if (candidate.equals(currentCandidate)) {
                 candidate = null;
@@ -56,15 +54,7 @@ public class SentenceParser implements Parser {
             throw new PandaParserFailure("Unknown sentence", data);
         }
 
-        PhrasemeRepresentation matchedPhraseme = candidate.getMatchedPhraseme();
-        Phraseme phraseme = matchedPhraseme.getPhraseme();
-
-        return new ExecutableStatement() {
-            @Override
-            public void execute(ExecutableBranch branch) {
-                phraseme.getAct().perform(branch);
-            }
-        };
+        return new LinguisticStatement(candidate.getMatchedElement());
     }
 
 }

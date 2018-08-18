@@ -14,22 +14,19 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.phraseme;
+package org.panda_lang.light.framework.design.architecture.linguistic.type;
 
-import org.panda_lang.light.framework.design.architecture.dynamic.LinguisticAct;
-import org.panda_lang.light.framework.design.architecture.type.Type;
+import org.panda_lang.panda.framework.design.architecture.prototype.ClassPrototype;
 
-public abstract class PhrasemeCallback implements LinguisticAct {
+import java.util.List;
+import java.util.function.Function;
 
-    private final Type type;
+public interface Type<T> extends ClassPrototype {
 
-    protected PhrasemeCallback(Type type) {
-        this.type = type;
-    }
+    List<? extends TypeTransformer> getTypeTransformer();
 
-    @Override
-    public Type getType() {
-        return type;
-    }
+    Function<T, String> getStringifier();
+
+    TypeSerializer<T> getSerializer();
 
 }

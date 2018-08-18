@@ -16,15 +16,14 @@
 
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemeWildcardProcessor;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
 public class LinguisticPatternBuilder {
 
-    private LexicalPattern<PhrasemeRepresentation> pattern;
-    private PhrasemeWildcardProcessor wildcardProcessor;
+    private LexicalPattern<LinguisticAct> pattern;
+    private LinguisticWildcardProcessor wildcardProcessor;
 
     public LinguisticPatternBuilder compile(String pattern) {
         LinguisticPatternCompiler compiler = new LinguisticPatternCompiler(pattern);
@@ -34,12 +33,12 @@ public class LinguisticPatternBuilder {
         return this;
     }
 
-    public LinguisticPatternBuilder setWildcardProcessor(WildcardProcessor<PhrasemeRepresentation> wildcardProcessor) {
+    public LinguisticPatternBuilder setWildcardProcessor(WildcardProcessor<LinguisticAct> wildcardProcessor) {
         pattern.setWildcardProcessor(wildcardProcessor);
         return this;
     }
 
-    public LinguisticPatternBuilder setWildcardProcessor(PhrasemeWildcardProcessor wildcardProcessor) {
+    public LinguisticPatternBuilder setWildcardProcessor(LinguisticWildcardProcessor wildcardProcessor) {
         this.wildcardProcessor = wildcardProcessor;
         return this;
     }

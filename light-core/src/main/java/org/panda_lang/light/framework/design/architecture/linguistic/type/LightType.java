@@ -14,43 +14,44 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.type;
+package org.panda_lang.light.framework.design.architecture.linguistic.type;
 
 import org.panda_lang.panda.framework.design.architecture.prototype.PandaClassPrototype;
 
+import java.util.List;
 import java.util.function.Function;
 
-public class LightType extends PandaClassPrototype implements Type {
+public class LightType<T> extends PandaClassPrototype implements Type<T> {
 
-    private final TypeSerializer<?> serializer;
-    private final TypeTransformer transformer;
-    private final Function<?, String> stringifier;
+    private final TypeSerializer<T> serializer;
+    private final List<TypeTransformer> transformer;
+    private final Function<T, String> stringifier;
 
-    public LightType(LightTypeBuilder builder) {
+    public LightType(LightTypeBuilder<T> builder) {
         super(builder);
 
         this.serializer = builder.serializer;
-        this.transformer = builder.transformer;
+        this.transformer = builder.transformers;
         this.stringifier = builder.stringifier;
     }
 
     @Override
-    public TypeSerializer getSerializer() {
+    public TypeSerializer<T> getSerializer() {
         return serializer;
     }
 
     @Override
-    public TypeTransformer getTypeTransformer() {
+    public List<? extends TypeTransformer> getTypeTransformer() {
         return transformer;
     }
 
     @Override
-    public Function<?, String> getStringifier() {
+    public Function<T, String> getStringifier() {
         return stringifier;
     }
 
-    public static LightTypeBuilder builder() {
-        return new LightTypeBuilder();
+    public static <T> LightTypeBuilder<T> builder() {
+        return new LightTypeBuilder<>();
     }
 
 }

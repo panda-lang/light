@@ -16,31 +16,30 @@
 
 package org.panda_lang.light.framework.language.runtime;
 
-import org.panda_lang.light.framework.design.architecture.phraseme.Phraseme;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeCallback;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.Phrasemes;
-import org.panda_lang.light.framework.design.architecture.value.TypeValue;
+import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
+import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.PhrasemeCallback;
+import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phrasemes;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 public class DefaultLightPhrasemes {
 
     public Phrasemes generate() {
-        PhrasemeRepresentation sendRepresentation = new PhrasemeRepresentation(
+        Phraseme phraseme = new Phraseme(
                 LinguisticPattern.builder()
-                    .compile("send * to console")
-                    .build(),
-                new Phraseme(new PhrasemeCallback(null) {
+                        .compile("send * to console")
+                        .build(),
+                new PhrasemeCallback() {
                     @Override
-                    public TypeValue perform(ExecutableBranch branch) {
+                    public Object call(ExecutableBranch branch) {
                         System.out.println("Test val");
                         return null;
                     }
-                }));
+                }
+        );
 
         Phrasemes defaultPhrasemes = new Phrasemes();
-        defaultPhrasemes.registerPhraseme(sendRepresentation);
+        defaultPhrasemes.registerElement(phraseme);
 
         return defaultPhrasemes;
     }

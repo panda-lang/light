@@ -17,29 +17,27 @@
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemeCandidate;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme.PhrasemesGroup;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractor;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorWorker;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
-public class LinguisticExtractor implements LexicalExtractor<PhrasemeRepresentation> {
+public class LinguisticExtractor implements LexicalExtractor<LinguisticAct> {
 
     private final LinguisticPattern pattern;
-    private final PhrasemesGroup group;
-    private final @Nullable PhrasemeCandidate previousCandidate;
+    private final LinguisticPatternContext group;
+    private final @Nullable LinguisticCandidate<LinguisticAct> previousCandidate;
 
-    public LinguisticExtractor(LinguisticPattern pattern, PhrasemesGroup group, @Nullable PhrasemeCandidate previousResult) {
+    public LinguisticExtractor(LinguisticPattern pattern, LinguisticPatternContext group, @Nullable LinguisticCandidate<LinguisticAct> previousResult) {
         this.pattern = pattern;
         this.group = group;
         this.previousCandidate = previousResult;
     }
 
     @Override
-    public LexicalExtractorResult<PhrasemeRepresentation> extract(String phrase) {
-        WildcardProcessor<PhrasemeRepresentation> wildcardProcessor = null;
+    public LexicalExtractorResult<LinguisticAct> extract(String phrase) {
+        WildcardProcessor<LinguisticAct> wildcardProcessor = null;
 
         if (pattern.getWildcardProcessor() != null) {
             wildcardProcessor = wildcard -> pattern.getWildcardProcessor().handle(group, wildcard, previousCandidate);
@@ -49,7 +47,7 @@ public class LinguisticExtractor implements LexicalExtractor<PhrasemeRepresentat
             wildcardProcessor = pattern.getLexicalPattern().getWildcardProcessor();
         }
 
-        LexicalExtractorWorker<PhrasemeRepresentation> extractorWorker = new LexicalExtractorWorker<>(wildcardProcessor);
+        LexicalExtractorWorker<LinguisticAct> extractorWorker = new LexicalExtractorWorker<>(wildcardProcessor);
         return extractorWorker.extract(pattern.getLexicalPattern().getModel(), phrase);
     }
 

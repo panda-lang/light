@@ -14,12 +14,25 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.type;
+package org.panda_lang.light.framework.design.architecture.linguistic.type;
 
-public interface TypeSerializer<T> {
+import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
 
-    T serialize(String data);
+import java.util.Collection;
+import java.util.HashSet;
 
-    String deserialize(T object);
+public class Types implements ContextComponent<Type<?>> {
+
+    private final Collection<Type<?>> types = new HashSet<>();
+
+    @Override
+    public void registerElement(Type<?> element) {
+        types.add(element);
+    }
+
+    @Override
+    public Collection<? extends Type<?>> getElements() {
+        return types;
+    }
 
 }

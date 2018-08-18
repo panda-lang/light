@@ -14,13 +14,25 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.interpreter.pattern.linguistic.phraseme;
+package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
 
-import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.framework.design.architecture.phraseme.PhrasemeRepresentation;
+import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
 
-public interface PhrasemeWildcardProcessor {
+import java.util.Collection;
+import java.util.HashSet;
 
-    PhrasemeRepresentation handle(PhrasemesGroup group, String wildcard, @Nullable PhrasemeCandidate previousCandidate);
+public class Phrasemes implements ContextComponent<Phraseme> {
+
+    private final Collection<Phraseme> phrasemeRepresentations = new HashSet<>();
+
+    @Override
+    public void registerElement(Phraseme phraseme) {
+        phrasemeRepresentations.add(phraseme);
+    }
+
+    @Override
+    public Collection<? extends Phraseme> getElements() {
+        return phrasemeRepresentations;
+    }
 
 }

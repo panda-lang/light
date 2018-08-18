@@ -16,28 +16,11 @@
 
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
-import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
+import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 
-public class LinguisticPatternResult<T> {
+public interface LinguisticWildcardProcessor {
 
-    private final boolean matched;
-    private LexicalExtractorResult<T> lexicalResult;
-
-    public LinguisticPatternResult(boolean matched) {
-        this.matched = matched;
-    }
-
-    public LinguisticPatternResult(LexicalExtractorResult<T> result) {
-        this.matched = result.isMatched();
-        this.lexicalResult = result;
-    }
-
-    public boolean isMatched() {
-        return matched;
-    }
-
-    public LexicalExtractorResult<T> getLexicalResult() {
-        return lexicalResult;
-    }
+    @Nullable LinguisticAct handle(LinguisticPatternContext context, String wildcard, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate);
 
 }

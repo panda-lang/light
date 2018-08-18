@@ -14,26 +14,16 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.phraseme;
+package org.panda_lang.light.framework.design.architecture.linguistic;
 
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
+import org.panda_lang.light.framework.design.architecture.value.TypeValue;
+import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
-public class PhrasemeRepresentation {
+public interface LinguisticAct {
 
-    private final LinguisticPattern pattern;
-    private final Phraseme phraseme;
+    TypeValue perform(ExecutableBranch branch);
 
-    public PhrasemeRepresentation(LinguisticPattern pattern, Phraseme phraseme) {
-        this.pattern = pattern;
-        this.phraseme = phraseme;
-    }
-
-    public Phraseme getPhraseme() {
-        return phraseme;
-    }
-
-    public LinguisticPattern getPattern() {
-        return pattern;
-    }
+    Type getType();
 
 }

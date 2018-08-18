@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.type;
+package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
 
-import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.framework.design.architecture.dynamic.LinguisticAct;
+import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
-public interface TypeTransformer {
+public abstract class PhrasemeCallback {
 
-    @Nullable LinguisticAct transform(String sentence);
+    public abstract Object call(ExecutableBranch branch);
 
 }

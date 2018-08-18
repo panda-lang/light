@@ -14,46 +14,49 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.type;
+package org.panda_lang.light.framework.design.architecture.linguistic.type;
 
 import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.framework.design.architecture.dynamic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.design.architecture.prototype.PandaClassPrototypeBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
-public class LightTypeBuilder extends PandaClassPrototypeBuilder<LightTypeBuilder, LightType> {
+public class LightTypeBuilder<T> extends PandaClassPrototypeBuilder<LightTypeBuilder<T>, LightType> {
 
-    protected TypeTransformer transformer;
-    protected TypeSerializer<?> serializer;
-    protected Function<?, String> stringifier;
+    protected List<TypeTransformer> transformers;
+    protected TypeSerializer<T> serializer;
+    protected Function<T, String> stringifier;
 
     protected LightTypeBuilder() {
-        this.transformer = new DefaultTypeTransformer();
+        this.transformers = new ArrayList<>();
+        transformers.add(new DefaultTypeTransformer());
     }
 
-    public LightTypeBuilder serializer(TypeSerializer<?> serializer) {
+    public LightTypeBuilder<T> serializer(TypeSerializer<T> serializer) {
         this.serializer = serializer;
         return this;
     }
 
-    public LightTypeBuilder transformer(TypeTransformer transformer) {
-        this.transformer = transformer;
+    public LightTypeBuilder<T> transformer(TypeTransformer transformer) {
+        this.transformers.add(transformer);
         return this;
     }
 
-    public LightTypeBuilder stringifier(Function<?, String> stringifier) {
+    public LightTypeBuilder<T> stringifier(Function<T, String> stringifier) {
         this.stringifier = stringifier;
         return this;
     }
 
     @Override
-    public LightType build() {
+    public LightType<T> build() {
         if (name == null) {
             throw new IllegalArgumentException("ClassPrototype name is not definied");
         }
 
-        return new LightType(this);
+        return new LightType<>(this);
     }
 
     private static class DefaultTypeTransformer implements TypeTransformer {

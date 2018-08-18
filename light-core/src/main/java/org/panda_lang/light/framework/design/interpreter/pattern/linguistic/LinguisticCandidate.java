@@ -16,28 +16,38 @@
 
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
-import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
-
-public class LinguisticPatternResult<T> {
+public class LinguisticCandidate<T> {
 
     private final boolean matched;
-    private LexicalExtractorResult<T> lexicalResult;
+    private final T matchedPhraseme;
+    private final LinguisticPatternResult<T> linguisticResult;
+    private boolean definite;
 
-    public LinguisticPatternResult(boolean matched) {
+    public LinguisticCandidate(boolean matched, boolean definite, T matchedElement, LinguisticPatternResult<T> linguisticResult) {
         this.matched = matched;
+        this.definite = definite;
+        this.matchedPhraseme = matchedElement;
+        this.linguisticResult = linguisticResult;
     }
 
-    public LinguisticPatternResult(LexicalExtractorResult<T> result) {
-        this.matched = result.isMatched();
-        this.lexicalResult = result;
+    public LinguisticCandidate(boolean matched) {
+        this(matched, true, null, null);
+    }
+
+    public boolean isDefinite() {
+        return definite;
     }
 
     public boolean isMatched() {
         return matched;
     }
 
-    public LexicalExtractorResult<T> getLexicalResult() {
-        return lexicalResult;
+    public LinguisticPatternResult<T> getLinguisticResult() {
+        return linguisticResult;
+    }
+
+    public T getMatchedElement() {
+        return matchedPhraseme;
     }
 
 }

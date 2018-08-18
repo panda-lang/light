@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.value;
+package org.panda_lang.light.framework.design.architecture.linguistic.type;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
-import org.panda_lang.panda.framework.design.architecture.value.Value;
+public interface TypeSerializer<T> {
 
-public interface TypeValue extends Value {
+    T serialize(String data);
 
-    @Override
-    Type getType();
+    String deserialize(T object);
 
 }

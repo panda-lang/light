@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.dynamic;
+package org.panda_lang.light.framework.design.architecture.linguistic;
 
-import org.panda_lang.light.framework.design.architecture.type.Type;
-import org.panda_lang.light.framework.design.architecture.value.TypeValue;
-import org.panda_lang.panda.language.runtime.ExecutableBranch;
+import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 
-public interface LinguisticAct {
+public interface Context {
 
-    TypeValue perform(ExecutableBranch branch);
+    @Nullable LinguisticCandidate<LinguisticAct> find(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate);
 
-    Type getType();
+    void importComponent(ContextComponent<?> component);
+
+    Context fork();
 
 }
