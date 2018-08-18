@@ -17,6 +17,7 @@
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractor;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
@@ -25,13 +26,13 @@ import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extra
 
 public class LinguisticExtractor implements LexicalExtractor<LinguisticAct> {
 
+    private final Context context;
     private final LinguisticPattern pattern;
-    private final LinguisticPatternContext group;
     private final @Nullable LinguisticCandidate<LinguisticAct> previousCandidate;
 
-    public LinguisticExtractor(LinguisticPattern pattern, LinguisticPatternContext group, @Nullable LinguisticCandidate<LinguisticAct> previousResult) {
+    public LinguisticExtractor(Context context, LinguisticPattern pattern, @Nullable LinguisticCandidate<LinguisticAct> previousResult) {
         this.pattern = pattern;
-        this.group = group;
+        this.context = context;
         this.previousCandidate = previousResult;
     }
 
@@ -40,7 +41,7 @@ public class LinguisticExtractor implements LexicalExtractor<LinguisticAct> {
         WildcardProcessor<LinguisticAct> wildcardProcessor = null;
 
         if (pattern.getWildcardProcessor() != null) {
-            wildcardProcessor = wildcard -> pattern.getWildcardProcessor().handle(group, wildcard, previousCandidate);
+            wildcardProcessor = wildcard -> pattern.getWildcardProcessor().handle(context, wildcard, previousCandidate);
         }
 
         if (wildcardProcessor == null && pattern.getLexicalPattern().hasWildcardProcessor()) {

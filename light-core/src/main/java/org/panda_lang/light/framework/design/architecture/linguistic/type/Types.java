@@ -16,7 +16,11 @@
 
 package org.panda_lang.light.framework.design.architecture.linguistic.type;
 
+import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -24,6 +28,11 @@ import java.util.HashSet;
 public class Types implements ContextComponent<Type<?>> {
 
     private final Collection<Type<?>> types = new HashSet<>();
+
+    @Override
+    public LinguisticCandidate<LinguisticAct> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+        return null;
+    }
 
     @Override
     public void registerElement(Type<?> element) {

@@ -30,6 +30,10 @@ public class LinguisticCandidate<T> {
         this.linguisticResult = linguisticResult;
     }
 
+    public LinguisticCandidate(T matchedElement, LinguisticPatternResult<T> linguisticResult) {
+        this(true, true, matchedElement, linguisticResult);
+    }
+
     public LinguisticCandidate(boolean matched) {
         this(matched, true, null, null);
     }

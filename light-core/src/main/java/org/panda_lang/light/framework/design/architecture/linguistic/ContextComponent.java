@@ -16,9 +16,14 @@
 
 package org.panda_lang.light.framework.design.architecture.linguistic;
 
+import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
+
 import java.util.Collection;
 
 public interface ContextComponent<T> {
+
+    LinguisticCandidate<LinguisticAct> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate);
 
     void registerElement(T element);
 

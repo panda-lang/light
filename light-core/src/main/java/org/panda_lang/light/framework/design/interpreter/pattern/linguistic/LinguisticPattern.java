@@ -17,6 +17,7 @@
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
@@ -31,11 +32,11 @@ public class LinguisticPattern {
         this.wildcardProcessor = wildcardProcessor;
     }
 
-    public LinguisticPatternResult match(String sentence, LinguisticPatternContext context, @Nullable LinguisticCandidate<LinguisticAct> previousResult) {
-        LinguisticExtractor extractor = new LinguisticExtractor(this, context, previousResult);
+    public LinguisticPatternResult<LinguisticAct> match(String sentence, Context context, @Nullable LinguisticCandidate<LinguisticAct> previousResult) {
+        LinguisticExtractor extractor = new LinguisticExtractor(context, this, previousResult);
         LexicalExtractorResult<LinguisticAct> result = lexicalPattern.extract(extractor, sentence);
 
-        return new LinguisticPatternResult(result);
+        return new LinguisticPatternResult<>(result);
     }
 
     public boolean hasWildcardProcessor() {

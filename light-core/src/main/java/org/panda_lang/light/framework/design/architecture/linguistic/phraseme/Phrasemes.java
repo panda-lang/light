@@ -16,23 +16,47 @@
 
 package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
 
+import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternResult;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 public class Phrasemes implements ContextComponent<Phraseme> {
 
-    private final Collection<Phraseme> phrasemeRepresentations = new HashSet<>();
+    private final Collection<Phraseme> phrasemes = new HashSet<>();
+
+    @Override
+    public LinguisticCandidate<LinguisticAct> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+        for (Phraseme phraseme : phrasemes) {
+            LinguisticPatternResult<LinguisticAct> result = phraseme.getPattern().match(sentence, context, previousCandidate);
+
+            if (result == null || !result.isMatched()) {
+                return new LinguisticCandidate<>(false);
+            }
+
+            LinguisticCandidate<LinguisticAct> candidate = new LinguisticCandidate<>(phraseme.getAct(), result);
+
+            if (candidate.isMatched()) {
+                return candidate;
+            }
+        }
+
+        return new LinguisticCandidate<>(false);
+    }
 
     @Override
     public void registerElement(Phraseme phraseme) {
-        phrasemeRepresentations.add(phraseme);
+        phrasemes.add(phraseme);
     }
 
     @Override
     public Collection<? extends Phraseme> getElements() {
-        return phrasemeRepresentations;
+        return phrasemes;
     }
 
 }

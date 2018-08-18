@@ -37,36 +37,17 @@ public class LinguisticPatternContext implements Context {
     }
 
     @Override
-    public @Nullable LinguisticCandidate<LinguisticAct> find(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+    public LinguisticCandidate<LinguisticAct> find(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
         for (ContextComponent<?> contextComponent : context) {
-
-        }
-
-        /*
-        for (Phrasemes phrasemes : context) {
-            PhrasemeCandidate candidate = phrasemes.find(this, sentence, previousResult);
+            LinguisticCandidate<LinguisticAct> candidate = contextComponent.recognize(this, sentence, previousCandidate);
 
             if (candidate.isMatched()) {
                 return candidate;
             }
         }
-        */
 
         return new LinguisticCandidate<>(false);
     }
-
-    /*
-    private LinguisticCandidate<LinguisticAct> match(PhrasemeRepresentation representation, String sentence, LinguisticPatternContext group, @Nullable PhrasemeCandidate previousResult) {
-        LinguisticPattern pattern = representation.getPattern();
-        LinguisticPatternResult result = pattern.match(sentence, group, previousResult);
-
-        if (result == null || !result.isMatched()) {
-            return new PhrasemeCandidate();
-        }
-
-        return new PhrasemeCandidate(representation, result);
-    }
-    */
 
     @Override
     public void importComponent(ContextComponent<?> component) {
