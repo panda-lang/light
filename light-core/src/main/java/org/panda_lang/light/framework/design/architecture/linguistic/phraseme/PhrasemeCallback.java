@@ -20,6 +20,6 @@ import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 public abstract class PhrasemeCallback {
 
-    public abstract Object call(ExecutableBranch branch);
+    public abstract Object call(ExecutableBranch branch, Object[] convertedParameters);
 
 }

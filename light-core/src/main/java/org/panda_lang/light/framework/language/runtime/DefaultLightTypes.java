@@ -27,10 +27,7 @@ public class DefaultLightTypes {
                 .name("String")
                 .associated(String.class)
                 .aliases("string")
-                .transformer(sentence -> {
-                    System.out.println("yay");
-                    return (sentence.startsWith("\"") && sentence.endsWith("\"")) ? sentence.substring(1, sentence.length() - 1) : null;
-                })
+                .transformer(sentence -> (sentence.startsWith("\"") && sentence.endsWith("\"")) ? sentence.substring(1, sentence.length() - 1) : null)
                 .build();
 
         Types types = new Types();

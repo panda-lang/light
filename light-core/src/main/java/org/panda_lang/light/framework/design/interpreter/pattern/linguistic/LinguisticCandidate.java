@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 public class LinguisticCandidate<T> {
 
     private final boolean matched;
-    private final T matchedPhraseme;
+    private final T matchedElement;
     private final LinguisticPatternResult<T> linguisticResult;
     private final LinguisticCandidate<T> previousCandidate;
     private boolean definite;
@@ -29,7 +29,7 @@ public class LinguisticCandidate<T> {
     public LinguisticCandidate(boolean matched, boolean definite, T matchedElement, LinguisticPatternResult<T> linguisticResult, LinguisticCandidate<T> previousCandidate) {
         this.matched = matched;
         this.definite = definite;
-        this.matchedPhraseme = matchedElement;
+        this.matchedElement = matchedElement;
         this.linguisticResult = linguisticResult;
         this.previousCandidate = previousCandidate;
     }
@@ -63,7 +63,7 @@ public class LinguisticCandidate<T> {
     }
 
     public T getMatchedElement() {
-        return matchedPhraseme;
+        return matchedElement;
     }
 
 }

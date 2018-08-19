@@ -22,7 +22,7 @@ import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 public interface LinguisticAct {
 
-    TypeValue perform(ExecutableBranch branch);
+    TypeValue perform(ExecutableBranch branch, LinguisticAct... parameters);
 
     Type getType();
 

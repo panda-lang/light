@@ -25,7 +25,7 @@ import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extra
 public class LinguisticPattern {
 
     private final LexicalPattern<LinguisticAct> lexicalPattern;
-    private final @Nullable LinguisticWildcardProcessor wildcardProcessor;
+    private @Nullable LinguisticWildcardProcessor wildcardProcessor;
 
     public LinguisticPattern(LexicalPattern<LinguisticAct> lexicalPattern, @Nullable LinguisticWildcardProcessor wildcardProcessor) {
         this.lexicalPattern = lexicalPattern;
@@ -37,6 +37,10 @@ public class LinguisticPattern {
         LexicalExtractorResult<LinguisticAct> result = lexicalPattern.extract(extractor, sentence);
 
         return new LinguisticPatternResult<>(result);
+    }
+
+    public void setWildcardProcessor(LinguisticWildcardProcessor wildcardProcessor) {
+        this.wildcardProcessor = wildcardProcessor;
     }
 
     public boolean hasWildcardProcessor() {

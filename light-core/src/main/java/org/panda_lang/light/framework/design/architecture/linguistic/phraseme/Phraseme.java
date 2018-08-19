@@ -36,8 +36,14 @@ public class Phraseme {
         this.pattern = pattern;
         this.act = new LinguisticAct() {
             @Override
-            public TypeValue perform(ExecutableBranch branch) {
-                callback.call(branch);
+            public TypeValue perform(ExecutableBranch branch, LinguisticAct... parameters) {
+                Object[] convertedParameters = new Object[parameters.length];
+
+                for (int i = 0; i < parameters.length; i++) {
+                    convertedParameters[i] = parameters[i].perform(branch).getObject();
+                }
+
+                callback.call(branch, convertedParameters);
                 return null;
             }
 

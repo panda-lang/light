@@ -16,11 +16,15 @@
 
 package org.panda_lang.light.framework.language.runtime;
 
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.PhrasemeCallback;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phrasemes;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
+
+import java.util.Arrays;
 
 public class DefaultLightPhrasemes {
 
@@ -28,11 +32,15 @@ public class DefaultLightPhrasemes {
         Phraseme phraseme = new Phraseme(
                 LinguisticPattern.builder()
                         .compile("send * to console")
+                        .setWildcardProcessor((context, wildcard, previousCandidate) -> {
+                            LinguisticCandidate<LinguisticAct> candidate = context.find(wildcard, previousCandidate);
+                            return candidate.isMatched() ? candidate.getMatchedElement() : null;
+                        })
                         .build(),
                 new PhrasemeCallback() {
                     @Override
-                    public Object call(ExecutableBranch branch) {
-                        System.out.println("Test val");
+                    public Object call(ExecutableBranch branch, Object[] convertedParameters) {
+                        System.out.println(Arrays.toString(convertedParameters));
                         return null;
                     }
                 }

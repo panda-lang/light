@@ -46,7 +46,7 @@ public class Types implements ContextComponent<Type<?>> {
 
                 return new LinguisticCandidate<>(new LinguisticAct() {
                     @Override
-                    public TypeValue perform(ExecutableBranch branch) {
+                    public TypeValue perform(ExecutableBranch branch, LinguisticAct... parameters) {
                         return value;
                     }
 

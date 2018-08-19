@@ -26,6 +26,7 @@ import org.panda_lang.panda.framework.design.architecture.statement.Statement;
 import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
 import org.panda_lang.panda.framework.design.interpreter.parser.ParserData;
 import org.panda_lang.panda.framework.language.interpreter.parser.PandaParserFailure;
+import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
 public class SentenceParser implements Parser {
 
@@ -54,7 +55,14 @@ public class SentenceParser implements Parser {
             throw new PandaParserFailure("Unknown sentence", data);
         }
 
-        return new LinguisticStatement(candidate.getMatchedElement());
+        LexicalExtractorResult<LinguisticAct> lexicalResult = candidate.getLinguisticResult().getLexicalResult();
+        LinguisticAct[] parameters = new LinguisticAct[lexicalResult.getProcessedValues() != null ? lexicalResult.getProcessedValues().size() : 0];
+
+        for (int i = 0; i < parameters.length; i++) {
+            parameters[i] = lexicalResult.getProcessedValues().get(i).getValue();
+        }
+
+        return new LinguisticStatement(candidate.getMatchedElement(), parameters);
     }
 
 }
