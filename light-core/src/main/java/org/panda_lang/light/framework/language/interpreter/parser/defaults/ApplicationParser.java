@@ -16,27 +16,30 @@
 
 package org.panda_lang.light.framework.language.interpreter.parser.defaults;
 
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternContext;
-import org.panda_lang.light.framework.design.interpreter.lexer.*;
+import org.panda_lang.light.framework.design.architecture.linguistic.Context;
+import org.panda_lang.light.framework.design.interpreter.lexer.LightLexer;
 import org.panda_lang.light.framework.design.interpreter.parser.LightComponents;
-import org.panda_lang.light.framework.design.interpreter.source.*;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternContext;
+import org.panda_lang.light.framework.design.interpreter.source.LightSourceStream;
 import org.panda_lang.light.framework.language.architecture.LightApplication;
 import org.panda_lang.light.framework.language.architecture.LightScript;
 import org.panda_lang.light.framework.language.runtime.DefaultLightPhrasemes;
-import org.panda_lang.panda.framework.design.interpreter.parser.*;
-import org.panda_lang.panda.framework.design.architecture.*;
-import org.panda_lang.panda.framework.design.interpreter.*;
-import org.panda_lang.panda.framework.design.interpreter.lexer.*;
-import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
-import org.panda_lang.panda.framework.design.interpreter.parser.generation.casual.*;
-import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.*;
-import org.panda_lang.panda.framework.design.interpreter.source.*;
-import org.panda_lang.panda.framework.design.interpreter.token.*;
-import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
-import org.panda_lang.panda.framework.language.*;
-import org.panda_lang.panda.framework.language.interpreter.messenger.translators.exception.*;
+import org.panda_lang.panda.framework.design.architecture.Script;
+import org.panda_lang.panda.framework.design.interpreter.Interpretation;
+import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
+import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
+import org.panda_lang.panda.framework.design.interpreter.parser.ParserData;
+import org.panda_lang.panda.framework.design.interpreter.parser.component.UniversalComponents;
+import org.panda_lang.panda.framework.design.interpreter.parser.generation.casual.CasualParserGeneration;
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.PipelineRegistry;
+import org.panda_lang.panda.framework.design.interpreter.source.Source;
+import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;
+import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
+import org.panda_lang.panda.framework.design.interpreter.token.distributor.SourceStream;
+import org.panda_lang.panda.framework.language.Language;
+import org.panda_lang.panda.framework.language.interpreter.messenger.translators.exception.ExceptionTranslator;
 import org.panda_lang.panda.framework.language.interpreter.parser.PandaParserData;
-import org.panda_lang.panda.framework.language.interpreter.parser.defaults.*;
+import org.panda_lang.panda.framework.language.interpreter.parser.defaults.OverallParser;
 import org.panda_lang.panda.framework.language.interpreter.parser.generation.casual.PandaCasualParserGeneration;
 
 public class ApplicationParser implements Parser {
@@ -54,11 +57,15 @@ public class ApplicationParser implements Parser {
         PipelineRegistry pipelineRegistry = language.getParserPipelineRegistry();
         CasualParserGeneration generation = new PandaCasualParserGeneration();
 
+        Context context = new LinguisticPatternContext();
+        context.importComponent(new DefaultLightPhrasemes().generate());
+
         ParserData baseData = new PandaParserData();
         baseData.setComponent(UniversalComponents.APPLICATION, application);
         baseData.setComponent(UniversalComponents.INTERPRETATION, interpretation);
         baseData.setComponent(UniversalComponents.GENERATION, generation);
         baseData.setComponent(UniversalComponents.PIPELINE, pipelineRegistry);
+        baseData.setComponent(LightComponents.CONTEXT, context);
 
         ExceptionTranslator exceptionTranslator = new ExceptionTranslator(interpretation);
         interpretation.getMessenger().addMessageTranslator(exceptionTranslator);
@@ -70,7 +77,6 @@ public class ApplicationParser implements Parser {
             interpretation.execute(() -> {
                 Lexer lexer = new LightLexer(source.getContent());
                 TokenizedSource tokenizedSource = lexer.convert();
-
                 // System.out.println(tokenizedSource.toString());
 
                 SourceStream stream = new LightSourceStream(tokenizedSource);
@@ -80,10 +86,6 @@ public class ApplicationParser implements Parser {
                 delegatedInfo.setComponent(UniversalComponents.SOURCE, tokenizedSource);
                 delegatedInfo.setComponent(UniversalComponents.SOURCE_STREAM, stream);
                 delegatedInfo.setComponent(UniversalComponents.SCRIPT, script);
-
-                LinguisticPatternContext defaultPhrasemes = new LinguisticPatternContext();
-                defaultPhrasemes.importComponent(new DefaultLightPhrasemes().generate());
-                delegatedInfo.setComponent(LightComponents.PHRASEMES, defaultPhrasemes);
 
                 OverallParser parser = new OverallParser(delegatedInfo);
                 application.addScript(script);

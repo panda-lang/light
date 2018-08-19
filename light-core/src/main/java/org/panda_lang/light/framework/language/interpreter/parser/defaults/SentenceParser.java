@@ -16,11 +16,11 @@
 
 package org.panda_lang.light.framework.language.interpreter.parser.defaults;
 
+import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticStatement;
 import org.panda_lang.light.framework.design.interpreter.parser.LightComponents;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternContext;
 import org.panda_lang.light.framework.design.interpreter.token.SentenceRepresentation;
 import org.panda_lang.panda.framework.design.architecture.statement.Statement;
 import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
@@ -32,15 +32,15 @@ public class SentenceParser implements Parser {
     public Statement parse(ParserData data, SentenceRepresentation sentenceRepresentation) {
         String sentence = sentenceRepresentation.getTokenValue();
 
-        LinguisticPatternContext phrasemes = data.getComponent(LightComponents.PHRASEMES);
-        LinguisticCandidate<LinguisticAct> candidate = phrasemes.find(sentence, null);
+        Context context = data.getComponent(LightComponents.CONTEXT);
+        LinguisticCandidate<LinguisticAct> candidate = context.find(sentence, null);
 
         while (candidate != null) {
             if (!candidate.isMatched() || candidate.isDefinite()) {
                 break;
             }
 
-            LinguisticCandidate<LinguisticAct> currentCandidate = phrasemes.find(sentence, candidate);
+            LinguisticCandidate<LinguisticAct> currentCandidate = context.find(sentence, candidate);
 
             if (candidate.equals(currentCandidate)) {
                 candidate = null;
