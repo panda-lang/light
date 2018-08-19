@@ -24,6 +24,7 @@ import org.panda_lang.light.framework.design.interpreter.source.LightSourceStrea
 import org.panda_lang.light.framework.language.architecture.LightApplication;
 import org.panda_lang.light.framework.language.architecture.LightScript;
 import org.panda_lang.light.framework.language.runtime.DefaultLightPhrasemes;
+import org.panda_lang.light.framework.language.runtime.DefaultLightTypes;
 import org.panda_lang.panda.framework.design.architecture.Script;
 import org.panda_lang.panda.framework.design.interpreter.Interpretation;
 import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
@@ -59,6 +60,7 @@ public class ApplicationParser implements Parser {
 
         Context context = new LinguisticPatternContext();
         context.importComponent(new DefaultLightPhrasemes().generate());
+        context.importComponent(new DefaultLightTypes().generate());
 
         ParserData baseData = new PandaParserData();
         baseData.setComponent(UniversalComponents.APPLICATION, application);

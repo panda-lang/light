@@ -17,10 +17,9 @@
 package org.panda_lang.light.framework.design.architecture.linguistic.type;
 
 import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 
-public interface TypeTransformer {
+public interface TypeTransformer<T> {
 
-    @Nullable LinguisticAct transform(String sentence);
+    @Nullable T transform(String sentence);
 
 }

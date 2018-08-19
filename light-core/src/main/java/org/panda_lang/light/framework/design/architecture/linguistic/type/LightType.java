@@ -24,7 +24,7 @@ import java.util.function.Function;
 public class LightType<T> extends PandaClassPrototype implements Type<T> {
 
     private final TypeSerializer<T> serializer;
-    private final List<TypeTransformer> transformer;
+    private final List<TypeTransformer<T>> transformer;
     private final Function<T, String> stringifier;
 
     public LightType(LightTypeBuilder<T> builder) {
@@ -41,7 +41,7 @@ public class LightType<T> extends PandaClassPrototype implements Type<T> {
     }
 
     @Override
-    public List<? extends TypeTransformer> getTypeTransformer() {
+    public List<? extends TypeTransformer<T>> getTypeTransformer() {
         return transformer;
     }
 

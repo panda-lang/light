@@ -17,7 +17,6 @@
 package org.panda_lang.light.framework.design.architecture.linguistic.type;
 
 import org.jetbrains.annotations.Nullable;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.design.architecture.prototype.PandaClassPrototypeBuilder;
 
 import java.util.ArrayList;
@@ -26,13 +25,13 @@ import java.util.function.Function;
 
 public class LightTypeBuilder<T> extends PandaClassPrototypeBuilder<LightTypeBuilder<T>, LightType> {
 
-    protected List<TypeTransformer> transformers;
+    protected List<TypeTransformer<T>> transformers;
     protected TypeSerializer<T> serializer;
     protected Function<T, String> stringifier;
 
     protected LightTypeBuilder() {
         this.transformers = new ArrayList<>();
-        transformers.add(new DefaultTypeTransformer());
+        transformers.add(new DefaultTypeTransformer<>());
     }
 
     public LightTypeBuilder<T> serializer(TypeSerializer<T> serializer) {
@@ -40,7 +39,7 @@ public class LightTypeBuilder<T> extends PandaClassPrototypeBuilder<LightTypeBui
         return this;
     }
 
-    public LightTypeBuilder<T> transformer(TypeTransformer transformer) {
+    public LightTypeBuilder<T> transformer(TypeTransformer<T> transformer) {
         this.transformers.add(transformer);
         return this;
     }
@@ -59,10 +58,10 @@ public class LightTypeBuilder<T> extends PandaClassPrototypeBuilder<LightTypeBui
         return new LightType<>(this);
     }
 
-    private static class DefaultTypeTransformer implements TypeTransformer {
+    private static class DefaultTypeTransformer<T> implements TypeTransformer<T> {
 
         @Override
-        public @Nullable LinguisticAct transform(String sentence) {
+        public @Nullable T transform(String sentence) {
             return null;
         }
 
