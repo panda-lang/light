@@ -19,9 +19,16 @@ package org.panda_lang.light;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.management.ManagementFactory;
+
 public class LightLogger {
 
     protected static Logger LIGHT_LOGGER = LoggerFactory.getLogger("Light");
+
+    public static void printJVMUptime() {
+        long jvmStartTime = ManagementFactory.getRuntimeMXBean().getStartTime();
+        LIGHT_LOGGER.info("JVM launch time: " + (System.currentTimeMillis() - jvmStartTime) + "ms");
+    }
 
     public static void setLogger(Logger logger) {
         LIGHT_LOGGER = logger;

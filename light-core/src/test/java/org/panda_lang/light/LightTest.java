@@ -16,16 +16,17 @@
 
 package org.panda_lang.light;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 import org.panda_lang.light.framework.language.architecture.LightApplication;
-import org.panda_lang.panda.utilities.commons.*;
+import org.panda_lang.panda.utilities.commons.LoggingUtils;
 
 public  class LightTest {
 
     @Test
     public void testLight() {
-        LightCore core = new LightCore();
+        LightLogger.printJVMUptime();
 
+        LightCore core = new LightCore();
         LightLoader loader = core.getLoader();
         LightApplication application = loader.loadFiles("../examples/current_test.light");
 
