@@ -22,16 +22,14 @@ import org.panda_lang.panda.language.runtime.ExecutableBranch;
 public class LinguisticStatement extends ExecutableStatement {
 
     private final LinguisticAct act;
-    private final LinguisticAct[] parameters;
 
-    public LinguisticStatement(LinguisticAct act, LinguisticAct... parameters) {
+    public LinguisticStatement(LinguisticAct act) {
         this.act = act;
-        this.parameters = parameters;
     }
 
     @Override
     public void execute(ExecutableBranch branch) {
-        act.perform(branch, parameters);
+        act.perform(branch);
     }
 
 }
