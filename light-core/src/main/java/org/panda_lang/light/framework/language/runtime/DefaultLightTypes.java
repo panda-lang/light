@@ -17,20 +17,24 @@
 package org.panda_lang.light.framework.language.runtime;
 
 import org.panda_lang.light.framework.design.architecture.linguistic.type.LightType;
-import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Types;
 
 public class DefaultLightTypes {
 
     public Types generate() {
-        Type<String> stringType = LightType.<String> builder()
+        Types types = new Types();
+
+        types.registerElement(LightType.<String> builder()
                 .name("string")
                 .associated(String.class)
                 .transformer(sentence -> (sentence.startsWith("\"") && sentence.endsWith("\"")) ? sentence.substring(1, sentence.length() - 1) : null)
-                .build();
+                .build());
 
-        Types types = new Types();
-        types.registerElement(stringType);
+        types.registerElement(LightType.<Boolean> builder()
+                .name("boolean")
+                .associated(Boolean.class)
+                .transformer(sentence -> (sentence.equals("true") || sentence.equals("false")) ? Boolean.parseBoolean(sentence) : null)
+                .build());
 
         return types;
     }

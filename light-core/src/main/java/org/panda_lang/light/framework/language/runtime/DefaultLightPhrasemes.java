@@ -28,7 +28,9 @@ import java.util.Arrays;
 public class DefaultLightPhrasemes {
 
     public Phrasemes generate() {
-        Phraseme phraseme = new Phraseme(
+        Phrasemes defaultPhrasemes = new Phrasemes();
+
+        defaultPhrasemes.registerElement(new Phraseme(
                 LinguisticPattern.builder()
                         .compile("send <string> to console")
                         .build(),
@@ -39,10 +41,20 @@ public class DefaultLightPhrasemes {
                         return null;
                     }
                 }
-        );
+        ));
 
-        Phrasemes defaultPhrasemes = new Phrasemes();
-        defaultPhrasemes.registerElement(phraseme);
+        defaultPhrasemes.registerElement(new Phraseme(
+                LinguisticPattern.builder()
+                        .compile("send <boolean> to console")
+                        .build(),
+                new PhrasemeCallback() {
+                    @Override
+                    public Object call(ExecutableBranch branch, Object[] convertedParameters) {
+                        System.out.println("bool: " + Arrays.toString(convertedParameters));
+                        return null;
+                    }
+                }
+        ));
 
         return defaultPhrasemes;
     }

@@ -36,7 +36,7 @@ public class Phrasemes implements ContextComponent<Phraseme> {
             LinguisticPatternResult<LinguisticAct> result = phraseme.getPattern().match(sentence, context, previousCandidate);
 
             if (result == null || !result.isMatched()) {
-                return new LinguisticCandidate<>(false);
+                continue;
             }
 
             LinguisticCandidate<LinguisticAct> candidate = new LinguisticCandidate<>(phraseme.getAct(), result);
