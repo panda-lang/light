@@ -17,6 +17,7 @@
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.LightException;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractor;
@@ -41,7 +42,13 @@ public class LinguisticExtractor implements LexicalExtractor<LinguisticAct> {
         WildcardProcessor<LinguisticAct> wildcardProcessor = null;
 
         if (pattern.getWildcardProcessor() != null) {
-            wildcardProcessor = wildcard -> pattern.getWildcardProcessor().handle(context, wildcard, previousCandidate);
+            wildcardProcessor = (details, wildcard) -> {
+                if (details == null) {
+                    throw new LightException("Invalid type, details are not specified for the '" + wildcard + "' wildcard");
+                }
+
+                return pattern.getWildcardProcessor().handle(context, details, wildcard, previousCandidate);
+            };
         }
 
         if (wildcardProcessor == null && pattern.getLexicalPattern().hasWildcardProcessor()) {

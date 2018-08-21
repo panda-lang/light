@@ -17,8 +17,6 @@
 package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
 
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
-import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
-import org.panda_lang.light.framework.design.architecture.value.TypeValue;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
@@ -26,6 +24,7 @@ public class Phraseme {
 
     private final LinguisticPattern pattern;
     private final LinguisticAct act;
+    private int usages;
 
     public Phraseme(LinguisticPattern pattern, LinguisticAct act) {
         this.pattern = pattern;
@@ -36,11 +35,11 @@ public class Phraseme {
         this.pattern = pattern;
         this.act = new LinguisticAct() {
             @Override
-            public TypeValue perform(ExecutableBranch branch, LinguisticAct... parameters) {
+            public Object perform(ExecutableBranch branch, LinguisticAct... parameters) {
                 Object[] convertedParameters = new Object[parameters.length];
 
                 for (int i = 0; i < parameters.length; i++) {
-                    convertedParameters[i] = parameters[i].perform(branch).getObject();
+                    convertedParameters[i] = parameters[i].perform(branch);
                 }
 
                 callback.call(branch, convertedParameters);
@@ -48,10 +47,14 @@ public class Phraseme {
             }
 
             @Override
-            public Type getType() {
-                return null;
+            public String getType() {
+                return "void";
             }
         };
+    }
+
+    public void increaseUsages() {
+        ++usages;
     }
 
     public LinguisticAct getAct() {

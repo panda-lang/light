@@ -16,14 +16,12 @@
 
 package org.panda_lang.light.framework.design.architecture.linguistic;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
-import org.panda_lang.light.framework.design.architecture.value.TypeValue;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
 public interface LinguisticAct {
 
-    TypeValue perform(ExecutableBranch branch, LinguisticAct... parameters);
+    Object perform(ExecutableBranch branch, LinguisticAct... parameters);
 
-    Type getType();
+    String getType();
 
 }

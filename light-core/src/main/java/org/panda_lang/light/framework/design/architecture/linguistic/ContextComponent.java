@@ -29,4 +29,6 @@ public interface ContextComponent<T> {
 
     Collection<? extends T> getElements();
 
+    Class<?> getComponentType();
+
 }

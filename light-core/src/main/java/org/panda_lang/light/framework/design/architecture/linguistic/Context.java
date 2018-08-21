@@ -17,13 +17,16 @@
 package org.panda_lang.light.framework.design.architecture.linguistic;
 
 import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 
 public interface Context {
 
-    LinguisticCandidate<LinguisticAct> find(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate);
-
     void importComponent(ContextComponent<?> component);
+
+    @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate);
+
+    @Nullable Type<?> getType(String type);
 
     Context fork();
 

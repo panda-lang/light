@@ -51,12 +51,18 @@ public class Phrasemes implements ContextComponent<Phraseme> {
 
     @Override
     public void registerElement(Phraseme phraseme) {
+        phraseme.getPattern().setWildcardProcessor(PhrasemesWildcardProcessor.getInstance());
         phrasemes.add(phraseme);
     }
 
     @Override
     public Collection<? extends Phraseme> getElements() {
         return phrasemes;
+    }
+
+    @Override
+    public Class<?> getComponentType() {
+        return Phraseme.class;
     }
 
 }

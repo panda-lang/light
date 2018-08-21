@@ -24,9 +24,8 @@ public class DefaultLightTypes {
 
     public Types generate() {
         Type<String> stringType = LightType.<String> builder()
-                .name("String")
+                .name("string")
                 .associated(String.class)
-                .aliases("string")
                 .transformer(sentence -> (sentence.startsWith("\"") && sentence.endsWith("\"")) ? sentence.substring(1, sentence.length() - 1) : null)
                 .build();
 

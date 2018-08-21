@@ -19,7 +19,7 @@ package org.panda_lang.light.framework.language.interpreter.parser.defaults;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.interpreter.lexer.LightLexer;
 import org.panda_lang.light.framework.design.interpreter.parser.LightComponents;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternContext;
+import org.panda_lang.light.framework.language.architecture.linguistic.LightContext;
 import org.panda_lang.light.framework.design.interpreter.source.LightSourceStream;
 import org.panda_lang.light.framework.language.architecture.LightApplication;
 import org.panda_lang.light.framework.language.architecture.LightScript;
@@ -58,7 +58,7 @@ public class ApplicationParser implements Parser {
         PipelineRegistry pipelineRegistry = language.getParserPipelineRegistry();
         CasualParserGeneration generation = new PandaCasualParserGeneration();
 
-        Context context = new LinguisticPatternContext();
+        Context context = new LightContext();
         context.importComponent(new DefaultLightPhrasemes().generate());
         context.importComponent(new DefaultLightTypes().generate());
 

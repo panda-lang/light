@@ -20,8 +20,6 @@ import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
-import org.panda_lang.light.framework.design.architecture.value.LightTypeValue;
-import org.panda_lang.light.framework.design.architecture.value.TypeValue;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
@@ -42,17 +40,15 @@ public class Types implements ContextComponent<Type<?>> {
                     continue;
                 }
 
-                TypeValue value = new LightTypeValue(type, result);
-
                 return new LinguisticCandidate<>(new LinguisticAct() {
                     @Override
-                    public TypeValue perform(ExecutableBranch branch, LinguisticAct... parameters) {
-                        return value;
+                    public Object perform(ExecutableBranch branch, LinguisticAct... parameters) {
+                        return result;
                     }
 
                     @Override
-                    public Type getType() {
-                        return value.getType();
+                    public String getType() {
+                        return type.getClassName();
                     }
                 }, null, previousCandidate);
             }
@@ -69,6 +65,11 @@ public class Types implements ContextComponent<Type<?>> {
     @Override
     public Collection<? extends Type<?>> getElements() {
         return types;
+    }
+
+    @Override
+    public Class<?> getComponentType() {
+        return Type.class;
     }
 
 }

@@ -20,13 +20,11 @@ import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticStatement;
 import org.panda_lang.light.framework.design.interpreter.parser.LightComponents;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.light.framework.design.interpreter.token.SentenceRepresentation;
 import org.panda_lang.panda.framework.design.architecture.statement.Statement;
 import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
 import org.panda_lang.panda.framework.design.interpreter.parser.ParserData;
 import org.panda_lang.panda.framework.language.interpreter.parser.PandaParserFailure;
-import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
 public class SentenceParser implements Parser {
 
@@ -34,35 +32,13 @@ public class SentenceParser implements Parser {
         String sentence = sentenceRepresentation.getTokenValue();
 
         Context context = data.getComponent(LightComponents.CONTEXT);
-        LinguisticCandidate<LinguisticAct> candidate = context.find(sentence, null);
+        LinguisticAct act = context.find(sentence, null);
 
-        while (candidate != null) {
-            if (!candidate.isMatched() || candidate.isDefinite()) {
-                break;
-            }
-
-            LinguisticCandidate<LinguisticAct> currentCandidate = context.find(sentence, candidate);
-
-            if (candidate.equals(currentCandidate)) {
-                candidate = null;
-                break;
-            }
-
-            candidate = currentCandidate;
+        if (act == null) {
+            throw new PandaParserFailure("Unrecognized syntax", data);
         }
 
-        if (candidate == null || !candidate.isMatched()) {
-            throw new PandaParserFailure("Unknown sentence", data);
-        }
-
-        LexicalExtractorResult<LinguisticAct> lexicalResult = candidate.getLinguisticResult().getLexicalResult();
-        LinguisticAct[] parameters = new LinguisticAct[lexicalResult.getProcessedValues() != null ? lexicalResult.getProcessedValues().size() : 0];
-
-        for (int i = 0; i < parameters.length; i++) {
-            parameters[i] = lexicalResult.getProcessedValues().get(i).getValue();
-        }
-
-        return new LinguisticStatement(candidate.getMatchedElement(), parameters);
+        return new LinguisticStatement(act);
     }
 
 }
