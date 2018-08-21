@@ -9,47 +9,31 @@ Panda Programming Language: [panda-lang.org](https://panda-lang.org/)
 <br>
 #### Example
 ```javascript
-// Event 'on load' called when the script starts
-on load {
-    // Display 'Hello Light' in console
-    send "Hello Light" to console
-
-    // If-statement
-    if true {
-        // Set <var> variable to text
-        set <var> to "Variable Test"
-        // Display content of <var> variable in console
-        send <var> to console
-
-        // Delete <var> variable
-        delete <var>
-        // Display content of <var> variable in console
-        send <var> to console
-    }
-
-    // Loop once
-    loop 1 time {
-        // Call function named 'pandaInfo'
-        call pandaInfo
-    }
-
-    // Set <int> variable to 0
-    set <int> to 0
-    // Loop when <int> variable is less than 1
-    while <int> is less than 1 {
-        // Display expression
-        send 5 is greater than 10 to console
-        // Set <int> variable to 1 (This will complete the loop)
-        set <int> to 1
-    }
+project {
+    name as ExampleProject
+    author as dzikoysk
+    version as 1.0.0
 }
 
-// Function 'pandaInfo'
-function pandaInfo {
-    // Display text in console
-    send "Hello Panda" to console
-    // Display Panda's version in console
-    send panda version to console
+dependencies {
+    provided sdk by dzikoysk
+    internal utils by lily
+}
+
+command /version {
+    send "ExampleProject {version of ExampleProject}" to @player
+}
+
+on player join {
+    if @player has played before {
+        send "Hello {@player's name}!" to @player and end
+    }
+
+    set <@player:account:balance> to {configuration:default balance}
+}
+
+phrase 'version of ExampleProject' {
+    return version of project
 }
 ```
 
