@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
+package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticWildcardProcessor;
 
 public class PhrasemesWildcardProcessor implements LinguisticWildcardProcessor {
 

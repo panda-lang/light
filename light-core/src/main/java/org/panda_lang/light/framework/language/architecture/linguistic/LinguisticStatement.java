@@ -14,12 +14,23 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
+package org.panda_lang.light.framework.language.architecture.linguistic;
 
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.panda.framework.design.architecture.dynamic.ExecutableStatement;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 
-public abstract class PhrasemeCallback {
+public class LinguisticStatement extends ExecutableStatement {
 
-    public abstract Object call(ExecutableBranch branch, Object[] convertedParameters);
+    private final LinguisticAct act;
+
+    public LinguisticStatement(LinguisticAct act) {
+        this.act = act;
+    }
+
+    @Override
+    public void execute(ExecutableBranch branch) {
+        act.perform(branch);
+    }
 
 }

@@ -16,8 +16,8 @@
 
 package org.panda_lang.light.framework.language.runtime;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.type.LightType;
-import org.panda_lang.light.framework.design.architecture.linguistic.type.Types;
+import org.panda_lang.light.framework.language.architecture.linguistic.type.LightType;
+import org.panda_lang.light.framework.language.architecture.linguistic.type.Types;
 
 public class DefaultLightTypes {
 

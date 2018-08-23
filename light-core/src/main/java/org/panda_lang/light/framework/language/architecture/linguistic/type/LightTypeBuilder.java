@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.linguistic.type;
+package org.panda_lang.light.framework.language.architecture.linguistic.type;
 
 import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.TypeSerializer;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.TypeTransformer;
 import org.panda_lang.panda.framework.design.architecture.prototype.PandaClassPrototypeBuilder;
 
 import java.util.ArrayList;

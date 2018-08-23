@@ -18,8 +18,8 @@
 package org.panda_lang.light.framework.language.runtime;
 
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
-import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.PhrasemeCallback;
-import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phrasemes;
+import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.PhrasemeCallback;
+import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.Phrasemes;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 

@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.linguistic.type;
+package org.panda_lang.light.framework.language.architecture.linguistic.type;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.TypeTransformer;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.panda.language.runtime.ExecutableBranch;
 

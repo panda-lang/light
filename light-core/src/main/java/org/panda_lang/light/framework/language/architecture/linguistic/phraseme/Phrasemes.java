@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
+package org.panda_lang.light.framework.language.architecture.linguistic.phraseme;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.PhrasemesWildcardProcessor;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternResult;
 
@@ -40,10 +42,9 @@ public class Phrasemes implements ContextComponent<Phraseme> {
             }
 
             LinguisticCandidate<LinguisticAct> candidate = new LinguisticCandidate<>(phraseme.getAct(), result);
+            phraseme.increaseUsages();
 
-            if (candidate.isMatched()) {
-                return candidate;
-            }
+            return candidate;
         }
 
         return new LinguisticCandidate<>(false);
