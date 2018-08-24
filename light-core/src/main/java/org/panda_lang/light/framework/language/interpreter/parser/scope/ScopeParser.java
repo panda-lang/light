@@ -19,6 +19,7 @@ package org.panda_lang.light.framework.language.interpreter.parser.scope;
 import org.panda_lang.light.framework.language.interpreter.parser.defaults.*;
 import org.panda_lang.light.framework.design.interpreter.source.*;
 import org.panda_lang.light.framework.language.interpreter.parser.*;
+import org.panda_lang.panda.framework.design.interpreter.parser.generation.casual.CasualParserGenerationLayer;
 import org.panda_lang.panda.framework.language.interpreter.token.PandaSyntax;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.*;
 import org.panda_lang.panda.framework.design.architecture.*;
@@ -41,7 +42,7 @@ public class ScopeParser implements UnifiedParser {
             .build();
 
     @Override
-    public boolean parse(ParserData data) {
+    public boolean parse(ParserData data, CasualParserGenerationLayer nextLayer) {
         AbyssRedactor redactor = AbyssPatternAssistant.traditionalMapping(PATTERN, data, "scope-declaration", "scope-content");
 
         data.setComponent(ScopeComponents.DECLARATION, redactor.get("scope-declaration"));
@@ -53,7 +54,7 @@ public class ScopeParser implements UnifiedParser {
         SourceStream declarationSignatureStream = new LightSourceStream(data.getComponent(ScopeComponents.DECLARATION));
         UnifiedParser scopeParser = pipeline.handle(declarationSignatureStream);
 
-        scopeParser.parse(data);
+        scopeParser.parse(data, nextLayer);
         Scope scope = data.getComponent(ScopeComponents.SCOPE);
 
         if (scope == null) {
@@ -64,7 +65,7 @@ public class ScopeParser implements UnifiedParser {
         ParserData contentData = data.fork().setComponent(UniversalComponents.SOURCE_STREAM, contentStream);
 
         ContentParser contentParser = new ContentParser();
-        contentParser.parse(contentData);
+        contentParser.parse(contentData, nextLayer);
 
         Script script = data.getComponent(UniversalComponents.SCRIPT);
         script.getStatements().add(scope);

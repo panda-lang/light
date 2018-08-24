@@ -19,6 +19,7 @@ package org.panda_lang.light.framework.language.interpreter.parser.scope.main;
 
 import org.panda_lang.light.framework.language.interpreter.parser.*;
 import org.panda_lang.light.framework.language.interpreter.parser.scope.*;
+import org.panda_lang.panda.framework.design.interpreter.parser.generation.casual.CasualParserGenerationLayer;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.ParserRegistration;
 import org.panda_lang.panda.framework.design.interpreter.parser.*;
 
@@ -26,8 +27,9 @@ import org.panda_lang.panda.framework.design.interpreter.parser.*;
 public class MainScopeParser implements UnifiedParser {
 
     @Override
-    public void parse(ParserData data) {
+    public boolean parse(ParserData data, CasualParserGenerationLayer nextLayer) {
         data.setComponent(ScopeComponents.SCOPE, new MainScope());
+        return true;
     }
 
 }

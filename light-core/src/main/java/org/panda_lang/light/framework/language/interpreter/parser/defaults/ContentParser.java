@@ -21,6 +21,7 @@ import org.panda_lang.light.framework.language.interpreter.parser.scope.*;
 import org.panda_lang.panda.framework.design.architecture.statement.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
+import org.panda_lang.panda.framework.design.interpreter.parser.generation.casual.CasualParserGenerationLayer;
 import org.panda_lang.panda.framework.design.interpreter.token.*;
 import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
 import org.panda_lang.panda.framework.language.interpreter.parser.*;
@@ -28,7 +29,7 @@ import org.panda_lang.panda.framework.language.interpreter.parser.*;
 public class ContentParser implements UnifiedParser {
 
     @Override
-    public void parse(ParserData data) {
+    public boolean parse(ParserData data, CasualParserGenerationLayer nextLayer) {
         SentenceParser sentenceParser = new SentenceParser();
 
         SourceStream source = data.getComponent(UniversalComponents.SOURCE_STREAM);
@@ -50,6 +51,8 @@ public class ContentParser implements UnifiedParser {
 
             throw new PandaParserFailure("Unknown token type", data);
         }
+
+        return true;
     }
 
 }
