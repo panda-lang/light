@@ -41,7 +41,7 @@ public class ScopeParser implements UnifiedParser {
             .build();
 
     @Override
-    public void parse(ParserData data) {
+    public boolean parse(ParserData data) {
         AbyssRedactor redactor = AbyssPatternAssistant.traditionalMapping(PATTERN, data, "scope-declaration", "scope-content");
 
         data.setComponent(ScopeComponents.DECLARATION, redactor.get("scope-declaration"));
@@ -68,6 +68,7 @@ public class ScopeParser implements UnifiedParser {
 
         Script script = data.getComponent(UniversalComponents.SCRIPT);
         script.getStatements().add(scope);
+        return true;
     }
 
 }
