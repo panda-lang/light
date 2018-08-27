@@ -19,7 +19,7 @@ package org.panda_lang.light.framework.language.interpreter.parser.scope;
 import org.panda_lang.light.framework.language.interpreter.parser.defaults.*;
 import org.panda_lang.light.framework.design.interpreter.source.*;
 import org.panda_lang.light.framework.language.interpreter.parser.*;
-import org.panda_lang.panda.framework.design.interpreter.parser.generation.casual.CasualParserGenerationLayer;
+import org.panda_lang.panda.framework.design.interpreter.parser.generation.casual.GenerationLayer;
 import org.panda_lang.panda.framework.language.interpreter.token.PandaSyntax;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.*;
 import org.panda_lang.panda.framework.design.architecture.*;
@@ -42,7 +42,7 @@ public class ScopeParser implements UnifiedParser {
             .build();
 
     @Override
-    public boolean parse(ParserData data, CasualParserGenerationLayer nextLayer) {
+    public boolean parse(ParserData data, GenerationLayer nextLayer) {
         AbyssRedactor redactor = AbyssPatternAssistant.traditionalMapping(PATTERN, data, "scope-declaration", "scope-content");
 
         data.setComponent(ScopeComponents.DECLARATION, redactor.get("scope-declaration"));
