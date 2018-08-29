@@ -18,7 +18,7 @@ package org.panda_lang.light.framework.language.architecture.linguistic;
 
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.design.architecture.dynamic.ExecutableStatement;
-import org.panda_lang.panda.language.runtime.ExecutableBranch;
+import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
 public class LinguisticStatement extends ExecutableStatement {
 

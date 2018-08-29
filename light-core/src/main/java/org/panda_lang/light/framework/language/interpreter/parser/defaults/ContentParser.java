@@ -23,7 +23,7 @@ import org.panda_lang.panda.framework.design.interpreter.parser.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.generation.casual.GenerationLayer;
 import org.panda_lang.panda.framework.design.interpreter.token.*;
-import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
+import org.panda_lang.panda.framework.design.interpreter.token.stream.*;
 import org.panda_lang.panda.framework.language.interpreter.parser.*;
 
 public class ContentParser implements UnifiedParser {

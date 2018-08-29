@@ -36,8 +36,8 @@ import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registr
 import org.panda_lang.panda.framework.design.interpreter.source.Source;
 import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;
 import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
-import org.panda_lang.panda.framework.design.interpreter.token.distributor.SourceStream;
-import org.panda_lang.panda.framework.language.Language;
+import org.panda_lang.panda.framework.design.interpreter.token.stream.SourceStream;
+import org.panda_lang.panda.framework.design.resource.Language;
 import org.panda_lang.panda.framework.language.interpreter.messenger.translators.exception.ExceptionTranslator;
 import org.panda_lang.panda.framework.language.interpreter.parser.PandaParserData;
 import org.panda_lang.panda.framework.language.interpreter.parser.defaults.OverallParser;

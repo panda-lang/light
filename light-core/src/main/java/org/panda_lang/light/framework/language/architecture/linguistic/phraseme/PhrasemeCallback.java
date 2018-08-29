@@ -16,7 +16,7 @@
 
 package org.panda_lang.light.framework.language.architecture.linguistic.phraseme;
 
-import org.panda_lang.panda.language.runtime.ExecutableBranch;
+import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
 public abstract class PhrasemeCallback {
 

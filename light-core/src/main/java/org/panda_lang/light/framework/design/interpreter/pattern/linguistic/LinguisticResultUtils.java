@@ -19,7 +19,7 @@ package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
-import org.panda_lang.panda.language.runtime.ExecutableBranch;
+import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
 public class LinguisticResultUtils {
 

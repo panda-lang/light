@@ -17,7 +17,7 @@
 package org.panda_lang.light.framework.language.interpreter.parser.scope.main;
 
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.*;
-import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
+import org.panda_lang.panda.framework.design.interpreter.token.stream.*;
 
 public class MainScopeParserHandler implements ParserHandler {
 

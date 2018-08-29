@@ -23,7 +23,7 @@ import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticA
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.TypeTransformer;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
-import org.panda_lang.panda.language.runtime.ExecutableBranch;
+import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
 import java.util.Collection;
 import java.util.HashSet;

@@ -16,12 +16,12 @@
 
 package org.panda_lang.light.framework.language.interpreter.token;
 
-import org.panda_lang.panda.framework.design.interpreter.token.Syntax;
-import org.panda_lang.panda.framework.language.interpreter.token.defaults.keyword.*;
-import org.panda_lang.panda.framework.language.interpreter.token.defaults.literal.*;
-import org.panda_lang.panda.framework.language.interpreter.token.defaults.operator.*;
-import org.panda_lang.panda.framework.language.interpreter.token.defaults.separator.*;
-import org.panda_lang.panda.framework.language.interpreter.token.defaults.sequence.*;
+import org.panda_lang.panda.framework.design.resource.Syntax;
+import org.panda_lang.panda.framework.language.resource.syntax.keyword.*;
+import org.panda_lang.panda.framework.language.resource.syntax.literal.*;
+import org.panda_lang.panda.framework.language.resource.syntax.operator.*;
+import org.panda_lang.panda.framework.language.resource.syntax.separator.*;
+import org.panda_lang.panda.framework.language.resource.syntax.sequence.*;
 
 import java.util.List;
 

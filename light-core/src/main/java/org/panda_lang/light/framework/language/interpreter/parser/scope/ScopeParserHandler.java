@@ -18,7 +18,7 @@ package org.panda_lang.light.framework.language.interpreter.parser.scope;
 
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.*;
 import org.panda_lang.panda.framework.design.interpreter.token.*;
-import org.panda_lang.panda.framework.design.interpreter.token.distributor.*;
+import org.panda_lang.panda.framework.design.interpreter.token.stream.*;
 
 import java.util.*;
 

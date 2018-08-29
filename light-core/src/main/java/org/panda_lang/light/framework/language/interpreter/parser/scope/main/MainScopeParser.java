@@ -20,7 +20,7 @@ package org.panda_lang.light.framework.language.interpreter.parser.scope.main;
 import org.panda_lang.light.framework.language.interpreter.parser.*;
 import org.panda_lang.light.framework.language.interpreter.parser.scope.*;
 import org.panda_lang.panda.framework.design.interpreter.parser.generation.casual.GenerationLayer;
-import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.ParserRegistration;
+import org.panda_lang.panda.framework.language.interpreter.parser.pipeline.ParserRegistration;
 import org.panda_lang.panda.framework.design.interpreter.parser.*;
 
 @ParserRegistration(target = LightPipelines.SCOPE, parserClass = MainScopeParser.class, handlerClass = MainScopeParserHandler.class)

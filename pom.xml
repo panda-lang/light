@@ -56,7 +56,7 @@
             <dependency>
                 <groupId>org.panda-lang</groupId>
                 <artifactId>panda</artifactId>
-                <version>indev-0.8.828</version>
+                <version>indev-0.8.829</version>
             </dependency>
 
             <!-- Tests -->

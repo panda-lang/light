@@ -20,7 +20,7 @@ import org.panda_lang.light.framework.design.interpreter.source.*;
 import org.panda_lang.light.framework.design.interpreter.token.*;
 import org.panda_lang.panda.framework.design.interpreter.lexer.*;
 import org.panda_lang.panda.framework.design.interpreter.token.*;
-import org.panda_lang.panda.framework.language.interpreter.token.defaults.separator.*;
+import org.panda_lang.panda.framework.language.resource.syntax.separator.*;
 import org.panda_lang.panda.framework.language.interpreter.token.*;
 
 import java.util.*;
