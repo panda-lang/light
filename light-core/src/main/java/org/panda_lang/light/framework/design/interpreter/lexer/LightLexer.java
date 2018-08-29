@@ -16,14 +16,18 @@
 
 package org.panda_lang.light.framework.design.interpreter.lexer;
 
-import org.panda_lang.light.framework.design.interpreter.source.*;
-import org.panda_lang.light.framework.design.interpreter.token.*;
-import org.panda_lang.panda.framework.design.interpreter.lexer.*;
-import org.panda_lang.panda.framework.design.interpreter.token.*;
-import org.panda_lang.panda.framework.language.resource.syntax.separator.*;
-import org.panda_lang.panda.framework.language.interpreter.token.*;
+import org.panda_lang.light.framework.design.interpreter.source.LightTokenizedSource;
+import org.panda_lang.light.framework.design.interpreter.token.Sentence;
+import org.panda_lang.light.framework.design.interpreter.token.SentenceRepresentation;
+import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
+import org.panda_lang.panda.framework.design.interpreter.token.Token;
+import org.panda_lang.panda.framework.design.interpreter.token.TokenRepresentation;
+import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
+import org.panda_lang.panda.framework.language.interpreter.token.PandaTokenRepresentation;
+import org.panda_lang.panda.framework.language.resource.syntax.separator.Separators;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LightLexer implements Lexer {
 

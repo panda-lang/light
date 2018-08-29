@@ -16,11 +16,11 @@
 
 package org.panda_lang.light.framework.language.interpreter.parser.scope;
 
-import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.*;
-import org.panda_lang.panda.framework.design.interpreter.token.*;
-import org.panda_lang.panda.framework.design.interpreter.token.stream.*;
+import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.ParserHandler;
+import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
+import org.panda_lang.panda.framework.design.interpreter.token.stream.TokenReader;
 
-import java.util.*;
+import java.util.List;
 
 public class ScopeParserHandler implements ParserHandler {
 

@@ -21,9 +21,9 @@ import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.PhrasemesWildcardProcessor;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternResult;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.PhrasemesWildcardProcessor;
 
 import java.util.Collection;
 import java.util.HashSet;

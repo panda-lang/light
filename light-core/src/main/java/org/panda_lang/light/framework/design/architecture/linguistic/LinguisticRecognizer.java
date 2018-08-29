@@ -19,5 +19,4 @@ package org.panda_lang.light.framework.design.architecture.linguistic;
 public interface LinguisticRecognizer<T> {
 
 
-
 }

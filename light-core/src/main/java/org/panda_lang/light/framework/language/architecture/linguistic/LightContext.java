@@ -85,6 +85,11 @@ public class LightContext implements Context {
     }
 
     @Override
+    public LightContext fork() {
+        return new LightContext(context);
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public @Nullable Type<?> getType(String type) {
         for (ContextComponent<?> component : context) {
@@ -106,11 +111,6 @@ public class LightContext implements Context {
         }
 
         return null;
-    }
-
-    @Override
-    public LightContext fork() {
-        return new LightContext(context);
     }
 
 }

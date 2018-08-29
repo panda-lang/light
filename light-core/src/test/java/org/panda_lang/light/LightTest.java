@@ -20,7 +20,11 @@ import org.junit.jupiter.api.Test;
 import org.panda_lang.light.framework.language.architecture.LightApplication;
 import org.panda_lang.panda.utilities.commons.LoggingUtils;
 
-public  class LightTest {
+public class LightTest {
+
+    static {
+        LoggingUtils.skipJansi();
+    }
 
     @Test
     public void testLight() {
@@ -36,10 +40,6 @@ public  class LightTest {
         }
 
         application.launch();
-    }
-
-    static {
-        LoggingUtils.skipJansi();
     }
 
 }

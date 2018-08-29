@@ -26,8 +26,8 @@ public interface Context {
 
     @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate);
 
-    @Nullable Type<?> getType(String type);
-
     Context fork();
+
+    @Nullable Type<?> getType(String type);
 
 }

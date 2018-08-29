@@ -18,9 +18,9 @@ package org.panda_lang.light.framework.language.interpreter.parser.defaults;
 
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
-import org.panda_lang.light.framework.language.architecture.linguistic.LinguisticStatement;
 import org.panda_lang.light.framework.design.interpreter.parser.LightComponents;
 import org.panda_lang.light.framework.design.interpreter.token.SentenceRepresentation;
+import org.panda_lang.light.framework.language.architecture.linguistic.LinguisticStatement;
 import org.panda_lang.panda.framework.design.architecture.statement.Statement;
 import org.panda_lang.panda.framework.design.interpreter.parser.Parser;
 import org.panda_lang.panda.framework.design.interpreter.parser.ParserData;

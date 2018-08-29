@@ -16,11 +16,11 @@
 
 package org.panda_lang.light.framework.language.architecture;
 
-import org.panda_lang.light.*;
-import org.panda_lang.light.framework.language.*;
+import org.panda_lang.light.LightCore;
+import org.panda_lang.light.framework.language.LightLanguage;
 import org.panda_lang.light.framework.language.interpreter.LightInterpreter;
-import org.panda_lang.panda.framework.design.architecture.*;
-import org.panda_lang.panda.framework.design.architecture.module.*;
+import org.panda_lang.panda.framework.design.architecture.Environment;
+import org.panda_lang.panda.framework.design.architecture.module.ModulePath;
 
 public class LightEnvironment implements Environment {
 

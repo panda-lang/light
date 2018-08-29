@@ -17,10 +17,10 @@
 package org.panda_lang.light.framework.language;
 
 import org.panda_lang.light.LightException;
-import org.panda_lang.panda.framework.language.interpreter.parser.pipeline.ParserRegistrationLoader;
 import org.panda_lang.panda.framework.design.interpreter.parser.pipeline.registry.PipelineRegistry;
-import org.panda_lang.panda.framework.design.resource.Syntax;
 import org.panda_lang.panda.framework.design.resource.Language;
+import org.panda_lang.panda.framework.design.resource.Syntax;
+import org.panda_lang.panda.framework.language.interpreter.parser.pipeline.ParserRegistrationLoader;
 import org.panda_lang.panda.util.PandaUtils;
 
 public class LightLanguage implements Language {

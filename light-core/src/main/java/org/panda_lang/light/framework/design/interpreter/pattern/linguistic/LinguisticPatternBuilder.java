@@ -33,6 +33,10 @@ public class LinguisticPatternBuilder {
         return this;
     }
 
+    public LinguisticPattern build() {
+        return new LinguisticPattern(pattern, wildcardProcessor);
+    }
+
     public LinguisticPatternBuilder setWildcardProcessor(WildcardProcessor<LinguisticAct> wildcardProcessor) {
         pattern.setWildcardProcessor(wildcardProcessor);
         return this;
@@ -41,10 +45,6 @@ public class LinguisticPatternBuilder {
     public LinguisticPatternBuilder setWildcardProcessor(LinguisticWildcardProcessor wildcardProcessor) {
         this.wildcardProcessor = wildcardProcessor;
         return this;
-    }
-
-    public LinguisticPattern build() {
-        return new LinguisticPattern(pattern, wildcardProcessor);
     }
 
 }

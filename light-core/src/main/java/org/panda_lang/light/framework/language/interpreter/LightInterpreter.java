@@ -22,7 +22,7 @@ import org.panda_lang.light.framework.language.architecture.LightEnvironment;
 import org.panda_lang.light.framework.language.interpreter.parser.defaults.ApplicationParser;
 import org.panda_lang.panda.framework.design.interpreter.Interpretation;
 import org.panda_lang.panda.framework.design.interpreter.Interpreter;
-import org.panda_lang.panda.framework.design.interpreter.messenger.MessengerMessage;
+import org.panda_lang.panda.framework.design.interpreter.messenger.MessengerLevel;
 import org.panda_lang.panda.framework.design.interpreter.source.SourceSet;
 import org.panda_lang.panda.framework.language.interpreter.PandaInterpretation;
 
@@ -42,7 +42,7 @@ public class LightInterpreter implements Interpreter {
         LightApplication application = parser.parse(sources);
 
         if (!interpretation.isHealthy()) {
-            interpretation.getMessenger().sendMessage(MessengerMessage.Level.FAILURE, "Interpretation failed, cannot parse specified sources");
+            interpretation.getMessenger().sendMessage(MessengerLevel.FAILURE, "Interpretation failed, cannot parse specified sources");
             return null;
         }
 

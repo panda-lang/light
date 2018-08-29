@@ -16,15 +16,17 @@
 
 package org.panda_lang.light.framework.language.interpreter.parser.defaults;
 
-import org.panda_lang.light.framework.design.interpreter.token.*;
-import org.panda_lang.light.framework.language.interpreter.parser.scope.*;
-import org.panda_lang.panda.framework.design.architecture.statement.*;
-import org.panda_lang.panda.framework.design.interpreter.parser.*;
-import org.panda_lang.panda.framework.design.interpreter.parser.component.*;
+import org.panda_lang.light.framework.design.interpreter.token.SentenceRepresentation;
+import org.panda_lang.light.framework.language.interpreter.parser.scope.ScopeComponents;
+import org.panda_lang.panda.framework.design.architecture.statement.Scope;
+import org.panda_lang.panda.framework.design.architecture.statement.Statement;
+import org.panda_lang.panda.framework.design.interpreter.parser.ParserData;
+import org.panda_lang.panda.framework.design.interpreter.parser.UnifiedParser;
+import org.panda_lang.panda.framework.design.interpreter.parser.component.UniversalComponents;
 import org.panda_lang.panda.framework.design.interpreter.parser.generation.casual.GenerationLayer;
-import org.panda_lang.panda.framework.design.interpreter.token.*;
-import org.panda_lang.panda.framework.design.interpreter.token.stream.*;
-import org.panda_lang.panda.framework.language.interpreter.parser.*;
+import org.panda_lang.panda.framework.design.interpreter.token.TokenRepresentation;
+import org.panda_lang.panda.framework.design.interpreter.token.stream.SourceStream;
+import org.panda_lang.panda.framework.language.interpreter.parser.PandaParserFailure;
 
 public class ContentParser implements UnifiedParser {
 
