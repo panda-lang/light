@@ -16,10 +16,11 @@
 
 package org.panda_lang.light.framework.language.architecture.linguistic.phraseme;
 
+import org.jetbrains.annotations.Nullable;
 import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
 public abstract class PhrasemeCallback {
 
-    public abstract Object call(ExecutableBranch branch, Object[] convertedParameters);
+    public abstract @Nullable Object call(ExecutableBranch branch, Object[] convertedParameters);
 
 }

@@ -14,12 +14,21 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.library.phrasemes;
+package org.panda_lang.light.framework.language.resource.phrasemes;
+
+import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.registry.Id;
+import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.registry.PhrasemeRepresentation;
 
 public class ConsolePhraseme {
 
-    public void sendMessageToConsole(String message) {
+    @PhrasemeRepresentation("send message:<string> to console")
+    public void sendMessageToConsole(@Id("message") String message) {
+        System.out.println(message);
+    }
 
+    @PhrasemeRepresentation("send message:<boolean> to console")
+    public void sendMessageToConsole(@Id("message") boolean message) {
+        System.out.println("boolean::" + message);
     }
 
 }

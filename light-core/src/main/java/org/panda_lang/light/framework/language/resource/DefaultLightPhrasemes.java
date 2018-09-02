@@ -17,43 +17,23 @@
 package org.panda_lang.light.framework.language.resource;
 
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
-import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.PhrasemeCallback;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.Phrasemes;
-import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
+import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.registry.PhrasemeRepresentationLoader;
+import org.panda_lang.panda.utilities.annotations.AnnotationsScannerProcess;
 
-import java.util.Arrays;
+import java.util.Collection;
 
 public class DefaultLightPhrasemes {
 
-    public Phrasemes generate() {
+    public Phrasemes generate(AnnotationsScannerProcess process) {
         Phrasemes defaultPhrasemes = new Phrasemes();
 
-        defaultPhrasemes.registerElement(new Phraseme(
-                LinguisticPattern.builder()
-                        .compile("send <string> to console")
-                        .build(),
-                new PhrasemeCallback() {
-                    @Override
-                    public Object call(ExecutableBranch branch, Object[] convertedParameters) {
-                        System.out.println(Arrays.toString(convertedParameters));
-                        return null;
-                    }
-                }
-        ));
+        PhrasemeRepresentationLoader loader = new PhrasemeRepresentationLoader();
+        Collection<Phraseme> phrasemes = loader.load(process);
 
-        defaultPhrasemes.registerElement(new Phraseme(
-                LinguisticPattern.builder()
-                        .compile("send <boolean> to console")
-                        .build(),
-                new PhrasemeCallback() {
-                    @Override
-                    public Object call(ExecutableBranch branch, Object[] convertedParameters) {
-                        System.out.println("bool: " + Arrays.toString(convertedParameters));
-                        return null;
-                    }
-                }
-        ));
+        for (Phraseme phraseme : phrasemes) {
+            defaultPhrasemes.registerElement(phraseme);
+        }
 
         return defaultPhrasemes;
     }
