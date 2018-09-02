@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.language.interpreter.token;
+package org.panda_lang.light.framework.language.resource;
 
 import org.panda_lang.panda.framework.design.resource.Syntax;
 import org.panda_lang.panda.framework.language.resource.syntax.keyword.Keyword;
