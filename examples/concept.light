@@ -13,7 +13,7 @@ on player join {
         send "Hello {player's name}!" to player and end
     }
 
-    set <{player}:account:balance> to {configuration:default balance}
+    set <{player}:account:balance> to {configuration:default balance as number}
 }
 
 phraseme 'version of ExampleProject' {

@@ -53,6 +53,11 @@ public class LightType<T> extends PandaClassPrototype implements Type<T> {
         return stringifier;
     }
 
+    @Override
+    public List<? extends String> getPlurals() {
+        return null; // TODO: Plurals
+    }
+
     public static <T> LightTypeBuilder<T> builder() {
         return new LightTypeBuilder<>();
     }

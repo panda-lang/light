@@ -29,4 +29,6 @@ public interface Type<T> extends ClassPrototype {
 
     TypeSerializer<T> getSerializer();
 
+    List<? extends String> getPlurals();
+
 }
