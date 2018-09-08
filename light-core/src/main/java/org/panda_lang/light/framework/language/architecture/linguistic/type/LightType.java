@@ -26,6 +26,7 @@ import java.util.function.Function;
 
 public class LightType<T> extends PandaClassPrototype implements Type<T> {
 
+    private final List<String> plurals;
     private final TypeSerializer<T> serializer;
     private final List<TypeTransformer<T>> transformer;
     private final Function<T, String> stringifier;
@@ -33,6 +34,7 @@ public class LightType<T> extends PandaClassPrototype implements Type<T> {
     public LightType(LightTypeBuilder<T> builder) {
         super(builder);
 
+        this.plurals = builder.plurals;
         this.serializer = builder.serializer;
         this.transformer = builder.transformers;
         this.stringifier = builder.stringifier;
@@ -55,7 +57,7 @@ public class LightType<T> extends PandaClassPrototype implements Type<T> {
 
     @Override
     public List<? extends String> getPlurals() {
-        return null; // TODO: Plurals
+        return plurals;
     }
 
     public static <T> LightTypeBuilder<T> builder() {

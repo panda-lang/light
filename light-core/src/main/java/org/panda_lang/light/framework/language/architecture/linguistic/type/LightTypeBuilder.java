@@ -27,13 +27,21 @@ import java.util.function.Function;
 
 public class LightTypeBuilder<T> extends PandaClassPrototypeBuilder<LightTypeBuilder<T>, LightType> {
 
+    protected List<String> plurals;
     protected List<TypeTransformer<T>> transformers;
     protected TypeSerializer<T> serializer;
     protected Function<T, String> stringifier;
 
     protected LightTypeBuilder() {
+        this.plurals = new ArrayList<>(1);
         this.transformers = new ArrayList<>();
+
         transformers.add(new DefaultTypeTransformer<>());
+    }
+
+    public LightTypeBuilder<T> plural(String plural) {
+        plurals.add(plural);
+        return this;
     }
 
     public LightTypeBuilder<T> serializer(TypeSerializer<T> serializer) {
