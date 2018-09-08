@@ -23,8 +23,8 @@ import org.panda_lang.light.framework.design.interpreter.source.LightSourceStrea
 import org.panda_lang.light.framework.language.architecture.LightApplication;
 import org.panda_lang.light.framework.language.architecture.LightScript;
 import org.panda_lang.light.framework.language.architecture.linguistic.LightContext;
-import org.panda_lang.light.framework.language.runtime.DefaultLightPhrasemes;
-import org.panda_lang.light.framework.language.runtime.DefaultLightTypes;
+import org.panda_lang.light.framework.language.resource.DefaultLightPhrasemes;
+import org.panda_lang.light.framework.language.resource.DefaultLightTypes;
 import org.panda_lang.panda.framework.design.architecture.Script;
 import org.panda_lang.panda.framework.design.interpreter.Interpretation;
 import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
@@ -42,6 +42,7 @@ import org.panda_lang.panda.framework.language.interpreter.messenger.translators
 import org.panda_lang.panda.framework.language.interpreter.parser.PandaParserData;
 import org.panda_lang.panda.framework.language.interpreter.parser.defaults.OverallParser;
 import org.panda_lang.panda.framework.language.interpreter.parser.generation.casual.PandaCasualParserGeneration;
+import org.panda_lang.panda.util.PandaUtils;
 
 public class ApplicationParser implements Parser {
 
@@ -59,7 +60,7 @@ public class ApplicationParser implements Parser {
         CasualParserGeneration generation = new PandaCasualParserGeneration();
 
         Context context = new LightContext();
-        context.importComponent(new DefaultLightPhrasemes().generate());
+        context.importComponent(new DefaultLightPhrasemes().generate(PandaUtils.DEFAULT_PANDA_SCANNER));
         context.importComponent(new DefaultLightTypes().generate());
 
         ParserData baseData = new PandaParserData();

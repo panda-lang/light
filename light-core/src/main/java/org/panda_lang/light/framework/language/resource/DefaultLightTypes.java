@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.language.runtime;
+package org.panda_lang.light.framework.language.resource;
 
 import org.panda_lang.light.framework.language.architecture.linguistic.type.LightType;
 import org.panda_lang.light.framework.language.architecture.linguistic.type.Types;
