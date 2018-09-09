@@ -22,12 +22,12 @@ import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.
 
 public class ConsolePhraseme {
 
-    @PhrasemeRepresentation("send message:<string> to console")
+    @PhrasemeRepresentation("send message:<string> to [the] console")
     public void sendMessageToConsole(@Id("message") String message) {
         System.out.println(message);
     }
 
-    @PhrasemeRepresentation("send message:<boolean> to console")
+    @PhrasemeRepresentation("send message:<boolean> to [the] console")
     public void sendMessageToConsole(@Id("message") boolean message) {
         System.out.println("boolean::" + message);
     }

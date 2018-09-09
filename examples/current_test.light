@@ -1,10 +1,12 @@
 main {
-    // Print <string> type in console
+    // Print <string> type
     send "Hello Light" to console
 
-    // Print <boolean> type in console
-    send true to console
+    // Print <boolean> type
+    send
+     > true
+     > to the console
 
-    // Print phraseme in console
-    send light version to console
+    // Print phraseme (return type: string)
+    send light version to the console
 }
