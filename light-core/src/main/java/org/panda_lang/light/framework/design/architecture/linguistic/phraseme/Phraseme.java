@@ -25,15 +25,19 @@ public class Phraseme {
 
     private final LinguisticPattern pattern;
     private final LinguisticAct act;
+    private final String returnType;
     private int usages;
 
-    public Phraseme(LinguisticPattern pattern, LinguisticAct act) {
+    public Phraseme(LinguisticPattern pattern, LinguisticAct act, String returnType) {
         this.pattern = pattern;
         this.act = act;
+        this.returnType = returnType;
     }
 
-    public Phraseme(LinguisticPattern pattern, PhrasemeCallback callback) {
+    public Phraseme(LinguisticPattern pattern, PhrasemeCallback callback, String returnType) {
         this.pattern = pattern;
+        this.returnType = returnType;
+
         this.act = new LinguisticAct() {
             @Override
             public Object perform(ExecutableBranch branch, LinguisticAct... parameters) {
@@ -43,13 +47,12 @@ public class Phraseme {
                     convertedParameters[i] = parameters[i].perform(branch);
                 }
 
-                callback.call(branch, convertedParameters);
-                return null;
+                return callback.call(branch, convertedParameters);
             }
 
             @Override
             public String getType() {
-                return "void";
+                return returnType;
             }
         };
     }

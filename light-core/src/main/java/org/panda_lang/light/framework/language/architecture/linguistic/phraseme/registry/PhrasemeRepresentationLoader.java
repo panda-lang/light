@@ -60,7 +60,7 @@ public class PhrasemeRepresentationLoader {
             }
         };
 
-        return new Phraseme(pattern, callback);
+        return new Phraseme(pattern, callback, method.getReturnType().getSimpleName());
     }
 
 }

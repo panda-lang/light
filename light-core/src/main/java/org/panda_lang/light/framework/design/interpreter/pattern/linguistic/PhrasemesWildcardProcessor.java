@@ -28,7 +28,7 @@ public class PhrasemesWildcardProcessor implements LinguisticWildcardProcessor {
     public @Nullable LinguisticAct handle(Context context, String details, String wildcard, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
         LinguisticAct matchedAct = context.find(wildcard, previousCandidate);
 
-        if (matchedAct != null && !details.equals(matchedAct.getType())) {
+        if (matchedAct != null && !details.toLowerCase().equals(matchedAct.getType().toLowerCase())) {
             return null;
         }
 

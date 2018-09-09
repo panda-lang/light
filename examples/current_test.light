@@ -1,5 +1,10 @@
 main {
+    // Print <string> type in console
     send "Hello Light" to console
+
+    // Print <boolean> type in console
     send true to console
-    send "Hello Light" to console
+
+    // Print phraseme in console
+    send light version to console
 }

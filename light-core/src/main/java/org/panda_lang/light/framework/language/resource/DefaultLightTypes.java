@@ -18,22 +18,31 @@ package org.panda_lang.light.framework.language.resource;
 
 import org.panda_lang.light.framework.language.architecture.linguistic.type.LightType;
 import org.panda_lang.light.framework.language.architecture.linguistic.type.Types;
+import org.panda_lang.light.framework.language.architecture.linguistic.type.resolvers.TransformerTypeResolver;
 
 public class DefaultLightTypes {
 
     public Types generate() {
         Types types = new Types();
+        types.registerResolver(new TransformerTypeResolver());
 
-        types.registerElement(LightType.<String> builder()
-                .name("string")
-                .associated(String.class)
-                .transformer(sentence -> (sentence.startsWith("\"") && sentence.endsWith("\"")) ? sentence.substring(1, sentence.length() - 1) : null)
+        types.registerElement(LightType.<Void> builder()
+                .name("void")
+                .associated(void.class)
                 .build());
 
         types.registerElement(LightType.<Boolean> builder()
                 .name("boolean")
+                .plural("booleans")
                 .associated(Boolean.class)
                 .transformer(sentence -> (sentence.equals("true") || sentence.equals("false")) ? Boolean.parseBoolean(sentence) : null)
+                .build());
+
+        types.registerElement(LightType.<String> builder()
+                .name("string")
+                .plural("strings")
+                .associated(String.class)
+                .transformer(sentence -> (sentence.startsWith("\"") && sentence.endsWith("\"")) ? sentence.substring(1, sentence.length() - 1) : null)
                 .build());
 
         return types;
