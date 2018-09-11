@@ -37,4 +37,14 @@ public class ConsolePhraseme {
         return LightConstants.VERSION;
     }
 
+    @PhrasemeRepresentation("string of <object>")
+    public String stringOf(Object obj) {
+        return obj.toString();
+    }
+
+    @PhrasemeRepresentation("joined <string> and <string>")
+    public String join(String a, String b) {
+        return a + b;
+    }
+
 }

@@ -19,6 +19,7 @@ package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 
 public class PhrasemesWildcardProcessor implements LinguisticWildcardProcessor {
 
@@ -28,7 +29,18 @@ public class PhrasemesWildcardProcessor implements LinguisticWildcardProcessor {
     public @Nullable LinguisticAct handle(Context context, String details, String wildcard, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
         LinguisticAct matchedAct = context.find(wildcard, previousCandidate);
 
-        if (matchedAct != null && !details.toLowerCase().equals(matchedAct.getType().toLowerCase())) {
+        if (matchedAct == null) {
+            return null;
+        }
+
+        Type<?> required = context.getType(details);
+        Type<?> matched = context.getType(matchedAct.getType());
+
+        if (required == null || matched == null) {
+            return null;
+        }
+
+        if (!required.isAssignableFrom(matched)) {
             return null;
         }
 

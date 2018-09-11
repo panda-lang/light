@@ -31,6 +31,11 @@ public class DefaultLightTypes {
                 .associated(void.class)
                 .build());
 
+        types.registerElement(LightType.builder()
+                .name("object")
+                .plural("objects")
+                .build());
+
         types.registerElement(LightType.<Boolean> builder()
                 .name("boolean")
                 .plural("booleans")

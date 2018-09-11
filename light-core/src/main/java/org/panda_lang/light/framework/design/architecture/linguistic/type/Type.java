@@ -23,6 +23,8 @@ import java.util.function.Function;
 
 public interface Type<T> extends ClassPrototype {
 
+    boolean isAssignableFrom(Type<?> type);
+
     List<? extends TypeTransformer> getTypeTransformer();
 
     Function<T, String> getStringifier();

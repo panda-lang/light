@@ -9,4 +9,19 @@ main {
 
     // Print phraseme (return type: string)
     send light version to the console
+
+    // Print phrasemes sequence
+    send string of light version to the console
+
+    // Print phrasemes tree
+    send
+        > joined
+            > "Light "
+        > and
+            > string of light version
+    > to the console
 }
+
+
+
+
