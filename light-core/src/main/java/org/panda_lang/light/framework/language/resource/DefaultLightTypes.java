@@ -26,14 +26,14 @@ public class DefaultLightTypes {
         Types types = new Types();
         types.registerResolver(new TransformerTypeResolver());
 
-        types.registerElement(LightType.<Void> builder()
-                .name("void")
-                .associated(void.class)
-                .build());
-
         types.registerElement(LightType.builder()
                 .name("object")
                 .plural("objects")
+                .build());
+
+        types.registerElement(LightType.<Void> builder()
+                .name("void")
+                .associated(void.class)
                 .build());
 
         types.registerElement(LightType.<Boolean> builder()

@@ -42,7 +42,7 @@ public class LightType<T> extends PandaClassPrototype implements Type<T> {
 
     @Override
     public boolean isAssignableFrom(Type<?> type) {
-        return super.getClassName().toLowerCase().equals(type.getClassName().toLowerCase()) || type.isAssociatedWith(this);
+        return super.getClassName().equals(type.getClassName()) || type.isAssociatedWith(this);
     }
 
     @Override
