@@ -1,15 +1,16 @@
 package org.panda_lang.light.framework.language.architecture.linguistic.phraseme;
 
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
-import org.panda_lang.light.framework.language.architecture.linguistic.LinguisticUtils;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticUtils;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
 public class LightPhrasemeLinguisticAct implements LinguisticAct {
 
     private final PhrasemeCallback callback;
-    private final String returnType;
+    private final Type<?> returnType;
 
-    public LightPhrasemeLinguisticAct(PhrasemeCallback callback, String returnType) {
+    public LightPhrasemeLinguisticAct(PhrasemeCallback callback, Type<?> returnType) {
         this.callback = callback;
         this.returnType = returnType;
     }
@@ -20,7 +21,12 @@ public class LightPhrasemeLinguisticAct implements LinguisticAct {
     }
 
     @Override
-    public String getType() {
+    public Type<?>[] getParameterTypes() {
+        return LinguisticUtils.TYPELESS;
+    }
+
+    @Override
+    public Type<?> getType() {
         return returnType;
     }
 

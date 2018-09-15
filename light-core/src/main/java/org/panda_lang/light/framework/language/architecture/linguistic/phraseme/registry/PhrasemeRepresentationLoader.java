@@ -1,6 +1,7 @@
 package org.panda_lang.light.framework.language.architecture.linguistic.phraseme.registry;
 
 import org.panda_lang.light.LightException;
+import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.LightPhraseme;
@@ -16,7 +17,7 @@ import java.util.Collection;
 
 public class PhrasemeRepresentationLoader {
 
-    public Collection<Phraseme> load(AnnotationsScannerProcess process) {
+    public Collection<Phraseme> load(Context context, AnnotationsScannerProcess process) {
         Collection<Phraseme> phrasemes = new ArrayList<>();
 
         Collection<Method> methods = process.createSelector()
@@ -24,7 +25,7 @@ public class PhrasemeRepresentationLoader {
 
         for (Method method : methods) {
             try {
-                Phraseme phraseme = load(method);
+                Phraseme phraseme = load(context, method);
                 phrasemes.add(phraseme);
             } catch (Exception e) {
                 throw new LightException(e);
@@ -34,7 +35,7 @@ public class PhrasemeRepresentationLoader {
         return phrasemes;
     }
 
-    private Phraseme load(Method method) throws Exception {
+    private Phraseme load(Context context, Method method) throws Exception {
         PhrasemeRepresentation phrasemeRepresentation = method.getAnnotation(PhrasemeRepresentation.class);
         String patternRepresentation = phrasemeRepresentation.value();
 
@@ -61,7 +62,7 @@ public class PhrasemeRepresentationLoader {
             }
         };
 
-        return new LightPhraseme(pattern, callback, method.getReturnType().getSimpleName());
+        return new LightPhraseme(pattern, callback, context.getType(method.getReturnType().getSimpleName()));
     }
 
 }

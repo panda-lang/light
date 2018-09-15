@@ -3,6 +3,7 @@ package org.panda_lang.light.framework.language.architecture.linguistic.type.res
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticUtils;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.TypeResolver;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.TypeTransformer;
@@ -38,8 +39,13 @@ public class TransformerTypeResolver implements TypeResolver {
                 }
 
                 @Override
-                public String getType() {
-                    return type.getClassName();
+                public Type[] getParameterTypes() {
+                    return LinguisticUtils.TYPELESS;
+                }
+
+                @Override
+                public Type<?> getType() {
+                    return type;
                 }
             };
         }

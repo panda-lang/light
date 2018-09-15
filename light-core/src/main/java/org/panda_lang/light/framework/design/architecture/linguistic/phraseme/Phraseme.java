@@ -23,8 +23,8 @@ public interface Phraseme {
 
     void increaseUsages();
 
-    LinguisticAct getAct();
-
     LinguisticPattern getPattern();
+
+    LinguisticAct getAct();
 
 }

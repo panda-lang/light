@@ -2,6 +2,7 @@ package org.panda_lang.light.framework.language.architecture.linguistic.phraseme
 
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 
 public class LightPhraseme implements Phraseme {
@@ -15,7 +16,7 @@ public class LightPhraseme implements Phraseme {
         this.act = act;
     }
 
-    public LightPhraseme(LinguisticPattern pattern, PhrasemeCallback callback, String returnType) {
+    public LightPhraseme(LinguisticPattern pattern, PhrasemeCallback callback, Type<?> returnType) {
         this.pattern = pattern;
         this.act = new LightPhrasemeLinguisticAct(callback, returnType);
     }

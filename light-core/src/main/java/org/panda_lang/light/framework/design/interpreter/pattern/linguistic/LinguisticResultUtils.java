@@ -18,6 +18,8 @@ package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticUtils;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
@@ -45,7 +47,12 @@ public class LinguisticResultUtils {
                 }
 
                 @Override
-                public String getType() {
+                public Type<?>[] getParameterTypes() {
+                    return LinguisticUtils.TYPELESS;
+                }
+
+                @Override
+                public Type<?> getType() {
                     return act.getType();
                 }
             };

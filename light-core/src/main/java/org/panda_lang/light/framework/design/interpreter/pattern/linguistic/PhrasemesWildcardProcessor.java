@@ -34,7 +34,7 @@ public class PhrasemesWildcardProcessor implements LinguisticWildcardProcessor {
         }
 
         Type<?> required = context.getType(details);
-        Type<?> matched = context.getType(matchedAct.getType());
+        Type<?> matched = matchedAct.getType();
 
         if (required == null || matched == null) {
             return null;
