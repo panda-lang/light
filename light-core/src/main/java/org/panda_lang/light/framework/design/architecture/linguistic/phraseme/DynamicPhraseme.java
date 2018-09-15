@@ -5,6 +5,14 @@ import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
 public class DynamicPhraseme implements LinguisticAct {
 
+    private final String returnType;
+    private final Phraseme[] phrasemes;
+
+    public DynamicPhraseme(String returnType, Phraseme... phrasemes) {
+        this.returnType = returnType;
+        this.phrasemes = phrasemes;
+    }
+
     @Override
     public Object perform(ExecutableBranch branch, LinguisticAct... parameters) {
         return null;
@@ -12,7 +20,7 @@ public class DynamicPhraseme implements LinguisticAct {
 
     @Override
     public String getType() {
-        return null;
+        return returnType;
     }
 
 }

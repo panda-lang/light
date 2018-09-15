@@ -3,6 +3,7 @@ package org.panda_lang.light.framework.language.architecture.linguistic.phraseme
 import org.panda_lang.light.LightException;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
+import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.LightPhraseme;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.PhrasemeCallback;
 import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 import org.panda_lang.panda.utilities.annotations.AnnotationsScannerProcess;
@@ -60,7 +61,7 @@ public class PhrasemeRepresentationLoader {
             }
         };
 
-        return new Phraseme(pattern, callback, method.getReturnType().getSimpleName());
+        return new LightPhraseme(pattern, callback, method.getReturnType().getSimpleName());
     }
 
 }

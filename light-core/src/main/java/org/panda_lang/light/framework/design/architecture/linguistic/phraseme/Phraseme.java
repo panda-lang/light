@@ -18,55 +18,13 @@ package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
 
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
-import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.PhrasemeCallback;
-import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
-public class Phraseme {
+public interface Phraseme {
 
-    private final LinguisticPattern pattern;
-    private final LinguisticAct act;
-    private final String returnType;
-    private int usages;
+    void increaseUsages();
 
-    public Phraseme(LinguisticPattern pattern, LinguisticAct act, String returnType) {
-        this.pattern = pattern;
-        this.act = act;
-        this.returnType = returnType;
-    }
+    LinguisticAct getAct();
 
-    public Phraseme(LinguisticPattern pattern, PhrasemeCallback callback, String returnType) {
-        this.pattern = pattern;
-        this.returnType = returnType;
-
-        this.act = new LinguisticAct() {
-            @Override
-            public Object perform(ExecutableBranch branch, LinguisticAct... parameters) {
-                Object[] convertedParameters = new Object[parameters.length];
-
-                for (int i = 0; i < parameters.length; i++) {
-                    convertedParameters[i] = parameters[i].perform(branch);
-                }
-
-                return callback.call(branch, convertedParameters);
-            }
-
-            @Override
-            public String getType() {
-                return returnType;
-            }
-        };
-    }
-
-    public void increaseUsages() {
-        ++usages;
-    }
-
-    public LinguisticAct getAct() {
-        return act;
-    }
-
-    public LinguisticPattern getPattern() {
-        return pattern;
-    }
+    LinguisticPattern getPattern();
 
 }
