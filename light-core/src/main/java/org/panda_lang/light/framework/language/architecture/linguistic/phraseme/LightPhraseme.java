@@ -10,7 +10,7 @@ public class LightPhraseme implements Phraseme {
     private final LinguisticAct act;
     private int usages;
 
-    public LightPhraseme(LinguisticPattern pattern, LinguisticAct act, String returnType) {
+    public LightPhraseme(LinguisticPattern pattern, LinguisticAct act) {
         this.pattern = pattern;
         this.act = act;
     }
