@@ -67,7 +67,7 @@ public class LightLexer implements Lexer {
             }
 
             if (startsWithMultiline) {
-                preparedLine = preparedLine.substring(2, preparedLine.length());
+                preparedLine = preparedLine.substring(2);
             }
 
             if (endsWithMultiline) {
@@ -100,7 +100,7 @@ public class LightLexer implements Lexer {
         }
 
         if (close) {
-            phraseValue = phraseValue.substring(1, phraseValue.length());
+            phraseValue = phraseValue.substring(1);
         }
 
         phraseValue = phraseValue.trim();

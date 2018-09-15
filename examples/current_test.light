@@ -1,5 +1,27 @@
 main {
+    // Print <string> type
     send "Hello Light" to console
-    send true to console
-    send "Hello Light" to console
+
+    // Print <boolean> type
+    send
+     > true
+     > to the console
+
+    // Print phraseme (return type: string)
+    send light version to the console
+
+    // Print phrasemes sequence
+    send string of light version to the console
+
+    // Print phrasemes tree
+    send
+        > joined
+            > "Light "
+        > and
+            > string of light version
+    > to the console
 }
+
+
+
+

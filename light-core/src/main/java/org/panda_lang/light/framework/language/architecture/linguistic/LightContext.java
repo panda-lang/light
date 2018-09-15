@@ -97,7 +97,7 @@ public class LightContext implements Context {
                 continue;
             }
 
-            Type<?> matchedType = getType((ContextComponent<? extends Type<?>>) component, type);
+            return getType((ContextComponent<? extends Type<?>>) component, type);
         }
 
         return null;
@@ -105,7 +105,7 @@ public class LightContext implements Context {
 
     private @Nullable Type<?> getType(ContextComponent<? extends Type<?>> types, String type) {
         for (Type<?> element : types.getElements()) {
-            if (element.getClassName().equals(type)) {
+            if (element.getClassName().equals(type) || element.getAssociated().getSimpleName().equals(type)) {
                 return element;
             }
         }

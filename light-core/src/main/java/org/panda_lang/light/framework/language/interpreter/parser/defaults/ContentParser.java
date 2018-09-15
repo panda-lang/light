@@ -27,6 +27,7 @@ import org.panda_lang.panda.framework.design.interpreter.parser.generation.casua
 import org.panda_lang.panda.framework.design.interpreter.token.TokenRepresentation;
 import org.panda_lang.panda.framework.design.interpreter.token.stream.SourceStream;
 import org.panda_lang.panda.framework.language.interpreter.parser.PandaParserFailure;
+import org.panda_lang.panda.framework.language.resource.syntax.sequence.Sequences;
 
 public class ContentParser implements UnifiedParser {
 
@@ -41,6 +42,10 @@ public class ContentParser implements UnifiedParser {
             TokenRepresentation phrase = source.read();
 
             if (phrase instanceof SentenceRepresentation) {
+                if (phrase.getTokenValue().startsWith(Sequences.LINE_ORIENTED_COMMENT.getSequenceStart())) {
+                    continue;
+                }
+
                 Statement statement = sentenceParser.parse(data.fork(), (SentenceRepresentation) phrase);
 
                 if (statement != null) {
