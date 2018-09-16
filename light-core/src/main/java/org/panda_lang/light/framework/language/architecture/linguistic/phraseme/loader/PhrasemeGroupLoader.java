@@ -27,7 +27,6 @@ class PhrasemeGroupLoader {
         return phrasemes;
     }
 
-    // TODO: \o/
     private Phraseme loadPhrasemeGroup(Context context, Class<?> clazz) throws Exception {
         String phrasemeGroup = clazz.getAnnotation(PhrasemeGroup.class).value();
 

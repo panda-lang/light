@@ -29,7 +29,7 @@ public class ConsolePhraseme {
     }
 
     @PhrasemeVariant
-    public void sendMessageToConsole(@Id("message") boolean message) {
+    public void sendMessageToConsole(boolean message) {
         System.out.println("boolean::" + message);
     }
 

@@ -22,7 +22,6 @@ import org.panda_lang.light.framework.design.architecture.linguistic.ContextComp
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticResultUtils;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -69,7 +68,7 @@ public class LightContext implements Context {
             return null;
         }
 
-        return LinguisticResultUtils.assignParameters(candidate);
+        return LightContextUtils.assignParameters(candidate);
     }
 
     private LinguisticCandidate<LinguisticAct> findNext(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {

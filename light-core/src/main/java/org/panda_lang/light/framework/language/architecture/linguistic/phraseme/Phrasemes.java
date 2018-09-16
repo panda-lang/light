@@ -23,7 +23,6 @@ import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticA
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternResult;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.PhrasemesWildcardProcessor;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -52,7 +51,7 @@ public class Phrasemes implements ContextComponent<Phraseme> {
 
     @Override
     public void registerElement(Phraseme phraseme) {
-        phraseme.getPattern().setWildcardProcessor(PhrasemesWildcardProcessor.getInstance());
+        phraseme.getPattern().setWildcardProcessor(PhrasemesProcessor.getInstance());
         phrasemes.add(phraseme);
     }
 

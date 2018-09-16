@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
+package org.panda_lang.light.framework.language.architecture.linguistic.phraseme;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticWildcardProcessor;
 
-public class PhrasemesWildcardProcessor implements LinguisticWildcardProcessor {
+public class PhrasemesProcessor implements LinguisticWildcardProcessor {
 
-    private static final PhrasemesWildcardProcessor INSTANCE = new PhrasemesWildcardProcessor();
+    private static final PhrasemesProcessor INSTANCE = new PhrasemesProcessor();
 
     @Override
     public @Nullable LinguisticAct handle(Context context, String details, String wildcard, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
@@ -47,7 +49,7 @@ public class PhrasemesWildcardProcessor implements LinguisticWildcardProcessor {
         return matchedAct;
     }
 
-    public static PhrasemesWildcardProcessor getInstance() {
+    public static PhrasemesProcessor getInstance() {
         return INSTANCE;
     }
 
