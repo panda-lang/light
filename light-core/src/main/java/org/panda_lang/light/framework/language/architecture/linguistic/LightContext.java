@@ -29,10 +29,12 @@ import java.util.HashSet;
 
 public class LightContext implements Context {
 
-    private final Collection<ContextComponent<?>> context;
+    protected final Collection<ContextComponent<?>> context;
+    protected final LightContextTypeLookup typeLookup;
 
     private LightContext(Collection<ContextComponent<?>> context) {
-        this.context = new HashSet<>(context);
+        this.context = context;
+        this.typeLookup = new LightContextTypeLookup(this);
     }
 
     public LightContext() {
@@ -90,27 +92,13 @@ public class LightContext implements Context {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public @Nullable Type<?> getType(String type) {
-        for (ContextComponent<?> component : context) {
-            if (Type.class != component.getComponentType()) {
-                continue;
-            }
-
-            return getType((ContextComponent<? extends Type<?>>) component, type);
-        }
-
-        return null;
+    public @Nullable Type<?> getType(Class<?> clazz) {
+        return typeLookup.getType(type -> clazz.isAssignableFrom(type.getAssociated()));
     }
 
-    private @Nullable Type<?> getType(ContextComponent<? extends Type<?>> types, String type) {
-        for (Type<?> element : types.getElements()) {
-            if (element.getClassName().equals(type) || element.getAssociated().getSimpleName().equals(type)) {
-                return element;
-            }
-        }
-
-        return null;
+    @Override
+    public @Nullable Type<?> getType(String typeName) {
+        return typeLookup.getType(type -> type.getClassName().equals(typeName) || type.getAssociated().getSimpleName().equals(typeName));
     }
 
 }

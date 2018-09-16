@@ -1,4 +1,4 @@
-package org.panda_lang.light.framework.language.architecture.linguistic.phraseme.registry;
+package org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,11 +7,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PhrasemeRepresentation {
-
-    /**
-     * @return Linguistic Pattern
-     */
-    String value();
+public @interface PhrasemeVariant {
 
 }

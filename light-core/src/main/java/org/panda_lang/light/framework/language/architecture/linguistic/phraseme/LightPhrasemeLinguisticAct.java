@@ -5,12 +5,12 @@ import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticU
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
-public class LightPhrasemeLinguisticAct implements LinguisticAct {
+class LightPhrasemeLinguisticAct implements LinguisticAct {
 
     private final PhrasemeCallback callback;
     private final Type<?> returnType;
 
-    public LightPhrasemeLinguisticAct(PhrasemeCallback callback, Type<?> returnType) {
+    LightPhrasemeLinguisticAct(PhrasemeCallback callback, Type<?> returnType) {
         this.callback = callback;
         this.returnType = returnType;
     }

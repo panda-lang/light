@@ -1,7 +1,7 @@
 package org.panda_lang.light.framework.language.resource.phrasemes;
 
 import org.panda_lang.light.LightConstants;
-import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.registry.PhrasemeRepresentation;
+import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeRepresentation;
 
 public class TestPhrasemes {
 

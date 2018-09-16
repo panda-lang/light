@@ -28,6 +28,8 @@ public interface Context {
 
     Context fork();
 
+    @Nullable Type<?> getType(Class<?> clazz);
+
     @Nullable Type<?> getType(String type);
 
 }
