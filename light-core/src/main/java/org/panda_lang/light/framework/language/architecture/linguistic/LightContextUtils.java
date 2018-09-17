@@ -2,6 +2,7 @@ package org.panda_lang.light.framework.language.architecture.linguistic;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticUtils;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
@@ -12,16 +13,18 @@ class LightContextUtils {
 
     private LightContextUtils() { }
 
-    protected static @Nullable LinguisticAct assignParameters(LinguisticCandidate<LinguisticAct> candidate) {
-        LinguisticAct act = candidate.getMatchedElement();
+    protected static @Nullable LinguisticAct assignParameters(LinguisticCandidate<LinguisticDescriptor> candidate) {
+        LinguisticDescriptor descriptor = candidate.getMatchedElement();
 
-        if (!candidate.isMatched() || act == null) {
+        if (!candidate.isMatched()) {
             return null;
         }
 
+        LinguisticAct act = descriptor.getActs()[0];
+
         if (candidate.getLinguisticResult() != null) {
-            LexicalExtractorResult<LinguisticAct> lexicalResult = candidate.getLinguisticResult().getLexicalResult();
-            LinguisticAct[] matchedParameters = new LinguisticAct[lexicalResult.getProcessedValues().size()];
+            LexicalExtractorResult<LinguisticDescriptor> lexicalResult = candidate.getLinguisticResult().getLexicalResult();
+            LinguisticDescriptor[] matchedParameters = new LinguisticDescriptor[lexicalResult.getProcessedValues().size()];
 
             for (int i = 0; i < matchedParameters.length; i++) {
                 matchedParameters[i] = lexicalResult.getProcessedValues().get(i).getValue();
@@ -30,7 +33,7 @@ class LightContextUtils {
             return new LinguisticAct() {
                 @Override
                 public Object perform(ExecutableBranch branch, LinguisticAct... parameters) {
-                    return act.perform(branch, matchedParameters);
+                    return act.perform(branch, null); // matchedParameters
                 }
 
                 @Override

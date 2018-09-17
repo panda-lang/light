@@ -20,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 
@@ -46,15 +47,15 @@ public class LightContext implements Context {
     }
 
     @Override
-    public @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
-        LinguisticCandidate<LinguisticAct> candidate = findNext(sentence, null);
+    public @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate<LinguisticDescriptor> previousCandidate) {
+        LinguisticCandidate<LinguisticDescriptor> candidate = findNext(sentence, null);
 
         while (candidate != null) {
-            if (!candidate.isMatched() || candidate.isDefinite()) {
+            if (!candidate.isMatched()) {
                 break;
             }
 
-            LinguisticCandidate<LinguisticAct> currentCandidate = findNext(sentence, candidate);
+            LinguisticCandidate<LinguisticDescriptor> currentCandidate = findNext(sentence, candidate);
 
             if (candidate.equals(currentCandidate)) {
                 candidate = null;
@@ -71,9 +72,9 @@ public class LightContext implements Context {
         return LightContextUtils.assignParameters(candidate);
     }
 
-    private LinguisticCandidate<LinguisticAct> findNext(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+    private LinguisticCandidate<LinguisticDescriptor> findNext(String sentence, @Nullable LinguisticCandidate<LinguisticDescriptor> previousCandidate) {
         for (ContextComponent<?> contextComponent : context) {
-            LinguisticCandidate<LinguisticAct> candidate = contextComponent.recognize(this, sentence, previousCandidate);
+            LinguisticCandidate<LinguisticDescriptor> candidate = contextComponent.recognize(this, sentence, previousCandidate);
 
             if (!candidate.isMatched()) {
                 continue;
@@ -82,7 +83,7 @@ public class LightContext implements Context {
             return candidate;
         }
 
-        return new LinguisticCandidate<>(false);
+        return LinguisticCandidate.notMatched();
     }
 
     @Override

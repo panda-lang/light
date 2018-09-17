@@ -16,13 +16,13 @@
 
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
 public class LinguisticPatternBuilder {
 
-    private LexicalPattern<LinguisticAct> pattern;
+    private LexicalPattern<LinguisticDescriptor> pattern;
     private LinguisticWildcardProcessor wildcardProcessor;
 
     public LinguisticPatternBuilder compile(String pattern) {
@@ -33,18 +33,18 @@ public class LinguisticPatternBuilder {
         return this;
     }
 
-    public LinguisticPattern build() {
-        return new LinguisticPattern(pattern, wildcardProcessor);
-    }
-
-    public LinguisticPatternBuilder setWildcardProcessor(WildcardProcessor<LinguisticAct> wildcardProcessor) {
+    public LinguisticPatternBuilder wildcardProcessor(WildcardProcessor<LinguisticDescriptor> wildcardProcessor) {
         pattern.setWildcardProcessor(wildcardProcessor);
         return this;
     }
 
-    public LinguisticPatternBuilder setWildcardProcessor(LinguisticWildcardProcessor wildcardProcessor) {
+    public LinguisticPatternBuilder wildcardProcessor(LinguisticWildcardProcessor wildcardProcessor) {
         this.wildcardProcessor = wildcardProcessor;
         return this;
+    }
+
+    public LinguisticPattern build() {
+        return new LinguisticPattern(pattern, wildcardProcessor);
     }
 
 }

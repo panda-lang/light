@@ -19,16 +19,18 @@ package org.panda_lang.light.framework.language.architecture.linguistic.phraseme
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticWildcardProcessor;
+import org.panda_lang.light.framework.language.architecture.linguistic.LightLinguisticDescriptor;
 
-public class PhrasemesProcessor implements LinguisticWildcardProcessor {
+public class PhrasemesWildcardProcessor implements LinguisticWildcardProcessor {
 
-    private static final PhrasemesProcessor INSTANCE = new PhrasemesProcessor();
+    private static final PhrasemesWildcardProcessor INSTANCE = new PhrasemesWildcardProcessor();
 
     @Override
-    public @Nullable LinguisticAct handle(Context context, String details, String wildcard, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+    public @Nullable LinguisticDescriptor handle(Context context, String details, String wildcard, @Nullable LinguisticCandidate<LinguisticDescriptor> previousCandidate) {
         LinguisticAct matchedAct = context.find(wildcard, previousCandidate);
 
         if (matchedAct == null) {
@@ -46,10 +48,10 @@ public class PhrasemesProcessor implements LinguisticWildcardProcessor {
             return null;
         }
 
-        return matchedAct;
+        return new LightLinguisticDescriptor("#TODO", matchedAct);
     }
 
-    public static PhrasemesProcessor getInstance() {
+    public static PhrasemesWildcardProcessor getInstance() {
         return INSTANCE;
     }
 

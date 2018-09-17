@@ -16,15 +16,13 @@
 
 package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 
-public interface Phraseme {
+public interface Phraseme extends LinguisticDescriptor {
 
     void increaseUsages();
 
     LinguisticPattern getPattern();
-
-    LinguisticAct getAct();
 
 }

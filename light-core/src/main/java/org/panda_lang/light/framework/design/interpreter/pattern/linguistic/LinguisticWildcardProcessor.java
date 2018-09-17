@@ -18,10 +18,11 @@ package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
 
 public interface LinguisticWildcardProcessor {
 
-    @Nullable LinguisticAct handle(Context context, @Nullable String details, String wildcard, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate);
+    @Nullable
+    LinguisticDescriptor handle(Context context, @Nullable String details, String wildcard, @Nullable LinguisticCandidate<LinguisticDescriptor> previousCandidate);
 
 }

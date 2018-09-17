@@ -23,11 +23,11 @@ public class LinguisticPatternResult<T> {
     private final boolean matched;
     private LexicalExtractorResult<T> lexicalResult;
 
-    public LinguisticPatternResult(boolean matched) {
+    LinguisticPatternResult(boolean matched) {
         this.matched = matched;
     }
 
-    public LinguisticPatternResult(LexicalExtractorResult<T> result) {
+    LinguisticPatternResult(LexicalExtractorResult<T> result) {
         this.matched = result.isMatched();
         this.lexicalResult = result;
     }

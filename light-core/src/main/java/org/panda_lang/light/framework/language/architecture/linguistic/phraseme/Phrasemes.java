@@ -20,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternResult;
@@ -32,26 +33,26 @@ public class Phrasemes implements ContextComponent<Phraseme> {
     private final Collection<Phraseme> phrasemes = new HashSet<>();
 
     @Override
-    public LinguisticCandidate<LinguisticAct> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+    public LinguisticCandidate<LinguisticDescriptor> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticDescriptor> previousCandidate) {
         for (Phraseme phraseme : phrasemes) {
-            LinguisticPatternResult<LinguisticAct> result = phraseme.getPattern().match(sentence, context, previousCandidate);
+            LinguisticPatternResult<LinguisticDescriptor> result = phraseme.getPattern().match(sentence, context, previousCandidate);
 
             if (result == null || !result.isMatched()) {
                 continue;
             }
 
-            LinguisticCandidate<LinguisticAct> candidate = new LinguisticCandidate<>(phraseme.getAct(), result);
+            LinguisticCandidate<LinguisticDescriptor> candidate = new LinguisticCandidate<>(phraseme, result);
             phraseme.increaseUsages();
 
             return candidate;
         }
 
-        return new LinguisticCandidate<>(false);
+        return LinguisticCandidate.notMatched();
     }
 
     @Override
     public void registerElement(Phraseme phraseme) {
-        phraseme.getPattern().setWildcardProcessor(PhrasemesProcessor.getInstance());
+        phraseme.getPattern().setWildcardProcessor(PhrasemesWildcardProcessor.getInstance());
         phrasemes.add(phraseme);
     }
 

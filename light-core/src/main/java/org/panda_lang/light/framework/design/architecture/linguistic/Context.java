@@ -22,7 +22,7 @@ import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.Ling
 
 public interface Context {
 
-    @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate);
+    @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate<LinguisticDescriptor> previousCandidate);
 
     void importComponent(ContextComponent<?> component);
 

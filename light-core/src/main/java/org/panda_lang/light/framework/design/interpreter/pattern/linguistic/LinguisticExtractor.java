@@ -19,27 +19,27 @@ package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.LightException;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractor;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorWorker;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
-public class LinguisticExtractor implements LexicalExtractor<LinguisticAct> {
+class LinguisticExtractor implements LexicalExtractor<LinguisticDescriptor> {
 
     private final Context context;
     private final LinguisticPattern pattern;
-    private final @Nullable LinguisticCandidate<LinguisticAct> previousCandidate;
+    private final @Nullable LinguisticCandidate<LinguisticDescriptor> previousCandidate;
 
-    public LinguisticExtractor(Context context, LinguisticPattern pattern, @Nullable LinguisticCandidate<LinguisticAct> previousResult) {
+    LinguisticExtractor(Context context, LinguisticPattern pattern, @Nullable LinguisticCandidate<LinguisticDescriptor> previousResult) {
         this.pattern = pattern;
         this.context = context;
         this.previousCandidate = previousResult;
     }
 
     @Override
-    public LexicalExtractorResult<LinguisticAct> extract(String phrase) {
-        WildcardProcessor<LinguisticAct> wildcardProcessor = null;
+    public LexicalExtractorResult<LinguisticDescriptor> extract(String phrase) {
+        WildcardProcessor<LinguisticDescriptor> wildcardProcessor = null;
 
         if (pattern.getWildcardProcessor() != null) {
             wildcardProcessor = (details, wildcard) -> {
@@ -55,7 +55,7 @@ public class LinguisticExtractor implements LexicalExtractor<LinguisticAct> {
             wildcardProcessor = pattern.getLexicalPattern().getWildcardProcessor();
         }
 
-        LexicalExtractorWorker<LinguisticAct> extractorWorker = new LexicalExtractorWorker<>(wildcardProcessor);
+        LexicalExtractorWorker<LinguisticDescriptor> extractorWorker = new LexicalExtractorWorker<>(wildcardProcessor);
         return extractorWorker.extract(pattern.getLexicalPattern().getModel(), phrase);
     }
 

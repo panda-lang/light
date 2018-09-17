@@ -5,20 +5,28 @@ import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Ph
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
 public class LightPhraseme implements Phraseme {
 
     private final LinguisticPattern pattern;
-    private final LinguisticAct act;
+    private final Collection<LinguisticAct> act;
     private int usages;
 
-    public LightPhraseme(LinguisticPattern pattern, LinguisticAct act) {
+    public LightPhraseme(LinguisticPattern pattern, LinguisticAct... acts) {
         this.pattern = pattern;
-        this.act = act;
+        this.act = new ArrayList<>();
+        this.addActs(acts);
     }
 
     public LightPhraseme(LinguisticPattern pattern, PhrasemeCallback callback, Type<?> returnType) {
-        this.pattern = pattern;
-        this.act = new LightPhrasemeLinguisticAct(callback, returnType);
+        this(pattern, new LightPhrasemeLinguisticAct(callback, returnType));
+    }
+
+    protected void addActs(LinguisticAct... acts) {
+        act.addAll(Arrays.asList(acts));
     }
 
     @Override
@@ -27,13 +35,18 @@ public class LightPhraseme implements Phraseme {
     }
 
     @Override
-    public LinguisticAct getAct() {
-        return act;
+    public LinguisticAct[] getActs() {
+        return act.toArray(new LinguisticAct[0]);
     }
 
     @Override
     public LinguisticPattern getPattern() {
         return pattern;
+    }
+
+    @Override
+    public String getIdentifier() {
+        return "#TODO";
     }
 
 }
