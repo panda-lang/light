@@ -21,9 +21,9 @@ public class LinguisticCandidate<T> {
     private static final LinguisticCandidate<?> NOT_MATCHED = new LinguisticCandidate<>(null, null);
 
     private final T matchedElement;
-    private final LinguisticPatternResult<T> linguisticResult;
+    private final LinguisticPatternResult linguisticResult;
 
-    public LinguisticCandidate(T matchedElement, LinguisticPatternResult<T> linguisticResult) {
+    public LinguisticCandidate(T matchedElement, LinguisticPatternResult linguisticResult) {
         this.matchedElement = matchedElement;
         this.linguisticResult = linguisticResult;
     }
@@ -31,7 +31,7 @@ public class LinguisticCandidate<T> {
         return matchedElement != null;
     }
 
-    public LinguisticPatternResult<T> getLinguisticResult() {
+    public LinguisticPatternResult getLinguisticResult() {
         return linguisticResult;
     }
 

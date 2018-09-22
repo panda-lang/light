@@ -19,8 +19,7 @@ package org.panda_lang.light.framework.language.architecture.linguistic;
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 
@@ -47,17 +46,17 @@ public class LightContext implements Context {
     }
 
     @Override
-    public @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate<LinguisticDescriptor> previousCandidate) {
-        LinguisticCandidate<LinguisticDescriptor> candidate = findNext(sentence, null);
+    public @Nullable LinguisticGroup find(String sentence, @Nullable LinguisticCandidate<LinguisticGroup> previousCandidate) {
+        LinguisticCandidate<LinguisticGroup> candidate = findNext(sentence, null);
 
         while (candidate != null) {
             if (!candidate.isMatched()) {
                 break;
             }
 
-            LinguisticCandidate<LinguisticDescriptor> currentCandidate = findNext(sentence, candidate);
+            LinguisticCandidate<LinguisticGroup> currentCandidate = findNext(sentence, candidate);
 
-            if (candidate.equals(currentCandidate)) {
+            if (candidate.getMatchedElement().compare(currentCandidate.getMatchedElement())) {
                 candidate = null;
                 break;
             }
@@ -72,9 +71,9 @@ public class LightContext implements Context {
         return LightContextUtils.assignParameters(candidate);
     }
 
-    private LinguisticCandidate<LinguisticDescriptor> findNext(String sentence, @Nullable LinguisticCandidate<LinguisticDescriptor> previousCandidate) {
+    private LinguisticCandidate<LinguisticGroup> findNext(String sentence, @Nullable LinguisticCandidate<LinguisticGroup> previousCandidate) {
         for (ContextComponent<?> contextComponent : context) {
-            LinguisticCandidate<LinguisticDescriptor> candidate = contextComponent.recognize(this, sentence, previousCandidate);
+            LinguisticCandidate<LinguisticGroup> candidate = contextComponent.recognize(this, sentence, previousCandidate);
 
             if (!candidate.isMatched()) {
                 continue;

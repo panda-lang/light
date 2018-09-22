@@ -16,10 +16,10 @@
 
 package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 
-public interface Phraseme extends LinguisticDescriptor {
+public interface Phraseme extends LinguisticGroup {
 
     void increaseUsages();
 

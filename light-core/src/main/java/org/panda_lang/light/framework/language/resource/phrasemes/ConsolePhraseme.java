@@ -16,17 +16,11 @@
 
 package org.panda_lang.light.framework.language.resource.phrasemes;
 
-import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.Id;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeGroup;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeVariant;
 
 @PhrasemeGroup("send message:<?> to [the] console")
 public class ConsolePhraseme {
-
-    @PhrasemeVariant
-    public void sendMessageToConsole(@Id("message") String message) {
-        System.out.println(message);
-    }
 
     @PhrasemeVariant
     public void sendMessageToConsole(boolean message) {

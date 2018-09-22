@@ -17,7 +17,7 @@
 package org.panda_lang.light.framework.language.interpreter.parser.defaults;
 
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
 import org.panda_lang.light.framework.design.interpreter.parser.LightComponents;
 import org.panda_lang.light.framework.design.interpreter.token.SentenceRepresentation;
 import org.panda_lang.light.framework.language.architecture.linguistic.LinguisticStatement;
@@ -32,13 +32,13 @@ public class SentenceParser implements Parser {
         String sentence = sentenceRepresentation.getTokenValue();
 
         Context context = data.getComponent(LightComponents.CONTEXT);
-        LinguisticAct act = context.find(sentence, null);
+        LinguisticGroup act = context.find(sentence, null);
 
         if (act == null) {
             throw new PandaParserFailure("Unrecognized syntax", data);
         }
 
-        return new LinguisticStatement(act);
+        return new LinguisticStatement(act.getPerformers()[0]);
     }
 
 }

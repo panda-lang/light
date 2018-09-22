@@ -16,25 +16,25 @@
 
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 
 class LinguisticPatternCompiler {
 
     private final String pattern;
-    private LexicalPattern<LinguisticDescriptor> lexicalPattern;
+    private LexicalPattern<LinguisticGroup> lexicalPattern;
 
     LinguisticPatternCompiler(String pattern) {
         this.pattern = pattern;
     }
 
     protected void compile() {
-        this.lexicalPattern = LexicalPattern.<LinguisticDescriptor> builder()
+        this.lexicalPattern = LexicalPattern.<LinguisticGroup> builder()
                 .compile(pattern)
                 .build();
     }
 
-    protected LexicalPattern<LinguisticDescriptor> getLexicalPattern() {
+    protected LexicalPattern<LinguisticGroup> getLexicalPattern() {
         return lexicalPattern;
     }
 

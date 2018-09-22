@@ -18,10 +18,10 @@ package org.panda_lang.light.framework.design.architecture.linguistic.type;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
 
 public interface TypeResolver {
 
-    @Nullable LinguisticDescriptor resolve(ContextComponent<Type<?>> component, String sentence);
+    @Nullable LinguisticGroup resolve(ContextComponent<Type<?>> component, String sentence);
 
 }

@@ -18,25 +18,25 @@ package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
 public class LinguisticPattern {
 
-    private final LexicalPattern<LinguisticDescriptor> lexicalPattern;
+    private final LexicalPattern<LinguisticGroup> lexicalPattern;
     private @Nullable LinguisticWildcardProcessor wildcardProcessor;
 
-    public LinguisticPattern(LexicalPattern<LinguisticDescriptor> lexicalPattern, @Nullable LinguisticWildcardProcessor wildcardProcessor) {
+    public LinguisticPattern(LexicalPattern<LinguisticGroup> lexicalPattern, @Nullable LinguisticWildcardProcessor wildcardProcessor) {
         this.lexicalPattern = lexicalPattern;
         this.wildcardProcessor = wildcardProcessor;
     }
 
-    public LinguisticPatternResult<LinguisticDescriptor> match(String sentence, Context context, @Nullable LinguisticCandidate<LinguisticDescriptor> previousResult) {
+    public LinguisticPatternResult match(String sentence, Context context, @Nullable LinguisticCandidate<LinguisticGroup> previousResult) {
         LinguisticExtractor extractor = new LinguisticExtractor(context, this, previousResult);
-        LexicalExtractorResult<LinguisticDescriptor> result = lexicalPattern.extract(extractor, sentence);
+        LexicalExtractorResult<LinguisticGroup> result = lexicalPattern.extract(extractor, sentence);
 
-        return new LinguisticPatternResult<>(result);
+        return new LinguisticPatternResult(result);
     }
 
     public void setWildcardProcessor(@Nullable LinguisticWildcardProcessor wildcardProcessor) {
@@ -51,7 +51,7 @@ public class LinguisticPattern {
         return wildcardProcessor;
     }
 
-    public LexicalPattern<LinguisticDescriptor> getLexicalPattern() {
+    public LexicalPattern<LinguisticGroup> getLexicalPattern() {
         return lexicalPattern;
     }
 

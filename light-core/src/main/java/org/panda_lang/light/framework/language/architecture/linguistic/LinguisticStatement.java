@@ -32,5 +32,4 @@ public class LinguisticStatement extends ExecutableStatement {
     public void execute(ExecutableBranch branch) {
         act.perform(branch);
     }
-
 }

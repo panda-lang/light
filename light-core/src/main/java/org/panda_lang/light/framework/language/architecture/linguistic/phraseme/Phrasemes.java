@@ -19,8 +19,7 @@ package org.panda_lang.light.framework.language.architecture.linguistic.phraseme
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticDescriptor;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternResult;
@@ -33,15 +32,15 @@ public class Phrasemes implements ContextComponent<Phraseme> {
     private final Collection<Phraseme> phrasemes = new HashSet<>();
 
     @Override
-    public LinguisticCandidate<LinguisticDescriptor> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticDescriptor> previousCandidate) {
+    public LinguisticCandidate<LinguisticGroup> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticGroup> previousCandidate) {
         for (Phraseme phraseme : phrasemes) {
-            LinguisticPatternResult<LinguisticDescriptor> result = phraseme.getPattern().match(sentence, context, previousCandidate);
+            LinguisticPatternResult result = phraseme.getPattern().match(sentence, context, previousCandidate);
 
             if (result == null || !result.isMatched()) {
                 continue;
             }
 
-            LinguisticCandidate<LinguisticDescriptor> candidate = new LinguisticCandidate<>(phraseme, result);
+            LinguisticCandidate<LinguisticGroup> candidate = new LinguisticCandidate<>(phraseme, result);
             phraseme.increaseUsages();
 
             return candidate;
