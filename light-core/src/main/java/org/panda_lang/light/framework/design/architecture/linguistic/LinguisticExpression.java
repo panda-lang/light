@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
+package org.panda_lang.light.framework.design.architecture.linguistic;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
+import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
-public interface Phraseme extends LinguisticAct {
+public interface LinguisticExpression {
 
-    void increaseUsages();
+    Object perform(ExecutableBranch branch, LinguisticExpression... parameters);
 
-    LinguisticPattern getPattern();
+    Type<?>[] getParameterTypes();
+
+    Type<?> getType();
 
 }

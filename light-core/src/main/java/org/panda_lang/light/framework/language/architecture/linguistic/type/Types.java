@@ -19,7 +19,7 @@ package org.panda_lang.light.framework.language.architecture.linguistic.type;
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.TypeResolver;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
@@ -34,12 +34,20 @@ public class Types implements ContextComponent<Type<?>> {
     private final Collection<TypeResolver> resolvers = new ArrayList<>();
 
     @Override
-    public LinguisticCandidate<LinguisticGroup> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticGroup> previousCandidate) {
+    public LinguisticCandidate<LinguisticAct> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
         for (TypeResolver resolver : resolvers) {
-            LinguisticGroup result = resolver.resolve(this, sentence);
+            LinguisticAct result = resolver.resolve(this, sentence);
 
             if (result == null) {
                 continue;
+            }
+
+            if (previousCandidate != null) {
+                LinguisticAct previousResult = previousCandidate.getMatchedElement();
+
+                if (result.compare(previousResult)) {
+                    continue;
+                }
             }
 
             return new LinguisticCandidate<>(result, null);

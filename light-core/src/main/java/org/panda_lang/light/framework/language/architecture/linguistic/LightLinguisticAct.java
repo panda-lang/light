@@ -1,28 +1,32 @@
 package org.panda_lang.light.framework.language.architecture.linguistic;
 
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticExpression;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 
-public class LightLinguisticGroup implements LinguisticGroup {
+public class LightLinguisticAct implements LinguisticAct {
 
     private final String identifier;
     private final Type<?> returnType;
-    private final LinguisticAct[] acts;
+    private final LinguisticExpression[] acts;
 
-    public LightLinguisticGroup(String identifier, Type<?> returnType, LinguisticAct... acts) {
+    public LightLinguisticAct(String identifier, Type<?> returnType, LinguisticExpression... acts) {
         this.identifier = identifier;
         this.returnType = returnType;
         this.acts = acts;
     }
 
     @Override
-    public boolean compare(LinguisticGroup another) {
-        return another.getIdentifier().equals(identifier);
+    public boolean compare(LinguisticAct another) {
+        if (another == null) {
+            return false;
+        }
+
+        return identifier.equals(another.getIdentifier());
     }
 
     @Override
-    public LinguisticAct[] getPerformers() {
+    public LinguisticExpression[] getPerformers() {
         return acts;
     }
 

@@ -16,25 +16,25 @@
 
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
 public class LinguisticPatternResult {
 
     private final boolean matched;
-    private LexicalExtractorResult<? extends LinguisticGroup> lexicalResult;
+    private LexicalExtractorResult<? extends LinguisticAct> lexicalResult;
 
     LinguisticPatternResult(boolean matched) {
         this.matched = matched;
     }
 
-    LinguisticPatternResult(LexicalExtractorResult<? extends LinguisticGroup> result) {
+    LinguisticPatternResult(LexicalExtractorResult<? extends LinguisticAct> result) {
         this.matched = result.isMatched();
         this.lexicalResult = result;
     }
 
-    public LinguisticGroup[] getMatchedParameters() {
-        LinguisticGroup[] matchedParameters = new LinguisticGroup[lexicalResult.getProcessedValues().size()];
+    public LinguisticAct[] getMatchedParameters() {
+        LinguisticAct[] matchedParameters = new LinguisticAct[lexicalResult.getProcessedValues().size()];
 
         for (int i = 0; i < matchedParameters.length; i++) {
             matchedParameters[i] = lexicalResult.getProcessedValues().get(i).getValue();
@@ -47,7 +47,7 @@ public class LinguisticPatternResult {
         return matched;
     }
 
-    public LexicalExtractorResult<? extends LinguisticGroup> getLexicalResult() {
+    public LexicalExtractorResult<? extends LinguisticAct> getLexicalResult() {
         return lexicalResult;
     }
 

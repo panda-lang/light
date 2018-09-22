@@ -7,7 +7,7 @@ public class LinguisticUtils {
 
     public static final Type<?>[] TYPELESS = new Type[0];
 
-    public static Object[] perform(ExecutableBranch branch, LinguisticAct[] acts) {
+    public static Object[] perform(ExecutableBranch branch, LinguisticExpression[] acts) {
         Object[] convertedParameters = new Object[acts.length];
 
         for (int i = 0; i < acts.length; i++) {

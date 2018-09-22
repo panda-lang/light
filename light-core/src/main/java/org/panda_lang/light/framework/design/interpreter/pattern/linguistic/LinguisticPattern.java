@@ -18,23 +18,23 @@ package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
 public class LinguisticPattern {
 
-    private final LexicalPattern<LinguisticGroup> lexicalPattern;
+    private final LexicalPattern<LinguisticAct> lexicalPattern;
     private @Nullable LinguisticWildcardProcessor wildcardProcessor;
 
-    public LinguisticPattern(LexicalPattern<LinguisticGroup> lexicalPattern, @Nullable LinguisticWildcardProcessor wildcardProcessor) {
+    public LinguisticPattern(LexicalPattern<LinguisticAct> lexicalPattern, @Nullable LinguisticWildcardProcessor wildcardProcessor) {
         this.lexicalPattern = lexicalPattern;
         this.wildcardProcessor = wildcardProcessor;
     }
 
-    public LinguisticPatternResult match(String sentence, Context context, @Nullable LinguisticCandidate<LinguisticGroup> previousResult) {
+    public LinguisticPatternResult match(String sentence, Context context, @Nullable LinguisticCandidate<LinguisticAct> previousResult) {
         LinguisticExtractor extractor = new LinguisticExtractor(context, this, previousResult);
-        LexicalExtractorResult<LinguisticGroup> result = lexicalPattern.extract(extractor, sentence);
+        LexicalExtractorResult<LinguisticAct> result = lexicalPattern.extract(extractor, sentence);
 
         return new LinguisticPatternResult(result);
     }
@@ -51,7 +51,7 @@ public class LinguisticPattern {
         return wildcardProcessor;
     }
 
-    public LexicalPattern<LinguisticGroup> getLexicalPattern() {
+    public LexicalPattern<LinguisticAct> getLexicalPattern() {
         return lexicalPattern;
     }
 

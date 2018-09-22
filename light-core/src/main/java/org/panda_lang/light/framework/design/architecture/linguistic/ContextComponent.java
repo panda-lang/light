@@ -23,7 +23,7 @@ import java.util.Collection;
 
 public interface ContextComponent<T> {
 
-    LinguisticCandidate<LinguisticGroup> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticGroup> previousCandidate);
+    LinguisticCandidate<LinguisticAct> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate);
 
     void registerElement(T element);
 

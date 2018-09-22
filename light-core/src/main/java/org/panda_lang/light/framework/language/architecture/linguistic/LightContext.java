@@ -19,12 +19,13 @@ package org.panda_lang.light.framework.language.architecture.linguistic;
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Stack;
 
 public class LightContext implements Context {
 
@@ -46,34 +47,29 @@ public class LightContext implements Context {
     }
 
     @Override
-    public @Nullable LinguisticGroup find(String sentence, @Nullable LinguisticCandidate<LinguisticGroup> previousCandidate) {
-        LinguisticCandidate<LinguisticGroup> candidate = findNext(sentence, null);
+    public @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+        Stack<LinguisticCandidate<LinguisticAct>> candidates = new Stack<>();
 
-        while (candidate != null) {
+        do {
+            LinguisticCandidate<LinguisticAct> candidate = findNext(sentence, candidates.isEmpty() ? previousCandidate : candidates.peek());
+
             if (!candidate.isMatched()) {
                 break;
             }
 
-            LinguisticCandidate<LinguisticGroup> currentCandidate = findNext(sentence, candidate);
-
-            if (candidate.getMatchedElement().compare(currentCandidate.getMatchedElement())) {
-                candidate = null;
+            if (candidate.getMatchedElement().compare(candidates.isEmpty() ? null : candidates.peek().getMatchedElement())) {
                 break;
             }
 
-            candidate = currentCandidate;
-        }
+            candidates.push(candidate);
+        } while (candidates.peek().isMatched());
 
-        if (candidate == null) {
-            return null;
-        }
-
-        return LightContextUtils.assignParameters(candidate);
+        return LightContextUtils.createGroup(candidates);
     }
 
-    private LinguisticCandidate<LinguisticGroup> findNext(String sentence, @Nullable LinguisticCandidate<LinguisticGroup> previousCandidate) {
+    private LinguisticCandidate<LinguisticAct> findNext(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
         for (ContextComponent<?> contextComponent : context) {
-            LinguisticCandidate<LinguisticGroup> candidate = contextComponent.recognize(this, sentence, previousCandidate);
+            LinguisticCandidate<LinguisticAct> candidate = contextComponent.recognize(this, sentence, previousCandidate);
 
             if (!candidate.isMatched()) {
                 continue;
