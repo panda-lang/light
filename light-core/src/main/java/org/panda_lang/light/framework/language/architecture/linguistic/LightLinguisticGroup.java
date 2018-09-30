@@ -1,16 +1,19 @@
 package org.panda_lang.light.framework.language.architecture.linguistic;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticExpression;
+import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticExpression;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
+import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
-public class LightLinguisticAct implements LinguisticAct {
+public class LightLinguisticGroup implements LinguisticGroup {
 
     private final String identifier;
     private final Type<?> returnType;
     private final LinguisticExpression[] acts;
 
-    public LightLinguisticAct(String identifier, Type<?> returnType, LinguisticExpression... acts) {
+    public LightLinguisticGroup(String identifier, Type<?> returnType, LinguisticExpression... acts) {
         this.identifier = identifier;
         this.returnType = returnType;
         this.acts = acts;
@@ -18,11 +21,12 @@ public class LightLinguisticAct implements LinguisticAct {
 
     @Override
     public boolean compare(LinguisticAct another) {
-        if (another == null) {
-            return false;
-        }
+        return another instanceof LightLinguisticGroup && identifier.equals(((LightLinguisticGroup) another).getIdentifier());
+    }
 
-        return identifier.equals(another.getIdentifier());
+    @Override
+    public @Nullable Object perform(ExecutableBranch branch, LinguisticAct... parameters) {
+        return null;
     }
 
     @Override

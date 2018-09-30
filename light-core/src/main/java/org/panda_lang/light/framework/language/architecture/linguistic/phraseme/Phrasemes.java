@@ -19,7 +19,6 @@ package org.panda_lang.light.framework.language.architecture.linguistic.phraseme
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternResult;
@@ -32,7 +31,7 @@ public class Phrasemes implements ContextComponent<Phraseme> {
     private final Collection<Phraseme> phrasemes = new HashSet<>();
 
     @Override
-    public LinguisticCandidate<LinguisticAct> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+    public LinguisticCandidate recognize(Context context, String sentence, @Nullable LinguisticCandidate previousCandidate) {
         for (Phraseme phraseme : phrasemes) {
             LinguisticPatternResult result = phraseme.getPattern().match(sentence, context, previousCandidate);
 
@@ -40,7 +39,7 @@ public class Phrasemes implements ContextComponent<Phraseme> {
                 continue;
             }
 
-            LinguisticCandidate<LinguisticAct> candidate = new LinguisticCandidate<>(phraseme, result);
+            LinguisticCandidate candidate = new LinguisticCandidate(phraseme, result);
             phraseme.increaseUsages();
 
             return candidate;

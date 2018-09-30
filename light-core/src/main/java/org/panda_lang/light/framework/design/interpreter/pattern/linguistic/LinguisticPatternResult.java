@@ -17,6 +17,7 @@
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
 public class LinguisticPatternResult {
@@ -34,7 +35,7 @@ public class LinguisticPatternResult {
     }
 
     public LinguisticAct[] getMatchedParameters() {
-        LinguisticAct[] matchedParameters = new LinguisticAct[lexicalResult.getProcessedValues().size()];
+        LinguisticAct[] matchedParameters = new LinguisticGroup[lexicalResult.getProcessedValues().size()];
 
         for (int i = 0; i < matchedParameters.length; i++) {
             matchedParameters[i] = lexicalResult.getProcessedValues().get(i).getValue();

@@ -47,17 +47,22 @@ public class LightContext implements Context {
     }
 
     @Override
-    public @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
-        Stack<LinguisticCandidate<LinguisticAct>> candidates = new Stack<>();
+    public @Nullable LinguisticAct find(String sentence) {
+        return find(sentence, null);
+    }
+
+    @Override
+    public @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate previousCandidate) {
+        Stack<LinguisticCandidate> candidates = new Stack<>();
 
         do {
-            LinguisticCandidate<LinguisticAct> candidate = findNext(sentence, candidates.isEmpty() ? previousCandidate : candidates.peek());
+            LinguisticCandidate candidate = findNext(sentence, candidates.isEmpty() ? previousCandidate : candidates.peek());
 
             if (!candidate.isMatched()) {
                 break;
             }
 
-            if (candidate.getMatchedElement().compare(candidates.isEmpty() ? null : candidates.peek().getMatchedElement())) {
+            if (!candidates.isEmpty() && candidate.getMatchedElement().compare(candidates.peek().getMatchedElement())) {
                 break;
             }
 
@@ -67,9 +72,9 @@ public class LightContext implements Context {
         return LightContextUtils.createGroup(candidates);
     }
 
-    private LinguisticCandidate<LinguisticAct> findNext(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+    private LinguisticCandidate findNext(String sentence, @Nullable LinguisticCandidate previousCandidate) {
         for (ContextComponent<?> contextComponent : context) {
-            LinguisticCandidate<LinguisticAct> candidate = contextComponent.recognize(this, sentence, previousCandidate);
+            LinguisticCandidate candidate = contextComponent.recognize(this, sentence, previousCandidate);
 
             if (!candidate.isMatched()) {
                 continue;

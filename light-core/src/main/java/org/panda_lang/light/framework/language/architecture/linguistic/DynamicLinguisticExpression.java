@@ -2,8 +2,10 @@ package org.panda_lang.light.framework.language.architecture.linguistic;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.LightException;
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticExpression;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticExpression;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticGroup;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticUtils;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 import org.panda_lang.panda.framework.language.runtime.PandaRuntimeException;
@@ -17,7 +19,7 @@ public class DynamicLinguisticExpression implements LinguisticExpression {
 
     public DynamicLinguisticExpression(Type<?> returnType, LinguisticAct... candidates) {
         if (candidates.length == 0) {
-            throw new IllegalArgumentException("Cannot create DynamicPhraseme without any associated phraseme");
+            throw new IllegalArgumentException("Cannot create DynamicPhraseme without any associated acts");
         }
 
         this.returnType = returnType;
@@ -29,23 +31,19 @@ public class DynamicLinguisticExpression implements LinguisticExpression {
     }
 
     @Override
-    public Object perform(ExecutableBranch branch, LinguisticExpression... parameters) {
-        for (LinguisticAct candidate : candidates) {
-            LinguisticExpression selected = select(candidate, parameters);
+    public Object perform(ExecutableBranch branch, LinguisticAct... parameters) {
+        LinguisticAct selected = select(candidates, parameters);
 
-            if (selected == null) {
-                continue;
-            }
-
-            return selected.perform(branch, parameters);
+        if (selected == null) {
+            throw new LightException("Cannot find matching candidate");
         }
 
-        throw new LightException("Cannot find matching candidate");
+        return selected.perform(branch, parameters);
     }
 
-    private  @Nullable LinguisticExpression select(LinguisticAct candidate, LinguisticExpression... parameters) {
-        for (LinguisticExpression act : candidate.getPerformers()) {
-            LinguisticExpression selected = select(act, parameters);
+    private @Nullable LinguisticAct select(LinguisticAct[] acts, LinguisticAct... parameters) {
+        for (LinguisticAct act : acts) {
+            LinguisticAct selected = select(act, parameters);
 
             if (selected != null) {
                 return selected;
@@ -55,8 +53,20 @@ public class DynamicLinguisticExpression implements LinguisticExpression {
         return null;
     }
 
-    private @Nullable LinguisticExpression select(LinguisticExpression act, LinguisticExpression... parameters) {
-        Type<?>[] requiredTypes = act.getParameterTypes();
+    private @Nullable LinguisticAct select(LinguisticAct act, LinguisticAct... parameters) {
+        if (act instanceof LinguisticExpression) {
+            return selectExpression((LinguisticExpression) act, parameters);
+        }
+
+        if (act instanceof LinguisticGroup) {
+            return select(((LinguisticGroup) act).getPerformers(), parameters);
+        }
+
+        return parameters.length == 0 ? act : null;
+    }
+
+    private @Nullable LinguisticAct selectExpression(LinguisticExpression expression, LinguisticAct... parameters) {
+        Type<?>[] requiredTypes = expression.getParameterTypes();
 
         if (requiredTypes.length != parameters.length) {
             throw new PandaRuntimeException("Mismatched phrasemes");
@@ -71,16 +81,17 @@ public class DynamicLinguisticExpression implements LinguisticExpression {
             }
         }
 
-        return act;
+        return expression;
     }
 
-    public LinguisticAct toAct() {
-        return new LightLinguisticAct("#TODO", returnType, this);
+    @Override
+    public boolean compare(LinguisticAct another) {
+        return another.equals(this);
     }
 
     @Override
     public Type<?>[] getParameterTypes() {
-        return new Type[0];
+        return LinguisticUtils.TYPELESS;
     }
 
     @Override

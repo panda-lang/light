@@ -23,6 +23,6 @@ import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticA
 public interface LinguisticWildcardProcessor {
 
     @Nullable
-    LinguisticAct handle(Context context, @Nullable String details, String wildcard, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate);
+    LinguisticAct handle(Context context, @Nullable String details, String wildcard, @Nullable LinguisticCandidate previousCandidate);
 
 }

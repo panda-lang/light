@@ -1,5 +1,6 @@
 package org.panda_lang.light.framework.language.architecture.linguistic.phraseme;
 
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticExpression;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticUtils;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
@@ -16,8 +17,13 @@ class LightPhrasemeLinguisticExpression implements LinguisticExpression {
     }
 
     @Override
-    public Object perform(ExecutableBranch branch, LinguisticExpression... parameters) {
+    public Object perform(ExecutableBranch branch, LinguisticAct... parameters) {
         return callback.call(branch, LinguisticUtils.perform(branch, parameters));
+    }
+
+    @Override
+    public boolean compare(LinguisticAct another) {
+        return another.equals(this);
     }
 
     @Override

@@ -38,7 +38,7 @@ public class SentenceParser implements Parser {
             throw new PandaParserFailure("Unrecognized syntax", data);
         }
 
-        return new LinguisticStatement(act.getPerformers()[0]);
+        return new LinguisticStatement(act);
     }
 
 }

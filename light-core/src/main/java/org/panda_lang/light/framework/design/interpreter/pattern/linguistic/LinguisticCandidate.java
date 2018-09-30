@@ -16,14 +16,16 @@
 
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
-public class LinguisticCandidate<T> {
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 
-    private static final LinguisticCandidate<?> NOT_MATCHED = new LinguisticCandidate<>(null, null);
+public class LinguisticCandidate {
 
-    private final T matchedElement;
+    private static final LinguisticCandidate NOT_MATCHED = new LinguisticCandidate(null, null);
+
+    private final LinguisticAct matchedElement;
     private final LinguisticPatternResult linguisticResult;
 
-    public LinguisticCandidate(T matchedElement, LinguisticPatternResult linguisticResult) {
+    public LinguisticCandidate(LinguisticAct matchedElement, LinguisticPatternResult linguisticResult) {
         this.matchedElement = matchedElement;
         this.linguisticResult = linguisticResult;
     }
@@ -35,13 +37,12 @@ public class LinguisticCandidate<T> {
         return linguisticResult;
     }
 
-    public T getMatchedElement() {
+    public LinguisticAct getMatchedElement() {
         return matchedElement;
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> LinguisticCandidate<T> notMatched() {
-        return (LinguisticCandidate<T>) NOT_MATCHED;
+    public static LinguisticCandidate notMatched() {
+        return NOT_MATCHED;
     }
 
 }

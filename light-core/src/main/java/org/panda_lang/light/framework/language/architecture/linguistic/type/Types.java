@@ -34,7 +34,7 @@ public class Types implements ContextComponent<Type<?>> {
     private final Collection<TypeResolver> resolvers = new ArrayList<>();
 
     @Override
-    public LinguisticCandidate<LinguisticAct> recognize(Context context, String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+    public LinguisticCandidate recognize(Context context, String sentence, @Nullable LinguisticCandidate previousCandidate) {
         for (TypeResolver resolver : resolvers) {
             LinguisticAct result = resolver.resolve(this, sentence);
 
@@ -50,7 +50,7 @@ public class Types implements ContextComponent<Type<?>> {
                 }
             }
 
-            return new LinguisticCandidate<>(result, null);
+            return new LinguisticCandidate(result, null);
         }
 
         return LinguisticCandidate.notMatched();

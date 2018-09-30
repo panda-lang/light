@@ -5,22 +5,28 @@ import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticA
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 class LightContextUtils {
 
     private LightContextUtils() { }
 
-    protected static @Nullable LinguisticAct createGroup(Collection<LinguisticCandidate<LinguisticAct>> candidates) {
+    protected static @Nullable LinguisticAct createGroup(Collection<LinguisticCandidate> candidates) {
         if (candidates.size() == 0) {
             return null;
         }
 
         LinguisticAct first = candidates.iterator().next().getMatchedElement();
 
-        return candidates.size() == 1 ? first : new DynamicLinguisticExpression(first.getType(), candidates.stream()
+        if (candidates.size() == 1) {
+            return first;
+        }
+
+        Collection<LinguisticAct> elements = candidates.stream()
                 .map(LinguisticCandidate::getMatchedElement)
-                .toArray(LinguisticAct[]::new))
-                .toAct();
+                .collect(Collectors.toList());
+
+        return new DynamicLinguisticExpression(first.getType(), elements);
     }
 
 }

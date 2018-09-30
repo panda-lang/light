@@ -28,7 +28,7 @@ public class PhrasemesWildcardProcessor implements LinguisticWildcardProcessor {
     private static final PhrasemesWildcardProcessor INSTANCE = new PhrasemesWildcardProcessor();
 
     @Override
-    public @Nullable LinguisticAct handle(Context context, String details, String wildcard, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+    public @Nullable LinguisticAct handle(Context context, String details, String wildcard, @Nullable LinguisticCandidate previousCandidate) {
     LinguisticAct matchedAct = context.find(wildcard, previousCandidate);
 
         if (matchedAct == null) {
