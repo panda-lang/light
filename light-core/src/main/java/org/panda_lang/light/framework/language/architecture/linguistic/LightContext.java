@@ -69,7 +69,7 @@ public class LightContext implements Context {
             candidates.push(candidate);
         } while (candidates.peek().isMatched());
 
-        return LightContextUtils.createGroup(candidates);
+        return LightContextUtils.prepare(candidates);
     }
 
     private LinguisticCandidate findNext(String sentence, @Nullable LinguisticCandidate previousCandidate) {
@@ -93,6 +93,12 @@ public class LightContext implements Context {
 
     @Override
     public @Nullable Type<?> getType(Class<?> clazz) {
+        Type<?> matched = typeLookup.getType(type -> type.getAssociated() == clazz);
+
+        if (matched != null) {
+            return matched;
+        }
+
         return typeLookup.getType(type -> clazz.isAssignableFrom(type.getAssociated()));
     }
 

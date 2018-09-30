@@ -33,6 +33,20 @@ public class LinguisticCandidate {
         return matchedElement != null;
     }
 
+    public LinguisticAct[] getMatchedParameters() {
+        if (linguisticResult == null || linguisticResult.getLexicalResult() == null) {
+            return new LinguisticAct[0];
+        }
+
+        LinguisticAct[] matchedParameters = new LinguisticAct[linguisticResult.getLexicalResult().getProcessedValues().size()];
+
+        for (int i = 0; i < matchedParameters.length; i++) {
+            matchedParameters[i] = linguisticResult.getLexicalResult().getProcessedValues().get(i).getValue();
+        }
+
+        return matchedParameters;
+    }
+
     public LinguisticPatternResult getLinguisticResult() {
         return linguisticResult;
     }

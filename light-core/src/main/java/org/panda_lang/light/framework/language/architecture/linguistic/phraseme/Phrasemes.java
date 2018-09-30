@@ -19,9 +19,11 @@ package org.panda_lang.light.framework.language.architecture.linguistic.phraseme
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.ContextComponent;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPatternResult;
+import org.panda_lang.light.framework.language.architecture.linguistic.LightLinguisticGroup;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -39,10 +41,10 @@ public class Phrasemes implements ContextComponent<Phraseme> {
                 continue;
             }
 
-            LinguisticCandidate candidate = new LinguisticCandidate(phraseme, result);
+            LinguisticAct group = new LightLinguisticGroup(phraseme.getReturnType(), phraseme.getExpressions());
             phraseme.increaseUsages();
 
-            return candidate;
+            return new LinguisticCandidate(group, result);
         }
 
         return LinguisticCandidate.notMatched();

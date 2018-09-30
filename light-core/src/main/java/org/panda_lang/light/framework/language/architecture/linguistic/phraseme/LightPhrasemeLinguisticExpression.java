@@ -8,10 +8,12 @@ import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
 class LightPhrasemeLinguisticExpression implements LinguisticExpression {
 
+    private final Type<?>[] parameterTypes;
     private final PhrasemeCallback callback;
     private final Type<?> returnType;
 
-    LightPhrasemeLinguisticExpression(PhrasemeCallback callback, Type<?> returnType) {
+    LightPhrasemeLinguisticExpression(Type<?>[] parameterTypes, PhrasemeCallback callback, Type<?> returnType) {
+        this.parameterTypes = parameterTypes;
         this.callback = callback;
         this.returnType = returnType;
     }
@@ -28,7 +30,7 @@ class LightPhrasemeLinguisticExpression implements LinguisticExpression {
 
     @Override
     public Type<?>[] getParameterTypes() {
-        return LinguisticUtils.TYPELESS;
+        return parameterTypes;
     }
 
     @Override

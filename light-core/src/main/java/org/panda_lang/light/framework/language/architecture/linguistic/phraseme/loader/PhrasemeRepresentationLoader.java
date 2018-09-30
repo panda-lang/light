@@ -3,6 +3,7 @@ package org.panda_lang.light.framework.language.architecture.linguistic.phraseme
 import org.panda_lang.light.LightException;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.LightPhraseme;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.PhrasemeCallback;
@@ -45,6 +46,7 @@ class PhrasemeRepresentationLoader {
                 .build();
 
         Object instance = method.getDeclaringClass().newInstance();
+        Type<?> returnType = context.getType(method.getReturnType());
 
         PhrasemeCallback callback = new PhrasemeCallback() {
             @Override
@@ -59,8 +61,13 @@ class PhrasemeRepresentationLoader {
             }
         };
 
-        return new LightPhraseme(pattern, callback, context.getType(method.getReturnType()));
-    }
+        Type<?>[] parameterTypes = new Type[method.getParameterCount()];
 
+        for (int i = 0; i < parameterTypes.length; i++) {
+            parameterTypes[i] = context.getType(method.getParameterTypes()[i]);
+        }
+
+        return new LightPhraseme(pattern, parameterTypes, callback, returnType);
+    }
 
 }
