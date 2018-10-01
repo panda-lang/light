@@ -26,9 +26,9 @@ public interface Phraseme {
 
     void increaseUsages();
 
-    Type<?> getReturnType();
-
     Collection<? extends LinguisticExpression> getExpressions();
+
+    Type<?> getReturnType();
 
     LinguisticPattern getPattern();
 

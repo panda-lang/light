@@ -6,13 +6,13 @@ import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticU
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
 
-class LightPhrasemeLinguisticExpression implements LinguisticExpression {
+public class LightPhrasemeLinguisticExpression implements LinguisticExpression {
 
     private final Type<?>[] parameterTypes;
     private final PhrasemeCallback callback;
     private final Type<?> returnType;
 
-    LightPhrasemeLinguisticExpression(Type<?>[] parameterTypes, PhrasemeCallback callback, Type<?> returnType) {
+    public LightPhrasemeLinguisticExpression(Type<?>[] parameterTypes, PhrasemeCallback callback, Type<?> returnType) {
         this.parameterTypes = parameterTypes;
         this.callback = callback;
         this.returnType = returnType;

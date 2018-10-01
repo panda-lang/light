@@ -23,10 +23,6 @@ public class LightPhraseme implements Phraseme {
         this.addActs(acts);
     }
 
-    public LightPhraseme(LinguisticPattern pattern, Type<?>[] parameterTypes, PhrasemeCallback callback, Type<?> returnType) {
-        this(pattern, returnType, new LightPhrasemeLinguisticExpression(parameterTypes, callback, returnType));
-    }
-
     @Override
     public void increaseUsages() {
         ++usages;
@@ -37,13 +33,13 @@ public class LightPhraseme implements Phraseme {
     }
 
     @Override
-    public Type<?> getReturnType() {
-        return returnType;
+    public Collection<LinguisticExpression> getExpressions() {
+        return expressions;
     }
 
     @Override
-    public Collection<LinguisticExpression> getExpressions() {
-        return expressions;
+    public Type<?> getReturnType() {
+        return returnType;
     }
 
     @Override

@@ -37,14 +37,14 @@ public class Phrasemes implements ContextComponent<Phraseme> {
         for (Phraseme phraseme : phrasemes) {
             LinguisticPatternResult result = phraseme.getPattern().match(sentence, context, previousCandidate);
 
-            if (result == null || !result.isMatched()) {
+            if (!result.isMatched()) {
                 continue;
             }
 
-            LinguisticAct group = new LightLinguisticGroup(phraseme.getReturnType(), phraseme.getExpressions());
+            LinguisticAct act = new LightLinguisticGroup(phraseme.getReturnType(), phraseme.getExpressions());
             phraseme.increaseUsages();
 
-            return new LinguisticCandidate(group, result);
+            return new LinguisticCandidate(act, result);
         }
 
         return LinguisticCandidate.notMatched();

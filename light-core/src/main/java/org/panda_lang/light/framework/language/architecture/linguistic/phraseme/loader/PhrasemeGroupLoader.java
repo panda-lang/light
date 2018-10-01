@@ -2,6 +2,8 @@ package org.panda_lang.light.framework.language.architecture.linguistic.phraseme
 
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
+import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.LightPhraseme;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeGroup;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeVariant;
 import org.panda_lang.panda.utilities.annotations.AnnotationsScannerProcess;
@@ -28,10 +30,18 @@ class PhrasemeGroupLoader {
     }
 
     private Phraseme loadPhrasemeGroup(Context context, Class<?> clazz) throws Exception {
-        String phrasemeGroup = clazz.getAnnotation(PhrasemeGroup.class).value();
+        LinguisticPattern pattern = LinguisticPattern.builder()
+                .compile(clazz.getAnnotation(PhrasemeGroup.class).value())
+                .build();
+
+        LightPhraseme phraseme = new LightPhraseme(pattern, null);
 
         Collection<Method> variantMethods = ReflectionUtils.getMethodsAnnotatedWith(clazz, PhrasemeVariant.class);
 
+        return null;
+    }
+
+    private Phraseme loadPhraseme(Context context, Method method) {
         return null;
     }
 
