@@ -11,4 +11,6 @@ public @interface PhrasemeGroup {
 
     String value();
 
+    Class<?> returnType() default void.class;
+
 }

@@ -20,7 +20,7 @@ public class LightPhraseme implements Phraseme {
         this.pattern = pattern;
         this.returnType = returnType;
         this.expressions = new ArrayList<>(1);
-        this.addActs(acts);
+        this.addAssociatedExpressions(acts);
     }
 
     @Override
@@ -28,7 +28,15 @@ public class LightPhraseme implements Phraseme {
         ++usages;
     }
 
-    protected void addActs(LinguisticExpression... acts) {
+    public void merge(Phraseme phraseme) {
+        if (!returnType.isAssignableFrom(phraseme.getReturnType())) {
+            throw new IllegalArgumentException("Cannot merge a phraseme of another type (" + returnType.getClassName() + " != " + phraseme.getReturnType().getClassName() + ")");
+        }
+
+        expressions.addAll(phraseme.getExpressions());
+    }
+
+    public void addAssociatedExpressions(LinguisticExpression... acts) {
         expressions.addAll(Arrays.asList(acts));
     }
 
