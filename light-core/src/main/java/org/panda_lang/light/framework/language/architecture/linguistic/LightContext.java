@@ -22,17 +22,19 @@ import org.panda_lang.light.framework.design.architecture.linguistic.ContextComp
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
-import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticResultUtils;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Stack;
 
 public class LightContext implements Context {
 
-    private final Collection<ContextComponent<?>> context;
+    protected final Collection<ContextComponent<?>> context;
+    protected final LightContextTypeLookup typeLookup;
 
     private LightContext(Collection<ContextComponent<?>> context) {
-        this.context = new HashSet<>(context);
+        this.context = context;
+        this.typeLookup = new LightContextTypeLookup(this);
     }
 
     public LightContext() {
@@ -45,34 +47,34 @@ public class LightContext implements Context {
     }
 
     @Override
-    public @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
-        LinguisticCandidate<LinguisticAct> candidate = findNext(sentence, null);
-
-        while (candidate != null) {
-            if (!candidate.isMatched() || candidate.isDefinite()) {
-                break;
-            }
-
-            LinguisticCandidate<LinguisticAct> currentCandidate = findNext(sentence, candidate);
-
-            if (candidate.equals(currentCandidate)) {
-                candidate = null;
-                break;
-            }
-
-            candidate = currentCandidate;
-        }
-
-        if (candidate == null) {
-            return null;
-        }
-
-        return LinguisticResultUtils.assignParameters(candidate);
+    public @Nullable LinguisticAct find(String sentence) {
+        return find(sentence, null);
     }
 
-    private LinguisticCandidate<LinguisticAct> findNext(String sentence, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
+    @Override
+    public @Nullable LinguisticAct find(String sentence, @Nullable LinguisticCandidate previousCandidate) {
+        Stack<LinguisticCandidate> candidates = new Stack<>();
+
+        do {
+            LinguisticCandidate candidate = findNext(sentence, candidates.isEmpty() ? previousCandidate : candidates.peek());
+
+            if (!candidate.isMatched()) {
+                break;
+            }
+
+            if (!candidates.isEmpty() && candidate.getMatchedElement().compare(candidates.peek().getMatchedElement())) {
+                break;
+            }
+
+            candidates.push(candidate);
+        } while (candidates.peek().isMatched());
+
+        return LightContextUtils.prepare(candidates);
+    }
+
+    private LinguisticCandidate findNext(String sentence, @Nullable LinguisticCandidate previousCandidate) {
         for (ContextComponent<?> contextComponent : context) {
-            LinguisticCandidate<LinguisticAct> candidate = contextComponent.recognize(this, sentence, previousCandidate);
+            LinguisticCandidate candidate = contextComponent.recognize(this, sentence, previousCandidate);
 
             if (!candidate.isMatched()) {
                 continue;
@@ -81,7 +83,7 @@ public class LightContext implements Context {
             return candidate;
         }
 
-        return new LinguisticCandidate<>(false);
+        return LinguisticCandidate.notMatched();
     }
 
     @Override
@@ -90,27 +92,19 @@ public class LightContext implements Context {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public @Nullable Type<?> getType(String type) {
-        for (ContextComponent<?> component : context) {
-            if (Type.class != component.getComponentType()) {
-                continue;
-            }
+    public @Nullable Type<?> getType(Class<?> clazz) {
+        Type<?> matched = typeLookup.getType(type -> type.getAssociated() == clazz);
 
-            return getType((ContextComponent<? extends Type<?>>) component, type);
+        if (matched != null) {
+            return matched;
         }
 
-        return null;
+        return typeLookup.getType(type -> clazz.isAssignableFrom(type.getAssociated()));
     }
 
-    private @Nullable Type<?> getType(ContextComponent<? extends Type<?>> types, String type) {
-        for (Type<?> element : types.getElements()) {
-            if (element.getClassName().equals(type) || element.getAssociated().getSimpleName().equals(type)) {
-                return element;
-            }
-        }
-
-        return null;
+    @Override
+    public @Nullable Type<?> getType(String typeName) {
+        return typeLookup.getType(type -> type.getClassName().equals(typeName) || type.getAssociated().getSimpleName().equals(typeName));
     }
 
 }

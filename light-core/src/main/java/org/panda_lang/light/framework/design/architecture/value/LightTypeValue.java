@@ -18,6 +18,8 @@ package org.panda_lang.light.framework.design.architecture.value;
 
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 
+import java.util.Objects;
+
 public class LightTypeValue implements TypeValue {
 
     private final Type type;
@@ -42,6 +44,27 @@ public class LightTypeValue implements TypeValue {
     @Override
     public Type getType() {
         return type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        LightTypeValue that = (LightTypeValue) o;
+
+        return type.equals(that.type) &&
+                Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, value);
     }
 
 }

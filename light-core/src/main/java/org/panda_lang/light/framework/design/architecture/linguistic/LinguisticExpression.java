@@ -14,17 +14,12 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.language.resource.phrasemes;
+package org.panda_lang.light.framework.design.architecture.linguistic;
 
-import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeGroup;
-import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeVariant;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 
-@PhrasemeGroup("send message:<?> to [the] console")
-public class ConsolePhraseme {
+public interface LinguisticExpression extends LinguisticAct {
 
-    @PhrasemeVariant
-    public void sendMessageToConsole(boolean message) {
-        System.out.println("boolean::" + message);
-    }
+    Type<?>[] getParameterTypes();
 
 }

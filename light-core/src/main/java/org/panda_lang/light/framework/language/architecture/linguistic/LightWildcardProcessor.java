@@ -14,27 +14,29 @@
  * limitations under the License.
  */
 
-package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
+package org.panda_lang.light.framework.language.architecture.linguistic;
 
 import org.jetbrains.annotations.Nullable;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticCandidate;
+import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticWildcardProcessor;
 
-public class PhrasemesWildcardProcessor implements LinguisticWildcardProcessor {
+public class LightWildcardProcessor implements LinguisticWildcardProcessor {
 
-    private static final PhrasemesWildcardProcessor INSTANCE = new PhrasemesWildcardProcessor();
+    private static final LightWildcardProcessor INSTANCE = new LightWildcardProcessor();
 
     @Override
-    public @Nullable LinguisticAct handle(Context context, String details, String wildcard, @Nullable LinguisticCandidate<LinguisticAct> previousCandidate) {
-        LinguisticAct matchedAct = context.find(wildcard, previousCandidate);
+    public @Nullable LinguisticAct handle(Context context, String details, String wildcard, @Nullable LinguisticCandidate previousCandidate) {
+    LinguisticAct matchedAct = context.find(wildcard, previousCandidate);
 
         if (matchedAct == null) {
             return null;
         }
 
         Type<?> required = context.getType(details);
-        Type<?> matched = context.getType(matchedAct.getType());
+        Type<?> matched = matchedAct.getType();
 
         if (required == null || matched == null) {
             return null;
@@ -47,7 +49,7 @@ public class PhrasemesWildcardProcessor implements LinguisticWildcardProcessor {
         return matchedAct;
     }
 
-    public static PhrasemesWildcardProcessor getInstance() {
+    public static LightWildcardProcessor getInstance() {
         return INSTANCE;
     }
 

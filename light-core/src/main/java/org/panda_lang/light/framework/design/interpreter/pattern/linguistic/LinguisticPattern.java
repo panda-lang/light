@@ -32,14 +32,14 @@ public class LinguisticPattern {
         this.wildcardProcessor = wildcardProcessor;
     }
 
-    public LinguisticPatternResult<LinguisticAct> match(String sentence, Context context, @Nullable LinguisticCandidate<LinguisticAct> previousResult) {
+    public LinguisticPatternResult match(String sentence, Context context, @Nullable LinguisticCandidate previousResult) {
         LinguisticExtractor extractor = new LinguisticExtractor(context, this, previousResult);
         LexicalExtractorResult<LinguisticAct> result = lexicalPattern.extract(extractor, sentence);
 
-        return new LinguisticPatternResult<>(result);
+        return new LinguisticPatternResult(result);
     }
 
-    public void setWildcardProcessor(LinguisticWildcardProcessor wildcardProcessor) {
+    public void setWildcardProcessor(@Nullable LinguisticWildcardProcessor wildcardProcessor) {
         this.wildcardProcessor = wildcardProcessor;
     }
 

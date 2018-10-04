@@ -19,22 +19,22 @@ package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.LexicalPattern;
 
-public class LinguisticPatternCompiler {
+class LinguisticPatternCompiler {
 
     private final String pattern;
     private LexicalPattern<LinguisticAct> lexicalPattern;
 
-    public LinguisticPatternCompiler(String pattern) {
+    LinguisticPatternCompiler(String pattern) {
         this.pattern = pattern;
     }
 
-    public void compile() {
+    protected void compile() {
         this.lexicalPattern = LexicalPattern.<LinguisticAct> builder()
                 .compile(pattern)
                 .build();
     }
 
-    public LexicalPattern<LinguisticAct> getLexicalPattern() {
+    protected LexicalPattern<LinguisticAct> getLexicalPattern() {
         return lexicalPattern;
     }
 

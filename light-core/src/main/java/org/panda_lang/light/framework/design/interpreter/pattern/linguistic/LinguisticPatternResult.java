@@ -16,18 +16,19 @@
 
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorResult;
 
-public class LinguisticPatternResult<T> {
+public class LinguisticPatternResult {
 
     private final boolean matched;
-    private LexicalExtractorResult<T> lexicalResult;
+    private LexicalExtractorResult<? extends LinguisticAct> lexicalResult;
 
-    public LinguisticPatternResult(boolean matched) {
+    LinguisticPatternResult(boolean matched) {
         this.matched = matched;
     }
 
-    public LinguisticPatternResult(LexicalExtractorResult<T> result) {
+    LinguisticPatternResult(LexicalExtractorResult<? extends LinguisticAct> result) {
         this.matched = result.isMatched();
         this.lexicalResult = result;
     }
@@ -36,7 +37,7 @@ public class LinguisticPatternResult<T> {
         return matched;
     }
 
-    public LexicalExtractorResult<T> getLexicalResult() {
+    public LexicalExtractorResult<? extends LinguisticAct> getLexicalResult() {
         return lexicalResult;
     }
 

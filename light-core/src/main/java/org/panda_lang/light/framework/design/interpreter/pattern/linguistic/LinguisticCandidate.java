@@ -16,54 +16,47 @@
 
 package org.panda_lang.light.framework.design.interpreter.pattern.linguistic;
 
-import org.jetbrains.annotations.Nullable;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
 
-public class LinguisticCandidate<T> {
+public class LinguisticCandidate {
 
-    private final boolean matched;
-    private final T matchedElement;
-    private final LinguisticPatternResult<T> linguisticResult;
-    private final LinguisticCandidate<T> previousCandidate;
-    private boolean definite;
+    private static final LinguisticCandidate NOT_MATCHED = new LinguisticCandidate(null, null);
 
-    public LinguisticCandidate(boolean matched, boolean definite, T matchedElement, LinguisticPatternResult<T> linguisticResult, LinguisticCandidate<T> previousCandidate) {
-        this.matched = matched;
-        this.definite = definite;
+    private final LinguisticAct matchedElement;
+    private final LinguisticPatternResult linguisticResult;
+
+    public LinguisticCandidate(LinguisticAct matchedElement, LinguisticPatternResult linguisticResult) {
         this.matchedElement = matchedElement;
         this.linguisticResult = linguisticResult;
-        this.previousCandidate = previousCandidate;
     }
-
-    public LinguisticCandidate(T matchedElement, LinguisticPatternResult<T> linguisticResult, @Nullable LinguisticCandidate<T> previousCandidate) {
-        this(true, true, matchedElement, linguisticResult, previousCandidate);
-    }
-
-    public LinguisticCandidate(T matchedElement, LinguisticPatternResult<T> linguisticResult) {
-        this(matchedElement, linguisticResult, null);
-    }
-
-    public LinguisticCandidate(boolean matched) {
-        this(matched, true, null, null, null);
-    }
-
-    public boolean isDefinite() {
-        return definite;
-    }
-
     public boolean isMatched() {
-        return matched;
+        return matchedElement != null;
     }
 
-    public LinguisticCandidate<T> getPreviousCandidate() {
-        return previousCandidate;
+    public LinguisticAct[] getMatchedParameters() {
+        if (linguisticResult == null || linguisticResult.getLexicalResult() == null) {
+            return new LinguisticAct[0];
+        }
+
+        LinguisticAct[] matchedParameters = new LinguisticAct[linguisticResult.getLexicalResult().getProcessedValues().size()];
+
+        for (int i = 0; i < matchedParameters.length; i++) {
+            matchedParameters[i] = linguisticResult.getLexicalResult().getProcessedValues().get(i).getValue();
+        }
+
+        return matchedParameters;
     }
 
-    public LinguisticPatternResult<T> getLinguisticResult() {
+    public LinguisticPatternResult getLinguisticResult() {
         return linguisticResult;
     }
 
-    public T getMatchedElement() {
+    public LinguisticAct getMatchedElement() {
         return matchedElement;
+    }
+
+    public static LinguisticCandidate notMatched() {
+        return NOT_MATCHED;
     }
 
 }

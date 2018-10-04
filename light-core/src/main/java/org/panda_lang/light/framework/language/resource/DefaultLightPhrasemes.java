@@ -16,20 +16,21 @@
 
 package org.panda_lang.light.framework.language.resource;
 
+import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.phraseme.Phraseme;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.Phrasemes;
-import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.registry.PhrasemeRepresentationLoader;
+import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.PhrasemesLoader;
 import org.panda_lang.panda.utilities.annotations.AnnotationsScannerProcess;
 
 import java.util.Collection;
 
 public class DefaultLightPhrasemes {
 
-    public Phrasemes generate(AnnotationsScannerProcess process) {
+    public Phrasemes generate(Context context, AnnotationsScannerProcess process) {
         Phrasemes defaultPhrasemes = new Phrasemes();
 
-        PhrasemeRepresentationLoader loader = new PhrasemeRepresentationLoader();
-        Collection<Phraseme> phrasemes = loader.load(process);
+        PhrasemesLoader loader = new PhrasemesLoader();
+        Collection<Phraseme> phrasemes = loader.load(context, process);
 
         for (Phraseme phraseme : phrasemes) {
             defaultPhrasemes.registerElement(phraseme);

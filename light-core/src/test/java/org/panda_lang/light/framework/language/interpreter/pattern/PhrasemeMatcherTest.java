@@ -27,7 +27,7 @@ public class PhrasemeMatcherTest {
 
         LinguisticPattern pattern = LinguisticPattern.builder()
                 .compile("add <string> to <string>")
-                .setWildcardProcessor((group, wildcard, previousCandidate) -> fakePhraseme)
+                .wildcardProcessor((group, wildcard, previousCandidate) -> fakePhraseme)
                 .build();
 
         Phraseme phraseme = new Phraseme(null, new LinguisticAct() {

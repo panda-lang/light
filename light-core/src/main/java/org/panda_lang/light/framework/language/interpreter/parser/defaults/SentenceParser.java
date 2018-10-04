@@ -32,7 +32,7 @@ public class SentenceParser implements Parser {
         String sentence = sentenceRepresentation.getTokenValue();
 
         Context context = data.getComponent(LightComponents.CONTEXT);
-        LinguisticAct act = context.find(sentence, null);
+        LinguisticAct act = context.find(sentence);
 
         if (act == null) {
             throw new PandaParserFailure("Unrecognized syntax", data);

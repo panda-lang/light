@@ -60,8 +60,8 @@ public class ApplicationParser implements Parser {
         CasualParserGeneration generation = new PandaCasualParserGeneration();
 
         Context context = new LightContext();
-        context.importComponent(new DefaultLightPhrasemes().generate(PandaUtils.DEFAULT_PANDA_SCANNER));
         context.importComponent(new DefaultLightTypes().generate());
+        context.importComponent(new DefaultLightPhrasemes().generate(context, PandaUtils.DEFAULT_PANDA_SCANNER));
 
         ParserData baseData = new PandaParserData();
         baseData.setComponent(UniversalComponents.APPLICATION, application);

@@ -16,14 +16,19 @@
 
 package org.panda_lang.light.framework.design.architecture.linguistic.phraseme;
 
-import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticAct;
+import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticExpression;
+import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.LinguisticPattern;
+
+import java.util.Collection;
 
 public interface Phraseme {
 
     void increaseUsages();
 
-    LinguisticAct getAct();
+    Collection<? extends LinguisticExpression> getExpressions();
+
+    Type<?> getReturnType();
 
     LinguisticPattern getPattern();
 

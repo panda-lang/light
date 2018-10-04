@@ -25,13 +25,13 @@ import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extra
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.LexicalExtractorWorker;
 import org.panda_lang.panda.framework.language.interpreter.pattern.lexical.extractor.processed.WildcardProcessor;
 
-public class LinguisticExtractor implements LexicalExtractor<LinguisticAct> {
+class LinguisticExtractor implements LexicalExtractor<LinguisticAct> {
 
     private final Context context;
     private final LinguisticPattern pattern;
-    private final @Nullable LinguisticCandidate<LinguisticAct> previousCandidate;
+    private final @Nullable LinguisticCandidate previousCandidate;
 
-    public LinguisticExtractor(Context context, LinguisticPattern pattern, @Nullable LinguisticCandidate<LinguisticAct> previousResult) {
+    LinguisticExtractor(Context context, LinguisticPattern pattern, @Nullable LinguisticCandidate previousResult) {
         this.pattern = pattern;
         this.context = context;
         this.previousCandidate = previousResult;
