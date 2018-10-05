@@ -2,8 +2,8 @@ language: java
 sudo: true
 
 jdk:
- - oraclejdk8
- - oraclejdk10
+  - oraclejdk8
+  - oraclejdk10
 
 notifications:
   email: false

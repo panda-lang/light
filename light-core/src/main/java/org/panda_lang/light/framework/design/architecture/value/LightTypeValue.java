@@ -47,6 +47,11 @@ public class LightTypeValue implements TypeValue {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(type, value);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -60,11 +65,6 @@ public class LightTypeValue implements TypeValue {
 
         return type.equals(that.type) &&
                 Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, value);
     }
 
 }
