@@ -9,10 +9,12 @@ import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeVariant;
 import org.panda_lang.panda.utilities.annotations.AnnotationsScannerProcess;
 import org.panda_lang.panda.utilities.commons.ReflectionUtils;
+import org.panda_lang.panda.utilities.commons.objects.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Stream;
 
 class PhrasemeGroupLoader {
 
@@ -25,32 +27,34 @@ class PhrasemeGroupLoader {
                 .selectTypesAnnotatedWith(PhrasemeGroup.class);
 
         for (Class<?> clazz : selected) {
-            Phraseme phraseme = loadPhrasemeGroup(context, clazz);
-            phrasemes.add(phraseme);
+            phrasemes.addAll(loadPhrasemeGroup(context, clazz));
         }
 
         return phrasemes;
     }
 
-    private Phraseme loadPhrasemeGroup(Context context, Class<?> clazz) throws Exception {
+    private Collection<Phraseme> loadPhrasemeGroup(Context context, Class<?> clazz) throws Exception {
         PhrasemeGroup group = clazz.getAnnotation(PhrasemeGroup.class);
 
-        LinguisticPattern pattern = LinguisticPattern.builder()
-                .compile(group.value())
-                .build();
-
-        LightPhraseme phraseme = new LightPhraseme(pattern, context.getType(group.returnType()));
         Collection<Method> variantMethods = ReflectionUtils.getMethodsAnnotatedWith(clazz, PhrasemeVariant.class);
+        Collection<Phraseme> phrasemes = new ArrayList<>(variantMethods.size());
 
         for (Method variantMethod : variantMethods) {
-            Phraseme variantPhraseme = loadPhraseme(pattern, context, variantMethod);
-            phraseme.merge(variantPhraseme);
+            phrasemes.add(loadPhraseme(group.value(), context, variantMethod));
         }
 
-        return phraseme;
+        return phrasemes;
     }
 
-    private Phraseme loadPhraseme(LinguisticPattern pattern, Context context, Method method) throws Exception {
+    private Phraseme loadPhraseme(String patternScheme, Context context, Method method) throws Exception {
+        String preparedPattern = StringUtils.replaceRespectively(patternScheme, "<?>", Stream.of(method.getParameterTypes())
+                .map(clazz -> "<" + clazz.getSimpleName() + ">")
+                .toArray(String[]::new));
+
+        LinguisticPattern pattern = LinguisticPattern.builder()
+                .compile(preparedPattern)
+                .build();
+
         LinguisticExpression expression = methodLoader.load(context, method);
         return new LightPhraseme(pattern, expression.getType(), expression);
     }

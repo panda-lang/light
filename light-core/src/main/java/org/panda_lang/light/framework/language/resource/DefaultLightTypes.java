@@ -33,13 +33,13 @@ public class DefaultLightTypes {
 
         types.registerElement(LightType.<Void> builder()
                 .name("void")
-                .associated(void.class)
+                .associated(Void.class)
                 .build());
 
         types.registerElement(LightType.<Boolean> builder()
                 .name("boolean")
                 .plural("booleans")
-                .associated(Boolean.class)
+                .associated(boolean.class)
                 .transformer(sentence -> (sentence.equals("true") || sentence.equals("false")) ? Boolean.parseBoolean(sentence) : null)
                 .build());
 
