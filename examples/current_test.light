@@ -3,7 +3,7 @@ main {
     send "Hello Light" to console
 
     // Print <boolean> type
-    //send
+    send
      > true
      > to the console
 

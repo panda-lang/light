@@ -16,6 +16,7 @@
 
 package org.panda_lang.light.framework.language.resource.phrasemes;
 
+import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.Id;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeGroup;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeVariant;
 
@@ -23,7 +24,12 @@ import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.
 public class ConsolePhraseme {
 
     @PhrasemeVariant
-    public void sendMessageToConsole(boolean message) {
+    public void sendMessageToConsole(String message) {
+        System.out.println(message);
+    }
+
+    @PhrasemeVariant
+    public void sendMessageToConsole(@Id("message") boolean message) {
         System.out.println("boolean::" + message);
     }
 

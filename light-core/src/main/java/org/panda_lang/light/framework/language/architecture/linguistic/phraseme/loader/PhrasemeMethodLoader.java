@@ -1,5 +1,6 @@
 package org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader;
 
+import org.panda_lang.light.LightException;
 import org.panda_lang.light.framework.design.architecture.linguistic.Context;
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticExpression;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
@@ -32,7 +33,14 @@ class PhrasemeMethodLoader {
         Type<?>[] parameterTypes = new Type[method.getParameterCount()];
 
         for (int i = 0; i < parameterTypes.length; i++) {
-            parameterTypes[i] = context.getType(method.getParameterTypes()[i]);
+            Class<?> typeClass = method.getParameterTypes()[i];
+            Type<?> type = context.getType(typeClass);
+
+            if (type == null) {
+                throw new LightException("Cannot recognize type " + typeClass);
+            }
+
+            parameterTypes[i] = type;
         }
 
         return new LightPhrasemeLinguisticExpression(parameterTypes, callback, returnType);
