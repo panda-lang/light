@@ -20,7 +20,7 @@
     <name>Light</name>
     <groupId>org.panda-lang</groupId>
     <artifactId>light-parent</artifactId>
-    <version>indev-0.4.0</version>
+    <version>indev-18.10.6</version>
     <packaging>pom</packaging>
 
     <scm>
