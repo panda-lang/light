@@ -54,7 +54,7 @@ Latest build of Light. Remember, API is not stable yet :o:
 <dependency>
     <groupId>org.panda_lang</groupId>
     <artifactId>light</artifactId>
-    <version>indev-0.4.0</version>
+    <version>indev-18.10.6</version>
 </dependency>
 ```
 The latest build of the previous edition. Remember, this is deprecated!
