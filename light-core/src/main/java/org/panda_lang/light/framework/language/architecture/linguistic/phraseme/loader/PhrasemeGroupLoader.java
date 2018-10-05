@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 class PhrasemeGroupLoader {
 
-    private final PhrasemeMethodLoader  methodLoader = new PhrasemeMethodLoader();
+    private final PhrasemeMethodLoader methodLoader = new PhrasemeMethodLoader();
 
     protected Collection<Phraseme> load(Context context, AnnotationsScannerProcess process) throws Exception {
         Collection<Phraseme> phrasemes = new ArrayList<>();

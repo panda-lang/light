@@ -29,6 +29,7 @@ public class LinguisticCandidate {
         this.matchedElement = matchedElement;
         this.linguisticResult = linguisticResult;
     }
+
     public boolean isMatched() {
         return matchedElement != null;
     }

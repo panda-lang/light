@@ -12,7 +12,8 @@ import java.util.stream.Collectors;
 
 class LightContextUtils {
 
-    private LightContextUtils() { }
+    private LightContextUtils() {
+    }
 
     protected static @Nullable LinguisticAct prepare(Collection<LinguisticCandidate> candidates) {
         if (candidates.size() == 0) {

@@ -29,7 +29,7 @@ public class LightWildcardProcessor implements LinguisticWildcardProcessor {
 
     @Override
     public @Nullable LinguisticAct handle(Context context, String details, String wildcard, @Nullable LinguisticCandidate previousCandidate) {
-    LinguisticAct matchedAct = context.find(wildcard, previousCandidate);
+        LinguisticAct matchedAct = context.find(wildcard, previousCandidate);
 
         if (matchedAct == null) {
             return null;
