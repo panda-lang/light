@@ -9,7 +9,7 @@ import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeVariant;
 import org.panda_lang.panda.utilities.annotations.AnnotationsScannerProcess;
 import org.panda_lang.panda.utilities.commons.ReflectionUtils;
-import org.panda_lang.panda.utilities.commons.objects.StringUtils;
+import org.panda_lang.panda.utilities.commons.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

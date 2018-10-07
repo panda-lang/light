@@ -5,7 +5,7 @@ import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticE
 import org.panda_lang.light.framework.design.architecture.linguistic.LinguisticUtils;
 import org.panda_lang.light.framework.design.architecture.linguistic.type.Type;
 import org.panda_lang.panda.framework.design.runtime.ExecutableBranch;
-import org.panda_lang.panda.utilities.commons.arrays.ArrayUtils;
+import org.panda_lang.panda.utilities.commons.ArrayUtils;
 
 public class LightPhrasemeLinguisticExpression implements LinguisticExpression {
 
