@@ -16,113 +16,35 @@
 
 package org.panda_lang.light.framework.design.interpreter.lexer;
 
-import org.panda_lang.light.framework.design.interpreter.source.LightTokenizedSource;
-import org.panda_lang.light.framework.design.interpreter.token.Sentence;
-import org.panda_lang.light.framework.design.interpreter.token.SentenceRepresentation;
 import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
-import org.panda_lang.panda.framework.design.interpreter.token.Token;
-import org.panda_lang.panda.framework.design.interpreter.token.TokenRepresentation;
 import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
-import org.panda_lang.panda.framework.language.interpreter.token.PandaTokenRepresentation;
-import org.panda_lang.panda.framework.language.resource.syntax.separator.Separators;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LightLexer implements Lexer {
 
     private final String source;
-    private String lineSeparator = System.lineSeparator();
+    private final String lineSeparator;
 
-    private List<TokenRepresentation> tokens = new ArrayList<>();
-    private StringBuilder lineBuilder = new StringBuilder();
-    private boolean multiline = false;
-    private int previousLine = -1;
+    public LightLexer(String source, String lineSeparator) {
+        this.source = source;
+        this.lineSeparator = lineSeparator;
+    }
 
     public LightLexer(String source) {
-        this.source = source;
+        this(source, System.lineSeparator());
     }
 
     @Override
     public TokenizedSource convert() {
-        String[] lines = source.split(lineSeparator);
-
-        for (int lineNumber = 0; lineNumber < lines.length; lineNumber++) {
-            String line = lines[lineNumber];
-            String preparedLine = line.trim();
-
-            if (preparedLine.isEmpty()) {
-                continue;
-            }
-
-            if (previousLine == -1) {
-                previousLine = lineNumber;
-            }
-
-            boolean startsWithMultiline = preparedLine.startsWith(">");
-            boolean endsWithMultiline = preparedLine.endsWith(">");
-
-            if (!multiline && !startsWithMultiline && lineBuilder.length() > 0) {
-                this.check(lineNumber);
-            }
-
-            if (startsWithMultiline) {
-                preparedLine = preparedLine.substring(2);
-            }
-
-            if (endsWithMultiline) {
-                preparedLine = preparedLine.substring(0, preparedLine.length() - 2);
-            }
-
-            if (lineBuilder.length() > 0) {
-                lineBuilder.append(" ");
-            }
-
-            lineBuilder.append(preparedLine);
-            multiline = endsWithMultiline;
-        }
-
-        if (lineBuilder.length() > 0) {
-            this.check(previousLine);
-        }
-
-        return new LightTokenizedSource(tokens);
+        LightLexerWorker worker = new LightLexerWorker(this);
+        return worker.convert();
     }
 
-    private void check(int lineNumber) {
-        String phraseValue = lineBuilder.toString().trim();
-
-        boolean open = phraseValue.endsWith("{");
-        boolean close = phraseValue.endsWith("}") && !phraseValue.contains("{");
-
-        if (open) {
-            phraseValue = phraseValue.substring(0, phraseValue.length() - 1);
-        }
-
-        if (close) {
-            phraseValue = phraseValue.substring(1);
-        }
-
-        phraseValue = phraseValue.trim();
-
-        if (phraseValue.length() > 0) {
-            Sentence phrase = new Sentence(phraseValue);
-            SentenceRepresentation representation = new SentenceRepresentation(phrase, previousLine);
-            tokens.add(representation);
-        }
-
-        if (open || close) {
-            Token operator = open ? Separators.LEFT_BRACE_DELIMITER : Separators.RIGHT_BRACE_DELIMITER;
-            TokenRepresentation separatorRepresentation = new PandaTokenRepresentation(operator, previousLine);
-            tokens.add(separatorRepresentation);
-        }
-
-        lineBuilder.setLength(0);
-        previousLine = lineNumber;
+    protected String getLineSeparator() {
+        return lineSeparator;
     }
 
-    public void setLineSeparator(String regex) {
-        this.lineSeparator = regex;
+    protected String getSource() {
+        return source;
     }
 
 }
