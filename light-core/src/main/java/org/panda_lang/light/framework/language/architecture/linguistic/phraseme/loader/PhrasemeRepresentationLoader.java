@@ -8,7 +8,7 @@ import org.panda_lang.light.framework.design.interpreter.pattern.linguistic.Ling
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.LightPhraseme;
 import org.panda_lang.light.framework.language.architecture.linguistic.phraseme.loader.annotations.PhrasemeRepresentation;
 import org.panda_lang.panda.utilities.annotations.AnnotationsScannerProcess;
-import org.panda_lang.panda.utilities.commons.objects.StringUtils;
+import org.panda_lang.panda.utilities.commons.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
