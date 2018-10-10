@@ -25,4 +25,8 @@ public class SentenceRepresentation extends PandaTokenRepresentation {
         super(token, line);
     }
 
+    public static SentenceRepresentation of(String sentence, int line) {
+        return new SentenceRepresentation(new Sentence(sentence), line);
+    }
+
 }
