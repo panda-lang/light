@@ -66,16 +66,16 @@ class LightIndentationLexerWorker implements Lexer {
 
         if (line.endsWith(":")) {
             Group group = new Group(level, SentenceRepresentation.of(line.substring(0, line.length() - 1), lineNumber));
-            addElement(level, group);
+            add(level, group);
         }
         else {
-            addElement(level, SentenceRepresentation.of(line, lineNumber));
+            add(level, SentenceRepresentation.of(line, lineNumber));
         }
 
         lineBuilder.clear();
     }
 
-    private void addElement(int currentLevel, Object element) {
+    private void add(int currentLevel, Object element) {
         if (currentLevel == 0 || currentGroups.isEmpty()) {
             pushHeadElement(element);
             return;
@@ -85,7 +85,7 @@ class LightIndentationLexerWorker implements Lexer {
 
         if (previousGroup.getLevel() < currentLevel) {
             popLevels(currentLevel - previousGroup.getLevel());
-            addElement(previousGroup, element);
+            addElementToGroup(previousGroup, element);
             return;
         }
 
@@ -93,7 +93,7 @@ class LightIndentationLexerWorker implements Lexer {
 
         if (!currentGroups.isEmpty()) {
             previousGroup = currentGroups.peek();
-            addElement(previousGroup, element);
+            addElementToGroup(previousGroup, element);
         }
         else {
             addElement(element);
@@ -110,7 +110,7 @@ class LightIndentationLexerWorker implements Lexer {
         addIfGroup(element);
     }
 
-    private void addElement(Group previousGroup, Object element) {
+    private void addElementToGroup(Group previousGroup, Object element) {
         addIfGroup(element);
         previousGroup.addElement(element);
     }
