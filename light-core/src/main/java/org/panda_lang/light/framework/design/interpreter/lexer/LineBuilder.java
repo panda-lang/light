@@ -5,14 +5,14 @@ class LineBuilder {
     private StringBuilder lineBuilder = new StringBuilder();
     private boolean multiline = false;
 
-    protected void next(String line, Runnable runnable) {
+    protected void next(String line, Runnable processor) {
         String preparedLine = line.trim();
 
         boolean startsWithMultiline = preparedLine.startsWith(">");
         boolean endsWithMultiline = preparedLine.endsWith(">");
 
         if (!multiline && !startsWithMultiline && lineBuilder.length() > 0) {
-            runnable.run();
+            processor.run();
         }
 
         if (startsWithMultiline) {

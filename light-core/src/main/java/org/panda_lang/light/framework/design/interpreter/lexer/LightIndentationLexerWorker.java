@@ -16,7 +16,7 @@ class LightIndentationLexerWorker implements Lexer {
     private final LightIndentationLexer lexer;
     private final List<TokenRepresentation> tokens = new ArrayList<>();
 
-    private final List<Group> groups = new ArrayList<>();
+    private final List<Object> elements = new ArrayList<>();
     private final Stack<Group> currentGroups = new Stack<>();
     private final LineBuilder lineBuilder = new LineBuilder();
 
@@ -46,86 +46,85 @@ class LightIndentationLexerWorker implements Lexer {
             String indentation = StringUtils.extractParagraph(line);
             int currentLine = lineNumber;
 
-            if (!StringUtils.isEmpty(indentation) && indentationLength == -1) {
+            if (indentation.length() > 0 && indentationLength == -1) {
                 indentationLength = indentation.length();
             }
 
-            lineBuilder.next(line, () -> {
-                checkSection(indentation, currentLine);
-            });
+            lineBuilder.next(line, () -> check(indentation, currentLine));
         }
 
         if (lineBuilder.getLength() > 0) {
-            this.checkSection(previousIndentation, previousLine);
+            this.check(previousIndentation, previousLine);
         }
 
         return new LightTokenizedSource(tokens);
     }
 
-    private void checkSection(String indentation, int lineNumber) {
-        String linePreview = lineBuilder.getTrimmedLine();
+    private void check(String indentation, int lineNumber) {
+        String line = lineBuilder.getTrimmedLine();
+        int level = indentation.length() / indentationLength;
 
-        if (linePreview.endsWith(":")) {
-            Group group = new Group(indentation.length(), SentenceRepresentation.of(linePreview, lineNumber));
-
-            if (group.getLevel() == 0) {
-                currentGroups.clear();
-                currentGroups.add(group);
-                groups.add(group);
-            }
-            else if (currentGroups.isEmpty()) {
-                currentGroups.push(group);
-                groups.add(group);
-            }
-            else {
-                Group previousGroup = currentGroups.peek();
-
-                if (previousGroup.getLevel() < group.getLevel()) {
-                    currentGroups.push(group);
-                    previousGroup.addElement(group);
-                }
-                else {
-                    int levels = previousGroup.getLevel() - group.getLevel();
-
-                    currentGroups.pop();
-                    previousGroup = currentGroups.peek();
-                    previousGroup.addElement(group);
-                    currentGroups.push(group);
-                }
-            }
+        if (line.endsWith(":")) {
+            Group group = new Group(level, SentenceRepresentation.of(line.substring(0, line.length() - 1), lineNumber));
+            addElement(level, group);
+        }
+        else {
+            addElement(level, SentenceRepresentation.of(line, lineNumber));
         }
 
-        /*
-        String phraseValue = lineBuilder.toString().trim();
+        lineBuilder.clear();
+    }
 
-        boolean open = phraseValue.endsWith("{");
-        boolean close = phraseValue.endsWith("}") && !phraseValue.contains("{");
-
-        if (open) {
-            phraseValue = phraseValue.substring(0, phraseValue.length() - 1);
+    private void addElement(int currentLevel, Object element) {
+        if (currentLevel == 0 || currentGroups.isEmpty()) {
+            pushHeadElement(element);
+            return;
         }
 
-        if (close) {
-            phraseValue = phraseValue.substring(1);
+        Group previousGroup = currentGroups.peek();
+
+        if (previousGroup.getLevel() < currentLevel) {
+            popLevels(currentLevel - previousGroup.getLevel());
+            addElement(previousGroup, element);
+            return;
         }
 
-        phraseValue = phraseValue.trim();
+        popLevels(previousGroup.getLevel() - currentLevel);
 
-        if (phraseValue.length() > 0) {
-            Sentence phrase = new Sentence(phraseValue);
-            SentenceRepresentation representation = new SentenceRepresentation(phrase, previousLine);
-            tokens.add(representation);
+        if (!currentGroups.isEmpty()) {
+            previousGroup = currentGroups.peek();
+            addElement(previousGroup, element);
         }
-
-        if (open || close) {
-            Token operator = open ? Separators.LEFT_BRACE_DELIMITER : Separators.RIGHT_BRACE_DELIMITER;
-            TokenRepresentation separatorRepresentation = new PandaTokenRepresentation(operator, previousLine);
-            tokens.add(separatorRepresentation);
+        else {
+            addElement(element);
         }
+    }
 
-        lineBuilder.setLength(0);
-        previousLine = lineNumber;
-        */
+    private void pushHeadElement(Object element) {
+        currentGroups.clear();
+        addElement(element);
+    }
+
+    private void addElement(Object element) {
+        elements.add(element);
+        addIfGroup(element);
+    }
+
+    private void addElement(Group previousGroup, Object element) {
+        addIfGroup(element);
+        previousGroup.addElement(element);
+    }
+
+    private void addIfGroup(Object element) {
+        if (element instanceof Group) {
+            currentGroups.push((Group) element);
+        }
+    }
+
+    private void popLevels(int levels) {
+        for (int i = 0; i < levels; i++) {
+            currentGroups.pop();
+        }
     }
 
     static class Group {
