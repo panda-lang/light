@@ -10,7 +10,7 @@ class IndentationLexerTest {
 
     @Test
     public void testLexer() {
-        LightIndentationLexer indentationLexer = new LightIndentationLexer(PandaURLSource.fromPath(PATH).getContent());
+        IndentationLexer indentationLexer = new IndentationLexer(PandaURLSource.fromPath(PATH).getContent());
         TokenizedSource source = indentationLexer.convert();
 
         System.out.println(source);

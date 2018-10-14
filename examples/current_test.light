@@ -1,11 +1,9 @@
-main {
+main:
     // Print <string> type
     send "Hello Light" to console
 
     // Print <boolean> type
-    send
-     > true
-     > to the console
+    send true to the console
 
     // Print phraseme (return type: string)
     send light version to the console
@@ -20,6 +18,3 @@ main {
         > and
             > string of light version
     > to the console
-}
-
-

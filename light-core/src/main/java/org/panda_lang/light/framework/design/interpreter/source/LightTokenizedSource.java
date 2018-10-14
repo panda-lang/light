@@ -29,16 +29,20 @@ public class LightTokenizedSource extends PandaTokenizedSource {
 
     @Override
     public String toString() {
-        StringBuilder messageBuilder = new StringBuilder("src: { ");
+        StringBuilder messageBuilder = new StringBuilder()
+                .append("src: { ")
+                .append(System.lineSeparator());
 
         for (TokenRepresentation representation : super.getTokensRepresentations()) {
-            messageBuilder.append(representation.getTokenType())
+            messageBuilder
+                    .append("  ")
+                    .append(representation.getTokenType())
                     .append(" [at ").append(representation.getLine() + 1).append("]: ")
                     .append(representation.getTokenValue())
                     .append(System.lineSeparator());
         }
 
-        return messageBuilder.append(" }").toString();
+        return messageBuilder.append("}").toString();
     }
 
 }
