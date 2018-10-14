@@ -21,7 +21,7 @@ import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
 import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
 import org.panda_lang.panda.framework.language.interpreter.source.PandaURLSource;
 
-public class MultilineLexerTest {
+class MultilineLexerTest {
 
     private final PandaURLSource source = PandaURLSource.fromPath("../examples/lexer/multiline_test.light");
 
