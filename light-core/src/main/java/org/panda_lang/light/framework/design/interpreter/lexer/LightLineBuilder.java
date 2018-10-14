@@ -1,18 +1,21 @@
 package org.panda_lang.light.framework.design.interpreter.lexer;
 
-class LineBuilder {
+import org.panda_lang.panda.utilities.commons.StringUtils;
+
+class LightLineBuilder {
 
     private StringBuilder lineBuilder = new StringBuilder();
     private boolean multiline = false;
 
-    protected void next(String line, Runnable runnable) {
+    protected void next(String line, Runnable processor) {
         String preparedLine = line.trim();
+        String indentation = StringUtils.extractParagraph(line);
 
         boolean startsWithMultiline = preparedLine.startsWith(">");
         boolean endsWithMultiline = preparedLine.endsWith(">");
 
         if (!multiline && !startsWithMultiline && lineBuilder.length() > 0) {
-            runnable.run();
+            processor.run();
         }
 
         if (startsWithMultiline) {
@@ -27,7 +30,9 @@ class LineBuilder {
             lineBuilder.append(" ");
         }
 
+        lineBuilder.append(indentation);
         lineBuilder.append(preparedLine);
+
         multiline = endsWithMultiline;
     }
 
@@ -37,10 +42,6 @@ class LineBuilder {
 
     protected int getLength() {
         return lineBuilder.length();
-    }
-
-    protected String getTrimmedLine() {
-        return getLine().trim();
     }
 
     protected String getLine() {

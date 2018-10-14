@@ -1,0 +1,20 @@
+@ legacy indentation
+
+statement 1
+statement 2
+
+main:
+    statement 3
+
+    foreach statement:
+        statement 4
+
+    statement 5
+
+    if statement 6:
+        statement 7
+
+function 1:
+    statement 8
+
+statement 9

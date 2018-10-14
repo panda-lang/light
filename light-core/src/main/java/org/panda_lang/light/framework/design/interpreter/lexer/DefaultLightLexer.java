@@ -16,21 +16,22 @@
 
 package org.panda_lang.light.framework.design.interpreter.lexer;
 
-import org.junit.jupiter.api.Test;
-import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
 import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
-import org.panda_lang.panda.framework.language.interpreter.source.PandaURLSource;
 
-class MultilineLexerTest {
+public class DefaultLightLexer extends AbstractLexer {
 
-    private final PandaURLSource source = PandaURLSource.fromPath("../examples/lexer/multiline_test.light");
+    public DefaultLightLexer(String source, String lineSeparator) {
+        super(source, lineSeparator);
+    }
 
-    @Test
-    public void testLexer() {
-        Lexer lexer = new DefaultLightLexer(source.getContent());
-        TokenizedSource tokenizedSource = lexer.convert();
+    public DefaultLightLexer(String content) {
+        super(content);
+    }
 
-        System.out.println(tokenizedSource);
+    @Override
+    public TokenizedSource convert() {
+        DefaultLightLexerWorker worker = new DefaultLightLexerWorker(this);
+        return worker.convert();
     }
 
 }

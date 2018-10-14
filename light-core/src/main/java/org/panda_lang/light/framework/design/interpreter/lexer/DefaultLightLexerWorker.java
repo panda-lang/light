@@ -1,23 +1,27 @@
 package org.panda_lang.light.framework.design.interpreter.lexer;
 
 import org.panda_lang.light.framework.design.interpreter.source.LightTokenizedSource;
+import org.panda_lang.light.framework.design.interpreter.token.Sentence;
+import org.panda_lang.light.framework.design.interpreter.token.SentenceRepresentation;
 import org.panda_lang.panda.framework.design.interpreter.lexer.Lexer;
+import org.panda_lang.panda.framework.design.interpreter.token.Token;
 import org.panda_lang.panda.framework.design.interpreter.token.TokenRepresentation;
 import org.panda_lang.panda.framework.design.interpreter.token.TokenizedSource;
+import org.panda_lang.panda.framework.language.interpreter.token.PandaTokenRepresentation;
+import org.panda_lang.panda.framework.language.resource.syntax.separator.Separators;
 import org.panda_lang.panda.utilities.commons.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class LightIndentationLexerWorker implements Lexer {
+class DefaultLightLexerWorker implements Lexer {
 
-    private final LightIndentationLexer lexer;
-
+    private final DefaultLightLexer lexer;
     private List<TokenRepresentation> tokens = new ArrayList<>();
-    private LineBuilder lineBuilder = new LineBuilder();
+    private LightLineBuilder lineBuilder = new LightLineBuilder();
     private int previousLine = -1;
 
-    protected LightIndentationLexerWorker(LightIndentationLexer lexer) {
+    protected DefaultLightLexerWorker(DefaultLightLexer lexer) {
         this.lexer = lexer;
     }
 
@@ -36,24 +40,23 @@ class LightIndentationLexerWorker implements Lexer {
                 previousLine = lineNumber;
             }
 
-            String indentation = StringUtils.extractParagraph(line);
+            String preparedLine = line.trim();
             int currentLine = lineNumber;
 
-            lineBuilder.next(line, () -> {
-                checkSection(currentLine);
+            lineBuilder.next(preparedLine, () -> {
+                check(currentLine);
             });
         }
 
         if (lineBuilder.getLength() > 0) {
-            this.checkSection(previousLine);
+            this.check(previousLine);
         }
 
         return new LightTokenizedSource(tokens);
     }
 
-    private void checkSection(int lineNumber) {
-        /*
-        String phraseValue = lineBuilder.toString().trim();
+    private void check(int lineNumber) {
+        String phraseValue = lineBuilder.getLine();
 
         boolean open = phraseValue.endsWith("{");
         boolean close = phraseValue.endsWith("}") && !phraseValue.contains("{");
@@ -80,9 +83,8 @@ class LightIndentationLexerWorker implements Lexer {
             tokens.add(separatorRepresentation);
         }
 
-        lineBuilder.setLength(0);
+        lineBuilder.clear();
         previousLine = lineNumber;
-        */
     }
 
 }
