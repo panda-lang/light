@@ -1,4 +1,4 @@
-# Light [![Build Status](https://travis-ci.org/Panda-Programming-Language/Light.svg?branch=master)](https://travis-ci.org/Panda-Programming-Language/Light)
+# Light [![Build Status](https://travis-ci.org/panda-lang/light.svg?branch=master)](https://travis-ci.org/panda-lang/light)
 
 Light is an English-like programming language built on the top of the Panda Framework and Panda Programming Language.
 <br>
